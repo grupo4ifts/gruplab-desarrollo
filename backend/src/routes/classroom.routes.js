@@ -4,8 +4,10 @@ const classroomController = require('../controllers/classroom.controller');
 const router = Router();
 
 router.get('/classrooms', classroomController.obtenerAulas);
+router.post('/newClassrooms', classroomController.crearAula);
 router.post('/classrooms', classroomController.crearAula);
-router.get('/classrooms/:code', classroomController.obtenerAulaPorCodigo);
-router.delete('/classrooms/:code', classroomController.eliminarAula);
+router.get('/classrooms/code/:join_code', classroomController.obtenerAulaPorCodigo);
+router.get('/classrooms/:id', classroomController.obtenerAulaPorId);
+router.delete('/classrooms/:id', classroomController.eliminarAula);
 
 module.exports = router;

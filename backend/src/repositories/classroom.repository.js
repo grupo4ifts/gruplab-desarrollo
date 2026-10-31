@@ -7,28 +7,36 @@ exports.obtenerAulas = async () => {
     return resultado.recordset;
 };
 
-exports.crearAula = async (nombre, codigo, descripcion) => {
+exports.crearAula = async (nombre, join_code, duenio) => {
     const pool = await getConnection();
     const resultado = await pool.request()
         .input('name', sql.NVarChar, nombre)
-        .input('code', sql.NVarChar, codigo)
-        .input('description', sql.NVarChar, descripcion)
+        .input('join_code', sql.NVarChar, join_code)
+        .input('duenio', sql.NVarChar, duenio)
         .query(queries.crearAula);
     return resultado.recordset;
 };
 
-exports.obtenerAulaPorCodigo = async (codigo) => {
+exports.obtenerAulaPorCodigo = async (join_code) => {
     const pool = await getConnection();
     const resultado = await pool.request()
-        .input('code', sql.NVarChar, codigo)
+        .input('join_code', sql.NVarChar, join_code)
         .query(queries.obtenerAulaPorCodigo);
     return resultado.recordset;
 };
 
-exports.eliminarAula = async (codigo) => {
+exports.obtenerAulaPorId = async (id) => {
     const pool = await getConnection();
     const resultado = await pool.request()
-        .input('code', sql.NVarChar, codigo)
+        .input('id', sql.Int, id)
+        .query(queries.obtenerAulaPorId);
+    return resultado.recordset;
+};
+
+exports.eliminarAula = async (id) => {
+    const pool = await getConnection();
+    const resultado = await pool.request()
+        .input('id', sql.Int, id)
         .query(queries.eliminarAula);
     return resultado.recordset;
 };

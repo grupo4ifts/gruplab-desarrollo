@@ -1,7 +1,8 @@
 exports.queries = {
     obtenerAulas: 'SELECT * FROM Classrooms',
-    crearAula: 'INSERT INTO Classrooms (name, code, description) VALUES (@name, @code, @description)',
-    obtenerAulaPorCodigo: 'SELECT * FROM Classrooms WHERE code = @code',
-    eliminarAula: 'DELETE FROM Classrooms WHERE code = @code',
+    crearAula: 'INSERT INTO Classrooms (name, join_code, duenio) VALUES (@name, @join_code, @duenio)',
+    obtenerAulaPorCodigo: 'SELECT * FROM Classrooms WHERE join_code = @join_code',
+    obtenerAulaPorId: 'SELECT * FROM Classrooms WHERE id = @id',
+    eliminarAula: 'DELETE FROM Classrooms WHERE id = @id'
 };
 

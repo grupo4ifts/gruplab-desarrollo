@@ -7,8 +7,7 @@ GO
 CREATE TABLE Classrooms (
     id INT IDENTITY(1,1) PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    code VARCHAR(10) NOT NULL UNIQUE,
-    description VARCHAR(255),
-    created_at DATETIME DEFAULT GETDATE()
+    duenio VARCHAR(100) NOT NULL,
+    join_code VARCHAR(20) NOT NULL UNIQUE
 );
 

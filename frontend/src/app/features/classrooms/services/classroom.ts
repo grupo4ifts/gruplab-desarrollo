@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ClassroomService {
-  private http = inject(HttpClient);
   private apiUrl = 'http://localhost:3000/classrooms';
+  constructor(private http: HttpClient) { }
 
   crearAula(name: string, duenio: string): Observable<any> {
     const body = { name, duenio };

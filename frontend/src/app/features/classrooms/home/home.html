@@ -1,1 +1,15 @@
-<p>home works!</p>
+@if (vistaActual() === 'inicio') {
+<div>
+    <h1>Aulas - Gruplab</h1>
+    <button (click)="vistaActual.set('profesor')">Crear Aula (Profesor)</button>
+    <button (click)="vistaActual.set('alumno')">Ingresar a Aula (Alumno)</button>
+</div>
+}
+
+@if (vistaActual() === 'profesor') {
+<app-profesor (volver)="vistaActual.set('inicio')"></app-profesor>
+}
+
+@if (vistaActual() === 'alumno') {
+<app-alumno (volver)="vistaActual.set('inicio')"></app-alumno>
+}

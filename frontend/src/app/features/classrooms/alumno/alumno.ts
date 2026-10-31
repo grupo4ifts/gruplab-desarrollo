@@ -9,7 +9,7 @@ import { ClassroomService } from '../services/classroom';
   templateUrl: './alumno.html',
   styleUrl: './alumno.css'
 })
-export class AlumnoComponent {
+export class Alumno {
   codigoAcceso = signal('');
   volver = output<void>();
 

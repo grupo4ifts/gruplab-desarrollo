@@ -1,3 +1,3 @@
-const { getConnection } = require("./config/db");
+const { getConnection } = require("./database/connection");
 
 getConnection()

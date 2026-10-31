@@ -29,7 +29,7 @@ exports.obtenerAulaPorCodigo = async (join_code) => {
         throw new Error('Aula no encontrada');
     }
 
-    return aula;
+    return aula[0];
 };
 
 exports.obtenerAulaPorId = async (id) => {
@@ -39,7 +39,7 @@ exports.obtenerAulaPorId = async (id) => {
         throw new Error('Aula no encontrada');
     }
 
-    return aula;
+    return aula[0];
 };
 
 exports.eliminarAula = async (id) => {

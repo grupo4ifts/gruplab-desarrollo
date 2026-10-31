@@ -18,6 +18,7 @@ export class Alumno {
   validar() {
     this.classroomService.obtenerAulaPorCodigo(this.codigoAcceso()).subscribe({
       next: (aula: any) => {
+        console.log(aula);
       },
       error: (error: any) => {
         console.error('El codigo no existe', error);

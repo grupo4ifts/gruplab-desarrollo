@@ -1,5 +1,6 @@
 import { Component, signal, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ClassroomService } from '../services/classroom';
 
 @Component({
@@ -14,14 +15,15 @@ export class Profesor {
   duenio = signal('');
   volver = output<void>();
 
-  constructor(private classroomService: ClassroomService) { }
+  constructor(
+    private classroomService: ClassroomService,
+    private router: Router
+  ) { }
 
   crear() {
     this.classroomService.crearAula(this.name(), this.duenio()).subscribe({
       next: (respuesta: any) => {
-        console.log(respuesta.message);
-        console.log('Comparti este codigo con tus alumnos:', respuesta.join_code);
-        this.volver.emit();
+        this.router.navigate(['/classrooms', respuesta.aulaId]);
       },
       error: (error: any) => console.error('Error al crear el aula:', error)
     });

@@ -1,0 +1,20 @@
+@if (aula()) {
+<header>
+    <h1>{{ aula().name }}</h1>
+    <p>Profesor: {{ aula().duenio }}</p>
+    <p>Codigo de acceso: <strong>{{ aula().join_code }}</strong></p>
+    <button (click)="volver()">Volver al inicio</button>
+</header>
+
+<section>
+    <h2>Grupos</h2>
+    <p>Seccion de grupos (Leandro)</p>
+</section>
+
+<section>
+    <h2>Miembros</h2>
+    <p>Seccion de miembros (Gonzalo)</p>
+</section>
+} @else {
+<p>Cargando aula...</p>
+}

@@ -1,12 +1,11 @@
 import { Component, signal, output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClassroomService } from '../services/classroom';
 
 @Component({
   selector: 'app-profesor',
   standalone: true,
-  imports: [FormsModule],
+  imports: [],
   templateUrl: './profesor.html',
   styleUrl: './profesor.css'
 })

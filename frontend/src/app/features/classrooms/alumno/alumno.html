@@ -1,4 +1,4 @@
 <h2>Ingresar al Aula</h2>
-<input type="text" [ngModel]="codigoAcceso()" (ngModelChange)="codigoAcceso.set($event)">
-<button (click)="validar()">Validar Código</button>
+<input type="text" [value]="codigoAcceso()" (input)="codigoAcceso.set(inputCodigo.value)" #inputCodigo placeholder="Codigo de acceso (ej: GL-1234)">
+<button (click)="validar()">Validar Codigo</button>
 <button (click)="volver.emit()">Volver</button>

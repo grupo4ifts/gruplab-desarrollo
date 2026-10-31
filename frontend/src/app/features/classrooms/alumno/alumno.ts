@@ -1,12 +1,11 @@
 import { Component, signal, output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { ClassroomService } from '../services/classroom';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-alumno',
   standalone: true,
-  imports: [FormsModule],
+  imports: [],
   templateUrl: './alumno.html',
   styleUrl: './alumno.css'
 })

@@ -1,5 +1,5 @@
 <h2>Crear Nueva Aula</h2>
-<input type="text" [ngModel]="name()" (ngModelChange)="name.set($event)" placeholder="Nombre del Aula">
-<input type="text" [ngModel]="duenio()" (ngModelChange)="duenio.set($event)" placeholder="Tu Nombre (Profesor)">
+<input type="text" [value]="name()" (input)="name.set(inputName.value)" #inputName placeholder="Nombre del Aula">
+<input type="text" [value]="duenio()" (input)="duenio.set(inputDuenio.value)" #inputDuenio placeholder="Tu Nombre (Profesor)">
 <button (click)="crear()">Crear Aula</button>
 <button (click)="volver.emit()">Volver</button>

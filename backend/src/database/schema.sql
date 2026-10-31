@@ -1,0 +1,14 @@
+CREATE DATABASE GrupLab;
+GO
+
+USE GrupLab;
+GO
+
+CREATE TABLE Classrooms (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    code VARCHAR(10) NOT NULL UNIQUE,
+    description VARCHAR(255),
+    created_at DATETIME DEFAULT GETDATE()
+);
+

@@ -10,8 +10,8 @@ const dbSettings = {
     database: process.env.DB_DATABASE,
     port: parseInt(process.env.DB_PORT) || 1433,
     options: {
-        encrypt: true, 
-        trustServerCertificate: true 
+        encrypt: true,
+        trustServerCertificate: true
     },
     pool: {
         max: 10,
@@ -23,10 +23,8 @@ const dbSettings = {
 exports.getConnection = async () => {
     try {
         const pool = await sql.connect(dbSettings);
-        console.log("¡Conectado exitosamente a AWS RDS (SQL Server)!");
         return pool;
     } catch (error) {
-        console.error("Error al conectar con la base de datos de AWS:", error);
         throw error;
     }
 };

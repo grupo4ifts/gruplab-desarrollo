@@ -5,19 +5,21 @@ exports.obtenerAulas = async () => {
     return aulas;
 };
 
-exports.crearAula = async (name, join_code, duenio) => {
-    if (!name || !join_code || !duenio) {
+exports.crearAula = async (name, duenio) => {
+    if (!name || !duenio) {
         throw new Error('Faltan datos para crear el aula');
     }
 
-    const aulaExistente = await classroomRepository.obtenerAulaPorCodigo(join_code);
+    const nRandom = Math.floor(1000 + Math.random() * 9000);
+    const join_code = `GL-${nRandom}`;
 
+    const aulaExistente = await classroomRepository.obtenerAulaPorCodigo(join_code);
     if (aulaExistente && aulaExistente.length > 0) {
-        throw new Error('El aula ya existe');
+        throw new Error('Error al generar el codigo, intente nuevamente');
     }
 
-    const resultado = await classroomRepository.crearAula(name, join_code, duenio);
-    return resultado;
+    await classroomRepository.crearAula(name, join_code, duenio);
+    return { message: 'Aula creada exitosamente', join_code };
 };
 
 exports.obtenerAulaPorCodigo = async (join_code) => {
@@ -47,5 +49,6 @@ exports.eliminarAula = async (id) => {
         throw new Error('Aula no encontrada para eliminar');
     }
 
-    return await classroomRepository.eliminarAula(id);
+    await classroomRepository.eliminarAula(id);
+    return { message: 'Aula eliminada correctamente' };
 };

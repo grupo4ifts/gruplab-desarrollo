@@ -4,26 +4,25 @@ GET http://localhost:3000/classrooms
 ### ---
 
 ### Crear aula
-POST http://localhost:3000/newClassrooms
+POST http://localhost:3000/classrooms
 Content-Type: application/json
 
 {
-  "name": "Aula 101",
-  "join_code": "A101",
-  "duenio": "Profesor Perez"
+  "name": "laboraasdo",
+  "duenio": "asdse"
 }
 
 ### ---
 
-### Obtener aula por código (join_code)
-GET http://localhost:3000/classrooms/code/A101
+### Obtener aula por codigo (join_code)
+GET http://localhost:3000/classrooms/code/GL-2009
 
 ### ---
 
 ### Obtener aula por ID
-GET http://localhost:3000/classrooms/1
+GET http://localhost:3000/classrooms/2
 
 ### ---
 
 ### Eliminar aula por ID
-DELETE http://localhost:3000/classrooms/1
+DELETE http://localhost:3000/classrooms/8

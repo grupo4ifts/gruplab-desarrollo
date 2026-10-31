@@ -11,9 +11,10 @@ exports.obtenerAulas = async (req, res) => {
 
 exports.crearAula = async (req, res) => {
     try {
-        const { name, join_code, duenio } = req.body;
-        await classroomService.crearAula(name, join_code, duenio);
-        res.status(201).json({ message: 'Aula creada exitosamente' });
+        const name = req.body.name || req.body.materia;
+        const duenio = req.body.duenio || req.body.profesor;
+        const result = await classroomService.crearAula(name, duenio);
+        res.status(200).json(result);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -42,9 +43,9 @@ exports.obtenerAulaPorId = async (req, res) => {
 exports.eliminarAula = async (req, res) => {
     try {
         const { id } = req.params;
-        await classroomService.eliminarAula(id);
-        res.json({ message: 'Aula eliminada exitosamente' });
+        const result = await classroomService.eliminarAula(id);
+        res.status(200).json(result);
     } catch (error) {
-        res.status(400).json(error.message);
+        res.status(400).json({ error: error.message });
     }
 };

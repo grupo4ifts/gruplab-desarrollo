@@ -18,8 +18,10 @@ exports.crearAula = async (name, duenio) => {
         throw new Error('Error al generar el codigo, intente nuevamente');
     }
 
-    await classroomRepository.crearAula(name, join_code, duenio);
-    return { message: 'Aula creada exitosamente', join_code };
+    const resultado = await classroomRepository.crearAula(name, join_code, duenio);
+    const aulaId = resultado[0].id;
+
+    return { message: 'Aula creada exitosamente', aulaId, join_code };
 };
 
 exports.obtenerAulaPorCodigo = async (join_code) => {

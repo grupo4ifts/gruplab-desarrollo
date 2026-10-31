@@ -6,14 +6,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ClassroomService {
-
   private http = inject(HttpClient);
-
   private apiUrl = 'http://localhost:3000/classrooms';
 
-  crearAula(name: string, join_code: string, duenio: string): Observable<any> {
-    const body = { name, join_code, duenio };
-    return this.http.post(`${this.apiUrl}/newClassrooms`, body);
+  crearAula(name: string, duenio: string): Observable<any> {
+    const body = { name, duenio };
+    return this.http.post(this.apiUrl, body);
   }
 
   obtenerAulaPorCodigo(join_code: string): Observable<any> {
@@ -21,7 +19,7 @@ export class ClassroomService {
   }
 
   obtenerAulas(): Observable<any> {
-    return this.http.get(`${this.apiUrl}`);
+    return this.http.get(this.apiUrl);
   }
 
   obtenerAulaPorId(id: number): Observable<any> {

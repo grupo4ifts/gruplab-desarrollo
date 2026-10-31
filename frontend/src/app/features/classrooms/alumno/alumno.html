@@ -1,1 +1,4 @@
-<p>alumno works!</p>
+<h2>Ingresar al Aula</h2>
+<input type="text" [ngModel]="codigoAcceso()" (ngModelChange)="codigoAcceso.set($event)">
+<button (click)="validar()">Validar Código</button>
+<button (click)="volver.emit()">Volver</button>

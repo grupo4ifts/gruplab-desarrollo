@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap');
+
+.bienvenida {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.logo {
+    display: inline-flex;   
+    align-items: center;
+    gap: 0.6rem;           
+    margin-bottom: 0.6rem;
+    font-family: 'Poppins', sans-serif;
+}
+.logo-icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    background-color: #ff5a1f;              
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 800;
+    border: 2px solid #1a1a1a;          
+    border-radius: 12px;                    
+    box-shadow: 3px 3px 0 #1a1a1a;          
+}
+
+.logo-texto {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #1a1a1a;                         
+}
+ 
+.logo-lab {
+    color: #2f6bff;                         
+}
+ 
+.bienvenida p {
+    color: #666;
+    margin: 0;
+}
+
+
+.opciones {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+ 
+.opcion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    text-align: left;
+    margin: 0;
+    padding: 1.2rem;
+    background-color: #f0f6fd;
+    color: #333;
+    border: 1px solid #cfe0f5;
+    border-radius: 8px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+ 
+.opcion:hover {
+    background-color: #e6f0fb;
+    border-color: #0066cc;
+    box-shadow: 0 2px 6px rgba(0, 102, 204, 0.15);
+}
+ 
+.opcion-titulo {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #0066cc;
+}
+ 
+.opcion-texto {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #555;
+}
+.listado {
+    background-color: #ffffff;
+}
+ 
+.listado h2 {
+    margin-top: 0;
+}
+ 
+.aulas {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+ 
+.aula {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+    padding: 0.8rem 1rem;
+    background-color: #fafafa;
+    color: #333;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    text-align: left;
+}
+ 
+.aula:hover {
+    background-color: #f0f6fd;
+    border-color: #0066cc;
+}
+ 
+.aula-nombre {
+    font-weight: 600;
+}
+ 
+.aula-detalle {
+    font-size: 0.85rem;
+    color: #777;
+    white-space: nowrap;
+}
+ 
+.estado {
+    color: #777;
+    margin: 0.5rem 0;
+}
+ 
+.estado-error {
+    color: #c0392b;
+}
+
+@media (max-width: 500px) {
+    .opciones {
+        grid-template-columns: 1fr;
+    }
+ 
+    .aula {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.2rem;
+    }
+}

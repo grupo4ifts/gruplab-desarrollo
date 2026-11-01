@@ -1,15 +1,59 @@
 @if (vistaActual() === 'inicio') {
-<div>
-    <h1>Aulas - Gruplab</h1>
-    <button (click)="vistaActual.set('profesor')">Crear Aula (Profesor)</button>
-    <button (click)="vistaActual.set('alumno')">Ingresar a Aula (Alumno)</button>
+  <header class="bienvenida">
+
+    
+     <h1 class="logo">
+            <span class="logo-icono">G</span>
+            <span class="logo-texto">Grup<span class="logo-lab">Lab</span></span>
+        </h1>
+        <p>Organizá tus aulas, grupos y tareas en un solo lugar.</p>
+    
+    
+</header>
+
+<div class="opciones">
+        <button class="opcion" (click)="vistaActual.set('profesor')">
+            <span class="opcion-titulo">Soy profesor</span>
+            <span class="opcion-texto">Creá un aula nueva y compartí el código con tus alumnos.</span>
+        </button>
+ 
+        <button class="opcion" (click)="vistaActual.set('alumno')">
+            <span class="opcion-titulo">Soy alumno</span>
+            <span class="opcion-texto">Ingresá a un aula con el código que te dio tu profesor.</span>
+        </button>
+    </div>
+
+<section class="listado">
+        <h2>Aulas existentes</h2>
+ 
+        @if (cargando()) {
+        <p class="estado">Cargando aulas...</p>
+        } @else if (error()) {
+        <p class="estado estado-error">{{ error() }}</p>
+        <button (click)="cargarAulas()">Reintentar</button>
+        } @else {
+        <ul class="aulas">
+            @for (aula of aulas(); track aula.id) {
+            <li>
+                <button class="aula" (click)="abrirAula(aula.id)">
+                    <span class="aula-nombre">{{ aula.name }}</span>
+                    <span class="aula-detalle">{{ aula.duenio }} · {{ aula.join_code }}</span>
+                </button>
+            </li>
+            } @empty {
+            <li class="estado">Todavía no hay aulas. ¡Creá la primera!</li>
+            }
+        </ul>
+        }
+    </section>
+ 
 </div>
 }
-
+ 
 @if (vistaActual() === 'profesor') {
-<app-profesor (volver)="vistaActual.set('inicio')"></app-profesor>
+<app-profesor (volver)="volverAlInicio()"></app-profesor>
 }
-
+ 
 @if (vistaActual() === 'alumno') {
-<app-alumno (volver)="vistaActual.set('inicio')"></app-alumno>
+<app-alumno (volver)="volverAlInicio()"></app-alumno>
 }

@@ -2,6 +2,10 @@ import { Component, signal } from '@angular/core';
 import { Profesor } from '../profesor/profesor';
 import { Alumno } from '../alumno/alumno';
 
+
+
+
+
 @Component({
   selector: 'app-home',
   standalone: true,

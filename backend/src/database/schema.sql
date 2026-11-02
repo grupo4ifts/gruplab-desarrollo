@@ -11,3 +11,5 @@ CREATE TABLE Classrooms (
     join_code VARCHAR(20) NOT NULL UNIQUE
 );
 
+
+

@@ -11,8 +11,8 @@ exports.obtenerAulas = async (req, res) => {
 
 exports.crearAula = async (req, res) => {
     try {
-        const name = req.body.name || req.body.materia;
-        const duenio = req.body.duenio || req.body.profesor;
+        const name = req.body.name;
+        const duenio = req.body.duenio;
         const result = await classroomService.crearAula(name, duenio);
         res.status(200).json(result);
     } catch (error) {

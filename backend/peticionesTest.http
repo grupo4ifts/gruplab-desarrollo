@@ -25,4 +25,4 @@ GET http://localhost:3000/classrooms/2
 ### ---
 
 ### Eliminar aula por ID
-DELETE http://localhost:3000/classrooms/8
+DELETE http://localhost:3000/classrooms/10

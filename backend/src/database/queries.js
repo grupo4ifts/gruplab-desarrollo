@@ -1,4 +1,5 @@
 exports.queries = {
+    // Classrooms
     obtenerAulas: 'SELECT * FROM Classrooms',
     crearAula: 'INSERT INTO Classrooms (name, join_code, duenio) OUTPUT INSERTED.id VALUES (@name, @join_code, @duenio)',
     obtenerAulaPorCodigo: 'SELECT * FROM Classrooms WHERE join_code = @join_code',

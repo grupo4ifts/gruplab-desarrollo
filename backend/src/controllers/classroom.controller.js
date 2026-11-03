@@ -3,18 +3,17 @@ const classroomService = require('../services/classroom.service');
 exports.obtenerAulas = async (req, res) => {
     try {
         const aulas = await classroomService.obtenerAulas();
-        res.json(aulas);
+        res.status(200).json(aulas);
     } catch (error) {
-        res.status(400).json(error.message);
+        res.status(400).json({ error: error.message });
     }
 };
 
 exports.crearAula = async (req, res) => {
     try {
-        const name = req.body.name;
-        const duenio = req.body.duenio;
-        const result = await classroomService.crearAula(name, duenio);
-        res.status(200).json(result);
+        const { name, duenio } = req.body || {};
+        const resultado = await classroomService.crearAula(name, duenio);
+        res.status(200).json(resultado);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -24,7 +23,7 @@ exports.obtenerAulaPorCodigo = async (req, res) => {
     try {
         const { join_code } = req.params;
         const aula = await classroomService.obtenerAulaPorCodigo(join_code);
-        res.json(aula);
+        res.status(200).json(aula);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -36,7 +35,7 @@ exports.obtenerAulaPorId = async (req, res) => {
         const aula = await classroomService.obtenerAulaPorId(id);
         res.json(aula);
     } catch (error) {
-        res.status(400).json(error.message);
+        res.status(400).json({ error: error.message });
     }
 };
 

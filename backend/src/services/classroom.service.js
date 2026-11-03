@@ -13,15 +13,10 @@ exports.crearAula = async (name, duenio) => {
     const nRandom = Math.floor(1000 + Math.random() * 9000);
     const join_code = `GL-${nRandom}`;
 
-    const aulaExistente = await classroomRepository.obtenerAulaPorCodigo(join_code);
-    if (aulaExistente && aulaExistente.length > 0) {
-        throw new Error('Error al generar el codigo, intente nuevamente');
-    }
+    const newAula = await classroomRepository.crearAula(name, join_code, duenio);
+    const classroomId = newAula[0].id;
 
-    const resultado = await classroomRepository.crearAula(name, join_code, duenio);
-    const aulaId = resultado[0].id;
-
-    return { message: 'Aula creada exitosamente', aulaId, join_code };
+    return { message: 'Aula creada exitosamente', classroomId, join_code };
 };
 
 exports.obtenerAulaPorCodigo = async (join_code) => {
@@ -45,12 +40,11 @@ exports.obtenerAulaPorId = async (id) => {
 };
 
 exports.eliminarAula = async (id) => {
-    const aula = await classroomRepository.obtenerAulaPorId(id);
+    const aulaEliminada = await classroomRepository.eliminarAula(id);
 
-    if (!aula || aula.length === 0) {
+    if (!aulaEliminada || aulaEliminada.length === 0) {
         throw new Error('Aula no encontrada para eliminar');
     }
 
-    await classroomRepository.eliminarAula(id);
     return { message: 'Aula eliminada correctamente' };
 };

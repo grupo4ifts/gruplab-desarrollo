@@ -8,21 +8,21 @@ POST http://localhost:3000/classrooms
 Content-Type: application/json
 
 {
-  "name": "laboraasdo",
-  "duenio": "asdse"
+  "name": "Laboratorio",
+  "duenio": "Pepe"
 }
 
 ### ---
 
 ### Obtener aula por codigo (join_code)
-GET http://localhost:3000/classrooms/code/GL-2009
+GET http://localhost:3000/classrooms/code/GL-1180
 
 ### ---
 
 ### Obtener aula por ID
-GET http://localhost:3000/classrooms/2
+GET http://localhost:3000/classrooms/13
 
 ### ---
 
 ### Eliminar aula por ID
-DELETE http://localhost:3000/classrooms/10
+DELETE http://localhost:3000/classrooms/154

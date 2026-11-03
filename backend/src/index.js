@@ -1,5 +1,5 @@
 const express = require('express');
-const classroomRoutes = require('../src/routes/classroom.routes');
+const classroomRoutes = require('./routes/classroom.routes');
 const cors = require('cors');
 const app = express();
 

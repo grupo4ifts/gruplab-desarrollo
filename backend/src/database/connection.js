@@ -1,28 +1,9 @@
 const sql = require('mssql');
-const dotenv = require('dotenv');
-
-dotenv.config();
-
-const dbSettings = {
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    server: process.env.DB_SERVER,
-    database: process.env.DB_DATABASE,
-    port: parseInt(process.env.DB_PORT) || 1433,
-    options: {
-        encrypt: true,
-        trustServerCertificate: true
-    },
-    pool: {
-        max: 10,
-        min: 0,
-        idleTimeoutMillis: 30000
-    }
-};
+const { dbConfig } = require('./config');
 
 exports.getConnection = async () => {
     try {
-        const pool = await sql.connect(dbSettings);
+        const pool = await sql.connect(dbConfig);
         return pool;
     } catch (error) {
         throw error;

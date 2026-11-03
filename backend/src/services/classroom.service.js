@@ -14,9 +14,9 @@ exports.crearAula = async (name, duenio) => {
     const join_code = `GL-${nRandom}`;
 
     const newAula = await classroomRepository.crearAula(name, join_code, duenio);
-    const classroomId = newAula[0].id;
+    const aulaId = newAula[0].id;
 
-    return { message: 'Aula creada exitosamente', classroomId, join_code };
+    return { message: 'Aula creada exitosamente', aulaId, join_code };
 };
 
 exports.obtenerAulaPorCodigo = async (join_code) => {

@@ -11,5 +11,11 @@ CREATE TABLE Classrooms (
     join_code VARCHAR(20) NOT NULL UNIQUE
 );
 
-
+CREATE TABLE Groups (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    classroom_id INT NOT NULL FOREIGN KEY REFERENCES Classrooms(id) ON DELETE CASCADE,
+    group_number INT NOT NULL,
+    project_name VARCHAR(100) NOT NULL,
+    UNIQUE (classroom_id, group_number)
+);
 

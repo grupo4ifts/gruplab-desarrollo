@@ -33,7 +33,7 @@ exports.obtenerAulaPorCodigo = async (join_code) => {
             .query(queries.obtenerAulaPorCodigo);
         return resultado.recordset;
     } catch (error) {
-        throw new Error('Error al obtener el ula');
+        throw new Error('Error al obtener el aula');
     }
 };
 

@@ -1,5 +1,5 @@
 const sql = require('mssql');
-const { dbConfig } = require('./config');
+const dbConfig = require('./config');
 
 exports.getConnection = async () => {
     try {

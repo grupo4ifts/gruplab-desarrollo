@@ -15,7 +15,7 @@ Content-Type: application/json
 ### ---
 
 ### Obtener aula por codigo (join_code)
-GET http://localhost:3000/classrooms/code/GL-1180
+GET http://localhost:3000/classrooms/code/GL-9603
 
 ### ---
 

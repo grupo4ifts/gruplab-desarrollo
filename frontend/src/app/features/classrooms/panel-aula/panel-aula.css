@@ -1,0 +1,41 @@
+.code-aula {
+    background-color: var(--bg-cream, #faf9f5);
+    padding: 0.9rem 1.1rem;
+    margin: 0.8rem 0 1rem;
+    border: 1.5px solid #1a1a1a;
+    border-radius: 12px;
+    box-shadow: 2px 3px 0 #1a1a1a;
+}
+
+.code-aula p {
+    margin-bottom: 0.25rem;
+    color: #1a1a1a;
+}
+
+.code-aula p:last-child {
+    margin-bottom: 0;
+    font-size: 0.85rem;
+    color: #6b6b6b;
+}
+
+.code-aula strong {
+    color: var(--blue, #2563eb);
+    font-size: 1.1rem;
+}
+
+
+.code-aula p {
+    margin-bottom: 0.25rem;
+    color: #1a1a1a;
+}
+
+.code-aula p:last-child {
+    margin-bottom: 0;
+    font-size: 0.85rem;
+    color: #6b6b6b;
+}
+
+.code-aula strong {
+    color: var(--blue, #2563eb);
+    font-size: 1.1rem;
+}

@@ -2,7 +2,11 @@
 <header>
     <h1>{{ aula().name }}</h1>
     <p>Profesor: {{ aula().duenio }}</p>
-    <p>Codigo de acceso: <strong>{{ aula().join_code }}</strong></p>
+    <div class="code-aula">
+        <p>Codigo de acceso: <strong>{{ aula().join_code }}</strong></p>
+        <p>Comparti este codigo con tus alumnos para que puedan ingresar al AuLab</p>
+    </div>
+
     <button (click)="volver()">Volver al inicio</button>
 </header>
 

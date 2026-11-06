@@ -1,5 +1,5 @@
 const { sql, getConnection } = require('../database/connection');
-const { queries } = require('../database/queries');
+const queries = require('../database/queries');
 
 exports.obtenerAulas = async () => {
     const pool = await getConnection();

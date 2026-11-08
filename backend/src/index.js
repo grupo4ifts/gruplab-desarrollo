@@ -1,11 +1,13 @@
 const express = require('express');
 const classroomRoutes = require('./routes/classroom.routes');
+const memberRoutes = require('./routes/member.routes');  
 const cors = require('cors');
 const app = express();
 
 app.use(express.json());
 
 app.use(cors());
+app.use(memberRoutes);  
 
 app.use(classroomRoutes);
 

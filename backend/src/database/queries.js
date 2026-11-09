@@ -36,20 +36,20 @@ module.exports = {
     eliminarAula: `DELETE FROM Classrooms WHERE id = @id`,
 
 
-    obtenerMiembrosPorAula: `${queryBaseSelect}
+    obtenerMiembrosPorAula: `${queryBaseSelectMiembos}
         WHERE m.classroom_id = @classroom_id
         ORDER BY CASE WHEN m.rol = 'profesor' THEN 0 ELSE 1 END, m.nombre`,
 
-    obtenerMiembrosPorGrupo: `${queryBaseSelect}
+    obtenerMiembrosPorGrupo: `${queryBaseSelectMiembos}
         WHERE m.group_id = @group_id
         ORDER BY m.nombre`,
 
-    obtenerMiembroPorId: `${queryBaseSelect}
+    obtenerMiembroPorId: `${queryBaseSelectMiembos}
         WHERE m.id = @id`,
 
-    obtenerMiembroPorNombre: `${queryBaseSelect}
+    obtenerMiembroPorNombre: `${queryBaseSelectMiembos}
         WHERE m.classroom_id = @classroom_id AND m.nombre = @nombre`,
-    
+
     agregarMiembro: `INSERT INTO Members
         (classroom_id, nombre, email, rol)
     OUTPUT INSERTED.id
@@ -58,10 +58,10 @@ module.exports = {
 
     asignarGrupo: `UPDATE Members SET group_id = @group_id WHERE id = @id`,
 
-    
+
     obtenerAulaDelGrupo: `SELECT classroom_id FROM Groups WHERE id = @group_id`,
 
-   
+
     liberarTareasDelMiembro: `IF OBJECT_ID('Tasks') IS NOT NULL
         UPDATE Tasks SET assigned_to = NULL WHERE assigned_to = @id`,
 

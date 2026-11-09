@@ -2,8 +2,8 @@ const { sql, getConnection } = require('../database/connection');
 const queries = require('../database/queries');
 
 exports.obtenerAulas = async () => {
+    const pool = await getConnection();
     try {
-        const pool = await getConnection();
         const resultado = await pool.request().query(queries.obtenerAulas);
         return resultado.recordset;
     } catch (error) {
@@ -12,8 +12,8 @@ exports.obtenerAulas = async () => {
 };
 
 exports.crearAula = async (nombre, join_code, duenio) => {
+    const pool = await getConnection();
     try {
-        const pool = await getConnection();
         const resultado = await pool.request()
             .input('name', sql.NVarChar, nombre)
             .input('join_code', sql.NVarChar, join_code)
@@ -26,8 +26,8 @@ exports.crearAula = async (nombre, join_code, duenio) => {
 };
 
 exports.obtenerAulaPorCodigo = async (join_code) => {
+    const pool = await getConnection();
     try {
-        const pool = await getConnection();
         const resultado = await pool.request()
             .input('join_code', sql.NVarChar, join_code)
             .query(queries.obtenerAulaPorCodigo);
@@ -38,8 +38,8 @@ exports.obtenerAulaPorCodigo = async (join_code) => {
 };
 
 exports.obtenerAulaPorId = async (id) => {
+    const pool = await getConnection();
     try {
-        const pool = await getConnection();
         const resultado = await pool.request()
             .input('id', sql.Int, id)
             .query(queries.obtenerAulaPorId);
@@ -50,8 +50,8 @@ exports.obtenerAulaPorId = async (id) => {
 };
 
 exports.eliminarAula = async (id) => {
+    const pool = await getConnection();
     try {
-        const pool = await getConnection();
         const resultado = await pool.request()
             .input('id', sql.Int, id)
             .query(queries.eliminarAula);

@@ -6,7 +6,7 @@ exports.getConnection = async () => {
         const pool = await sql.connect(dbConfig);
         return pool;
     } catch (error) {
-        throw new Error('No se puedo conectar a la base de datos.');
+        throw new Error('No se pudo conectar a la base de datos.');
     }
 };
 

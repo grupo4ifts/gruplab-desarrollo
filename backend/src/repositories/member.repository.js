@@ -1,5 +1,5 @@
 const { sql, getConnection } = require('../database/connection');
-const queries = require('../database/member.queries');
+const queries = require('../database/queries');
 
 
 exports.obtenerMiembrosPorAula = async (classroomId) => {
@@ -8,9 +8,9 @@ exports.obtenerMiembrosPorAula = async (classroomId) => {
         const resultado = await pool.request()
             .input('classroom_id', sql.Int, classroomId)
             .query(queries.obtenerMiembrosPorAula);
-             return resultado.recordset;
+        return resultado.recordset;
     } catch (error) {
-        throw error;   
+        throw error;
     }
 };
 
@@ -58,10 +58,10 @@ exports.agregarMiembro = async (classroomId, nombre, email, rol) => {
         const resultado = await pool.request()
             .input('classroom_id', sql.Int, classroomId)
             .input('nombre', sql.NVarChar, nombre)
-            .input('email', sql.NVarChar, email)      
+            .input('email', sql.NVarChar, email)
             .input('rol', sql.NVarChar, rol)
             .query(queries.agregarMiembro);
-            return resultado.recordset;
+        return resultado.recordset;
     } catch (error) {
         throw error;
     }
@@ -72,9 +72,9 @@ exports.asignarGrupo = async (id, groupId) => {
     try {
         const resultado = await pool.request()
             .input('id', sql.Int, id)
-            .input('group_id', sql.Int, groupId)      
+            .input('group_id', sql.Int, groupId)
             .query(queries.asignarGrupo);
-            return resultado.rowsAffected[0];
+        return resultado.rowsAffected[0];
     } catch (error) {
         throw error;
     }

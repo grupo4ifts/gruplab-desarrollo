@@ -17,6 +17,12 @@ const queryBaseSelectMiembros = `SELECT
 FROM Members m
 LEFT JOIN Groups g ON g.id = m.group_id`;
 
+const queryBaseSelectGrupos = `SELECT
+    id,
+    classroom_id,
+    group_number,
+    project_name
+FROM Groups`;
 
 module.exports = {
     obtenerAulas: queryBaseSelect,
@@ -36,18 +42,18 @@ module.exports = {
     eliminarAula: `DELETE FROM Classrooms WHERE id = @id`,
 
 
-    obtenerMiembrosPorAula: `${queryBaseSelectMiembos}
+    obtenerMiembrosPorAula: `${queryBaseSelectMiembros}
         WHERE m.classroom_id = @classroom_id
         ORDER BY CASE WHEN m.rol = 'profesor' THEN 0 ELSE 1 END, m.nombre`,
 
-    obtenerMiembrosPorGrupo: `${queryBaseSelectMiembos}
+    obtenerMiembrosPorGrupo: `${queryBaseSelectMiemros}
         WHERE m.group_id = @group_id
         ORDER BY m.nombre`,
 
-    obtenerMiembroPorId: `${queryBaseSelectMiembos}
+    obtenerMiembroPorId: `${queryBaseSelectMiembros}
         WHERE m.id = @id`,
 
-    obtenerMiembroPorNombre: `${queryBaseSelectMiembos}
+    obtenerMiembroPorNombre: `${queryBaseSelectMiembros}
         WHERE m.classroom_id = @classroom_id AND m.nombre = @nombre`,
 
     agregarMiembro: `INSERT INTO Members
@@ -68,5 +74,23 @@ module.exports = {
     eliminarMiembro: `DELETE FROM Members WHERE id = @id`,
 
     eliminarMiembrosPorAula: `DELETE FROM Members WHERE classroom_id = @classroom_id`,
+
+    obtenerGruposPorAula: `${queryBaseSelectGrupos}
+        WHERE classroom_id = @classroom_id
+        ORDER BY group_number`,
+
+    obtenerGrupoPorId: `${queryBaseSelectGrupos}
+        WHERE id = @id`,
+
+    crearGrupo: `INSERT INTO Groups
+        (classroom_id, group_number, project_name)
+        VALUES
+        (@classroom_id, @group_number, @project_name)`,
+
+    actualizarGrupo: `UPDATE Groups
+        SET project_name = @project_name
+        WHERE id = @id`,
+
+    eliminarGrupo: `DELETE FROM Groups WHERE id = @id`,
 
 };

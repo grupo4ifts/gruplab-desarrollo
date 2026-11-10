@@ -9,7 +9,7 @@ const queryBaseSelectMiembros = `SELECT
     m.id,
     m.classroom_id,
     m.group_id,
-    g.name AS group_name,
+    g.project_name AS group_name,
     m.nombre,
     m.email,
     m.rol,
@@ -46,7 +46,7 @@ module.exports = {
         WHERE m.classroom_id = @classroom_id
         ORDER BY CASE WHEN m.rol = 'profesor' THEN 0 ELSE 1 END, m.nombre`,
 
-    obtenerMiembrosPorGrupo: `${queryBaseSelectMiemros}
+    obtenerMiembrosPorGrupo: `${queryBaseSelectMiembros}
         WHERE m.group_id = @group_id
         ORDER BY m.nombre`,
 

@@ -1,11 +1,12 @@
 const classroomRepository = require('../repositories/classroom.repository');
+const memberRepository = require('../repositories/member.repository');
 
 exports.obtenerAulas = async () => {
     const aulas = await classroomRepository.obtenerAulas();
     return aulas;
 };
 
-exports.crearAula = async (name, duenio) => {
+exports.crearAula = async (name, duenio, email) => {
     if (!name || !duenio) {
         throw new Error('Faltan datos para crear el aula');
     }
@@ -20,6 +21,8 @@ exports.crearAula = async (name, duenio) => {
 
     const [newAula] = await classroomRepository.crearAula(name, join_code, duenio);
     const aulaId = newAula.id;
+
+    await memberRepository.agregarMiembro(aulaId, duenio, email, 'profesor');
 
     return { message: 'Aula creada exitosamente', aulaId, join_code };
 };

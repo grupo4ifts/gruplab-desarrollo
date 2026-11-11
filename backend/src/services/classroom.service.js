@@ -54,6 +54,8 @@ exports.eliminarAula = async (id) => {
         throw new Error('Aula no encontrada para eliminar');
     }
 
+    await memberRepository.eliminarMiembrosPorAula(id);
+
     await classroomRepository.eliminarAula(id);
     return { message: 'Aula eliminada correctamente' };
 };

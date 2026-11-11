@@ -1,4 +1,20 @@
-<h2>Ingresar al Aula</h2>
-<input type="text" [value]="codigoAcceso()" (input)="codigoAcceso.set(inputCodigo.value)" #inputCodigo placeholder="Codigo de acceso (ej: GL-1234)">
-<button (click)="validar()">Validar Codigo</button>
-<button (click)="volver.emit()">Volver</button>
+<h2>Ingresar al Aula (Alumno)</h2>
+
+@if (errorMsg()) {
+    <p style="color: red;">{{ errorMsg() }}</p>
+}
+
+<div>
+    <input type="text" [value]="codigoAcceso()" (input)="codigoAcceso.set(inputCodigo.value)" #inputCodigo placeholder="Código de acceso (ej: GL-1234) *">
+</div>
+<div>
+    <input type="text" [value]="nombre()" (input)="nombre.set(inputNombre.value)" #inputNombre placeholder="Tu Nombre y Apellido *">
+</div>
+<div>
+    <input type="text" [value]="email()" (input)="email.set(inputEmail.value)" #inputEmail placeholder="Tu Email (opcional)">
+</div>
+
+<div>
+    <button (click)="validar()">Ingresar al Aula</button>
+    <button (click)="volver.emit()">Volver</button>
+</div>

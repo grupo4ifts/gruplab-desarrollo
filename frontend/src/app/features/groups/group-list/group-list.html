@@ -1,0 +1,25 @@
+<div>
+    <h3>Grupos de Trabajo ({{ grupos().length }})</h3>
+
+    @if (errorMsg()) {
+        <p style="color: red;">{{ errorMsg() }}</p>
+    }
+
+    <!-- Formulario simple para crear grupo -->
+    <div>
+        <input type="text" [value]="nuevoNombre()" (input)="nuevoNombre.set(inputNombre.value)" #inputNombre placeholder="Nombre del proyecto">
+        <button (click)="crear()">Crear Grupo</button>
+    </div>
+
+    <ul>
+        @for (g of grupos(); track g.id) {
+            <li>
+                <strong>Grupo #{{ g.group_number }}: {{ g.project_name }}</strong>
+                <button style="margin-left: 10px; color: red;" (click)="eliminar(g.id)">Eliminar</button>
+            </li>
+        } @empty {
+            <li>No hay grupos en esta aula.</li>
+        }
+    </ul>
+</div>
+

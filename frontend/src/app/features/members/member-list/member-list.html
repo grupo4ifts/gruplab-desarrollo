@@ -1,0 +1,35 @@
+<div>
+    <h3>Miembros del Aula ({{ miembros().length }})</h3>
+
+    @if (errorMsg()) {
+        <p style="color: red;">{{ errorMsg() }}</p>
+    }
+
+    <ul>
+        @for (m of miembros(); track m.id) {
+            <li>
+                <strong>{{ m.nombre }}</strong> 
+                ({{ m.rol }})
+                @if (m.email) { - {{ m.email }} }
+
+                <!-- Si es alumno, puede asignarse a un grupo -->
+                @if (m.rol === 'alumno') {
+                    <label style="margin-left: 10px;">Grupo: </label>
+                    <select #selectGrupo (change)="asignar(m.id, selectGrupo)">
+                        <option value="" [selected]="!m.group_id">-- Sin grupo --</option>
+                        @for (g of grupos(); track g.id) {
+                            <option [value]="g.id" [selected]="g.id === m.group_id">
+                                Grupo #{{ g.group_number }}: {{ g.project_name }}
+                            </option>
+                        }
+                    </select>
+                }
+
+                <button style="margin-left: 10px; color: red;" (click)="eliminar(m.id)">Eliminar</button>
+            </li>
+        } @empty {
+            <li>No hay miembros en esta aula.</li>
+        }
+    </ul>
+</div>
+

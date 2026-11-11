@@ -1,15 +1,35 @@
 @if (vistaActual() === 'inicio') {
 <div>
-    <h1>Aulas - Gruplab</h1>
-    <button (click)="vistaActual.set('profesor')">Crear Aula (Profesor)</button>
-    <button (click)="vistaActual.set('alumno')">Ingresar a Aula (Alumno)</button>
+    <h1>¿En qué trabajamos hoy?</h1>
+    <div>
+        <button (click)="vistaActual.set('profesor')">+ Crear Aula</button>
+        <button (click)="vistaActual.set('alumno')">Unirme con código</button>
+    </div>
+
+    <hr>
+
+    <div>
+        <h2>Mis Espacios</h2>
+        <ul>
+            @for (aula of misAulas(); track aula.id) {
+                <li>
+                    <strong>{{ aula.name }}</strong> (Profesor: {{ aula.duenio }})
+                    - Rol: <strong>{{ aula.rol === 'profesor' ? 'Docente' : 'Alumno' }}</strong>
+                    - Código: <code>{{ aula.join_code }}</code>
+                    <button style="margin-left: 10px;" (click)="ingresar(aula)">Entrar al Aula</button>
+                </li>
+            } @empty {
+                <li>No pertenecés a ningún aula todavía. Creá una o unite con un código de acceso.</li>
+            }
+        </ul>
+    </div>
 </div>
 }
 
 @if (vistaActual() === 'profesor') {
-<app-profesor (volver)="vistaActual.set('inicio')"></app-profesor>
+<app-profesor (volver)="cargarMisAulas(); vistaActual.set('inicio')"></app-profesor>
 }
 
 @if (vistaActual() === 'alumno') {
-<app-alumno (volver)="vistaActual.set('inicio')"></app-alumno>
+<app-alumno (volver)="cargarMisAulas(); vistaActual.set('inicio')"></app-alumno>
 }

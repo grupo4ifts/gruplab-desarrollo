@@ -1,24 +1,30 @@
 @if (aula()) {
-<header>
+<div>
     <h1>{{ aula().name }}</h1>
-    <p>Profesor: {{ aula().duenio }}</p>
-    <div class="code-aula">
-        <p>Codigo de acceso: <strong>{{ aula().join_code }}</strong></p>
-        <p>Comparti este codigo con tus alumnos para que puedan ingresar al AuLab</p>
-    </div>
+    <p>Profesor: <strong>{{ aula().duenio }}</strong></p>
+    <p>Código de acceso: <strong>{{ aula().join_code }}</strong> (compartí este código con tus alumnos)</p>
 
+    @if (usuarioActual()?.rol === 'profesor') {
+        <button (click)="eliminarAula()" style="color: red;">Eliminar Aula</button>
+    }
     <button (click)="volver()">Volver al inicio</button>
-</header>
+</div>
 
+<hr>
+
+<!-- SECCIÓN GRUPOS (Leandro) -->
 <section>
     <h2>Grupos</h2>
-    <p>Seccion de grupos (Leandro)</p>
+    <app-group-list [classroomId]="aula().id" />
 </section>
 
+<hr>
+
+<!-- SECCIÓN MIEMBROS (Gonzalo) -->
 <section>
     <h2>Miembros</h2>
-    <p>Seccion de miembros (Gonzalo)</p>
+    <app-member-list [classroomId]="aula().id" />
 </section>
 } @else {
-<p>Cargando aula...</p>
+<p>Cargando datos del aula...</p>
 }

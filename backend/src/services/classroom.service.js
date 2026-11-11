@@ -22,9 +22,9 @@ exports.crearAula = async (name, duenio, email) => {
     const [newAula] = await classroomRepository.crearAula(name, join_code, duenio);
     const aulaId = newAula.id;
 
-    await memberRepository.agregarMiembro(aulaId, duenio, email, 'profesor');
+    const [miembro] = await memberRepository.agregarMiembro(aulaId, duenio, email, 'profesor');
 
-    return { message: 'Aula creada exitosamente', aulaId, join_code };
+    return { message: 'Aula creada exitosamente', aulaId, join_code, memberId: miembro?.id };
 };
 
 exports.obtenerAulaPorCodigo = async (join_code) => {

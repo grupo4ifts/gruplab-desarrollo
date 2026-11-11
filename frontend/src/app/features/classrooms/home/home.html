@@ -1,9 +1,10 @@
 <div class="row justify-content-center">
-  <div class="col-md-8 text-center py-4">
+  <div class="col-md-9 text-center py-4">
     <h1 class="display-6 fw-bold mb-3">Aulas GrupLab</h1>
-    <p class="text-secondary mb-4">Plataforma para gestión de aulas virtuales, grupos de trabajo y tareas colaborativas.</p>
+    <p class="text-secondary mb-4">Plataforma para gestión de aulas virtuales, grupos de trabajo y tareas colaborativas.
+    </p>
 
-    <div class="d-flex justify-content-center gap-3">
+    <div class="d-flex justify-content-center gap-3 mb-5">
       <a class="btn btn-primary btn-lg px-4" routerLink="/classrooms/nuevo">
         Crear Aula (Profesor)
       </a>
@@ -11,5 +12,48 @@
         Ingresar a Aula (Alumno)
       </a>
     </div>
+
+    @if (misAuLabs().length > 0) {
+    <div class="text-start">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h5 fw-bold mb-0">Mis AuLabs</h2>
+        <span class="text-muted small">Accedé a tus aulas y laboratorios como profesor o alumno</span>
+      </div>
+
+      <div class="row g-3">
+        @for (aulab of misAuLabs(); track aulab.classroomId) {
+        <div class="col-md-6">
+          <div class="card shadow-sm border-0 h-100">
+            <div class="card-body d-flex justify-content-between align-items-center">
+              <div>
+                <h3 class="h6 fw-bold mb-1">{{ aulab.nombreAula }}</h3>
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                  <span class="badge" [class.bg-primary]="aulab.rol === 'profesor'"
+                    [class.bg-success]="aulab.rol === 'alumno'">
+                    {{ aulab.rol === 'profesor' ? 'Profesor' : 'Alumno' }}
+                  </span>
+                  <small class="text-muted">👤 {{ aulab.nombreUsuario }}</small>
+                  @if (aulab.join_code) {
+                  <small class="badge bg-light text-secondary border">Código: {{ aulab.join_code }}</small>
+                  }
+                </div>
+              </div>
+
+              <div class="d-flex align-items-center gap-2 ms-3">
+                <button class="btn btn-primary btn-sm px-3" (click)="entrarAAuLab(aulab)">
+                  Entrar
+                </button>
+                <button class="btn btn-outline-secondary btn-sm" (click)="quitarAuLab(aulab.classroomId)"
+                  title="Quitar de mi lista">
+                  ✕
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+    }
   </div>
 </div>

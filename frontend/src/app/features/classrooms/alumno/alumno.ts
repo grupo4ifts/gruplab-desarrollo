@@ -14,20 +14,35 @@ export class Alumno {
   private classroomService = inject(ClassroomService);
   private router = inject(Router);
 
+  // SIGNALS DEL FORMULARIO
+
   codigoAcceso = signal('');
+
   nombre = signal('');
+
   email = signal('');
+
   errorMsg = signal('');
 
-  validar() {
+  // Valida el codigo ingresado por el alumno mediante suscripcion al servicio de classroom, luego establece el AuLab activo y redirige al aula si es correcto
+
+  validar(): void {
     this.classroomService.obtenerAulaPorCodigo(this.codigoAcceso()).subscribe({
       next: (aula: Classroom) => {
-        console.log(`Aula encontrada: ${aula.name}`);
+        this.classroomService.establecerAuLabActivo({
+          classroomId: aula.id,
+          nombreAula: aula.name,
+          rol: 'alumno',
+          nombreUsuario: this.nombre().trim() || 'Alumno',
+          join_code: aula.join_code,
+          duenio: aula.duenio
+        });
+
         this.router.navigate(['/classrooms', aula.id]);
       },
-      error: (error: any) => {
-        console.error('El codigo no existe', error);
-        this.errorMsg.set('Aula no encontrada.');
+      error: (err: any) => {
+        console.error('El codigo no existe', err);
+        this.errorMsg.set(err.error?.error || 'Aula no encontrada.');
       }
     });
   }

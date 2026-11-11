@@ -3,11 +3,8 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ClassroomService } from '../services/classroom';
 import { Classroom, UsuarioSession } from '../models/classroom';
 
-/**
- * Componente principal del panel de control de un aula específica.
- * Carga los detalles del aula a partir del parámetro ':id' de la ruta,
- * administra permisos según el rol ('profesor' / 'alumno') y aloja las secciones de grupos y miembros.
- */
+// Componente principal del panel de control de un aula especifica
+// Carga los detalles del aula a partir del parametro :id de la ruta y administra permisos segun el rol
 @Component({
   selector: 'app-panel-aula',
   standalone: true,
@@ -42,7 +39,6 @@ export class PanelAula implements OnInit {
       this.classroomService.obtenerAulaPorId(id).subscribe({
         next: (aula: Classroom) => this.aula.set(aula),
         error: (error: any) => {
-          console.error('Aula no encontrada', error);
           this.router.navigate(['/classrooms']);
         }
       });
@@ -55,7 +51,7 @@ export class PanelAula implements OnInit {
     const aulaActual = this.aula();
     if (!aulaActual) return;
 
-    if (confirm(`¿Estás seguro de que deseas eliminar el aula "${aulaActual.name}"?`)) {
+    if (confirm(`Estas seguro de que deseas eliminar el aula "${aulaActual.name}"?`)) {
       this.classroomService.eliminarAula(aulaActual.id).subscribe({
         next: () => {
           this.classroomService.quitarAuLab(aulaActual.id);
@@ -63,7 +59,6 @@ export class PanelAula implements OnInit {
           this.router.navigate(['/classrooms']);
         },
         error: (error: any) => {
-          console.error('Error al eliminar el aula', error);
           alert('No se pudo eliminar el aula');
         }
       });

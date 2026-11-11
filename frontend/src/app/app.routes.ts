@@ -1,10 +1,6 @@
 import { Routes } from '@angular/router';
 
-/**
- * Tabla de enrutamiento principal de la aplicación.
- * Todas las vistas del módulo de aulas utilizan carga perezosa (lazy loading)
- * mediante import() dinámico para optimizar el peso inicial del bundle.
- */
+// Tabla de enrutamiento principal de la aplicacion con carga perezosa (lazy loading)
 export const routes: Routes = [
   { path: '', redirectTo: 'classrooms', pathMatch: 'full' },
   { 

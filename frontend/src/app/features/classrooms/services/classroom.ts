@@ -18,8 +18,8 @@ export class ClassroomService {
 
   // Crea una nueva aula en el servidor y registra al creador como profesor y devuelve el Observable con el id generado, codigo de acceso y mensaje de exito
 
-  crearAula(name: string, duenio: string): Observable<CrearAulaResponse> {
-    const body = { name, duenio };
+  crearAula(name: string, duenio: string, email?: string): Observable<CrearAulaResponse> {
+    const body = { name, duenio, email };
     return this.http.post<CrearAulaResponse>(this.apiUrl, body);
   }
 
@@ -43,7 +43,7 @@ export class ClassroomService {
 
   // LOCALSTORAGE (Guarda la informacion en texto, mediante clave y valor en el navegador. Toda solicitud al localStorage se tiene que convertir del texto a objeto mediante JSON.parse(), porque si se accede a cualquier metodo del localStorage se retorna texto))
 
-  // Obtiene la sesion activa y devuelve el observable mediante la clave "gruplab_usuario" generada en los servicios
+  // Obtiene la sesion activa guardada en localStorage mediante la clave "gruplab_usuario"
 
   obtenerSesion(): UsuarioSession | null {
     const data = localStorage.getItem(this.KEY_USUARIO);
@@ -55,13 +55,13 @@ export class ClassroomService {
     }
   }
 
-  // Guarda la sesion activa y devuelve el observable mediante la clave "gruplab_usuario" generada en los servicios
+  // Guarda la sesion activa en localStorage mediante la clave "gruplab_usuario"
 
   guardarSesion(usuario: UsuarioSession): void {
     localStorage.setItem(this.KEY_USUARIO, JSON.stringify(usuario));
   }
 
-  // Elimina la sesion activa y devuelve el observable mediante la clave "gruplab_usuario" generada en los servicios
+  // Elimina la sesion activa del localStorage mediante la clave "gruplab_usuario"
 
   cerrarSesion(): void {
     localStorage.removeItem(this.KEY_USUARIO);
@@ -70,7 +70,7 @@ export class ClassroomService {
   // Trae las aulas guardadas del usuario que esta activo en memoria (LocalStorage)
 
   obtenerAuLabs(): AuLab[] {
-    const data = localStorage.getItem(this.KEY_AULABS) || localStorage.getItem('gruplab_mis_espacios');
+    const data = localStorage.getItem(this.KEY_AULABS);
     if (!data) return [];
     try {
       return JSON.parse(data);

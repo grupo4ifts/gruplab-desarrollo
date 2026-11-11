@@ -34,14 +34,12 @@ export class Alumno {
           nombreAula: aula.name,
           rol: 'alumno',
           nombreUsuario: this.nombre().trim() || 'Alumno',
-          join_code: aula.join_code,
-          duenio: aula.duenio
+          join_code: aula.join_code
         });
 
         this.router.navigate(['/classrooms', aula.id]);
       },
       error: (err: any) => {
-        console.error('El codigo no existe', err);
         this.errorMsg.set(err.error?.error || 'Aula no encontrada.');
       }
     });

@@ -39,6 +39,5 @@ export interface AuLab {
   rol: 'profesor' | 'alumno';
   nombreUsuario: string;
   join_code?: string;
-  duenio?: string;
   memberId?: number;
 }

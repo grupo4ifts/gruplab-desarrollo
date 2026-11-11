@@ -3,10 +3,6 @@ import { Router, RouterLink } from '@angular/router';
 import { ClassroomService } from '../services/classroom';
 import { CrearAulaResponse } from '../models/classroom';
 
-/**
- * Componente del formulario para que un docente cree un aula nueva.
- * Envía la petición al backend, inicializa el AuLab con rol 'profesor' y redirige al panel.
- */
 @Component({
   selector: 'app-profesor',
   standalone: true,
@@ -29,8 +25,9 @@ export class Profesor {
   errorMsg = signal('');
 
   // Como profesor, se crea el aula mediante el completado del formulario y el envio de peticion al backend
+
   crear(): void {
-    this.classroomService.crearAula(this.name(), this.duenio()).subscribe({
+    this.classroomService.crearAula(this.name(), this.duenio(), this.email()).subscribe({
       next: (respuesta: CrearAulaResponse) => {
         this.classroomService.establecerAuLabActivo({
           classroomId: respuesta.aulaId,
@@ -38,14 +35,12 @@ export class Profesor {
           rol: 'profesor',
           nombreUsuario: this.duenio(),
           join_code: respuesta.join_code,
-          duenio: this.duenio(),
           memberId: respuesta.memberId
         });
 
         this.router.navigate(['/classrooms', respuesta.aulaId]);
       },
       error: (err: any) => {
-        console.error('Error al crear el aula:', err);
         this.errorMsg.set(err.error?.error || 'Error al crear el aula.');
       }
     });

@@ -1,5 +1,33 @@
-<h2>Crear Nueva Aula</h2>
-<input type="text" [value]="name()" (input)="name.set(inputName.value)" #inputName placeholder="Nombre del Aula">
-<input type="text" [value]="duenio()" (input)="duenio.set(inputDuenio.value)" #inputDuenio placeholder="Tu Nombre (Profesor)">
-<button (click)="crear()">Crear Aula</button>
-<button (click)="volver.emit()">Volver</button>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4">
+        <h2 class="h4 card-title mb-3 fw-bold">Crear Nueva Aula</h2>
+
+        @if (errorMsg()) {
+          <div class="alert alert-danger py-2 mb-3">{{ errorMsg() }}</div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label text-muted small">Nombre del Aula</label>
+          <input type="text" class="form-control" [value]="name()" (input)="name.set(inputName.value)" #inputName placeholder="Ej: Laboratorio de Computación">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-muted small">Nombre del Profesor</label>
+          <input type="text" class="form-control" [value]="duenio()" (input)="duenio.set(inputDuenio.value)" #inputDuenio placeholder="Ej: Prof. Pérez">
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label text-muted small">Email (opcional)</label>
+          <input type="text" class="form-control" [value]="email()" (input)="email.set(inputEmail.value)" #inputEmail placeholder="profesor@mail.com">
+        </div>
+
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary px-4" (click)="crear()">Crear Aula</button>
+          <button class="btn btn-outline-secondary" (click)="volver.emit()">Volver</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

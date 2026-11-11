@@ -1,5 +1,4 @@
 const memberRepository = require('../repositories/member.repository');
-const classroomRepository = require('../repositories/classroom.repository');
 
 exports.obtenerMiembrosPorAula = async (classroomId) => {
     if (!classroomId) {

@@ -1,32 +1,33 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Classroom, CrearAulaResponse, EliminarAulaResponse } from '../models/classroom';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClassroomService {
+  private http = inject(HttpClient);
   private apiUrl = 'http://localhost:3000/classrooms';
 
-  constructor(private http: HttpClient) { }
-
-  crearAula(name: string, duenio: string) {
+  crearAula(name: string, duenio: string): Observable<CrearAulaResponse> {
     const body = { name, duenio };
-    return this.http.post(this.apiUrl, body);
+    return this.http.post<CrearAulaResponse>(this.apiUrl, body);
   }
 
-  obtenerAulaPorCodigo(join_code: string) {
-    return this.http.get(`${this.apiUrl}/code/${join_code}`);
+  obtenerAulaPorCodigo(join_code: string): Observable<Classroom> {
+    return this.http.get<Classroom>(`${this.apiUrl}/code/${join_code}`);
   }
 
-  obtenerAulas() {
-    return this.http.get(this.apiUrl);
+  obtenerAulas(): Observable<Classroom[]> {
+    return this.http.get<Classroom[]>(this.apiUrl);
   }
 
-  obtenerAulaPorId(id: number) {
-    return this.http.get(`${this.apiUrl}/${id}`);
+  obtenerAulaPorId(id: number): Observable<Classroom> {
+    return this.http.get<Classroom>(`${this.apiUrl}/${id}`);
   }
 
-  eliminarAula(id: number) {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+  eliminarAula(id: number): Observable<EliminarAulaResponse> {
+    return this.http.delete<EliminarAulaResponse>(`${this.apiUrl}/${id}`);
   }
 }

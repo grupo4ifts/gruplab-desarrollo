@@ -1,24 +1,51 @@
-@if (aula()) {
-<header>
-    <h1>{{ aula().name }}</h1>
-    <p>Profesor: {{ aula().duenio }}</p>
-    <div class="code-aula">
-        <p>Codigo de acceso: <strong>{{ aula().join_code }}</strong></p>
-        <p>Comparti este codigo con tus alumnos para que puedan ingresar al AuLab</p>
+@if (aula(); as a) {
+<div class="row g-4">
+  <!-- Cabecera del Aula -->
+  <div class="col-12">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+        <div>
+          <h1 class="h3 fw-bold mb-1">{{ a.name }}</h1>
+          <p class="text-muted mb-0">Profesor: <strong>{{ a.duenio }}</strong></p>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <div class="badge bg-primary-subtle text-primary border border-primary-subtle fs-6 px-3 py-2">
+            Código: <strong class="user-select-all">{{ a.join_code }}</strong>
+          </div>
+          <button class="btn btn-outline-secondary" routerLink="/classrooms">Volver al inicio</button>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <button (click)="volver()">Volver al inicio</button>
-</header>
+  <!-- Sección Grupos (Leandro) -->
+  <div class="col-md-6">
+    <div class="card shadow-sm border-0 h-100">
+      <div class="card-header bg-white py-3">
+        <h2 class="h5 fw-bold mb-0">Grupos de Trabajo</h2>
+      </div>
+      <div class="card-body">
+        <p class="text-muted">Sección de grupos (Leandro)</p>
+      </div>
+    </div>
+  </div>
 
-<section>
-    <h2>Grupos</h2>
-    <p>Seccion de grupos (Leandro)</p>
-</section>
-
-<section>
-    <h2>Miembros</h2>
-    <p>Seccion de miembros (Gonzalo)</p>
-</section>
+  <!-- Sección Miembros (Gonzalo) -->
+  <div class="col-md-6">
+    <div class="card shadow-sm border-0 h-100">
+      <div class="card-header bg-white py-3">
+        <h2 class="h5 fw-bold mb-0">Miembros del Aula</h2>
+      </div>
+      <div class="card-body">
+        <p class="text-muted">Sección de miembros (Gonzalo)</p>
+      </div>
+    </div>
+  </div>
+</div>
 } @else {
-<p>Cargando aula...</p>
+  <div class="d-flex justify-content-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+  </div>
 }

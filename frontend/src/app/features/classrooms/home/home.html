@@ -1,8 +1,18 @@
 @if (vistaActual() === 'inicio') {
-<div>
-    <h1>Aulas - Gruplab</h1>
-    <button (click)="vistaActual.set('profesor')">Crear Aula (Profesor)</button>
-    <button (click)="vistaActual.set('alumno')">Ingresar a Aula (Alumno)</button>
+<div class="row justify-content-center">
+  <div class="col-md-8 text-center py-4">
+    <h1 class="display-6 fw-bold mb-3">Aulas GrupLab</h1>
+    <p class="text-secondary mb-4">Plataforma para gestión de aulas virtuales, grupos de trabajo y tareas colaborativas.</p>
+
+    <div class="d-flex justify-content-center gap-3">
+      <button class="btn btn-primary btn-lg px-4" (click)="vistaActual.set('profesor')">
+        Crear Aula (Profesor)
+      </button>
+      <button class="btn btn-outline-primary btn-lg px-4" (click)="vistaActual.set('alumno')">
+        Ingresar a Aula (Alumno)
+      </button>
+    </div>
+  </div>
 </div>
 }
 

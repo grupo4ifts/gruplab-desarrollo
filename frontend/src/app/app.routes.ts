@@ -1,10 +1,14 @@
 import { Routes } from '@angular/router';
-import { Home } from './features/classrooms/home/home';
-import { PanelAula } from './features/classrooms/panel-aula/panel-aula';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'classrooms', pathMatch: 'full' },
-    { path: 'classrooms', component: Home },
-    { path: 'classrooms/:id', component: PanelAula },
-    { path: '**', redirectTo: 'classrooms' }
+  { path: '', redirectTo: 'classrooms', pathMatch: 'full' },
+  { 
+    path: 'classrooms', 
+    loadComponent: () => import('./features/classrooms/home/home').then(m => m.Home) 
+  },
+  { 
+    path: 'classrooms/:id', 
+    loadComponent: () => import('./features/classrooms/panel-aula/panel-aula').then(m => m.PanelAula) 
+  },
+  { path: '**', redirectTo: 'classrooms' }
 ];

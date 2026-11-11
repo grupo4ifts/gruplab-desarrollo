@@ -1,6 +1,7 @@
-import { Component, signal, output } from '@angular/core';
-import { ClassroomService } from '../services/classroom';
+import { Component, signal, output, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { ClassroomService } from '../services/classroom';
+import { Classroom } from '../models/classroom';
 
 @Component({
   selector: 'app-alumno',
@@ -10,20 +11,24 @@ import { Router } from '@angular/router';
   styleUrl: './alumno.css'
 })
 export class Alumno {
-  codigoAcceso = signal('');
-  volver = output<void>();
+  private classroomService = inject(ClassroomService);
+  private router = inject(Router);
 
-  constructor(private classroomService: ClassroomService, private router: Router) { }
+  codigoAcceso = signal('');
+  nombre = signal('');
+  email = signal('');
+  errorMsg = signal('');
+  volver = output<void>();
 
   validar() {
     this.classroomService.obtenerAulaPorCodigo(this.codigoAcceso()).subscribe({
-      next: (aula: any) => {
+      next: (aula: Classroom) => {
         console.log(`Aula encontrada: ${aula.name}`);
         this.router.navigate(['/classrooms', aula.id]);
       },
       error: (error: any) => {
         console.error('El codigo no existe', error);
-        alert('Aula no encontrada.');
+        this.errorMsg.set('Aula no encontrada.');
       }
     });
   }

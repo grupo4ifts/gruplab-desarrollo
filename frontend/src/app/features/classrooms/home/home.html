@@ -1,25 +1,15 @@
-@if (vistaActual() === 'inicio') {
 <div class="row justify-content-center">
   <div class="col-md-8 text-center py-4">
     <h1 class="display-6 fw-bold mb-3">Aulas GrupLab</h1>
     <p class="text-secondary mb-4">Plataforma para gestión de aulas virtuales, grupos de trabajo y tareas colaborativas.</p>
 
     <div class="d-flex justify-content-center gap-3">
-      <button class="btn btn-primary btn-lg px-4" (click)="vistaActual.set('profesor')">
+      <a class="btn btn-primary btn-lg px-4" routerLink="/classrooms/nuevo">
         Crear Aula (Profesor)
-      </button>
-      <button class="btn btn-outline-primary btn-lg px-4" (click)="vistaActual.set('alumno')">
+      </a>
+      <a class="btn btn-outline-primary btn-lg px-4" routerLink="/classrooms/unirse">
         Ingresar a Aula (Alumno)
-      </button>
+      </a>
     </div>
   </div>
 </div>
-}
-
-@if (vistaActual() === 'profesor') {
-<app-profesor (volver)="vistaActual.set('inicio')"></app-profesor>
-}
-
-@if (vistaActual() === 'alumno') {
-<app-alumno (volver)="vistaActual.set('inicio')"></app-alumno>
-}

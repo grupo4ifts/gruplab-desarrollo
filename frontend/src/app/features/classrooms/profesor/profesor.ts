@@ -1,12 +1,12 @@
-import { Component, signal, output, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, signal, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { ClassroomService } from '../services/classroom';
 import { CrearAulaResponse } from '../models/classroom';
 
 @Component({
   selector: 'app-profesor',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './profesor.html',
   styleUrl: './profesor.css'
 })
@@ -18,7 +18,6 @@ export class Profesor {
   duenio = signal('');
   email = signal('');
   errorMsg = signal('');
-  volver = output<void>();
 
   crear() {
     this.classroomService.crearAula(this.name(), this.duenio()).subscribe({

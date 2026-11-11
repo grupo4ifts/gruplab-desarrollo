@@ -1,12 +1,12 @@
-import { Component, signal, output, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, signal, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { ClassroomService } from '../services/classroom';
 import { Classroom } from '../models/classroom';
 
 @Component({
   selector: 'app-alumno',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './alumno.html',
   styleUrl: './alumno.css'
 })
@@ -18,7 +18,6 @@ export class Alumno {
   nombre = signal('');
   email = signal('');
   errorMsg = signal('');
-  volver = output<void>();
 
   validar() {
     this.classroomService.obtenerAulaPorCodigo(this.codigoAcceso()).subscribe({

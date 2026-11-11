@@ -1,28 +1,88 @@
-### Traer todas las aulas
-GET http://localhost:3000/classrooms
+@baseUrl = http://localhost:3000
 
-### ---
+# ==========================================================
+# 1. AULAS (Classrooms)
+# ==========================================================
+
+### Traer todas las aulas
+GET {{baseUrl}}/classrooms
 
 ### Crear aula
-POST http://localhost:3000/classrooms
+POST {{baseUrl}}/classrooms
 Content-Type: application/json
 
 {
-  "name": "Laboratorio",
-  "duenio": "Pepe"
+  "name": "Laboratorio de Software",
+  "duenio": "Prof. Pérez"
 }
 
-### ---
-
 ### Obtener aula por codigo (join_code)
-GET http://localhost:3000/classrooms/code/GL-1180
-
-### ---
+GET {{baseUrl}}/classrooms/code/GL-1000
 
 ### Obtener aula por ID
-GET http://localhost:3000/classrooms/13
-
-### ---
+GET {{baseUrl}}/classrooms/1
 
 ### Eliminar aula por ID
-DELETE http://localhost:3000/classrooms/154
+DELETE {{baseUrl}}/classrooms/1
+
+
+# ==========================================================
+# 2. MIEMBROS (Members)
+# ==========================================================
+
+### Obtener miembros de un aula
+GET {{baseUrl}}/classrooms/34/members
+
+### Agregar miembro a un aula (Profesor o Alumno)
+POST {{baseUrl}}/classrooms/34/members
+Content-Type: application/json
+
+{
+  "nombre": "Juan Pérez",
+  "email": "juan@correo.com",
+  "rol": "alumno"
+}
+
+### Obtener miembros de un grupo especifico
+GET {{baseUrl}}/groups/1/members
+
+### Asignar miembro a un grupo (o null para quitarlo)
+PUT {{baseUrl}}/members/1/group
+Content-Type: application/json
+
+{
+  "group_id": 1
+}
+
+### Eliminar miembro por ID
+DELETE {{baseUrl}}/members/1
+
+
+# ==========================================================
+# 3. GRUPOS (Groups)
+# ==========================================================
+
+### Obtener grupos de un aula
+GET {{baseUrl}}/classrooms/33/groups
+
+### Crear grupo en un aula
+POST {{baseUrl}}/classrooms/33/groups
+Content-Type: application/json
+
+{
+  "project_name": "Sistema de Gestión"
+}
+
+### Obtener grupo por ID
+GET {{baseUrl}}/groups/2
+
+### Actualizar nombre del proyecto del grupo
+PUT {{baseUrl}}/groups/1
+Content-Type: application/json
+
+{
+  "project_name": "Sistema de Gestión Web"
+}
+
+### Eliminar grupo por ID
+DELETE {{baseUrl}}/groups/1

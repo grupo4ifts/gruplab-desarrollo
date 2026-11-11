@@ -1,12 +1,12 @@
 const sql = require('mssql');
-const { dbConfig } = require('./config');
+const dbConfig = require('./config');
 
 exports.getConnection = async () => {
     try {
         const pool = await sql.connect(dbConfig);
         return pool;
     } catch (error) {
-        throw error;
+        throw new Error('No se pudo conectar a la base de datos.');
     }
 };
 

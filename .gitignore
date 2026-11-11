@@ -1,5 +1,6 @@
 node_modules/
 backend/.env
 .angular/
+*.http
 docs
 .env

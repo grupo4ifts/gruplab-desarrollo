@@ -1,11 +1,12 @@
 const classroomRepository = require('../repositories/classroom.repository');
+const memberRepository = require('../repositories/member.repository');
 
 exports.obtenerAulas = async () => {
     const aulas = await classroomRepository.obtenerAulas();
     return aulas;
 };
 
-exports.crearAula = async (name, duenio) => {
+exports.crearAula = async (name, duenio, email) => {
     if (!name || !duenio) {
         throw new Error('Faltan datos para crear el aula');
     }
@@ -13,41 +14,43 @@ exports.crearAula = async (name, duenio) => {
     const nRandom = Math.floor(1000 + Math.random() * 9000);
     const join_code = `GL-${nRandom}`;
 
-    const aulaExistente = await classroomRepository.obtenerAulaPorCodigo(join_code);
-    if (aulaExistente && aulaExistente.length > 0) {
+    const [aulaExistente] = await classroomRepository.obtenerAulaPorCodigo(join_code);
+    if (aulaExistente) {
         throw new Error('Error al generar el codigo, intente nuevamente');
     }
 
-    const newAula = await classroomRepository.crearAula(name, join_code, duenio);
-    const aulaId = newAula[0].id;
+    const [newAula] = await classroomRepository.crearAula(name, join_code, duenio);
+    const aulaId = newAula.id;
+
+    await memberRepository.agregarMiembro(aulaId, duenio, email, 'profesor');
 
     return { message: 'Aula creada exitosamente', aulaId, join_code };
 };
 
 exports.obtenerAulaPorCodigo = async (join_code) => {
-    const aula = await classroomRepository.obtenerAulaPorCodigo(join_code);
+    const [aula] = await classroomRepository.obtenerAulaPorCodigo(join_code);
 
-    if (!aula || aula.length === 0) {
+    if (!aula) {
         throw new Error('Aula no encontrada');
     }
 
-    return aula[0];
+    return aula;
 };
 
 exports.obtenerAulaPorId = async (id) => {
-    const aula = await classroomRepository.obtenerAulaPorId(id);
+    const [aula] = await classroomRepository.obtenerAulaPorId(id);
 
-    if (!aula || aula.length === 0) {
+    if (!aula) {
         throw new Error('Aula no encontrada');
     }
 
-    return aula[0];
+    return aula;
 };
 
 exports.eliminarAula = async (id) => {
-    const aula = await classroomRepository.obtenerAulaPorId(id);
+    const [aula] = await classroomRepository.obtenerAulaPorId(id);
 
-    if (!aula || aula.length === 0) {
+    if (!aula) {
         throw new Error('Aula no encontrada para eliminar');
     }
 

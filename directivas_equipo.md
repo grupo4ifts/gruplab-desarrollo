@@ -9,18 +9,18 @@ Stack: Node.js + Express + SQL Server (`mssql`) en backend, Angular 21 Standalon
 ## 0. Indice
 
 1. Estado actual del repositorio
-2. Reparto de modulos (5 integrantes Fullstack)
+2. Reparto de modulos (5 integrantes Fullstack con tablas propias)
 3. Reglas de Git
 4. Archivos compartidos
 5. Convenciones de backend (con plantilla real del proyecto)
 6. Convenciones de frontend (Angular 21 + inject + Signals + Bootstrap)
-7. Base de datos completa y orden de creacion
+7. Base de datos completa (`schema.sql`)
 8. Contratos de integracion entre modulos
 9. Modulo 1 - Luciano - Aulas y Home (COMPLETADO)
 10. Modulo 2 - Leandro - Grupos (Backend listo / Falta Frontend)
 11. Modulo 3 - Gonzalo - Miembros (Backend listo / Falta Frontend)
-12. Modulo 4 - Abel - Tablero Kanban de 4 Columnas y Flujo de Estados (Backend + Frontend)
-13. Modulo 5 - Leonardo - ABM de Tareas y Comentarios (Backend + Frontend)
+12. Modulo 4 - Abel - Tablero Kanban y Columnas Dinamicas (`BoardColumns`)
+13. Modulo 5 - Leonardo - ABM de Tareas y Comentarios (`Tasks` y `Comments`)
 14. Como trabajar sin esperar al companero (datos de prueba)
 15. Checklist de entrega por integrante
 
@@ -46,9 +46,9 @@ gruplab-fe-be/
         classroom.routes.js      (LISTO - Luciano)
         group.routes.js          (LISTO - Leandro)
         member.routes.js         (LISTO - Gonzalo)
-        board.routes.js          (Pendiente - Abel)
-        task.routes.js           (Pendiente - Leonardo)
-        comment.routes.js        (Pendiente - Leonardo)
+        board.routes.js          (Pendiente - Abel: Columnas y Tablero)
+        task.routes.js           (Pendiente - Leonardo: Tareas)
+        comment.routes.js        (Pendiente - Leonardo: Comentarios)
       controllers/
         classroom.controller.js  (LISTO - Luciano)
         group.controller.js      (LISTO - Leandro)
@@ -89,11 +89,12 @@ gruplab-fe-be/
           groups/                (Pendiente Frontend - Leandro)
           members/               (Pendiente Frontend - Gonzalo)
           tasks/                 (Compartido sin pisarse entre Abel y Leonardo)
-            models/task.ts       (Interfaz Task y TaskStatus)
+            models/board-column.ts (Pendiente - Abel: Interfaz BoardColumn)
+            models/task.ts       (Pendiente - Leonardo/Abel: Interfaz Task)
             services/board.ts    (Pendiente - Abel: BoardService)
             services/task.ts     (Pendiente - Leonardo: TaskService)
-            kanban/              (Pendiente - Abel: Tablero de 4 columnas)
-            task-card/           (Pendiente - Abel: Tarjeta y cambio de columna)
+            kanban/              (Pendiente - Abel: Tablero con 4 columnas base + agregar columna)
+            task-card/           (Pendiente - Abel: Tarjeta de tarea y movimiento entre columnas)
             task-form/           (Pendiente - Leonardo: Crear tarea)
             task-detail/         (Pendiente - Leonardo: Ver/Editar/Borrar tarea)
           comments/              (Pendiente Frontend - Leonardo)
@@ -108,17 +109,17 @@ Puertos:
 
 ---
 
-## 2. Reparto de modulos (5 integrantes Fullstack: Backend + Frontend)
+## 2. Reparto de modulos (5 integrantes Fullstack con tablas propias)
 
-Todos los integrantes programan tanto **Backend** (SQL + Repository + Service + Controller + Routes) como **Frontend** (Service + Componentes en Angular 21):
+Cada integrante es duenio de sus propias tablas SQL, su propio Backend (Repository + Service + Controller + Routes) y su propio Frontend:
 
 | Integrante | Modulo | Tablas SQL | Archivos Backend | Carpeta / Componentes Frontend | Estado actual |
 |---|---|---|---|---|---|
 | **Luciano** | Aulas, Home y Panel del Aula | `Classrooms` | `classroom.*` | `features/classrooms` (`Home`, `Profesor`, `Alumno`, `PanelAula`) | **100% Completado** |
 | **Leandro** | Grupos de trabajo | `Groups` | `group.*` | `features/groups` (`GroupService`, `GroupList`) | Backend listo / Falta Front |
 | **Gonzalo** | Miembros del aula | `Members` | `member.*` | `features/members` (`MemberService`, `MemberList`) | Backend listo / Falta Front |
-| **Abel** | **Tablero Kanban (4 Columnas, Filtros y Cambio de Estado)** | Usa `Tasks` (consultas de tablero y estado) | `board.*` (`board.repository`, `board.service`, `board.controller`, `board.routes`) | `features/tasks` (`BoardService`, `Kanban` de 4 columnas, `TaskCard`) | Pendiente |
-| **Leonardo** | **ABM de Tareas y Comentarios** | `Tasks`, `Comments` | `task.*` (crear, ver, editar, borrar tarea) y `comment.*` | `features/tasks` (`TaskService`, `TaskForm`, `TaskDetail`) y `features/comments` (`CommentService`, `Comments`) | Pendiente |
+| **Abel** | **Tablero Kanban y Columnas Dinamicas** (4 columnas iniciales + crear/editar/borrar columna y mover tarea) | `BoardColumns` | `board.*` (`board.repository`, `board.service`, `board.controller`, `board.routes`) | `features/tasks` (`BoardService`, `Kanban`, `TaskCard`) | Pendiente |
+| **Leonardo** | **ABM de Tareas y Comentarios** | `Tasks`, `Comments` | `task.*` y `comment.*` | `features/tasks` (`TaskService`, `TaskForm`, `TaskDetail`) y `features/comments` (`CommentService`, `Comments`) | Pendiente |
 
 ---
 
@@ -132,7 +133,7 @@ Ramas:
 Flujo diario:
 1. Pararse en la rama propia: `git checkout <tu-rama>`
 2. Traer lo ultimo de develop antes de empezar: `git pull origin develop`
-3. Trabajar y hacer commits descriptivos: `git commit -m "tablero: endpoints de board y cambio de columna"`
+3. Trabajar y hacer commits descriptivos: `git commit -m "tablero: crud de columnas y movimiento de tareas"`
 4. Subir la rama propia: `git push origin <tu-rama>`
 5. Abrir Pull Request hacia `develop`.
 
@@ -145,7 +146,7 @@ Regla: solo se AGREGAN lineas al final del bloque correspondiente, nunca se borr
 | Archivo | Que agrega cada uno |
 |---|---|
 | `backend/src/index.js` | `require` y `app.use` de sus rutas (`board.routes`, `task.routes`, `comment.routes`) |
-| `backend/src/database/schema.sql` | `CREATE TABLE Tasks` y `CREATE TABLE Comments` al final |
+| `backend/src/database/schema.sql` | `CREATE TABLE BoardColumns` (Abel), `CREATE TABLE Tasks` y `CREATE TABLE Comments` (Leonardo) |
 | `backend/src/database/queries.js` | Sus queries al final del `module.exports` |
 | `backend/peticionesTest.http` | Su bloque de pruebas al final del archivo |
 | `frontend/src/app/app.routes.ts` | La ruta con `loadComponent` para `/groups/:groupId/board` (antes de `'**'`) |
@@ -166,51 +167,59 @@ Regla: solo se AGREGAN lineas al final del bloque correspondiente, nunca se borr
 
 ### 5.2 Plantilla real del proyecto (copiar este estilo exacto)
 
-**En `repositories/board.repository.js` (o `task.repository.js`):**
+**En `repositories/board.repository.js`:**
 ```javascript
 const { sql, getConnection } = require('../database/connection');
 const queries = require('../database/queries');
 
-exports.obtenerTareasTablero = async (groupId) => {
+exports.obtenerColumnasPorGrupo = async (groupId) => {
     const pool = await getConnection();
     try {
         const resultado = await pool.request()
             .input('group_id', sql.Int, groupId)
-            .query(queries.obtenerTareasPorGrupo);
+            .query(queries.obtenerColumnasPorGrupo);
         return resultado.recordset;
     } catch (error) {
-        throw new Error('Error al obtener las tareas del tablero');
+        throw new Error('Error al obtener las columnas del tablero');
     }
 };
 ```
 
-**En `services/board.service.js` (o `task.service.js`):**
+**En `services/board.service.js`:**
 ```javascript
 const boardRepository = require('../repositories/board.repository');
 
-const ESTADOS_VALIDOS = ['todo', 'in_progress', 'review', 'done'];
+exports.crearColumna = async (groupId, name, color) => {
+    if (!groupId || !name || !name.trim()) {
+        throw new Error('El nombre de la columna es obligatorio');
+    }
+    const columnasActuales = await boardRepository.obtenerColumnasPorGrupo(groupId);
+    const nuevaPosicion = columnasActuales.length + 1;
+    const colorFinal = color || 'secondary';
 
-exports.cambiarEstadoTarea = async (id, status) => {
-    if (!status || !ESTADOS_VALIDOS.includes(status)) {
-        throw new Error('Estado de columna invalido. Valores permitidos: todo, in_progress, review, done');
-    }
-    const filasAfectadas = await boardRepository.cambiarEstadoTarea(id, status);
-    if (filasAfectadas === 0) {
-        throw new Error('Tarea no encontrada');
-    }
-    return { message: 'Estado actualizado correctamente', status };
+    const [columnaCreada] = await boardRepository.crearColumna(
+        groupId,
+        name.trim(),
+        nuevaPosicion,
+        colorFinal
+    );
+    return {
+        message: 'Columna creada exitosamente',
+        id: columnaCreada.id,
+        position: nuevaPosicion
+    };
 };
 ```
 
-**En `controllers/board.controller.js` (o `task.controller.js`):**
+**En `controllers/board.controller.js`:**
 ```javascript
 const boardService = require('../services/board.service');
 
-exports.cambiarEstadoTarea = async (req, res) => {
+exports.crearColumna = async (req, res) => {
     try {
-        const { id } = req.params;
-        const { status } = req.body || {};
-        const resultado = await boardService.cambiarEstadoTarea(id, status);
+        const { groupId } = req.params;
+        const { name, color } = req.body || {};
+        const resultado = await boardService.crearColumna(groupId, name, color);
         res.status(200).json(resultado);
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -232,8 +241,8 @@ exports.cambiarEstadoTarea = async (req, res) => {
    private router = inject(Router);
    ```
 3. **Interfaces TypeScript (`models/`)**: Crear interfaces para tipar los modelos y respuestas. No dejar todo en `any`.
-4. **Servicios con `Observable<T>`**: Tipar el retorno de cada metodo HTTP (`Observable<Task[]>`, etc.).
-5. **Estado con Signals**: `tareas = signal<Task[]>([]);` y columnas derivadas con `computed()`.
+4. **Servicios con `Observable<T>`**: Tipar el retorno de cada metodo HTTP (`Observable<BoardColumn[]>`, `Observable<Task[]>`, etc.).
+5. **Estado con Signals**: `columnas = signal<BoardColumn[]>([]);`, `tareas = signal<Task[]>([]);`.
 6. **Ciclo de vida `OnInit`**: Hacer las llamadas HTTP iniciales dentro de `ngOnInit(): void`.
 7. **Lectura de parametros de ruta con `.subscribe()`**:
    ```typescript
@@ -251,14 +260,14 @@ exports.cambiarEstadoTarea = async (req, res) => {
      loadComponent: () => import('./features/tasks/kanban/kanban').then(m => m.Kanban)
    }
    ```
-9. **Estilos con Bootstrap 5.3**: Ya esta cargado en `index.html`. Usar clases nativas de Bootstrap (`card`, `shadow-sm`, `btn`, `badge`, `form-control`, `row`, `col-md-3`).
+9. **Estilos con Bootstrap 5.3**: Ya esta cargado en `index.html`. Usar clases nativas de Bootstrap (`card`, `shadow-sm`, `btn`, `badge`, `form-control`, `row`, `col`).
 
 ---
 
 ## 7. Base de datos completa (`schema.sql`)
 
 Las tablas 1 (`Classrooms`), 2 (`Groups`) y 3 (`Members`) **ya estan creadas en `schema.sql`**.
-Falta agregar las tablas 4 (`Tasks`) y 5 (`Comments`) al final de `schema.sql`:
+Se agregan al final la tabla 4 (`BoardColumns` de Abel) y las tablas 5 y 6 (`Tasks` y `Comments` de Leonardo):
 
 ```sql
 -- 1. Luciano (YA EXISTE)
@@ -289,18 +298,27 @@ CREATE TABLE Members (
     created_at   DATETIME      DEFAULT GETDATE()
 );
 
--- 4. Tabla Tasks (Usada por Abel para el Tablero de 4 columnas y por Leonardo para el ABM de Tareas)
+-- 4. Abel (AGREGAR AHORA - Columnas del tablero de cada grupo)
+CREATE TABLE BoardColumns (
+    id         INT          IDENTITY (1, 1) PRIMARY KEY,
+    group_id   INT          NOT NULL FOREIGN KEY REFERENCES Groups (id) ON DELETE CASCADE,
+    name       VARCHAR (50) NOT NULL, -- 'Por hacer', 'En progreso', 'En revision', 'Terminado' o nuevas
+    position   INT          NOT NULL, -- Orden de izquierda a derecha: 1, 2, 3, 4...
+    color      VARCHAR (20) DEFAULT 'secondary' NOT NULL -- 'secondary', 'primary', 'warning', 'success', 'info'
+);
+
+-- 5. Leonardo (AGREGAR AHORA - Tareas dentro de una columna del tablero)
 CREATE TABLE Tasks (
     id          INT            IDENTITY (1, 1) PRIMARY KEY,
-    group_id    INT            NOT NULL FOREIGN KEY REFERENCES Groups (id) ON DELETE CASCADE,
+    group_id    INT            NOT NULL,
+    column_id   INT            NOT NULL FOREIGN KEY REFERENCES BoardColumns (id) ON DELETE CASCADE,
     assigned_to INT            NULL FOREIGN KEY REFERENCES Members (id),
     title       VARCHAR (150)  NOT NULL,
     description VARCHAR (1000) NULL,
-    status      VARCHAR (20)   DEFAULT 'todo' NOT NULL, -- 'todo', 'in_progress', 'review', 'done'
     created_at  DATETIME       DEFAULT GETDATE()
 );
 
--- 5. Tabla Comments (Leonardo)
+-- 6. Leonardo (AGREGAR AHORA - Comentarios de cada tarea)
 CREATE TABLE Comments (
     id          INT            IDENTITY (1, 1) PRIMARY KEY,
     task_id     INT            NOT NULL FOREIGN KEY REFERENCES Tasks (id) ON DELETE CASCADE,
@@ -310,8 +328,9 @@ CREATE TABLE Comments (
 );
 ```
 
-> **Nota importante sobre SQL Server:**
-> `Tasks.assigned_to` NO lleva `ON DELETE SET NULL` porque SQL Server lanza el error 1785 de multiples caminos en cascada. Ya esta resuelto en `queries.js` con la query `liberarTareasDelMiembro` cuando se elimina un miembro.
+> **Nota sobre cascadas en SQL Server (sin error 1785):**
+> La cadena de borrado en cascada es lineal: `Classrooms -> Groups -> BoardColumns -> Tasks -> Comments`.
+> `Tasks.assigned_to` no lleva `ON DELETE SET NULL` porque SQL Server no permite caminos multiples; ya esta resuelto en `queries.js` con `liberarTareasDelMiembro`.
 
 ---
 
@@ -336,23 +355,33 @@ Ya implementado por Luciano en `ClassroomService`:
   const sesion = JSON.parse(localStorage.getItem('gruplab_usuario') || '{}');
   ```
 
-### 8.2 Contrato compartido entre Abel (Tablero) y Leonardo (Tareas)
+### 8.2 Modelos compartidos entre Abel (Tablero) y Leonardo (Tareas)
 
-Ambos comparten la interfaz `Task` en `frontend/src/app/features/tasks/models/task.ts`:
-```typescript
-export type TaskStatus = 'todo' | 'in_progress' | 'review' | 'done';
+1. **`frontend/src/app/features/tasks/models/board-column.ts` (Abel)**:
+   ```typescript
+   export interface BoardColumn {
+     id: number;
+     group_id: number;
+     name: string;
+     position: number;
+     color: string;
+   }
+   ```
 
-export interface Task {
-  id: number;
-  group_id: number;
-  assigned_to: number | null;
-  assigned_name?: string | null;
-  title: string;
-  description: string | null;
-  status: TaskStatus;
-  created_at: string;
-}
-```
+2. **`frontend/src/app/features/tasks/models/task.ts` (Leonardo y Abel)**:
+   ```typescript
+   export interface Task {
+     id: number;
+     group_id: number;
+     column_id: number;
+     column_name?: string;
+     assigned_to: number | null;
+     assigned_name?: string | null;
+     title: string;
+     description: string | null;
+     created_at: string;
+   }
+   ```
 
 ### 8.3 Componentes que se incrustan en otros
 
@@ -360,8 +389,8 @@ export interface Task {
 |---|---|---|---|---|
 | `GroupList` | Leandro | `app-group-list` | `[classroomId]="a.id"` | `PanelAula` (Luciano) |
 | `MemberList` | Gonzalo | `app-member-list` | `[classroomId]="a.id"` | `PanelAula` (Luciano) |
-| `TaskCard` | Abel | `app-task-card` | `[tarea]="t"` `(cambiarEstado)="..."` `(seleccionar)="..."` | `Kanban` (Abel) |
-| `TaskForm` | Leonardo | `app-task-form` | `[groupId]="groupId()"` `(creada)="cargarTablero()"` | `Kanban` (Abel) |
+| `TaskCard` | Abel | `app-task-card` | `[tarea]="t"` `(moverColumna)="..."` `(seleccionar)="..."` | `Kanban` (Abel) |
+| `TaskForm` | Leonardo | `app-task-form` | `[groupId]="groupId()"` `[columnId]="primeraColumnaId()"` `(creada)="cargarTablero()"` | `Kanban` (Abel) |
 | `TaskDetail` | Leonardo | `app-task-detail` | `[tarea]="tareaSeleccionada()!"` `(cerrar)="..."` `(actualizada)="cargarTablero()"` | `Kanban` (Abel) |
 | `Comments` | Leonardo | `app-comments` | `[taskId]="tarea().id"` | `TaskDetail` (Leonardo) |
 
@@ -413,39 +442,65 @@ Todo el modulo 1 ya se encuentra finalizado, documentado y compilando sin errore
 
 ---
 
-## 12. Modulo 4 - Abel - Tablero Kanban de 4 Columnas y Estados (Backend + Frontend)
+## 12. Modulo 4 - Abel - Tablero Kanban y Columnas Dinamicas (`BoardColumns`)
 
-**Responsabilidad:** Construir el **Backend del Tablero** (`board.*`: consultas del tablero por grupo, filtro por miembro/estado y cambio de estado entre las 4 columnas) y el **Frontend del Tablero Kanban** (`BoardService`, `Kanban` con 4 columnas y `TaskCard`).
+**Responsabilidad:** Construir la tabla `BoardColumns`, el **Backend del Tablero y sus Columnas (`board.*`)** (creacion automatica de las **4 columnas iniciales**, posibilidad de **agregar nuevas columnas**, renombrarlas, eliminarlas y mover tareas entre columnas) y el **Frontend del Tablero Kanban (`BoardService`, `Kanban` y `TaskCard`)**.
 
-### 12.1 Backend de Abel (`board.*` + `queries.js`)
+### 12.1 Base de Datos (Abel)
+Agregar la tabla `BoardColumns` en `backend/src/database/schema.sql` (ver seccion 7).
 
-1. **En `backend/src/database/queries.js`**, agregar la base de consulta y las queries del tablero:
+### 12.2 Backend de Abel (`board.*` + `queries.js`)
+
+1. **En `backend/src/database/queries.js`**, agregar la constante base y las queries de Abel:
    ```javascript
+   const queryBaseSelectColumnas = `SELECT
+       id,
+       group_id,
+       name,
+       position,
+       color
+   FROM BoardColumns`;
+
    const queryBaseSelectTareas = `SELECT
        t.id,
        t.group_id,
+       t.column_id,
+       c.name AS column_name,
        t.assigned_to,
        m.nombre AS assigned_name,
        t.title,
        t.description,
-       t.status,
        t.created_at
    FROM Tasks t
+   INNER JOIN BoardColumns c ON c.id = t.column_id
    LEFT JOIN Members m ON m.id = t.assigned_to`;
    ```
    Y dentro del `module.exports`:
    ```javascript
-   // Queries de Abel (Tablero y cambio de columna)
+   // Queries de Abel (Columnas del Tablero y movimiento de tareas)
+   obtenerColumnasPorGrupo: `${queryBaseSelectColumnas}
+       WHERE group_id = @group_id
+       ORDER BY position ASC`,
+
+   obtenerColumnaPorId: `${queryBaseSelectColumnas}
+       WHERE id = @id`,
+
+   crearColumna: `INSERT INTO BoardColumns (group_id, name, position, color)
+       OUTPUT INSERTED.id
+       VALUES (@group_id, @name, @position, @color)`,
+
+   actualizarColumna: `UPDATE BoardColumns
+       SET name = @name, color = @color
+       WHERE id = @id`,
+
+   eliminarColumna: `DELETE FROM BoardColumns WHERE id = @id`,
+
    obtenerTareasPorGrupo: `${queryBaseSelectTareas}
        WHERE t.group_id = @group_id
        ORDER BY t.created_at ASC`,
 
-   obtenerTareasPorGrupoYMiembro: `${queryBaseSelectTareas}
-       WHERE t.group_id = @group_id AND t.assigned_to = @assigned_to
-       ORDER BY t.created_at ASC`,
-
-   cambiarEstadoTarea: `UPDATE Tasks
-       SET status = @status
+   moverTareaDeColumna: `UPDATE Tasks
+       SET column_id = @column_id
        WHERE id = @id`,
    ```
 
@@ -457,19 +512,26 @@ Todo el modulo 1 ya se encuentra finalizado, documentado y compilando sin errore
 
    **Endpoints que expone Abel:**
 
-   | Metodo | URL | Body / Query | Respuesta OK |
+   | Metodo | URL | Body | Respuesta OK |
    |---|---|---|---|
-   | `GET` | `/groups/:groupId/board` | Opcional: `?assigned_to=1` | `[ { id, group_id, assigned_to, assigned_name, title, description, status, created_at } ]` |
-   | `PATCH` | `/tasks/:id/status` | `{ "status": "in_progress" }` | `{ "message": "Estado actualizado correctamente", "status": "in_progress" }` |
+   | `GET` | `/groups/:groupId/board` | - | `{ columns: [ ... ], tasks: [ ... ] }` (Si el grupo aun no tiene columnas, crea las 4 por defecto automaticamente) |
+   | `POST` | `/groups/:groupId/columns` | `{ "name": "Testing", "color": "info" }` | `{ "message": "Columna creada exitosamente", "id": 5, "position": 5 }` |
+   | `PUT` | `/columns/:id` | `{ "name": "QA / Testing", "color": "info" }` | `{ "message": "Columna actualizada correctamente" }` |
+   | `DELETE` | `/columns/:id` | - | `{ "message": "Columna eliminada correctamente" }` |
+   | `PATCH` | `/tasks/:id/column` | `{ "column_id": 2 }` | `{ "message": "Tarea movida de columna correctamente" }` |
 
-   **Validaciones obligatorias en `board.service.js`:**
-   - En `obtenerTablero(groupId, assignedTo)`:
-     - Si viene `assignedTo`, llama a `boardRepository.obtenerTareasPorGrupoYMiembro(groupId, assignedTo)`.
-     - Si no viene `assignedTo`, llama a `boardRepository.obtenerTareasPorGrupo(groupId)`.
-   - En `cambiarEstadoTarea(id, status)`:
-     - Validar que `status` sea uno de los **4 estados de las columnas**: `'todo'`, `'in_progress'`, `'review'` o `'done'`.
-     - Si envian cualquier otro valor, lanzar `throw new Error('Estado de columna invalido. Valores permitidos: todo, in_progress, review, done')`.
-     - Si el `UPDATE` afecta 0 filas, lanzar `throw new Error('Tarea no encontrada')`.
+   **Logica de negocio en `board.service.js`:**
+   - **Inicializacion automatica de las 4 columnas base**:
+     En `obtenerTablero(groupId)`, consultar `obtenerColumnasPorGrupo(groupId)`. Si devuelve `0` columnas, crear automaticamente las **4 columnas iniciales**:
+     1. `'Por hacer'` (`position: 1`, `color: 'secondary'`)
+     2. `'En progreso'` (`position: 2`, `color: 'primary'`)
+     3. `'En revision'` (`position: 3`, `color: 'warning'`)
+     4. `'Terminado'` (`position: 4`, `color: 'success'`)
+     Luego devolver `{ columns, tasks }`.
+   - **Crear columna nueva (`POST /groups/:groupId/columns`)**:
+     Validar que `name` no este vacio (maximo 50 caracteres). Calcular `position = columnasActuales.length + 1` y guardar en `BoardColumns`.
+   - **Mover tarea de columna (`PATCH /tasks/:id/column`)**:
+     Verificar que la columna destino (`column_id`) exista con `obtenerColumnaPorId(column_id)` antes de actualizar la tarea.
 
 3. **Registrar rutas en `backend/src/index.js`**:
    ```javascript
@@ -478,14 +540,12 @@ Todo el modulo 1 ya se encuentra finalizado, documentado y compilando sin errore
    app.use(boardRoutes);
    ```
 
-4. **Agregar bloque de pruebas en `backend/peticionesTest.http`**:
-   - Probar `GET http://localhost:3000/groups/1/board`, `GET http://localhost:3000/groups/1/board?assigned_to=1` y `PATCH http://localhost:3000/tasks/1/status`.
-
 ---
 
-### 12.2 Frontend de Abel (`features/tasks/`)
+### 12.3 Frontend de Abel (`features/tasks/`)
 
 Archivos que construye Abel:
+- `frontend/src/app/features/tasks/models/board-column.ts` (`BoardColumn`)
 - `frontend/src/app/features/tasks/services/board.ts` (`BoardService`)
 - `frontend/src/app/features/tasks/kanban/` (`kanban.ts`, `kanban.html`, `kanban.css`)
 - `frontend/src/app/features/tasks/task-card/` (`task-card.ts`, `task-card.html`, `task-card.css`)
@@ -498,43 +558,37 @@ Archivos que construye Abel:
   ```
 
 1. **Servicio `BoardService` (`features/tasks/services/board.ts`)**:
-   - Usa `private http = inject(HttpClient)`.
-   - `obtenerTablero(groupId: number, assignedTo?: number | null): Observable<Task[]>` -> llama a `GET http://localhost:3000/groups/${groupId}/board` (agregando `?assigned_to=${assignedTo}` si aplica).
-   - `cambiarEstado(taskId: number, status: TaskStatus): Observable<{ message: string; status: TaskStatus }>` -> llama a `PATCH http://localhost:3000/tasks/${taskId}/status`.
+   - `obtenerTablero(groupId: number): Observable<{ columns: BoardColumn[]; tasks: Task[] }>`
+   - `crearColumna(groupId: number, name: string, color?: string): Observable<any>`
+   - `actualizarColumna(columnId: number, name: string, color: string): Observable<any>`
+   - `eliminarColumna(columnId: number): Observable<any>`
+   - `moverTareaDeColumna(taskId: number, columnId: number): Observable<any>`
 
 2. **Componente `Kanban` (selector `app-kanban`)**:
-   - **Lectura de ruta y carga inicial (`ngOnInit`)**:
-     - Se suscribe a `this.route.params` para obtener `groupId = Number(params['groupId'])`.
-     - Consulta los datos del grupo (`GET /groups/:id`) para mostrar en la cabecera: *"Grupo #{{ g.group_number }} - {{ g.project_name }}"* y el boton **"Volver al aula"** (`[routerLink]="['/classrooms', g.classroom_id]"`).
-     - Llama a `boardService.obtenerTablero(groupId)` y guarda la lista en `tareas = signal<Task[]>([])`.
-   - **Las 4 Columnas del Tablero (con `computed()`)**:
-     - **Columna 1 — Por hacer (`todo`)**:
-       `porHacer = computed(() => this.tareasFiltradas().filter(t => t.status === 'todo'));`
-     - **Columna 2 — En progreso (`in_progress`)**:
-       `enProgreso = computed(() => this.tareasFiltradas().filter(t => t.status === 'in_progress'));`
-     - **Columna 3 — En revision (`review`)**:
-       `enRevision = computed(() => this.tareasFiltradas().filter(t => t.status === 'review'));`
-     - **Columna 4 — Terminado (`done`)**:
-       `terminado = computed(() => this.tareasFiltradas().filter(t => t.status === 'done'));`
-     - Maquetar con una grilla Bootstrap de 4 columnas (`<div class="row g-3">` con cuatro `<div class="col-md-3">`), cada una con su cabecera, badge contador de tareas y color distintivo (ej: secondary, primary, warning, success).
-   - **Filtros del Tablero**:
-     - Filtro por miembro responsable (usando el parametro `?assigned_to` de su endpoint o signal local) y busqueda por texto.
+   - **Carga inicial (`ngOnInit`)**:
+     - Lee `groupId` con `this.route.params.subscribe(...)`.
+     - Carga el grupo (`GET /groups/:id`) para mostrar *"Grupo #{{ g.group_number }} - {{ g.project_name }}"* y el boton **"Volver al aula"**.
+     - Llama a `boardService.obtenerTablero(groupId)` y guarda `columnas = signal<BoardColumn[]>([])` y `tareas = signal<Task[]>([])`.
+   - **Renderizado dinamico de las columnas (`@for (col of columnas(); track col.id)`)**:
+     - Muestra las **4 columnas iniciales** (y cualquier **columna nueva** que agregue el grupo).
+     - En cada columna filtra las tareas con `obtenerTareasDeColumna(col.id)` (respetando tambien el filtro por miembro responsable).
+     - Incluye boton **"+ Nueva Columna"** en la cabecera del tablero para crear una columna adicional al instante, y boton para eliminar/renombrar columnas.
    - **Integracion con los componentes de Leonardo**:
-     - Boton **"Nueva Tarea"**: abre `<app-task-form [groupId]="groupId()" (creada)="cargarTablero()" />`.
-     - Clic en una tarjeta: guarda la tarea en `tareaSeleccionada = signal<Task | null>(null)` para abrir `<app-task-detail [tarea]="tareaSeleccionada()!" (cerrar)="tareaSeleccionada.set(null)" (actualizada)="cargarTablero()" />`.
+     - Boton **"Nueva Tarea"**: abre `<app-task-form [groupId]="groupId()" [columnId]="columnas()[0].id" (creada)="cargarTablero()" />`.
+     - Clic en una tarjeta: abre `<app-task-detail [tarea]="tareaSeleccionada()!" (cerrar)="tareaSeleccionada.set(null)" (actualizada)="cargarTablero()" />`.
 
 3. **Componente `TaskCard` (selector `app-task-card`)**:
-   - **Entrada**: `tarea = input.required<Task>()`.
-   - **Salidas**: `cambiarEstado = output<TaskStatus>()`, `seleccionar = output<Task>()`.
-   - Muestra titulo, badge con `tarea().assigned_name || 'Sin asignar'` y botones rapidos (`←` y `→`) para avanzar o retroceder entre las 4 columnas (`'todo' -> 'in_progress' -> 'review' -> 'done'`).
+   - **Entradas**: `tarea = input.required<Task>()`, `puedeRetroceder = input<boolean>(true)`, `puedeAvanzar = input<boolean>(true)`.
+   - **Salidas**: `mover = output<'anterior' | 'siguiente'>()`, `seleccionar = output<Task>()`.
+   - Muestra titulo, badge del responsable (`tarea().assigned_name || 'Sin asignar'`) y botones (`←` y `→`) para pasar la tarea a la columna anterior o siguiente en orden de `position`.
 
 ---
 
-## 13. Modulo 5 - Leonardo - ABM de Tareas y Comentarios (Backend + Frontend)
+## 13. Modulo 5 - Leonardo - ABM de Tareas y Comentarios (`Tasks` y `Comments`)
 
 **Responsabilidad:** Construir las tablas `Tasks` y `Comments`, el **Backend de ABM de Tareas (`task.*`) y Comentarios (`comment.*`)**, los servicios `TaskService` y `CommentService`, y los componentes `TaskForm`, `TaskDetail` y `Comments`.
 
-### 13.1 Base de Datos
+### 13.1 Base de Datos (Leonardo)
 Agregar las tablas `Tasks` y `Comments` al final de `backend/src/database/schema.sql` (ver seccion 7).
 
 ### 13.2 Backend de Leonardo (`task.*`, `comment.*` y `queries.js`)
@@ -545,9 +599,9 @@ Agregar las tablas `Tasks` y `Comments` al final de `backend/src/database/schema
    obtenerTareaPorId: `${queryBaseSelectTareas}
        WHERE t.id = @id`,
 
-   crearTarea: `INSERT INTO Tasks (group_id, assigned_to, title, description, status)
+   crearTarea: `INSERT INTO Tasks (group_id, column_id, assigned_to, title, description)
        OUTPUT INSERTED.id
-       VALUES (@group_id, @assigned_to, @title, @description, 'todo')`,
+       VALUES (@group_id, @column_id, @assigned_to, @title, @description)`,
 
    actualizarTarea: `UPDATE Tasks
        SET title = @title, description = @description, assigned_to = @assigned_to
@@ -576,13 +630,14 @@ Agregar las tablas `Tasks` y `Comments` al final de `backend/src/database/schema
 
    | Metodo | URL | Body | Respuesta OK |
    |---|---|---|---|
-   | `GET` | `/tasks/:id` | - | `{ id, group_id, assigned_to, assigned_name, title, description, status, created_at }` |
-   | `POST` | `/groups/:groupId/tasks` | `{ "title": "Armar DER", "description": "...", "assigned_to": 1 }` | `{ "message": "Tarea creada exitosamente", "id": 10 }` |
+   | `GET` | `/tasks/:id` | - | `{ id, group_id, column_id, column_name, assigned_to, assigned_name, title, description, created_at }` |
+   | `POST` | `/groups/:groupId/tasks` | `{ "column_id": 1, "title": "Armar DER", "description": "...", "assigned_to": 1 }` | `{ "message": "Tarea creada exitosamente", "id": 10 }` |
    | `PUT` | `/tasks/:id` | `{ "title": "...", "description": "...", "assigned_to": 1 }` | `{ "message": "Tarea actualizada correctamente" }` |
    | `DELETE` | `/tasks/:id` | - | `{ "message": "Tarea eliminada correctamente" }` |
 
    **Validaciones en `task.service.js`:**
    - `title` obligatorio (con `.trim()`), maximo 150 caracteres.
+   - `column_id` obligatorio al crear la tarea.
    - En `GET`, `PUT` y `DELETE`, verificar primero que la tarea exista con `obtenerTareaPorId(id)`; si no existe, lanzar `throw new Error('Tarea no encontrada')`.
 
 3. **Completar archivos de Comentarios (`comment.repository.js`, `comment.service.js`, `comment.controller.js`, `comment.routes.js`)**:
@@ -611,13 +666,13 @@ Agregar las tablas `Tasks` y `Comments` al final de `backend/src/database/schema
 ### 13.3 Frontend de Leonardo (`features/tasks/` y `features/comments/`)
 
 1. **Modelos**:
-   - `frontend/src/app/features/tasks/models/task.ts`: Interfaces `Task`, `TaskStatus`.
+   - `frontend/src/app/features/tasks/models/task.ts`: Interfaz `Task`.
    - `frontend/src/app/features/comments/models/comment.ts`: Interfaz `Comment`.
 
 2. **Servicios (`inject(HttpClient)` y `Observable<T>`)**:
    - `frontend/src/app/features/tasks/services/task.ts` (`TaskService`):
      - `obtenerTareaPorId(id: number): Observable<Task>`
-     - `crearTarea(groupId: number, body: { title: string; description?: string; assigned_to?: number | null }): Observable<any>`
+     - `crearTarea(groupId: number, body: { column_id: number; title: string; description?: string; assigned_to?: number | null }): Observable<any>`
      - `actualizarTarea(id: number, body: { title: string; description?: string; assigned_to?: number | null }): Observable<any>`
      - `eliminarTarea(id: number): Observable<any>`
    - `frontend/src/app/features/comments/services/comment.ts` (`CommentService`):
@@ -626,7 +681,7 @@ Agregar las tablas `Tasks` y `Comments` al final de `backend/src/database/schema
      - `eliminarComentario(id: number, author_name: string): Observable<any>`
 
 3. **Componente `TaskForm` (`features/tasks/task-form/`, selector `app-task-form`)**:
-   - Entrada: `groupId = input.required<number>()`.
+   - Entradas: `groupId = input.required<number>()`, `columnId = input.required<number>()`.
    - Salidas: `creada = output<void>()`, `cancelar = output<void>()`.
    - Campos: `title`, `description` y `<select>` de miembro responsable del grupo (`GET /groups/:groupId/members`).
    - Al guardar llama a `taskService.crearTarea(...)` y emite `creada.emit()`.
@@ -649,24 +704,28 @@ Agregar las tablas `Tasks` y `Comments` al final de `backend/src/database/schema
 ## 14. Como trabajar sin esperar al companero (datos de prueba)
 
 ```sql
--- 1. Crear aula, grupo y miembro desde peticionesTest.http (o con estos INSERTs):
+-- 1. Crear aula, grupo y miembro:
 INSERT INTO Classrooms (name, duenio, join_code) VALUES ('Laboratorio Web', 'Lautaro', 'GL-1111');
 INSERT INTO Groups (classroom_id, group_number, project_name) VALUES (1, 1, 'Sistema Kanban');
 INSERT INTO Members (classroom_id, group_id, nombre, rol) VALUES (1, 1, 'Lautaro', 'profesor');
 
--- 2. Tareas de prueba en las 4 columnas (para que Abel y Leonardo prueben de inmediato):
-INSERT INTO Tasks (group_id, assigned_to, title, description, status) VALUES
-(1, 1, 'Armar tablas SQL', 'Crear Tasks y Comments', 'done'),
-(1, 1, 'Endpoints de Tasks', 'Repository, Service y Controller', 'review'),
-(1, 1, 'Maquetar 4 columnas', 'Usar Bootstrap 5.3', 'in_progress'),
-(1, NULL, 'Agregar filtros', 'Filtrar por miembro responsable', 'todo');
+-- 2. Crear las 4 columnas base del grupo 1 (Tabla BoardColumns de Abel):
+INSERT INTO BoardColumns (group_id, name, position, color) VALUES
+(1, 'Por hacer', 1, 'secondary'),
+(1, 'En progreso', 2, 'primary'),
+(1, 'En revision', 3, 'warning'),
+(1, 'Terminado', 4, 'success');
 
--- 3. Comentario de prueba:
+-- 3. Crear tareas en distintas columnas (Tabla Tasks de Leonardo):
+INSERT INTO Tasks (group_id, column_id, assigned_to, title, description) VALUES
+(1, 4, 1, 'Armar tablas SQL', 'Crear BoardColumns, Tasks y Comments'),
+(1, 3, 1, 'Endpoints de Tasks', 'Repository, Service y Controller'),
+(1, 2, 1, 'Maquetar columnas dinamicas', 'Usar Bootstrap 5.3'),
+(1, 1, NULL, 'Agregar filtros', 'Filtrar por miembro responsable');
+
+-- 4. Comentario de prueba (Tabla Comments de Leonardo):
 INSERT INTO Comments (task_id, author_name, content) VALUES (1, 'Lautaro', 'Tablas verificadas sin error 1785');
 ```
-
-- **Abel**: Con esos `INSERT` ya puede desarrollar y probar todo su backend (`GET /groups/1/board` y `PATCH /tasks/1/status`) y su frontend (`http://localhost:4200/groups/1/board`) sin esperar los formularios de Leonardo.
-- **Leonardo**: Con esos `INSERT` ya puede probar todo su backend (`POST /groups/1/tasks`, `GET/PUT/DELETE /tasks/1` y `/comments`) y probar sus componentes `<app-task-form>`, `<app-task-detail>` y `<app-comments>`.
 
 ---
 
@@ -679,26 +738,26 @@ INSERT INTO Comments (task_id, author_name, content) VALUES (1, 'Lautaro', 'Tabl
 - [ ] Pull Request hacia `develop` sin conflictos.
 
 ### Luciano (Modulo 1 - Aulas y Home)
-- [x] Backend completo de Aulas (`classroom.*`) con creacion de profesor en `Members` y borrado en cascada.
+- [x] Tabla `Classrooms` y Backend completo (`classroom.*`) con creacion de profesor en `Members` y borrado en cascada.
 - [x] Frontend con Lazy Loading, `RouterLink`, `inject()`, `Observable<T>` e interfaces.
 - [x] Manejo de sesion y **"Mis AuLabs"** multirrol en `ClassroomService`.
 - [x] `PanelAula` con permisos de profesor y espacio para `GroupList` y `MemberList`.
 
 ### Leandro (Modulo 2 - Grupos)
-- [x] Backend de grupos (`group.*`) integrado y probado en `peticionesTest.http`.
+- [x] Tabla `Groups` y Backend (`group.*`) integrado y probado en `peticionesTest.http`.
 - [ ] `GroupService` e interfaz `Group` en `features/groups/`.
 - [ ] `GroupList` y creacion de grupo con navegacion a `/groups/:groupId/board`.
 
 ### Gonzalo (Modulo 3 - Miembros)
-- [x] Backend de miembros (`member.*`) integrado y probado en `peticionesTest.http`.
+- [x] Tabla `Members` y Backend (`member.*`) integrado y probado en `peticionesTest.http`.
 - [ ] `MemberService` e interfaz `Member` en `features/members/`.
 - [ ] `MemberList` con asignacion de grupo mediante `<select>` y baja de miembro.
 
-### Abel (Modulo 4 - Tablero Kanban de 4 Columnas - Backend + Frontend)
-- [ ] Queries y endpoints del tablero en `board.repository.js`, `board.service.js`, `board.controller.js` y `board.routes.js` (`GET /groups/:groupId/board` con filtro y `PATCH /tasks/:id/status` validando los 4 estados).
+### Abel (Modulo 4 - Tablero Kanban y Columnas Dinamicas - Backend + Frontend)
+- [ ] Tabla `BoardColumns` agregada a `schema.sql`.
+- [ ] Queries y endpoints en `board.repository.js`, `board.service.js`, `board.controller.js` y `board.routes.js` (inicializacion automatica de las 4 columnas base, crear nueva columna, editar, eliminar y mover tarea de columna).
 - [ ] `BoardService` en `features/tasks/services/board.ts` y ruta `/groups/:groupId/board` en `app.routes.ts`.
-- [ ] Componente `Kanban` con las **4 columnas** (`todo`, `in_progress`, `review`, `done`) usando `computed()` y filtros.
-- [ ] Componente `TaskCard` con botones de cambio de estado entre las 4 columnas y apertura de detalle.
+- [ ] Componentes `Kanban` (renderizado de las 4 columnas + boton "+ Nueva Columna" + filtros) y `TaskCard` (movimiento entre columnas).
 
 ### Leonardo (Modulo 5 - ABM de Tareas y Comentarios - Backend + Frontend)
 - [ ] Tablas `Tasks` y `Comments` agregadas a `schema.sql`.

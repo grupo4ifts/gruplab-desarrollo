@@ -15,7 +15,7 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Courier /Encoding /WinAnsiEncoding >>
 endobj
 6 0 obj
-<< /Length 4839 >>
+<< /Length 4973 >>
 stream
 BT
 /F2 15 Tf
@@ -71,7 +71,7 @@ BT
 (1. Estado actual del repositorio) Tj
 /F1 9.5 Tf
 1 0 0 1 42 565 Tm
-(2. Reparto de modulos \(5 integrantes Fullstack\)) Tj
+(2. Reparto de modulos \(5 integrantes Fullstack con tablas propias\)) Tj
 /F1 9.5 Tf
 1 0 0 1 42 552.5 Tm
 (3. Reglas de Git) Tj
@@ -86,7 +86,7 @@ BT
 (6. Convenciones de frontend \(Angular 21 + inject + Signals + Bootstrap\)) Tj
 /F1 9.5 Tf
 1 0 0 1 42 502.5 Tm
-(7. Base de datos completa y orden de creacion) Tj
+(7. Base de datos completa \(schema.sql\)) Tj
 /F1 9.5 Tf
 1 0 0 1 42 490 Tm
 (8. Contratos de integracion entre modulos) Tj
@@ -101,106 +101,106 @@ BT
 (11. Modulo 3 - Gonzalo - Miembros \(Backend listo / Falta Frontend\)) Tj
 /F1 9.5 Tf
 1 0 0 1 42 440 Tm
-(12. Modulo 4 - Abel - Tablero Kanban de 4 Columnas y Flujo de Estados \(Backend +) Tj
+(12. Modulo 4 - Abel - Tablero Kanban y Columnas Dinamicas \(BoardColumns\)) Tj
 /F1 9.5 Tf
 1 0 0 1 42 427.5 Tm
-(Frontend\)) Tj
+(13. Modulo 5 - Leonardo - ABM de Tareas y Comentarios \(Tasks y Comments\)) Tj
 /F1 9.5 Tf
 1 0 0 1 42 415 Tm
-(13. Modulo 5 - Leonardo - ABM de Tareas y Comentarios \(Backend + Frontend\)) Tj
-/F1 9.5 Tf
-1 0 0 1 42 402.5 Tm
 (14. Como trabajar sin esperar al companero \(datos de prueba\)) Tj
 /F1 9.5 Tf
-1 0 0 1 42 390 Tm
+1 0 0 1 42 402.5 Tm
 (15. Checklist de entrega por integrante) Tj
 /F1 9.5 Tf
-1 0 0 1 42 377.5 Tm
+1 0 0 1 42 390 Tm
 () Tj
 /F1 8 Tf
-1 0 0 1 42 365 Tm
+1 0 0 1 42 377.5 Tm
 (____________________________________________________________________________________) Tj
 /F1 9.5 Tf
-1 0 0 1 42 355 Tm
+1 0 0 1 42 367.5 Tm
 () Tj
 /F1 9 Tf
-1 0 0 1 42 342.5 Tm
+1 0 0 1 42 355 Tm
 () Tj
 /F2 12.5 Tf
-1 0 0 1 42 334.5 Tm
+1 0 0 1 42 347 Tm
 (1. Estado actual del repositorio) Tj
 /F1 9.5 Tf
-1 0 0 1 42 317.5 Tm
+1 0 0 1 42 330 Tm
 () Tj
 /F3 8.5 Tf
-1 0 0 1 42 305 Tm
+1 0 0 1 42 317.5 Tm
 (  gruplab-fe-be/) Tj
 /F3 8.5 Tf
-1 0 0 1 42 294 Tm
+1 0 0 1 42 306.5 Tm
 (    README.md) Tj
 /F3 8.5 Tf
-1 0 0 1 42 283 Tm
+1 0 0 1 42 295.5 Tm
 (    backend/) Tj
 /F3 8.5 Tf
-1 0 0 1 42 272 Tm
+1 0 0 1 42 284.5 Tm
 (      .env                         \(no se sube, cada uno tiene el suyo\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 261 Tm
+1 0 0 1 42 273.5 Tm
 (      package.json                 \(express, mssql, cors, dotenv, nodemon\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 250 Tm
+1 0 0 1 42 262.5 Tm
 (      peticionesTest.http          \(pruebas unificadas de todos los modulos\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 239 Tm
+1 0 0 1 42 251.5 Tm
 (      src/) Tj
 /F3 8.5 Tf
-1 0 0 1 42 228 Tm
+1 0 0 1 42 240.5 Tm
 (        index.js                   \(servidor Express, middlewares y registro de rutas\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 217 Tm
+1 0 0 1 42 229.5 Tm
 (        database/) Tj
 /F3 8.5 Tf
-1 0 0 1 42 206 Tm
+1 0 0 1 42 218.5 Tm
 (          config.js                \(dotenv y dbConfig\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 195 Tm
+1 0 0 1 42 207.5 Tm
 (          connection.js            \(getConnection y sql con manejo de errores\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 184 Tm
+1 0 0 1 42 196.5 Tm
 (          queries.js               \(queries unificadas de todos los modulos\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 173 Tm
+1 0 0 1 42 185.5 Tm
 (          schema.sql               \(tablas SQL del proyecto\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 162 Tm
+1 0 0 1 42 174.5 Tm
 (        routes/) Tj
 /F3 8.5 Tf
-1 0 0 1 42 151 Tm
+1 0 0 1 42 163.5 Tm
 (          classroom.routes.js      \(LISTO - Luciano\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 140 Tm
+1 0 0 1 42 152.5 Tm
 (          group.routes.js          \(LISTO - Leandro\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 129 Tm
+1 0 0 1 42 141.5 Tm
 (          member.routes.js         \(LISTO - Gonzalo\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 118 Tm
-(          board.routes.js          \(Pendiente - Abel\)) Tj
+1 0 0 1 42 130.5 Tm
+(          board.routes.js          \(Pendiente - Abel: Columnas y Tablero\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 107 Tm
-(          task.routes.js           \(Pendiente - Leonardo\)) Tj
+1 0 0 1 42 119.5 Tm
+(          task.routes.js           \(Pendiente - Leonardo: Tareas\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 96 Tm
-(          comment.routes.js        \(Pendiente - Leonardo\)) Tj
+1 0 0 1 42 108.5 Tm
+(          comment.routes.js        \(Pendiente - Leonardo: Comentarios\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 85 Tm
+1 0 0 1 42 97.5 Tm
 (        controllers/) Tj
 /F3 8.5 Tf
-1 0 0 1 42 74 Tm
+1 0 0 1 42 86.5 Tm
 (          classroom.controller.js  \(LISTO - Luciano\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 63 Tm
+1 0 0 1 42 75.5 Tm
 (          group.controller.js      \(LISTO - Leandro\)) Tj
+/F3 8.5 Tf
+1 0 0 1 42 64.5 Tm
+(          member.controller.js     \(LISTO - Gonzalo\)) Tj
 /F1 8 Tf
 1 0 0 1 275 24 Tm
 (Pagina 1 de 14) Tj
@@ -211,126 +211,126 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 6 0 R >>
 endobj
 8 0 obj
-<< /Length 5685 >>
+<< /Length 5726 >>
 stream
 BT
 /F3 8.5 Tf
 1 0 0 1 42 790 Tm
-(          member.controller.js     \(LISTO - Gonzalo\)) Tj
-/F3 8.5 Tf
-1 0 0 1 42 779 Tm
 (          board.controller.js      \(Pendiente - Abel\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 768 Tm
+1 0 0 1 42 779 Tm
 (          task.controller.js       \(Pendiente - Leonardo\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 757 Tm
+1 0 0 1 42 768 Tm
 (          comment.controller.js    \(Pendiente - Leonardo\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 746 Tm
+1 0 0 1 42 757 Tm
 (        services/) Tj
 /F3 8.5 Tf
-1 0 0 1 42 735 Tm
+1 0 0 1 42 746 Tm
 (          classroom.service.js     \(LISTO - Luciano\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 724 Tm
+1 0 0 1 42 735 Tm
 (          group.service.js         \(LISTO - Leandro\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 713 Tm
+1 0 0 1 42 724 Tm
 (          member.service.js        \(LISTO - Gonzalo\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 702 Tm
+1 0 0 1 42 713 Tm
 (          board.service.js         \(Pendiente - Abel\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 691 Tm
+1 0 0 1 42 702 Tm
 (          task.service.js          \(Pendiente - Leonardo\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 680 Tm
+1 0 0 1 42 691 Tm
 (          comment.service.js       \(Pendiente - Leonardo\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 669 Tm
+1 0 0 1 42 680 Tm
 (        repositories/) Tj
 /F3 8.5 Tf
-1 0 0 1 42 658 Tm
+1 0 0 1 42 669 Tm
 (          classroom.repository.js  \(LISTO - Luciano\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 647 Tm
+1 0 0 1 42 658 Tm
 (          group.repository.js      \(LISTO - Leandro\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 636 Tm
+1 0 0 1 42 647 Tm
 (          member.repository.js     \(LISTO - Gonzalo\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 625 Tm
+1 0 0 1 42 636 Tm
 (          board.repository.js      \(Pendiente - Abel\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 614 Tm
+1 0 0 1 42 625 Tm
 (          task.repository.js       \(Pendiente - Leonardo\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 603 Tm
+1 0 0 1 42 614 Tm
 (          comment.repository.js    \(Pendiente - Leonardo\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 592 Tm
+1 0 0 1 42 603 Tm
 (    frontend/) Tj
 /F3 8.5 Tf
-1 0 0 1 42 581 Tm
+1 0 0 1 42 592 Tm
 (      src/) Tj
 /F3 8.5 Tf
-1 0 0 1 42 570 Tm
+1 0 0 1 42 581 Tm
 (        index.html                 \(incluye Bootstrap 5.3 CSS via CDN\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 559 Tm
+1 0 0 1 42 570 Tm
 (        main.ts) Tj
 /F3 8.5 Tf
-1 0 0 1 42 548 Tm
+1 0 0 1 42 559 Tm
 (        app/) Tj
 /F3 8.5 Tf
-1 0 0 1 42 537 Tm
+1 0 0 1 42 548 Tm
 (  app.ts / app.html        \(Header con RouterLink a /classrooms, router-outlet y Footer\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 526 Tm
+1 0 0 1 42 537 Tm
 (          app.config.ts            \(provideRouter y provideHttpClient\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 515 Tm
+1 0 0 1 42 526 Tm
 (          app.routes.ts            \(Rutas con carga perezosa / lazy loading\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 504 Tm
+1 0 0 1 42 515 Tm
 (          features/) Tj
 /F3 8.5 Tf
-1 0 0 1 42 493 Tm
+1 0 0 1 42 504 Tm
 (            classrooms/            \(MODULO 1 COMPLETO - Luciano\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 482 Tm
+1 0 0 1 42 493 Tm
 (  models/classroom.ts  \(Interfaces: Classroom, CrearAulaResponse, UsuarioSession, AuLab\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 471 Tm
+1 0 0 1 42 482 Tm
 (  services/classroom.ts\(ClassroomService con Observable<T> y manejo de localStorage\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 460 Tm
+1 0 0 1 42 471 Tm
 (              home/                \(Home + listado multirrol "Mis AuLabs"\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 449 Tm
+1 0 0 1 42 460 Tm
 (              profesor/            \(Formulario de creacion de aula\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 438 Tm
+1 0 0 1 42 449 Tm
 (              alumno/              \(Formulario de ingreso por codigo\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 427 Tm
+1 0 0 1 42 438 Tm
 (  panel-aula/          \(Panel del aula con permisos de profesor/alumno y espacio para) Tj
 /F3 8.5 Tf
-1 0 0 1 42 416 Tm
+1 0 0 1 42 427 Tm
 (  Grupos y Miembros\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 405 Tm
+1 0 0 1 42 416 Tm
 (            groups/                \(Pendiente Frontend - Leandro\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 394 Tm
+1 0 0 1 42 405 Tm
 (            members/               \(Pendiente Frontend - Gonzalo\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 383 Tm
+1 0 0 1 42 394 Tm
 (            tasks/                 \(Compartido sin pisarse entre Abel y Leonardo\)) Tj
 /F3 8.5 Tf
+1 0 0 1 42 383 Tm
+(              models/board-column.ts \(Pendiente - Abel: Interfaz BoardColumn\)) Tj
+/F3 8.5 Tf
 1 0 0 1 42 372 Tm
-(              models/task.ts       \(Interfaz Task y TaskStatus\)) Tj
+(              models/task.ts       \(Pendiente - Leonardo/Abel: Interfaz Task\)) Tj
 /F3 8.5 Tf
 1 0 0 1 42 361 Tm
 (              services/board.ts    \(Pendiente - Abel: BoardService\)) Tj
@@ -339,10 +339,10 @@ BT
 (              services/task.ts     \(Pendiente - Leonardo: TaskService\)) Tj
 /F3 8.5 Tf
 1 0 0 1 42 339 Tm
-(              kanban/              \(Pendiente - Abel: Tablero de 4 columnas\)) Tj
+(  kanban/              \(Pendiente - Abel: Tablero con 4 columnas base + agregar columna\)) Tj
 /F3 8.5 Tf
 1 0 0 1 42 328 Tm
-(              task-card/           \(Pendiente - Abel: Tarjeta y cambio de columna\)) Tj
+(  task-card/           \(Pendiente - Abel: Tarjeta de tarea y movimiento entre columnas\)) Tj
 /F3 8.5 Tf
 1 0 0 1 42 317 Tm
 (              task-form/           \(Pendiente - Leonardo: Crear tarea\)) Tj
@@ -387,16 +387,16 @@ BT
 () Tj
 /F2 12.5 Tf
 1 0 0 1 42 158 Tm
-(2. Reparto de modulos \(5 integrantes Fullstack: Backend + Frontend\)) Tj
+(2. Reparto de modulos \(5 integrantes Fullstack con tablas propias\)) Tj
 /F1 9.5 Tf
 1 0 0 1 42 141 Tm
 () Tj
 /F1 9.5 Tf
 1 0 0 1 42 128.5 Tm
-(Todos los integrantes programan tanto Backend \(SQL + Repository + Service + Controller) Tj
+(Cada integrante es duenio de sus propias tablas SQL, su propio Backend \(Repository +) Tj
 /F1 9.5 Tf
 1 0 0 1 42 116 Tm
-(+ Routes\) como Frontend \(Service + Componentes en Angular 21\):) Tj
+(Service + Controller + Routes\) y su propio Frontend:) Tj
 /F1 9.5 Tf
 1 0 0 1 42 103.5 Tm
 () Tj
@@ -419,7 +419,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 8 0 R >>
 endobj
 10 0 obj
-<< /Length 4697 >>
+<< /Length 4703 >>
 stream
 BT
 /F1 9.5 Tf
@@ -442,25 +442,25 @@ BT
 (MemberList\) | Backend listo / Falta Front |) Tj
 /F1 9.5 Tf
 1 0 0 1 42 715 Tm
-(| Abel | Tablero Kanban \(4 Columnas, Filtros y Cambio de Estado\) | Usa Tasks) Tj
+(| Abel | Tablero Kanban y Columnas Dinamicas \(4 columnas iniciales +) Tj
 /F1 9.5 Tf
 1 0 0 1 42 702.5 Tm
-(\(consultas de tablero y estado\) | board.* \(board.repository, board.service,) Tj
+(crear/editar/borrar columna y mover tarea\) | BoardColumns | board.* \(board.repository,) Tj
 /F1 9.5 Tf
 1 0 0 1 42 690 Tm
-(board.controller, board.routes\) | features/tasks \(BoardService, Kanban de 4 columnas,) Tj
+(board.service, board.controller, board.routes\) | features/tasks \(BoardService, Kanban,) Tj
 /F1 9.5 Tf
 1 0 0 1 42 677.5 Tm
 (TaskCard\) | Pendiente |) Tj
 /F1 9.5 Tf
 1 0 0 1 42 665 Tm
-(| Leonardo | ABM de Tareas y Comentarios | Tasks, Comments | task.* \(crear, ver,) Tj
+(| Leonardo | ABM de Tareas y Comentarios | Tasks, Comments | task.* y comment.* |) Tj
 /F1 9.5 Tf
 1 0 0 1 42 652.5 Tm
-(editar, borrar tarea\) y comment.* | features/tasks \(TaskService, TaskForm, TaskDetail\)) Tj
+(features/tasks \(TaskService, TaskForm, TaskDetail\) y features/comments) Tj
 /F1 9.5 Tf
 1 0 0 1 42 640 Tm
-(y features/comments \(CommentService, Comments\) | Pendiente |) Tj
+(\(CommentService, Comments\) | Pendiente |) Tj
 /F1 9.5 Tf
 1 0 0 1 42 627.5 Tm
 () Tj
@@ -508,10 +508,10 @@ BT
 (2. Traer lo ultimo de develop antes de empezar: git pull origin develop) Tj
 /F1 9.5 Tf
 1 0 0 1 42 442.5 Tm
-(3. Trabajar y hacer commits descriptivos: git commit -m "tablero: endpoints de board y) Tj
+(3. Trabajar y hacer commits descriptivos: git commit -m "tablero: crud de columnas y) Tj
 /F1 9.5 Tf
 1 0 0 1 42 430 Tm
-(cambio de columna") Tj
+(movimiento de tareas") Tj
 /F1 9.5 Tf
 1 0 0 1 42 417.5 Tm
 (4. Subir la rama propia: git push origin <tu-rama>) Tj
@@ -559,10 +559,10 @@ BT
 (comment.routes\) |) Tj
 /F1 9.5 Tf
 1 0 0 1 42 232.5 Tm
-(| backend/src/database/schema.sql | CREATE TABLE Tasks y CREATE TABLE Comments al) Tj
+(| backend/src/database/schema.sql | CREATE TABLE BoardColumns \(Abel\), CREATE TABLE) Tj
 /F1 9.5 Tf
 1 0 0 1 42 220 Tm
-(final |) Tj
+(Tasks y CREATE TABLE Comments \(Leonardo\) |) Tj
 /F1 9.5 Tf
 1 0 0 1 42 207.5 Tm
 (| backend/src/database/queries.js | Sus queries al final del module.exports |) Tj
@@ -612,7 +612,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 10 0 R >>
 endobj
 12 0 obj
-<< /Length 5048 >>
+<< /Length 4947 >>
 stream
 BT
 /F1 9.5 Tf
@@ -662,7 +662,7 @@ BT
 () Tj
 /F1 9.5 Tf
 1 0 0 1 42 601 Tm
-(En repositories/board.repository.js \(o task.repository.js\):) Tj
+(En repositories/board.repository.js:) Tj
 /F3 8.5 Tf
 1 0 0 1 42 588.5 Tm
 (  const { sql, getConnection } = require\('../database/connection'\);) Tj
@@ -674,7 +674,7 @@ BT
 (  ) Tj
 /F3 8.5 Tf
 1 0 0 1 42 555.5 Tm
-(  exports.obtenerTareasTablero = async \(groupId\) => {) Tj
+(  exports.obtenerColumnasPorGrupo = async \(groupId\) => {) Tj
 /F3 8.5 Tf
 1 0 0 1 42 544.5 Tm
 (      const pool = await getConnection\(\);) Tj
@@ -689,7 +689,7 @@ BT
 (              .input\('group_id', sql.Int, groupId\)) Tj
 /F3 8.5 Tf
 1 0 0 1 42 500.5 Tm
-(              .query\(queries.obtenerTareasPorGrupo\);) Tj
+(              .query\(queries.obtenerColumnasPorGrupo\);) Tj
 /F3 8.5 Tf
 1 0 0 1 42 489.5 Tm
 (          return resultado.recordset;) Tj
@@ -698,7 +698,7 @@ BT
 (      } catch \(error\) {) Tj
 /F3 8.5 Tf
 1 0 0 1 42 467.5 Tm
-(          throw new Error\('Error al obtener las tareas del tablero'\);) Tj
+(          throw new Error\('Error al obtener las columnas del tablero'\);) Tj
 /F3 8.5 Tf
 1 0 0 1 42 456.5 Tm
 (      }) Tj
@@ -710,7 +710,7 @@ BT
 () Tj
 /F1 9.5 Tf
 1 0 0 1 42 422 Tm
-(En services/board.service.js \(o task.service.js\):) Tj
+(En services/board.service.js:) Tj
 /F3 8.5 Tf
 1 0 0 1 42 409.5 Tm
 (  const boardRepository = require\('../repositories/board.repository'\);) Tj
@@ -719,94 +719,94 @@ BT
 (  ) Tj
 /F3 8.5 Tf
 1 0 0 1 42 387.5 Tm
-(  const ESTADOS_VALIDOS = ['todo', 'in_progress', 'review', 'done'];) Tj
+(  exports.crearColumna = async \(groupId, name, color\) => {) Tj
 /F3 8.5 Tf
 1 0 0 1 42 376.5 Tm
-(  ) Tj
+(      if \(!groupId || !name || !name.trim\(\)\) {) Tj
 /F3 8.5 Tf
 1 0 0 1 42 365.5 Tm
-(  exports.cambiarEstadoTarea = async \(id, status\) => {) Tj
+(          throw new Error\('El nombre de la columna es obligatorio'\);) Tj
 /F3 8.5 Tf
 1 0 0 1 42 354.5 Tm
-(      if \(!status || !ESTADOS_VALIDOS.includes\(status\)\) {) Tj
+(      }) Tj
 /F3 8.5 Tf
 1 0 0 1 42 343.5 Tm
-(  throw new Error\('Estado de columna invalido. Valores permitidos: todo, in_progress,) Tj
+(      const columnasActuales = await boardRepository.obtenerColumnasPorGrupo\(groupId\);) Tj
 /F3 8.5 Tf
 1 0 0 1 42 332.5 Tm
-(  review, done'\);) Tj
+(      const nuevaPosicion = columnasActuales.length + 1;) Tj
 /F3 8.5 Tf
 1 0 0 1 42 321.5 Tm
-(      }) Tj
+(      const colorFinal = color || 'secondary';) Tj
 /F3 8.5 Tf
 1 0 0 1 42 310.5 Tm
-(      const filasAfectadas = await boardRepository.cambiarEstadoTarea\(id, status\);) Tj
-/F3 8.5 Tf
-1 0 0 1 42 299.5 Tm
-(      if \(filasAfectadas === 0\) {) Tj
-/F3 8.5 Tf
-1 0 0 1 42 288.5 Tm
-(          throw new Error\('Tarea no encontrada'\);) Tj
-/F3 8.5 Tf
-1 0 0 1 42 277.5 Tm
-(      }) Tj
-/F3 8.5 Tf
-1 0 0 1 42 266.5 Tm
-(      return { message: 'Estado actualizado correctamente', status };) Tj
-/F3 8.5 Tf
-1 0 0 1 42 255.5 Tm
-(  };) Tj
-/F1 9.5 Tf
-1 0 0 1 42 244.5 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 232 Tm
-(En controllers/board.controller.js \(o task.controller.js\):) Tj
-/F3 8.5 Tf
-1 0 0 1 42 219.5 Tm
-(  const boardService = require\('../services/board.service'\);) Tj
-/F3 8.5 Tf
-1 0 0 1 42 208.5 Tm
 (  ) Tj
 /F3 8.5 Tf
-1 0 0 1 42 197.5 Tm
-(  exports.cambiarEstadoTarea = async \(req, res\) => {) Tj
+1 0 0 1 42 299.5 Tm
+(      const [columnaCreada] = await boardRepository.crearColumna\() Tj
 /F3 8.5 Tf
-1 0 0 1 42 186.5 Tm
-(      try {) Tj
+1 0 0 1 42 288.5 Tm
+(          groupId,) Tj
 /F3 8.5 Tf
-1 0 0 1 42 175.5 Tm
-(          const { id } = req.params;) Tj
+1 0 0 1 42 277.5 Tm
+(          name.trim\(\),) Tj
 /F3 8.5 Tf
-1 0 0 1 42 164.5 Tm
-(          const { status } = req.body || {};) Tj
+1 0 0 1 42 266.5 Tm
+(          nuevaPosicion,) Tj
 /F3 8.5 Tf
-1 0 0 1 42 153.5 Tm
-(          const resultado = await boardService.cambiarEstadoTarea\(id, status\);) Tj
+1 0 0 1 42 255.5 Tm
+(          colorFinal) Tj
 /F3 8.5 Tf
-1 0 0 1 42 142.5 Tm
-(          res.status\(200\).json\(resultado\);) Tj
+1 0 0 1 42 244.5 Tm
+(      \);) Tj
 /F3 8.5 Tf
-1 0 0 1 42 131.5 Tm
-(      } catch \(error\) {) Tj
+1 0 0 1 42 233.5 Tm
+(      return {) Tj
 /F3 8.5 Tf
-1 0 0 1 42 120.5 Tm
-(          res.status\(400\).json\({ error: error.message }\);) Tj
+1 0 0 1 42 222.5 Tm
+(          message: 'Columna creada exitosamente',) Tj
 /F3 8.5 Tf
-1 0 0 1 42 109.5 Tm
-(      }) Tj
+1 0 0 1 42 211.5 Tm
+(          id: columnaCreada.id,) Tj
 /F3 8.5 Tf
-1 0 0 1 42 98.5 Tm
+1 0 0 1 42 200.5 Tm
+(          position: nuevaPosicion) Tj
+/F3 8.5 Tf
+1 0 0 1 42 189.5 Tm
+(      };) Tj
+/F3 8.5 Tf
+1 0 0 1 42 178.5 Tm
 (  };) Tj
 /F1 9.5 Tf
-1 0 0 1 42 87.5 Tm
+1 0 0 1 42 167.5 Tm
 () Tj
-/F1 8 Tf
-1 0 0 1 42 75 Tm
-(____________________________________________________________________________________) Tj
 /F1 9.5 Tf
-1 0 0 1 42 65 Tm
-() Tj
+1 0 0 1 42 155 Tm
+(En controllers/board.controller.js:) Tj
+/F3 8.5 Tf
+1 0 0 1 42 142.5 Tm
+(  const boardService = require\('../services/board.service'\);) Tj
+/F3 8.5 Tf
+1 0 0 1 42 131.5 Tm
+(  ) Tj
+/F3 8.5 Tf
+1 0 0 1 42 120.5 Tm
+(  exports.crearColumna = async \(req, res\) => {) Tj
+/F3 8.5 Tf
+1 0 0 1 42 109.5 Tm
+(      try {) Tj
+/F3 8.5 Tf
+1 0 0 1 42 98.5 Tm
+(          const { groupId } = req.params;) Tj
+/F3 8.5 Tf
+1 0 0 1 42 87.5 Tm
+(          const { name, color } = req.body || {};) Tj
+/F3 8.5 Tf
+1 0 0 1 42 76.5 Tm
+(          const resultado = await boardService.crearColumna\(groupId, name, color\);) Tj
+/F3 8.5 Tf
+1 0 0 1 42 65.5 Tm
+(          res.status\(200\).json\(resultado\);) Tj
 /F1 8 Tf
 1 0 0 1 275 24 Tm
 (Pagina 4 de 14) Tj
@@ -817,201 +817,198 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 12 0 R >>
 endobj
 14 0 obj
-<< /Length 5014 >>
+<< /Length 4742 >>
 stream
 BT
-/F1 9 Tf
+/F3 8.5 Tf
 1 0 0 1 42 790 Tm
-() Tj
-/F2 12.5 Tf
-1 0 0 1 42 782 Tm
-(6. Convenciones de frontend \(Angular 21 Standalone + Bootstrap 5.3\)) Tj
-/F1 9.5 Tf
-1 0 0 1 42 765 Tm
-() Tj
-/F2 10.5 Tf
-1 0 0 1 42 752.5 Tm
-(6.1 Reglas actualizadas del proyecto) Tj
-/F1 9.5 Tf
-1 0 0 1 42 738.5 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 726 Tm
-(1. Componentes Standalone: standalone: true con sus propios imports: [...].) Tj
-/F1 9.5 Tf
-1 0 0 1 42 713.5 Tm
-(2. Inyeccion de dependencias con inject\(\): No usar constructores para inyectar. Usar:) Tj
+(      } catch \(error\) {) Tj
 /F3 8.5 Tf
-1 0 0 1 42 701 Tm
-(     private boardService = inject\(BoardService\);) Tj
+1 0 0 1 42 779 Tm
+(          res.status\(400\).json\({ error: error.message }\);) Tj
 /F3 8.5 Tf
-1 0 0 1 42 690 Tm
-(     private route = inject\(ActivatedRoute\);) Tj
+1 0 0 1 42 768 Tm
+(      }) Tj
 /F3 8.5 Tf
-1 0 0 1 42 679 Tm
-(     private router = inject\(Router\);) Tj
+1 0 0 1 42 757 Tm
+(  };) Tj
 /F1 9.5 Tf
-1 0 0 1 42 668 Tm
-(3. Interfaces TypeScript \(models/\): Crear interfaces para tipar los modelos y) Tj
-/F1 9.5 Tf
-1 0 0 1 42 655.5 Tm
-(respuestas. No dejar todo en any.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 643 Tm
-(4. Servicios con Observable<T>: Tipar el retorno de cada metodo HTTP) Tj
-/F1 9.5 Tf
-1 0 0 1 42 630.5 Tm
-(\(Observable<Task[]>, etc.\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 618 Tm
-(5. Estado con Signals: tareas = signal<Task[]>\([]\); y columnas derivadas con) Tj
-/F1 9.5 Tf
-1 0 0 1 42 605.5 Tm
-(computed\(\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 593 Tm
-(6. Ciclo de vida OnInit: Hacer las llamadas HTTP iniciales dentro de ngOnInit\(\): void.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 580.5 Tm
-(7. Lectura de parametros de ruta con .subscribe\(\):) Tj
-/F3 8.5 Tf
-1 0 0 1 42 568 Tm
-(     ngOnInit\(\): void {) Tj
-/F3 8.5 Tf
-1 0 0 1 42 557 Tm
-(       this.route.params.subscribe\(params => {) Tj
-/F3 8.5 Tf
-1 0 0 1 42 546 Tm
-(         const groupId = Number\(params['groupId']\);) Tj
-/F3 8.5 Tf
-1 0 0 1 42 535 Tm
-(         this.cargarTablero\(groupId\);) Tj
-/F3 8.5 Tf
-1 0 0 1 42 524 Tm
-(       }\);) Tj
-/F3 8.5 Tf
-1 0 0 1 42 513 Tm
-(     }) Tj
-/F1 9.5 Tf
-1 0 0 1 42 502 Tm
-(8. Carga Perezosa \(Lazy Loading\) en app.routes.ts:) Tj
-/F3 8.5 Tf
-1 0 0 1 42 489.5 Tm
-(     {) Tj
-/F3 8.5 Tf
-1 0 0 1 42 478.5 Tm
-(       path: 'groups/:groupId/board',) Tj
-/F3 8.5 Tf
-1 0 0 1 42 467.5 Tm
-(       loadComponent: \(\) => import\('./features/tasks/kanban/kanban'\).then\(m => m.Kanban\)) Tj
-/F3 8.5 Tf
-1 0 0 1 42 456.5 Tm
-(     }) Tj
-/F1 9.5 Tf
-1 0 0 1 42 445.5 Tm
-(9. Estilos con Bootstrap 5.3: Ya esta cargado en index.html. Usar clases nativas de) Tj
-/F1 9.5 Tf
-1 0 0 1 42 433 Tm
-(Bootstrap \(card, shadow-sm, btn, badge, form-control, row, col-md-3\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 420.5 Tm
+1 0 0 1 42 746 Tm
 () Tj
 /F1 8 Tf
-1 0 0 1 42 408 Tm
+1 0 0 1 42 733.5 Tm
 (____________________________________________________________________________________) Tj
 /F1 9.5 Tf
-1 0 0 1 42 398 Tm
+1 0 0 1 42 723.5 Tm
 () Tj
 /F1 9 Tf
-1 0 0 1 42 385.5 Tm
+1 0 0 1 42 711 Tm
 () Tj
 /F2 12.5 Tf
+1 0 0 1 42 703 Tm
+(6. Convenciones de frontend \(Angular 21 Standalone + Bootstrap 5.3\)) Tj
+/F1 9.5 Tf
+1 0 0 1 42 686 Tm
+() Tj
+/F2 10.5 Tf
+1 0 0 1 42 673.5 Tm
+(6.1 Reglas actualizadas del proyecto) Tj
+/F1 9.5 Tf
+1 0 0 1 42 659.5 Tm
+() Tj
+/F1 9.5 Tf
+1 0 0 1 42 647 Tm
+(1. Componentes Standalone: standalone: true con sus propios imports: [...].) Tj
+/F1 9.5 Tf
+1 0 0 1 42 634.5 Tm
+(2. Inyeccion de dependencias con inject\(\): No usar constructores para inyectar. Usar:) Tj
+/F3 8.5 Tf
+1 0 0 1 42 622 Tm
+(     private boardService = inject\(BoardService\);) Tj
+/F3 8.5 Tf
+1 0 0 1 42 611 Tm
+(     private route = inject\(ActivatedRoute\);) Tj
+/F3 8.5 Tf
+1 0 0 1 42 600 Tm
+(     private router = inject\(Router\);) Tj
+/F1 9.5 Tf
+1 0 0 1 42 589 Tm
+(3. Interfaces TypeScript \(models/\): Crear interfaces para tipar los modelos y) Tj
+/F1 9.5 Tf
+1 0 0 1 42 576.5 Tm
+(respuestas. No dejar todo en any.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 564 Tm
+(4. Servicios con Observable<T>: Tipar el retorno de cada metodo HTTP) Tj
+/F1 9.5 Tf
+1 0 0 1 42 551.5 Tm
+(\(Observable<BoardColumn[]>, Observable<Task[]>, etc.\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 539 Tm
+(5. Estado con Signals: columnas = signal<BoardColumn[]>\([]\);, tareas =) Tj
+/F1 9.5 Tf
+1 0 0 1 42 526.5 Tm
+(signal<Task[]>\([]\);.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 514 Tm
+(6. Ciclo de vida OnInit: Hacer las llamadas HTTP iniciales dentro de ngOnInit\(\): void.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 501.5 Tm
+(7. Lectura de parametros de ruta con .subscribe\(\):) Tj
+/F3 8.5 Tf
+1 0 0 1 42 489 Tm
+(     ngOnInit\(\): void {) Tj
+/F3 8.5 Tf
+1 0 0 1 42 478 Tm
+(       this.route.params.subscribe\(params => {) Tj
+/F3 8.5 Tf
+1 0 0 1 42 467 Tm
+(         const groupId = Number\(params['groupId']\);) Tj
+/F3 8.5 Tf
+1 0 0 1 42 456 Tm
+(         this.cargarTablero\(groupId\);) Tj
+/F3 8.5 Tf
+1 0 0 1 42 445 Tm
+(       }\);) Tj
+/F3 8.5 Tf
+1 0 0 1 42 434 Tm
+(     }) Tj
+/F1 9.5 Tf
+1 0 0 1 42 423 Tm
+(8. Carga Perezosa \(Lazy Loading\) en app.routes.ts:) Tj
+/F3 8.5 Tf
+1 0 0 1 42 410.5 Tm
+(     {) Tj
+/F3 8.5 Tf
+1 0 0 1 42 399.5 Tm
+(       path: 'groups/:groupId/board',) Tj
+/F3 8.5 Tf
+1 0 0 1 42 388.5 Tm
+(       loadComponent: \(\) => import\('./features/tasks/kanban/kanban'\).then\(m => m.Kanban\)) Tj
+/F3 8.5 Tf
 1 0 0 1 42 377.5 Tm
+(     }) Tj
+/F1 9.5 Tf
+1 0 0 1 42 366.5 Tm
+(9. Estilos con Bootstrap 5.3: Ya esta cargado en index.html. Usar clases nativas de) Tj
+/F1 9.5 Tf
+1 0 0 1 42 354 Tm
+(Bootstrap \(card, shadow-sm, btn, badge, form-control, row, col\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 341.5 Tm
+() Tj
+/F1 8 Tf
+1 0 0 1 42 329 Tm
+(____________________________________________________________________________________) Tj
+/F1 9.5 Tf
+1 0 0 1 42 319 Tm
+() Tj
+/F1 9 Tf
+1 0 0 1 42 306.5 Tm
+() Tj
+/F2 12.5 Tf
+1 0 0 1 42 298.5 Tm
 (7. Base de datos completa \(`schema.sql`\)) Tj
 /F1 9.5 Tf
-1 0 0 1 42 360.5 Tm
+1 0 0 1 42 281.5 Tm
 () Tj
 /F1 9.5 Tf
-1 0 0 1 42 348 Tm
+1 0 0 1 42 269 Tm
 (Las tablas 1 \(Classrooms\), 2 \(Groups\) y 3 \(Members\) ya estan creadas en schema.sql.) Tj
 /F1 9.5 Tf
-1 0 0 1 42 335.5 Tm
-(Falta agregar las tablas 4 \(Tasks\) y 5 \(Comments\) al final de schema.sql:) Tj
+1 0 0 1 42 256.5 Tm
+(Se agregan al final la tabla 4 \(BoardColumns de Abel\) y las tablas 5 y 6 \(Tasks y) Tj
 /F1 9.5 Tf
-1 0 0 1 42 323 Tm
+1 0 0 1 42 244 Tm
+(Comments de Leonardo\):) Tj
+/F1 9.5 Tf
+1 0 0 1 42 231.5 Tm
 () Tj
 /F3 8.5 Tf
-1 0 0 1 42 310.5 Tm
+1 0 0 1 42 219 Tm
 (  -- 1. Luciano \(YA EXISTE\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 299.5 Tm
+1 0 0 1 42 208 Tm
 (  CREATE TABLE Classrooms \() Tj
 /F3 8.5 Tf
-1 0 0 1 42 288.5 Tm
+1 0 0 1 42 197 Tm
 (      id        INT           IDENTITY \(1, 1\) PRIMARY KEY,) Tj
 /F3 8.5 Tf
-1 0 0 1 42 277.5 Tm
+1 0 0 1 42 186 Tm
 (      name      VARCHAR \(100\) NOT NULL,) Tj
 /F3 8.5 Tf
-1 0 0 1 42 266.5 Tm
+1 0 0 1 42 175 Tm
 (      duenio    VARCHAR \(100\) NOT NULL,) Tj
 /F3 8.5 Tf
-1 0 0 1 42 255.5 Tm
+1 0 0 1 42 164 Tm
 (      join_code VARCHAR \(20\)  NOT NULL UNIQUE) Tj
 /F3 8.5 Tf
-1 0 0 1 42 244.5 Tm
+1 0 0 1 42 153 Tm
 (  \);) Tj
 /F3 8.5 Tf
-1 0 0 1 42 233.5 Tm
+1 0 0 1 42 142 Tm
 (  ) Tj
 /F3 8.5 Tf
-1 0 0 1 42 222.5 Tm
-(  -- 2. Leandro \(YA EXISTE - notar columnas group_number y project_name\)) Tj
+1 0 0 1 42 131 Tm
+(  -- 2. Leandro \(YA EXISTE\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 211.5 Tm
+1 0 0 1 42 120 Tm
 (  CREATE TABLE Groups \() Tj
 /F3 8.5 Tf
-1 0 0 1 42 200.5 Tm
+1 0 0 1 42 109 Tm
 (      id           INT           IDENTITY \(1, 1\) PRIMARY KEY,) Tj
 /F3 8.5 Tf
-1 0 0 1 42 189.5 Tm
+1 0 0 1 42 98 Tm
 (  classroom_id INT           NOT NULL FOREIGN KEY REFERENCES Classrooms \(id\) ON DELETE) Tj
 /F3 8.5 Tf
-1 0 0 1 42 178.5 Tm
+1 0 0 1 42 87 Tm
 (  CASCADE,) Tj
 /F3 8.5 Tf
-1 0 0 1 42 167.5 Tm
+1 0 0 1 42 76 Tm
 (      group_number INT           NOT NULL,) Tj
 /F3 8.5 Tf
-1 0 0 1 42 156.5 Tm
+1 0 0 1 42 65 Tm
 (      project_name VARCHAR \(100\) NOT NULL,) Tj
-/F3 8.5 Tf
-1 0 0 1 42 145.5 Tm
-(      UNIQUE \(classroom_id, group_number\)) Tj
-/F3 8.5 Tf
-1 0 0 1 42 134.5 Tm
-(  \);) Tj
-/F3 8.5 Tf
-1 0 0 1 42 123.5 Tm
-(  ) Tj
-/F3 8.5 Tf
-1 0 0 1 42 112.5 Tm
-(  -- 3. Gonzalo \(YA EXISTE\)) Tj
-/F3 8.5 Tf
-1 0 0 1 42 101.5 Tm
-(  CREATE TABLE Members \() Tj
-/F3 8.5 Tf
-1 0 0 1 42 90.5 Tm
-(      id           INT           IDENTITY \(1, 1\) PRIMARY KEY,) Tj
-/F3 8.5 Tf
-1 0 0 1 42 79.5 Tm
-(      classroom_id INT           NOT NULL FOREIGN KEY REFERENCES Classrooms \(id\),) Tj
-/F3 8.5 Tf
-1 0 0 1 42 68.5 Tm
-(  group_id     INT           NULL FOREIGN KEY REFERENCES Groups \(id\) ON DELETE SET NULL,) Tj
-/F3 8.5 Tf
-1 0 0 1 42 57.5 Tm
-(      nombre       VARCHAR \(100\) NOT NULL,) Tj
 /F1 8 Tf
 1 0 0 1 275 24 Tm
 (Pagina 5 de 14) Tj
@@ -1022,201 +1019,204 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 14 0 R >>
 endobj
 16 0 obj
-<< /Length 4718 >>
+<< /Length 5003 >>
 stream
 BT
 /F3 8.5 Tf
 1 0 0 1 42 790 Tm
-(      email        VARCHAR \(100\) NULL,) Tj
+(      UNIQUE \(classroom_id, group_number\)) Tj
 /F3 8.5 Tf
 1 0 0 1 42 779 Tm
-(      rol          VARCHAR \(20\)  DEFAULT 'alumno' NOT NULL,) Tj
+(  \);) Tj
 /F3 8.5 Tf
 1 0 0 1 42 768 Tm
-(      created_at   DATETIME      DEFAULT GETDATE\(\)) Tj
+(  ) Tj
 /F3 8.5 Tf
 1 0 0 1 42 757 Tm
-(  \);) Tj
+(  -- 3. Gonzalo \(YA EXISTE\)) Tj
 /F3 8.5 Tf
 1 0 0 1 42 746 Tm
-(  ) Tj
+(  CREATE TABLE Members \() Tj
 /F3 8.5 Tf
 1 0 0 1 42 735 Tm
-(  -- 4. Tabla Tasks \(Usada por Abel para el Tablero de 4 columnas y por Leonardo para el) Tj
+(      id           INT           IDENTITY \(1, 1\) PRIMARY KEY,) Tj
 /F3 8.5 Tf
 1 0 0 1 42 724 Tm
-(  ABM de Tareas\)) Tj
+(      classroom_id INT           NOT NULL FOREIGN KEY REFERENCES Classrooms \(id\),) Tj
 /F3 8.5 Tf
 1 0 0 1 42 713 Tm
-(  CREATE TABLE Tasks \() Tj
+(  group_id     INT           NULL FOREIGN KEY REFERENCES Groups \(id\) ON DELETE SET NULL,) Tj
 /F3 8.5 Tf
 1 0 0 1 42 702 Tm
-(      id          INT            IDENTITY \(1, 1\) PRIMARY KEY,) Tj
+(      nombre       VARCHAR \(100\) NOT NULL,) Tj
 /F3 8.5 Tf
 1 0 0 1 42 691 Tm
-(  group_id    INT            NOT NULL FOREIGN KEY REFERENCES Groups \(id\) ON DELETE) Tj
+(      email        VARCHAR \(100\) NULL,) Tj
 /F3 8.5 Tf
 1 0 0 1 42 680 Tm
-(  CASCADE,) Tj
+(      rol          VARCHAR \(20\)  DEFAULT 'alumno' NOT NULL,) Tj
 /F3 8.5 Tf
 1 0 0 1 42 669 Tm
-(      assigned_to INT            NULL FOREIGN KEY REFERENCES Members \(id\),) Tj
+(      created_at   DATETIME      DEFAULT GETDATE\(\)) Tj
 /F3 8.5 Tf
 1 0 0 1 42 658 Tm
-(      title       VARCHAR \(150\)  NOT NULL,) Tj
+(  \);) Tj
 /F3 8.5 Tf
 1 0 0 1 42 647 Tm
-(      description VARCHAR \(1000\) NULL,) Tj
+(  ) Tj
 /F3 8.5 Tf
 1 0 0 1 42 636 Tm
-(  status      VARCHAR \(20\)   DEFAULT 'todo' NOT NULL, -- 'todo', 'in_progress', 'review',) Tj
+(  -- 4. Abel \(AGREGAR AHORA - Columnas del tablero de cada grupo\)) Tj
 /F3 8.5 Tf
 1 0 0 1 42 625 Tm
-(  'done') Tj
+(  CREATE TABLE BoardColumns \() Tj
 /F3 8.5 Tf
 1 0 0 1 42 614 Tm
-(      created_at  DATETIME       DEFAULT GETDATE\(\)) Tj
+(      id         INT          IDENTITY \(1, 1\) PRIMARY KEY,) Tj
 /F3 8.5 Tf
 1 0 0 1 42 603 Tm
-(  \);) Tj
+(  group_id   INT          NOT NULL FOREIGN KEY REFERENCES Groups \(id\) ON DELETE CASCADE,) Tj
 /F3 8.5 Tf
 1 0 0 1 42 592 Tm
-(  ) Tj
+(  name       VARCHAR \(50\) NOT NULL, -- 'Por hacer', 'En progreso', 'En revision',) Tj
 /F3 8.5 Tf
 1 0 0 1 42 581 Tm
-(  -- 5. Tabla Comments \(Leonardo\)) Tj
+(  'Terminado' o nuevas) Tj
 /F3 8.5 Tf
 1 0 0 1 42 570 Tm
-(  CREATE TABLE Comments \() Tj
+(      position   INT          NOT NULL, -- Orden de izquierda a derecha: 1, 2, 3, 4...) Tj
 /F3 8.5 Tf
 1 0 0 1 42 559 Tm
-(      id          INT            IDENTITY \(1, 1\) PRIMARY KEY,) Tj
+(  color      VARCHAR \(20\) DEFAULT 'secondary' NOT NULL -- 'secondary', 'primary',) Tj
 /F3 8.5 Tf
 1 0 0 1 42 548 Tm
-(  task_id     INT            NOT NULL FOREIGN KEY REFERENCES Tasks \(id\) ON DELETE CASCADE,) Tj
+(  'warning', 'success', 'info') Tj
 /F3 8.5 Tf
 1 0 0 1 42 537 Tm
-(      author_name VARCHAR \(100\)  NOT NULL,) Tj
+(  \);) Tj
 /F3 8.5 Tf
 1 0 0 1 42 526 Tm
-(      content     VARCHAR \(1000\) NOT NULL,) Tj
-/F3 8.5 Tf
-1 0 0 1 42 515 Tm
-(      created_at  DATETIME       DEFAULT GETDATE\(\)) Tj
-/F3 8.5 Tf
-1 0 0 1 42 504 Tm
-(  \);) Tj
-/F1 9.5 Tf
-1 0 0 1 42 493 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 480.5 Tm
-(> Nota importante sobre SQL Server:) Tj
-/F1 9.5 Tf
-1 0 0 1 42 468 Tm
-(> Tasks.assigned_to NO lleva ON DELETE SET NULL porque SQL Server lanza el error 1785) Tj
-/F1 9.5 Tf
-1 0 0 1 42 455.5 Tm
-(de multiples caminos en cascada. Ya esta resuelto en queries.js con la query) Tj
-/F1 9.5 Tf
-1 0 0 1 42 443 Tm
-(liberarTareasDelMiembro cuando se elimina un miembro.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 430.5 Tm
-() Tj
-/F1 8 Tf
-1 0 0 1 42 418 Tm
-(____________________________________________________________________________________) Tj
-/F1 9.5 Tf
-1 0 0 1 42 408 Tm
-() Tj
-/F1 9 Tf
-1 0 0 1 42 395.5 Tm
-() Tj
-/F2 12.5 Tf
-1 0 0 1 42 387.5 Tm
-(8. Contratos de integracion entre modulos) Tj
-/F1 9.5 Tf
-1 0 0 1 42 370.5 Tm
-() Tj
-/F2 10.5 Tf
-1 0 0 1 42 358 Tm
-(8.1 Sesion activa y Mis AuLabs \(`localStorage`\)) Tj
-/F1 9.5 Tf
-1 0 0 1 42 344 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 331.5 Tm
-(Ya implementado por Luciano en ClassroomService:) Tj
-/F1 9.5 Tf
-1 0 0 1 42 319 Tm
-(- Clave de sesion activa: gruplab_usuario) Tj
-/F3 8.5 Tf
-1 0 0 1 42 306.5 Tm
-(    {) Tj
-/F3 8.5 Tf
-1 0 0 1 42 295.5 Tm
-(      "nombre": "Lautaro",) Tj
-/F3 8.5 Tf
-1 0 0 1 42 284.5 Tm
-(      "rol": "profesor",) Tj
-/F3 8.5 Tf
-1 0 0 1 42 273.5 Tm
-(      "classroomId": 1,) Tj
-/F3 8.5 Tf
-1 0 0 1 42 262.5 Tm
-(      "classroomName": "Programacion Web",) Tj
-/F3 8.5 Tf
-1 0 0 1 42 251.5 Tm
-(      "memberId": 1) Tj
-/F3 8.5 Tf
-1 0 0 1 42 240.5 Tm
-(    }) Tj
-/F1 9.5 Tf
-1 0 0 1 42 229.5 Tm
-(- Clave de historial multirrol: gruplab_mis_aulabs \(permite actuar como profesor en) Tj
-/F1 9.5 Tf
-1 0 0 1 42 217 Tm
-(unas aulas y como alumno en otras\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 204.5 Tm
-(- Como leer el usuario actual desde cualquier componente \(ej: Leo para autor del) Tj
-/F1 9.5 Tf
-1 0 0 1 42 192 Tm
-(comentario\):) Tj
-/F3 8.5 Tf
-1 0 0 1 42 179.5 Tm
-(    const sesion = JSON.parse\(localStorage.getItem\('gruplab_usuario'\) || '{}'\);) Tj
-/F1 9.5 Tf
-1 0 0 1 42 168.5 Tm
-() Tj
-/F2 10.5 Tf
-1 0 0 1 42 156 Tm
-(8.2 Contrato compartido entre Abel \(Tablero\) y Leonardo \(Tareas\)) Tj
-/F1 9.5 Tf
-1 0 0 1 42 142 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 129.5 Tm
-(Ambos comparten la interfaz Task en frontend/src/app/features/tasks/models/task.ts:) Tj
-/F3 8.5 Tf
-1 0 0 1 42 117 Tm
-(  export type TaskStatus = 'todo' | 'in_progress' | 'review' | 'done';) Tj
-/F3 8.5 Tf
-1 0 0 1 42 106 Tm
 (  ) Tj
 /F3 8.5 Tf
-1 0 0 1 42 95 Tm
-(  export interface Task {) Tj
+1 0 0 1 42 515 Tm
+(  -- 5. Leonardo \(AGREGAR AHORA - Tareas dentro de una columna del tablero\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 84 Tm
-(    id: number;) Tj
+1 0 0 1 42 504 Tm
+(  CREATE TABLE Tasks \() Tj
 /F3 8.5 Tf
-1 0 0 1 42 73 Tm
-(    group_id: number;) Tj
+1 0 0 1 42 493 Tm
+(      id          INT            IDENTITY \(1, 1\) PRIMARY KEY,) Tj
 /F3 8.5 Tf
-1 0 0 1 42 62 Tm
-(    assigned_to: number | null;) Tj
+1 0 0 1 42 482 Tm
+(      group_id    INT            NOT NULL,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 471 Tm
+(  column_id   INT            NOT NULL FOREIGN KEY REFERENCES BoardColumns \(id\) ON DELETE) Tj
+/F3 8.5 Tf
+1 0 0 1 42 460 Tm
+(  CASCADE,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 449 Tm
+(      assigned_to INT            NULL FOREIGN KEY REFERENCES Members \(id\),) Tj
+/F3 8.5 Tf
+1 0 0 1 42 438 Tm
+(      title       VARCHAR \(150\)  NOT NULL,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 427 Tm
+(      description VARCHAR \(1000\) NULL,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 416 Tm
+(      created_at  DATETIME       DEFAULT GETDATE\(\)) Tj
+/F3 8.5 Tf
+1 0 0 1 42 405 Tm
+(  \);) Tj
+/F3 8.5 Tf
+1 0 0 1 42 394 Tm
+(  ) Tj
+/F3 8.5 Tf
+1 0 0 1 42 383 Tm
+(  -- 6. Leonardo \(AGREGAR AHORA - Comentarios de cada tarea\)) Tj
+/F3 8.5 Tf
+1 0 0 1 42 372 Tm
+(  CREATE TABLE Comments \() Tj
+/F3 8.5 Tf
+1 0 0 1 42 361 Tm
+(      id          INT            IDENTITY \(1, 1\) PRIMARY KEY,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 350 Tm
+(  task_id     INT            NOT NULL FOREIGN KEY REFERENCES Tasks \(id\) ON DELETE CASCADE,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 339 Tm
+(      author_name VARCHAR \(100\)  NOT NULL,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 328 Tm
+(      content     VARCHAR \(1000\) NOT NULL,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 317 Tm
+(      created_at  DATETIME       DEFAULT GETDATE\(\)) Tj
+/F3 8.5 Tf
+1 0 0 1 42 306 Tm
+(  \);) Tj
+/F1 9.5 Tf
+1 0 0 1 42 295 Tm
+() Tj
+/F1 9.5 Tf
+1 0 0 1 42 282.5 Tm
+(> Nota sobre cascadas en SQL Server \(sin error 1785\):) Tj
+/F1 9.5 Tf
+1 0 0 1 42 270 Tm
+(> La cadena de borrado en cascada es lineal: Classrooms -> Groups -> BoardColumns ->) Tj
+/F1 9.5 Tf
+1 0 0 1 42 257.5 Tm
+(Tasks -> Comments.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 245 Tm
+(> Tasks.assigned_to no lleva ON DELETE SET NULL porque SQL Server no permite caminos) Tj
+/F1 9.5 Tf
+1 0 0 1 42 232.5 Tm
+(multiples; ya esta resuelto en queries.js con liberarTareasDelMiembro.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 220 Tm
+() Tj
+/F1 8 Tf
+1 0 0 1 42 207.5 Tm
+(____________________________________________________________________________________) Tj
+/F1 9.5 Tf
+1 0 0 1 42 197.5 Tm
+() Tj
+/F1 9 Tf
+1 0 0 1 42 185 Tm
+() Tj
+/F2 12.5 Tf
+1 0 0 1 42 177 Tm
+(8. Contratos de integracion entre modulos) Tj
+/F1 9.5 Tf
+1 0 0 1 42 160 Tm
+() Tj
+/F2 10.5 Tf
+1 0 0 1 42 147.5 Tm
+(8.1 Sesion activa y Mis AuLabs \(`localStorage`\)) Tj
+/F1 9.5 Tf
+1 0 0 1 42 133.5 Tm
+() Tj
+/F1 9.5 Tf
+1 0 0 1 42 121 Tm
+(Ya implementado por Luciano en ClassroomService:) Tj
+/F1 9.5 Tf
+1 0 0 1 42 108.5 Tm
+(- Clave de sesion activa: gruplab_usuario) Tj
+/F3 8.5 Tf
+1 0 0 1 42 96 Tm
+(    {) Tj
+/F3 8.5 Tf
+1 0 0 1 42 85 Tm
+(      "nombre": "Lautaro",) Tj
+/F3 8.5 Tf
+1 0 0 1 42 74 Tm
+(      "rol": "profesor",) Tj
+/F3 8.5 Tf
+1 0 0 1 42 63 Tm
+(      "classroomId": 1,) Tj
 /F1 8 Tf
 1 0 0 1 275 24 Tm
 (Pagina 6 de 14) Tj
@@ -1227,189 +1227,195 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 16 0 R >>
 endobj
 18 0 obj
-<< /Length 4882 >>
+<< /Length 4727 >>
 stream
 BT
 /F3 8.5 Tf
 1 0 0 1 42 790 Tm
-(    assigned_name?: string | null;) Tj
+(      "classroomName": "Programacion Web",) Tj
 /F3 8.5 Tf
 1 0 0 1 42 779 Tm
-(    title: string;) Tj
+(      "memberId": 1) Tj
 /F3 8.5 Tf
 1 0 0 1 42 768 Tm
-(    description: string | null;) Tj
-/F3 8.5 Tf
-1 0 0 1 42 757 Tm
-(    status: TaskStatus;) Tj
-/F3 8.5 Tf
-1 0 0 1 42 746 Tm
-(    created_at: string;) Tj
-/F3 8.5 Tf
-1 0 0 1 42 735 Tm
-(  }) Tj
+(    }) Tj
 /F1 9.5 Tf
-1 0 0 1 42 724 Tm
+1 0 0 1 42 757 Tm
+(- Clave de historial multirrol: gruplab_mis_aulabs \(permite actuar como profesor en) Tj
+/F1 9.5 Tf
+1 0 0 1 42 744.5 Tm
+(unas aulas y como alumno en otras\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 732 Tm
+(- Como leer el usuario actual desde cualquier componente \(ej: Leo para autor del) Tj
+/F1 9.5 Tf
+1 0 0 1 42 719.5 Tm
+(comentario\):) Tj
+/F3 8.5 Tf
+1 0 0 1 42 707 Tm
+(    const sesion = JSON.parse\(localStorage.getItem\('gruplab_usuario'\) || '{}'\);) Tj
+/F1 9.5 Tf
+1 0 0 1 42 696 Tm
 () Tj
 /F2 10.5 Tf
-1 0 0 1 42 711.5 Tm
+1 0 0 1 42 683.5 Tm
+(8.2 Modelos compartidos entre Abel \(Tablero\) y Leonardo \(Tareas\)) Tj
+/F1 9.5 Tf
+1 0 0 1 42 669.5 Tm
+() Tj
+/F1 9.5 Tf
+1 0 0 1 42 657 Tm
+(1. frontend/src/app/features/tasks/models/board-column.ts \(Abel\):) Tj
+/F3 8.5 Tf
+1 0 0 1 42 644.5 Tm
+(     export interface BoardColumn {) Tj
+/F3 8.5 Tf
+1 0 0 1 42 633.5 Tm
+(       id: number;) Tj
+/F3 8.5 Tf
+1 0 0 1 42 622.5 Tm
+(       group_id: number;) Tj
+/F3 8.5 Tf
+1 0 0 1 42 611.5 Tm
+(       name: string;) Tj
+/F3 8.5 Tf
+1 0 0 1 42 600.5 Tm
+(       position: number;) Tj
+/F3 8.5 Tf
+1 0 0 1 42 589.5 Tm
+(       color: string;) Tj
+/F3 8.5 Tf
+1 0 0 1 42 578.5 Tm
+(     }) Tj
+/F1 9.5 Tf
+1 0 0 1 42 567.5 Tm
+() Tj
+/F1 9.5 Tf
+1 0 0 1 42 555 Tm
+(2. frontend/src/app/features/tasks/models/task.ts \(Leonardo y Abel\):) Tj
+/F3 8.5 Tf
+1 0 0 1 42 542.5 Tm
+(     export interface Task {) Tj
+/F3 8.5 Tf
+1 0 0 1 42 531.5 Tm
+(       id: number;) Tj
+/F3 8.5 Tf
+1 0 0 1 42 520.5 Tm
+(       group_id: number;) Tj
+/F3 8.5 Tf
+1 0 0 1 42 509.5 Tm
+(       column_id: number;) Tj
+/F3 8.5 Tf
+1 0 0 1 42 498.5 Tm
+(       column_name?: string;) Tj
+/F3 8.5 Tf
+1 0 0 1 42 487.5 Tm
+(       assigned_to: number | null;) Tj
+/F3 8.5 Tf
+1 0 0 1 42 476.5 Tm
+(       assigned_name?: string | null;) Tj
+/F3 8.5 Tf
+1 0 0 1 42 465.5 Tm
+(       title: string;) Tj
+/F3 8.5 Tf
+1 0 0 1 42 454.5 Tm
+(       description: string | null;) Tj
+/F3 8.5 Tf
+1 0 0 1 42 443.5 Tm
+(       created_at: string;) Tj
+/F3 8.5 Tf
+1 0 0 1 42 432.5 Tm
+(     }) Tj
+/F1 9.5 Tf
+1 0 0 1 42 421.5 Tm
+() Tj
+/F2 10.5 Tf
+1 0 0 1 42 409 Tm
 (8.3 Componentes que se incrustan en otros) Tj
 /F1 9.5 Tf
-1 0 0 1 42 697.5 Tm
+1 0 0 1 42 395 Tm
 () Tj
 /F1 9.5 Tf
-1 0 0 1 42 685 Tm
+1 0 0 1 42 382.5 Tm
 (| Componente | Duenio | Selector | Inputs / Outputs | Se incrusta en |) Tj
 /F1 9.5 Tf
-1 0 0 1 42 672.5 Tm
+1 0 0 1 42 370 Tm
 (|---|---|---|---|---|) Tj
 /F1 9.5 Tf
-1 0 0 1 42 660 Tm
+1 0 0 1 42 357.5 Tm
 (| GroupList | Leandro | app-group-list | [classroomId]="a.id" | PanelAula \(Luciano\) |) Tj
 /F1 9.5 Tf
-1 0 0 1 42 647.5 Tm
+1 0 0 1 42 345 Tm
 (| MemberList | Gonzalo | app-member-list | [classroomId]="a.id" | PanelAula \(Luciano\)) Tj
 /F1 9.5 Tf
-1 0 0 1 42 635 Tm
+1 0 0 1 42 332.5 Tm
 (|) Tj
 /F1 9.5 Tf
-1 0 0 1 42 622.5 Tm
-(| TaskCard | Abel | app-task-card | [tarea]="t" \(cambiarEstado\)="...") Tj
+1 0 0 1 42 320 Tm
+(| TaskCard | Abel | app-task-card | [tarea]="t" \(moverColumna\)="...") Tj
 /F1 9.5 Tf
-1 0 0 1 42 610 Tm
+1 0 0 1 42 307.5 Tm
 (\(seleccionar\)="..." | Kanban \(Abel\) |) Tj
 /F1 9.5 Tf
-1 0 0 1 42 597.5 Tm
+1 0 0 1 42 295 Tm
 (| TaskForm | Leonardo | app-task-form | [groupId]="groupId\(\)") Tj
 /F1 9.5 Tf
-1 0 0 1 42 585 Tm
-(\(creada\)="cargarTablero\(\)" | Kanban \(Abel\) |) Tj
+1 0 0 1 42 282.5 Tm
+([columnId]="primeraColumnaId\(\)" \(creada\)="cargarTablero\(\)" | Kanban \(Abel\) |) Tj
 /F1 9.5 Tf
-1 0 0 1 42 572.5 Tm
+1 0 0 1 42 270 Tm
 (| TaskDetail | Leonardo | app-task-detail | [tarea]="tareaSeleccionada\(\)!") Tj
 /F1 9.5 Tf
-1 0 0 1 42 560 Tm
+1 0 0 1 42 257.5 Tm
 (\(cerrar\)="..." \(actualizada\)="cargarTablero\(\)" | Kanban \(Abel\) |) Tj
 /F1 9.5 Tf
-1 0 0 1 42 547.5 Tm
+1 0 0 1 42 245 Tm
 (| Comments | Leonardo | app-comments | [taskId]="tarea\(\).id" | TaskDetail \(Leonardo\) |) Tj
 /F1 9.5 Tf
-1 0 0 1 42 535 Tm
+1 0 0 1 42 232.5 Tm
 () Tj
 /F1 8 Tf
-1 0 0 1 42 522.5 Tm
+1 0 0 1 42 220 Tm
 (____________________________________________________________________________________) Tj
 /F1 9.5 Tf
-1 0 0 1 42 512.5 Tm
+1 0 0 1 42 210 Tm
 () Tj
 /F1 9 Tf
-1 0 0 1 42 500 Tm
+1 0 0 1 42 197.5 Tm
 () Tj
 /F2 12.5 Tf
-1 0 0 1 42 492 Tm
+1 0 0 1 42 189.5 Tm
 (9. Modulo 1 - Luciano - Aulas y Home \(COMPLETADO\)) Tj
 /F1 9.5 Tf
-1 0 0 1 42 475 Tm
+1 0 0 1 42 172.5 Tm
 () Tj
 /F1 9.5 Tf
-1 0 0 1 42 462.5 Tm
+1 0 0 1 42 160 Tm
 (Todo el modulo 1 ya se encuentra finalizado, documentado y compilando sin errores:) Tj
 /F1 9.5 Tf
-1 0 0 1 42 450 Tm
+1 0 0 1 42 147.5 Tm
 (- Backend \(classroom.*\):) Tj
 /F1 9.5 Tf
-1 0 0 1 42 437.5 Tm
+1 0 0 1 42 135 Tm
 (- GET /classrooms, POST /classrooms, GET /classrooms/code/:join_code, GET) Tj
 /F1 9.5 Tf
-1 0 0 1 42 425 Tm
+1 0 0 1 42 122.5 Tm
 (/classrooms/:id, DELETE /classrooms/:id.) Tj
 /F1 9.5 Tf
-1 0 0 1 42 412.5 Tm
+1 0 0 1 42 110 Tm
 (- Al crear un aula, registra automaticamente al docente en Members con rol 'profesor') Tj
 /F1 9.5 Tf
-1 0 0 1 42 400 Tm
+1 0 0 1 42 97.5 Tm
 (y devuelve { message, aulaId, join_code, memberId }.) Tj
 /F1 9.5 Tf
-1 0 0 1 42 387.5 Tm
+1 0 0 1 42 85 Tm
 (- Al eliminar un aula, elimina primero los miembros asociados) Tj
 /F1 9.5 Tf
-1 0 0 1 42 375 Tm
+1 0 0 1 42 72.5 Tm
 (\(eliminarMiembrosPorAula\) y luego el aula.) Tj
 /F1 9.5 Tf
-1 0 0 1 42 362.5 Tm
+1 0 0 1 42 60 Tm
 (- Frontend \(features/classrooms/\):) Tj
-/F1 9.5 Tf
-1 0 0 1 42 350 Tm
-(- Rutas con lazy loading: /classrooms \(Home\), /classrooms/nuevo \(Profesor\),) Tj
-/F1 9.5 Tf
-1 0 0 1 42 337.5 Tm
-(/classrooms/unirse \(Alumno\), /classrooms/:id \(PanelAula\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 325 Tm
-(- Manejo de "Mis AuLabs" en Home: tarjetas que distinguen si sos Profesor o Alumno en) Tj
-/F1 9.5 Tf
-1 0 0 1 42 312.5 Tm
-(cada aula.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 300 Tm
-(- PanelAula: muestra cabecera, codigo del aula, usuario conectado, boton "Eliminar) Tj
-/F1 9.5 Tf
-1 0 0 1 42 287.5 Tm
-(Aula" \(exclusivo para rol profesor\) y deja listas las dos columnas para GroupList) Tj
-/F1 9.5 Tf
-1 0 0 1 42 275 Tm
-(\(Leandro\) y MemberList \(Gonzalo\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 262.5 Tm
-() Tj
-/F1 8 Tf
-1 0 0 1 42 250 Tm
-(____________________________________________________________________________________) Tj
-/F1 9.5 Tf
-1 0 0 1 42 240 Tm
-() Tj
-/F1 9 Tf
-1 0 0 1 42 227.5 Tm
-() Tj
-/F2 12.5 Tf
-1 0 0 1 42 219.5 Tm
-(10. Modulo 2 - Leandro - Grupos) Tj
-/F1 9.5 Tf
-1 0 0 1 42 202.5 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 190 Tm
-(- Backend: Ya integrado y funcionando en group.routes.js, group.controller.js,) Tj
-/F1 9.5 Tf
-1 0 0 1 42 177.5 Tm
-(group.service.js, group.repository.js y queries.js.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 165 Tm
-(  - Endpoints activos:) Tj
-/F1 9.5 Tf
-1 0 0 1 42 152.5 Tm
-(- GET /classrooms/:classroomId/groups -> [ { id, classroom_id, group_number,) Tj
-/F1 9.5 Tf
-1 0 0 1 42 140 Tm
-(project_name } ]) Tj
-/F1 9.5 Tf
-1 0 0 1 42 127.5 Tm
-(    - GET /groups/:id -> { id, classroom_id, group_number, project_name }) Tj
-/F1 9.5 Tf
-1 0 0 1 42 115 Tm
-(    - POST /classrooms/:classroomId/groups -> Body: { group_number, project_name }) Tj
-/F1 9.5 Tf
-1 0 0 1 42 102.5 Tm
-(    - PUT /groups/:id -> Body: { project_name }) Tj
-/F1 9.5 Tf
-1 0 0 1 42 90 Tm
-(    - DELETE /groups/:id) Tj
-/F1 9.5 Tf
-1 0 0 1 42 77.5 Tm
-(- Frontend pendiente \(features/groups/\):) Tj
-/F1 9.5 Tf
-1 0 0 1 42 65 Tm
-(  - models/group.ts: Interfaz Group \(id, classroom_id, group_number, project_name\).) Tj
 /F1 8 Tf
 1 0 0 1 275 24 Tm
 (Pagina 7 de 14) Tj
@@ -1420,195 +1426,186 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 18 0 R >>
 endobj
 20 0 obj
-<< /Length 4716 >>
+<< /Length 4918 >>
 stream
 BT
 /F1 9.5 Tf
 1 0 0 1 42 790 Tm
-(  - services/group.ts \(GroupService con inject\(HttpClient\)\).) Tj
+(- Rutas con lazy loading: /classrooms \(Home\), /classrooms/nuevo \(Profesor\),) Tj
 /F1 9.5 Tf
 1 0 0 1 42 777.5 Tm
-(- group-list/ \(app-group-list con classroomId = input.required<number>\(\)\): lista los) Tj
+(/classrooms/unirse \(Alumno\), /classrooms/:id \(PanelAula\).) Tj
 /F1 9.5 Tf
 1 0 0 1 42 765 Tm
-(grupos del aula, permite crear uno nuevo y tiene el boton "Ver tablero" con) Tj
+(- Manejo de "Mis AuLabs" en Home: tarjetas que distinguen si sos Profesor o Alumno en) Tj
 /F1 9.5 Tf
 1 0 0 1 42 752.5 Tm
-([routerLink]="['/groups', grupo.id, 'board']".) Tj
+(cada aula.) Tj
 /F1 9.5 Tf
 1 0 0 1 42 740 Tm
+(- PanelAula: muestra cabecera, codigo del aula, usuario conectado, boton "Eliminar) Tj
+/F1 9.5 Tf
+1 0 0 1 42 727.5 Tm
+(Aula" \(exclusivo para rol profesor\) y deja listas las dos columnas para GroupList) Tj
+/F1 9.5 Tf
+1 0 0 1 42 715 Tm
+(\(Leandro\) y MemberList \(Gonzalo\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 702.5 Tm
 () Tj
 /F1 8 Tf
-1 0 0 1 42 727.5 Tm
+1 0 0 1 42 690 Tm
 (____________________________________________________________________________________) Tj
-/F1 9.5 Tf
-1 0 0 1 42 717.5 Tm
-() Tj
-/F1 9 Tf
-1 0 0 1 42 705 Tm
-() Tj
-/F2 12.5 Tf
-1 0 0 1 42 697 Tm
-(11. Modulo 3 - Gonzalo - Miembros) Tj
 /F1 9.5 Tf
 1 0 0 1 42 680 Tm
 () Tj
-/F1 9.5 Tf
+/F1 9 Tf
 1 0 0 1 42 667.5 Tm
-(- Backend: Ya integrado y funcionando en member.routes.js, member.controller.js,) Tj
-/F1 9.5 Tf
-1 0 0 1 42 655 Tm
-(member.service.js, member.repository.js y queries.js.) Tj
+() Tj
+/F2 12.5 Tf
+1 0 0 1 42 659.5 Tm
+(10. Modulo 2 - Leandro - Grupos) Tj
 /F1 9.5 Tf
 1 0 0 1 42 642.5 Tm
-(  - Endpoints activos:) Tj
+() Tj
 /F1 9.5 Tf
 1 0 0 1 42 630 Tm
-(- GET /classrooms/:classroomId/members -> [ { id, classroom_id, group_id, group_name,) Tj
+(- Backend: Ya integrado y funcionando en group.routes.js, group.controller.js,) Tj
 /F1 9.5 Tf
 1 0 0 1 42 617.5 Tm
-(nombre, email, rol, created_at } ]) Tj
+(group.service.js, group.repository.js y queries.js.) Tj
 /F1 9.5 Tf
 1 0 0 1 42 605 Tm
-(    - GET /groups/:groupId/members) Tj
+(  - Endpoints activos:) Tj
 /F1 9.5 Tf
 1 0 0 1 42 592.5 Tm
-(    - POST /classrooms/:classroomId/members -> Body: { nombre, email, rol }) Tj
+(- GET /classrooms/:classroomId/groups -> [ { id, classroom_id, group_number,) Tj
 /F1 9.5 Tf
 1 0 0 1 42 580 Tm
-(    - PUT /members/:id/group -> Body: { group_id }) Tj
+(project_name } ]) Tj
 /F1 9.5 Tf
 1 0 0 1 42 567.5 Tm
-(    - DELETE /members/:id) Tj
+(    - GET /groups/:id -> { id, classroom_id, group_number, project_name }) Tj
 /F1 9.5 Tf
 1 0 0 1 42 555 Tm
-(- Frontend pendiente \(features/members/\):) Tj
+(    - POST /classrooms/:classroomId/groups -> Body: { group_number, project_name }) Tj
 /F1 9.5 Tf
 1 0 0 1 42 542.5 Tm
-(  - models/member.ts: Interfaz Member.) Tj
+(    - PUT /groups/:id -> Body: { project_name }) Tj
 /F1 9.5 Tf
 1 0 0 1 42 530 Tm
-(  - services/member.ts \(MemberService con inject\(HttpClient\)\).) Tj
+(    - DELETE /groups/:id) Tj
 /F1 9.5 Tf
 1 0 0 1 42 517.5 Tm
-(- member-list/ \(app-member-list con classroomId = input.required<number>\(\)\): muestra) Tj
+(- Frontend pendiente \(features/groups/\):) Tj
 /F1 9.5 Tf
 1 0 0 1 42 505 Tm
-(miembros del aula, diferencia al profesor con un badge, y permite asignar grupo a cada) Tj
+(  - models/group.ts: Interfaz Group \(id, classroom_id, group_number, project_name\).) Tj
 /F1 9.5 Tf
 1 0 0 1 42 492.5 Tm
-(alumno con un <select>.) Tj
+(  - services/group.ts \(GroupService con inject\(HttpClient\)\).) Tj
 /F1 9.5 Tf
 1 0 0 1 42 480 Tm
+(- group-list/ \(app-group-list con classroomId = input.required<number>\(\)\): lista los) Tj
+/F1 9.5 Tf
+1 0 0 1 42 467.5 Tm
+(grupos del aula, permite crear uno nuevo y tiene el boton "Ver tablero" con) Tj
+/F1 9.5 Tf
+1 0 0 1 42 455 Tm
+([routerLink]="['/groups', grupo.id, 'board']".) Tj
+/F1 9.5 Tf
+1 0 0 1 42 442.5 Tm
 () Tj
 /F1 8 Tf
-1 0 0 1 42 467.5 Tm
+1 0 0 1 42 430 Tm
 (____________________________________________________________________________________) Tj
 /F1 9.5 Tf
-1 0 0 1 42 457.5 Tm
+1 0 0 1 42 420 Tm
 () Tj
 /F1 9 Tf
-1 0 0 1 42 445 Tm
+1 0 0 1 42 407.5 Tm
 () Tj
 /F2 12.5 Tf
-1 0 0 1 42 437 Tm
-(12. Modulo 4 - Abel - Tablero Kanban de 4 Columnas y Estados \(Backend) Tj
-/F2 12.5 Tf
-1 0 0 1 42 420 Tm
-(+ Frontend\)) Tj
+1 0 0 1 42 399.5 Tm
+(11. Modulo 3 - Gonzalo - Miembros) Tj
 /F1 9.5 Tf
-1 0 0 1 42 403 Tm
+1 0 0 1 42 382.5 Tm
 () Tj
 /F1 9.5 Tf
-1 0 0 1 42 390.5 Tm
-(Responsabilidad: Construir el Backend del Tablero \(board.*: consultas del tablero por) Tj
+1 0 0 1 42 370 Tm
+(- Backend: Ya integrado y funcionando en member.routes.js, member.controller.js,) Tj
 /F1 9.5 Tf
-1 0 0 1 42 378 Tm
-(grupo, filtro por miembro/estado y cambio de estado entre las 4 columnas\) y el) Tj
+1 0 0 1 42 357.5 Tm
+(member.service.js, member.repository.js y queries.js.) Tj
 /F1 9.5 Tf
-1 0 0 1 42 365.5 Tm
-(Frontend del Tablero Kanban \(BoardService, Kanban con 4 columnas y TaskCard\).) Tj
+1 0 0 1 42 345 Tm
+(  - Endpoints activos:) Tj
 /F1 9.5 Tf
-1 0 0 1 42 353 Tm
-() Tj
-/F2 10.5 Tf
-1 0 0 1 42 340.5 Tm
-(12.1 Backend de Abel \(`board.*` + `queries.js`\)) Tj
+1 0 0 1 42 332.5 Tm
+(- GET /classrooms/:classroomId/members -> [ { id, classroom_id, group_id, group_name,) Tj
 /F1 9.5 Tf
-1 0 0 1 42 326.5 Tm
-() Tj
+1 0 0 1 42 320 Tm
+(nombre, email, rol, created_at } ]) Tj
 /F1 9.5 Tf
-1 0 0 1 42 314 Tm
-(1. En backend/src/database/queries.js, agregar la base de consulta y las queries del) Tj
+1 0 0 1 42 307.5 Tm
+(    - GET /groups/:groupId/members) Tj
 /F1 9.5 Tf
-1 0 0 1 42 301.5 Tm
-(tablero:) Tj
-/F3 8.5 Tf
-1 0 0 1 42 289 Tm
-(     const queryBaseSelectTareas = `SELECT) Tj
-/F3 8.5 Tf
-1 0 0 1 42 278 Tm
-(         t.id,) Tj
-/F3 8.5 Tf
-1 0 0 1 42 267 Tm
-(         t.group_id,) Tj
-/F3 8.5 Tf
-1 0 0 1 42 256 Tm
-(         t.assigned_to,) Tj
-/F3 8.5 Tf
+1 0 0 1 42 295 Tm
+(    - POST /classrooms/:classroomId/members -> Body: { nombre, email, rol }) Tj
+/F1 9.5 Tf
+1 0 0 1 42 282.5 Tm
+(    - PUT /members/:id/group -> Body: { group_id }) Tj
+/F1 9.5 Tf
+1 0 0 1 42 270 Tm
+(    - DELETE /members/:id) Tj
+/F1 9.5 Tf
+1 0 0 1 42 257.5 Tm
+(- Frontend pendiente \(features/members/\):) Tj
+/F1 9.5 Tf
 1 0 0 1 42 245 Tm
-(         m.nombre AS assigned_name,) Tj
-/F3 8.5 Tf
-1 0 0 1 42 234 Tm
-(         t.title,) Tj
-/F3 8.5 Tf
-1 0 0 1 42 223 Tm
-(         t.description,) Tj
-/F3 8.5 Tf
-1 0 0 1 42 212 Tm
-(         t.status,) Tj
-/F3 8.5 Tf
-1 0 0 1 42 201 Tm
-(         t.created_at) Tj
-/F3 8.5 Tf
-1 0 0 1 42 190 Tm
-(     FROM Tasks t) Tj
-/F3 8.5 Tf
-1 0 0 1 42 179 Tm
-(     LEFT JOIN Members m ON m.id = t.assigned_to`;) Tj
+(  - models/member.ts: Interfaz Member.) Tj
 /F1 9.5 Tf
-1 0 0 1 42 168 Tm
-(   Y dentro del module.exports:) Tj
-/F3 8.5 Tf
-1 0 0 1 42 155.5 Tm
-(     // Queries de Abel \(Tablero y cambio de columna\)) Tj
-/F3 8.5 Tf
-1 0 0 1 42 144.5 Tm
-(     obtenerTareasPorGrupo: `${queryBaseSelectTareas}) Tj
-/F3 8.5 Tf
-1 0 0 1 42 133.5 Tm
-(         WHERE t.group_id = @group_id) Tj
-/F3 8.5 Tf
+1 0 0 1 42 232.5 Tm
+(  - services/member.ts \(MemberService con inject\(HttpClient\)\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 220 Tm
+(- member-list/ \(app-member-list con classroomId = input.required<number>\(\)\): muestra) Tj
+/F1 9.5 Tf
+1 0 0 1 42 207.5 Tm
+(miembros del aula, diferencia al profesor con un badge, y permite asignar grupo a cada) Tj
+/F1 9.5 Tf
+1 0 0 1 42 195 Tm
+(alumno con un <select>.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 182.5 Tm
+() Tj
+/F1 8 Tf
+1 0 0 1 42 170 Tm
+(____________________________________________________________________________________) Tj
+/F1 9.5 Tf
+1 0 0 1 42 160 Tm
+() Tj
+/F1 9 Tf
+1 0 0 1 42 147.5 Tm
+() Tj
+/F2 12.5 Tf
+1 0 0 1 42 139.5 Tm
+(12. Modulo 4 - Abel - Tablero Kanban y Columnas Dinamicas) Tj
+/F2 12.5 Tf
 1 0 0 1 42 122.5 Tm
-(         ORDER BY t.created_at ASC`,) Tj
-/F3 8.5 Tf
-1 0 0 1 42 111.5 Tm
-(  ) Tj
-/F3 8.5 Tf
-1 0 0 1 42 100.5 Tm
-(     obtenerTareasPorGrupoYMiembro: `${queryBaseSelectTareas}) Tj
-/F3 8.5 Tf
-1 0 0 1 42 89.5 Tm
-(         WHERE t.group_id = @group_id AND t.assigned_to = @assigned_to) Tj
-/F3 8.5 Tf
-1 0 0 1 42 78.5 Tm
-(         ORDER BY t.created_at ASC`,) Tj
-/F3 8.5 Tf
-1 0 0 1 42 67.5 Tm
-(  ) Tj
-/F3 8.5 Tf
-1 0 0 1 42 56.5 Tm
-(     cambiarEstadoTarea: `UPDATE Tasks) Tj
+(\(`BoardColumns`\)) Tj
+/F1 9.5 Tf
+1 0 0 1 42 105.5 Tm
+() Tj
+/F1 9.5 Tf
+1 0 0 1 42 93 Tm
+(Responsabilidad: Construir la tabla BoardColumns, el Backend del Tablero y sus) Tj
+/F1 9.5 Tf
+1 0 0 1 42 80.5 Tm
+(Columnas \(board.*\) \(creacion automatica de las 4 columnas iniciales, posibilidad de) Tj
+/F1 9.5 Tf
+1 0 0 1 42 68 Tm
+(agregar nuevas columnas, renombrarlas, eliminarlas y mover tareas entre columnas\) y el) Tj
 /F1 8 Tf
 1 0 0 1 275 24 Tm
 (Pagina 8 de 14) Tj
@@ -1619,189 +1616,201 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 20 0 R >>
 endobj
 22 0 obj
-<< /Length 4793 >>
+<< /Length 4303 >>
 stream
 BT
-/F3 8.5 Tf
+/F1 9.5 Tf
 1 0 0 1 42 790 Tm
-(         SET status = @status) Tj
-/F3 8.5 Tf
-1 0 0 1 42 779 Tm
-(         WHERE id = @id`,) Tj
+(Frontend del Tablero Kanban \(BoardService, Kanban y TaskCard\).) Tj
 /F1 9.5 Tf
-1 0 0 1 42 768 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 755.5 Tm
-(2. Completar los 4 archivos de Backend de Abel:) Tj
-/F1 9.5 Tf
-1 0 0 1 42 743 Tm
-(   - backend/src/repositories/board.repository.js) Tj
-/F1 9.5 Tf
-1 0 0 1 42 730.5 Tm
-(   - backend/src/services/board.service.js) Tj
-/F1 9.5 Tf
-1 0 0 1 42 718 Tm
-(   - backend/src/controllers/board.controller.js) Tj
-/F1 9.5 Tf
-1 0 0 1 42 705.5 Tm
-(   - backend/src/routes/board.routes.js) Tj
-/F1 9.5 Tf
-1 0 0 1 42 693 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 680.5 Tm
-(   Endpoints que expone Abel:) Tj
-/F1 9.5 Tf
-1 0 0 1 42 668 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 655.5 Tm
-(   | Metodo | URL | Body / Query | Respuesta OK |) Tj
-/F1 9.5 Tf
-1 0 0 1 42 643 Tm
-(   |---|---|---|---|) Tj
-/F1 9.5 Tf
-1 0 0 1 42 630.5 Tm
-(| GET | /groups/:groupId/board | Opcional: ?assigned_to=1 | [ { id, group_id,) Tj
-/F1 9.5 Tf
-1 0 0 1 42 618 Tm
-(assigned_to, assigned_name, title, description, status, created_at } ] |) Tj
-/F1 9.5 Tf
-1 0 0 1 42 605.5 Tm
-(| PATCH | /tasks/:id/status | { "status": "in_progress" } | { "message": "Estado) Tj
-/F1 9.5 Tf
-1 0 0 1 42 593 Tm
-(actualizado correctamente", "status": "in_progress" } |) Tj
-/F1 9.5 Tf
-1 0 0 1 42 580.5 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 568 Tm
-(   Validaciones obligatorias en board.service.js:) Tj
-/F1 9.5 Tf
-1 0 0 1 42 555.5 Tm
-(   - En obtenerTablero\(groupId, assignedTo\):) Tj
-/F1 9.5 Tf
-1 0 0 1 42 543 Tm
-(- Si viene assignedTo, llama a boardRepository.obtenerTareasPorGrupoYMiembro\(groupId,) Tj
-/F1 9.5 Tf
-1 0 0 1 42 530.5 Tm
-(assignedTo\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 518 Tm
-(     - Si no viene assignedTo, llama a boardRepository.obtenerTareasPorGrupo\(groupId\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 505.5 Tm
-(   - En cambiarEstadoTarea\(id, status\):) Tj
-/F1 9.5 Tf
-1 0 0 1 42 493 Tm
-(- Validar que status sea uno de los 4 estados de las columnas: 'todo', 'in_progress',) Tj
-/F1 9.5 Tf
-1 0 0 1 42 480.5 Tm
-('review' o 'done'.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 468 Tm
-(- Si envian cualquier otro valor, lanzar throw new Error\('Estado de columna invalido.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 455.5 Tm
-(Valores permitidos: todo, in_progress, review, done'\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 443 Tm
-(     - Si el UPDATE afecta 0 filas, lanzar throw new Error\('Tarea no encontrada'\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 430.5 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 418 Tm
-(3. Registrar rutas en backend/src/index.js:) Tj
-/F3 8.5 Tf
-1 0 0 1 42 405.5 Tm
-(     const boardRoutes = require\('./routes/board.routes'\);) Tj
-/F3 8.5 Tf
-1 0 0 1 42 394.5 Tm
-(     // ...) Tj
-/F3 8.5 Tf
-1 0 0 1 42 383.5 Tm
-(     app.use\(boardRoutes\);) Tj
-/F1 9.5 Tf
-1 0 0 1 42 372.5 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 360 Tm
-(4. Agregar bloque de pruebas en backend/peticionesTest.http:) Tj
-/F1 9.5 Tf
-1 0 0 1 42 347.5 Tm
-(- Probar GET http://localhost:3000/groups/1/board, GET) Tj
-/F1 9.5 Tf
-1 0 0 1 42 335 Tm
-(http://localhost:3000/groups/1/board?assigned_to=1 y PATCH) Tj
-/F1 9.5 Tf
-1 0 0 1 42 322.5 Tm
-(http://localhost:3000/tasks/1/status.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 310 Tm
-() Tj
-/F1 8 Tf
-1 0 0 1 42 297.5 Tm
-(____________________________________________________________________________________) Tj
-/F1 9.5 Tf
-1 0 0 1 42 287.5 Tm
+1 0 0 1 42 777.5 Tm
 () Tj
 /F2 10.5 Tf
-1 0 0 1 42 275 Tm
-(12.2 Frontend de Abel \(`features/tasks/`\)) Tj
+1 0 0 1 42 765 Tm
+(12.1 Base de Datos \(Abel\)) Tj
 /F1 9.5 Tf
-1 0 0 1 42 261 Tm
+1 0 0 1 42 751 Tm
+(Agregar la tabla BoardColumns en backend/src/database/schema.sql \(ver seccion 7\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 738.5 Tm
+() Tj
+/F2 10.5 Tf
+1 0 0 1 42 726 Tm
+(12.2 Backend de Abel \(`board.*` + `queries.js`\)) Tj
+/F1 9.5 Tf
+1 0 0 1 42 712 Tm
 () Tj
 /F1 9.5 Tf
-1 0 0 1 42 248.5 Tm
-(Archivos que construye Abel:) Tj
+1 0 0 1 42 699.5 Tm
+(1. En backend/src/database/queries.js, agregar la constante base y las queries de) Tj
 /F1 9.5 Tf
-1 0 0 1 42 236 Tm
-(- frontend/src/app/features/tasks/services/board.ts \(BoardService\)) Tj
+1 0 0 1 42 687 Tm
+(Abel:) Tj
+/F3 8.5 Tf
+1 0 0 1 42 674.5 Tm
+(     const queryBaseSelectColumnas = `SELECT) Tj
+/F3 8.5 Tf
+1 0 0 1 42 663.5 Tm
+(         id,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 652.5 Tm
+(         group_id,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 641.5 Tm
+(         name,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 630.5 Tm
+(         position,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 619.5 Tm
+(         color) Tj
+/F3 8.5 Tf
+1 0 0 1 42 608.5 Tm
+(     FROM BoardColumns`;) Tj
+/F3 8.5 Tf
+1 0 0 1 42 597.5 Tm
+(  ) Tj
+/F3 8.5 Tf
+1 0 0 1 42 586.5 Tm
+(     const queryBaseSelectTareas = `SELECT) Tj
+/F3 8.5 Tf
+1 0 0 1 42 575.5 Tm
+(         t.id,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 564.5 Tm
+(         t.group_id,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 553.5 Tm
+(         t.column_id,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 542.5 Tm
+(         c.name AS column_name,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 531.5 Tm
+(         t.assigned_to,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 520.5 Tm
+(         m.nombre AS assigned_name,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 509.5 Tm
+(         t.title,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 498.5 Tm
+(         t.description,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 487.5 Tm
+(         t.created_at) Tj
+/F3 8.5 Tf
+1 0 0 1 42 476.5 Tm
+(     FROM Tasks t) Tj
+/F3 8.5 Tf
+1 0 0 1 42 465.5 Tm
+(     INNER JOIN BoardColumns c ON c.id = t.column_id) Tj
+/F3 8.5 Tf
+1 0 0 1 42 454.5 Tm
+(     LEFT JOIN Members m ON m.id = t.assigned_to`;) Tj
 /F1 9.5 Tf
-1 0 0 1 42 223.5 Tm
-(- frontend/src/app/features/tasks/kanban/ \(kanban.ts, kanban.html, kanban.css\)) Tj
-/F1 9.5 Tf
+1 0 0 1 42 443.5 Tm
+(   Y dentro del module.exports:) Tj
+/F3 8.5 Tf
+1 0 0 1 42 431 Tm
+(     // Queries de Abel \(Columnas del Tablero y movimiento de tareas\)) Tj
+/F3 8.5 Tf
+1 0 0 1 42 420 Tm
+(     obtenerColumnasPorGrupo: `${queryBaseSelectColumnas}) Tj
+/F3 8.5 Tf
+1 0 0 1 42 409 Tm
+(         WHERE group_id = @group_id) Tj
+/F3 8.5 Tf
+1 0 0 1 42 398 Tm
+(         ORDER BY position ASC`,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 387 Tm
+(  ) Tj
+/F3 8.5 Tf
+1 0 0 1 42 376 Tm
+(     obtenerColumnaPorId: `${queryBaseSelectColumnas}) Tj
+/F3 8.5 Tf
+1 0 0 1 42 365 Tm
+(         WHERE id = @id`,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 354 Tm
+(  ) Tj
+/F3 8.5 Tf
+1 0 0 1 42 343 Tm
+(     crearColumna: `INSERT INTO BoardColumns \(group_id, name, position, color\)) Tj
+/F3 8.5 Tf
+1 0 0 1 42 332 Tm
+(         OUTPUT INSERTED.id) Tj
+/F3 8.5 Tf
+1 0 0 1 42 321 Tm
+(         VALUES \(@group_id, @name, @position, @color\)`,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 310 Tm
+(  ) Tj
+/F3 8.5 Tf
+1 0 0 1 42 299 Tm
+(     actualizarColumna: `UPDATE BoardColumns) Tj
+/F3 8.5 Tf
+1 0 0 1 42 288 Tm
+(         SET name = @name, color = @color) Tj
+/F3 8.5 Tf
+1 0 0 1 42 277 Tm
+(         WHERE id = @id`,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 266 Tm
+(  ) Tj
+/F3 8.5 Tf
+1 0 0 1 42 255 Tm
+(     eliminarColumna: `DELETE FROM BoardColumns WHERE id = @id`,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 244 Tm
+(  ) Tj
+/F3 8.5 Tf
+1 0 0 1 42 233 Tm
+(     obtenerTareasPorGrupo: `${queryBaseSelectTareas}) Tj
+/F3 8.5 Tf
+1 0 0 1 42 222 Tm
+(         WHERE t.group_id = @group_id) Tj
+/F3 8.5 Tf
 1 0 0 1 42 211 Tm
-(- frontend/src/app/features/tasks/task-card/ \(task-card.ts, task-card.html,) Tj
+(         ORDER BY t.created_at ASC`,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 200 Tm
+(  ) Tj
+/F3 8.5 Tf
+1 0 0 1 42 189 Tm
+(     moverTareaDeColumna: `UPDATE Tasks) Tj
+/F3 8.5 Tf
+1 0 0 1 42 178 Tm
+(         SET column_id = @column_id) Tj
+/F3 8.5 Tf
+1 0 0 1 42 167 Tm
+(         WHERE id = @id`,) Tj
 /F1 9.5 Tf
-1 0 0 1 42 198.5 Tm
-(task-card.css\)) Tj
-/F1 9.5 Tf
-1 0 0 1 42 186 Tm
-(- En frontend/src/app/app.routes.ts: agregar la ruta con carga perezosa antes de '':) Tj
-/F3 8.5 Tf
-1 0 0 1 42 173.5 Tm
-(    {) Tj
-/F3 8.5 Tf
-1 0 0 1 42 162.5 Tm
-(      path: 'groups/:groupId/board',) Tj
-/F3 8.5 Tf
-1 0 0 1 42 151.5 Tm
-(      loadComponent: \(\) => import\('./features/tasks/kanban/kanban'\).then\(m => m.Kanban\)) Tj
-/F3 8.5 Tf
-1 0 0 1 42 140.5 Tm
-(    }) Tj
-/F1 9.5 Tf
-1 0 0 1 42 129.5 Tm
+1 0 0 1 42 156 Tm
 () Tj
 /F1 9.5 Tf
-1 0 0 1 42 117 Tm
-(1. Servicio BoardService \(features/tasks/services/board.ts\):) Tj
+1 0 0 1 42 143.5 Tm
+(2. Completar los 4 archivos de Backend de Abel:) Tj
 /F1 9.5 Tf
-1 0 0 1 42 104.5 Tm
-(   - Usa private http = inject\(HttpClient\).) Tj
+1 0 0 1 42 131 Tm
+(   - backend/src/repositories/board.repository.js) Tj
 /F1 9.5 Tf
-1 0 0 1 42 92 Tm
-(- obtenerTablero\(groupId: number, assignedTo?: number | null\): Observable<Task[]> ->) Tj
+1 0 0 1 42 118.5 Tm
+(   - backend/src/services/board.service.js) Tj
 /F1 9.5 Tf
-1 0 0 1 42 79.5 Tm
-(llama a GET http://localhost:3000/groups/${groupId}/board \(agregando) Tj
+1 0 0 1 42 106 Tm
+(   - backend/src/controllers/board.controller.js) Tj
 /F1 9.5 Tf
-1 0 0 1 42 67 Tm
-(?assigned_to=${assignedTo} si aplica\).) Tj
+1 0 0 1 42 93.5 Tm
+(   - backend/src/routes/board.routes.js) Tj
+/F1 9.5 Tf
+1 0 0 1 42 81 Tm
+() Tj
+/F1 9.5 Tf
+1 0 0 1 42 68.5 Tm
+(   Endpoints que expone Abel:) Tj
 /F1 8 Tf
 1 0 0 1 275 24 Tm
 (Pagina 9 de 14) Tj
@@ -1812,186 +1821,189 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 22 0 R >>
 endobj
 24 0 obj
-<< /Length 5180 >>
+<< /Length 5095 >>
 stream
 BT
 /F1 9.5 Tf
 1 0 0 1 42 790 Tm
-(- cambiarEstado\(taskId: number, status: TaskStatus\): Observable<{ message: string;) Tj
+() Tj
 /F1 9.5 Tf
 1 0 0 1 42 777.5 Tm
-(status: TaskStatus }> -> llama a PATCH http://localhost:3000/tasks/${taskId}/status.) Tj
+(   | Metodo | URL | Body | Respuesta OK |) Tj
 /F1 9.5 Tf
 1 0 0 1 42 765 Tm
-() Tj
+(   |---|---|---|---|) Tj
 /F1 9.5 Tf
 1 0 0 1 42 752.5 Tm
-(2. Componente Kanban \(selector app-kanban\):) Tj
+(| GET | /groups/:groupId/board | - | { columns: [ ... ], tasks: [ ... ] } \(Si el grupo) Tj
 /F1 9.5 Tf
 1 0 0 1 42 740 Tm
-(   - Lectura de ruta y carga inicial \(ngOnInit\):) Tj
+(aun no tiene columnas, crea las 4 por defecto automaticamente\) |) Tj
 /F1 9.5 Tf
 1 0 0 1 42 727.5 Tm
-(- Se suscribe a this.route.params para obtener groupId = Number\(params['groupId']\).) Tj
+(| POST | /groups/:groupId/columns | { "name": "Testing", "color": "info" } | {) Tj
 /F1 9.5 Tf
 1 0 0 1 42 715 Tm
-(- Consulta los datos del grupo \(GET /groups/:id\) para mostrar en la cabecera: *"Grupo) Tj
+("message": "Columna creada exitosamente", "id": 5, "position": 5 } |) Tj
 /F1 9.5 Tf
 1 0 0 1 42 702.5 Tm
-(#{{ g.group_number }} - {{ g.project_name }}"* y el boton "Volver al aula") Tj
+(| PUT | /columns/:id | { "name": "QA / Testing", "color": "info" } | { "message":) Tj
 /F1 9.5 Tf
 1 0 0 1 42 690 Tm
-(\([routerLink]="['/classrooms', g.classroom_id]"\).) Tj
+("Columna actualizada correctamente" } |) Tj
 /F1 9.5 Tf
 1 0 0 1 42 677.5 Tm
-(- Llama a boardService.obtenerTablero\(groupId\) y guarda la lista en tareas =) Tj
+(   | DELETE | /columns/:id | - | { "message": "Columna eliminada correctamente" } |) Tj
 /F1 9.5 Tf
 1 0 0 1 42 665 Tm
-(signal<Task[]>\([]\).) Tj
+(| PATCH | /tasks/:id/column | { "column_id": 2 } | { "message": "Tarea movida de) Tj
 /F1 9.5 Tf
 1 0 0 1 42 652.5 Tm
-(   - Las 4 Columnas del Tablero \(con computed\(\)\):) Tj
+(columna correctamente" } |) Tj
 /F1 9.5 Tf
 1 0 0 1 42 640 Tm
-(     - Columna 1 - Por hacer \(todo\):) Tj
+() Tj
 /F1 9.5 Tf
 1 0 0 1 42 627.5 Tm
-(porHacer = computed\(\(\) => this.tareasFiltradas\(\).filter\(t => t.status === 'todo'\)\);) Tj
+(   Logica de negocio en board.service.js:) Tj
 /F1 9.5 Tf
 1 0 0 1 42 615 Tm
-(     - Columna 2 - En progreso \(in_progress\):) Tj
+(   - Inicializacion automatica de las 4 columnas base:) Tj
 /F1 9.5 Tf
 1 0 0 1 42 602.5 Tm
-(enProgreso = computed\(\(\) => this.tareasFiltradas\(\).filter\(t => t.status ===) Tj
+(En obtenerTablero\(groupId\), consultar obtenerColumnasPorGrupo\(groupId\). Si devuelve 0) Tj
 /F1 9.5 Tf
 1 0 0 1 42 590 Tm
-('in_progress'\)\);) Tj
+(columnas, crear automaticamente las 4 columnas iniciales:) Tj
 /F1 9.5 Tf
 1 0 0 1 42 577.5 Tm
-(     - Columna 3 - En revision \(review\):) Tj
+(     1. 'Por hacer' \(position: 1, color: 'secondary'\)) Tj
 /F1 9.5 Tf
 1 0 0 1 42 565 Tm
-(enRevision = computed\(\(\) => this.tareasFiltradas\(\).filter\(t => t.status ===) Tj
+(     2. 'En progreso' \(position: 2, color: 'primary'\)) Tj
 /F1 9.5 Tf
 1 0 0 1 42 552.5 Tm
-('review'\)\);) Tj
+(     3. 'En revision' \(position: 3, color: 'warning'\)) Tj
 /F1 9.5 Tf
 1 0 0 1 42 540 Tm
-(     - Columna 4 - Terminado \(done\):) Tj
+(     4. 'Terminado' \(position: 4, color: 'success'\)) Tj
 /F1 9.5 Tf
 1 0 0 1 42 527.5 Tm
-(terminado = computed\(\(\) => this.tareasFiltradas\(\).filter\(t => t.status === 'done'\)\);) Tj
+(     Luego devolver { columns, tasks }.) Tj
 /F1 9.5 Tf
 1 0 0 1 42 515 Tm
-(- Maquetar con una grilla Bootstrap de 4 columnas \(<div class="row g-3"> con cuatro) Tj
+(   - Crear columna nueva \(POST /groups/:groupId/columns\):) Tj
 /F1 9.5 Tf
 1 0 0 1 42 502.5 Tm
-(<div class="col-md-3">\), cada una con su cabecera, badge contador de tareas y color) Tj
+(Validar que name no este vacio \(maximo 50 caracteres\). Calcular position =) Tj
 /F1 9.5 Tf
 1 0 0 1 42 490 Tm
-(distintivo \(ej: secondary, primary, warning, success\).) Tj
+(columnasActuales.length + 1 y guardar en BoardColumns.) Tj
 /F1 9.5 Tf
 1 0 0 1 42 477.5 Tm
-(   - Filtros del Tablero:) Tj
+(   - Mover tarea de columna \(PATCH /tasks/:id/column\):) Tj
 /F1 9.5 Tf
 1 0 0 1 42 465 Tm
-(- Filtro por miembro responsable \(usando el parametro ?assigned_to de su endpoint o) Tj
+(Verificar que la columna destino \(column_id\) exista con obtenerColumnaPorId\(column_id\)) Tj
 /F1 9.5 Tf
 1 0 0 1 42 452.5 Tm
-(signal local\) y busqueda por texto.) Tj
+(antes de actualizar la tarea.) Tj
 /F1 9.5 Tf
 1 0 0 1 42 440 Tm
-(   - Integracion con los componentes de Leonardo:) Tj
+() Tj
 /F1 9.5 Tf
 1 0 0 1 42 427.5 Tm
-(- Boton "Nueva Tarea": abre <app-task-form [groupId]="groupId\(\)") Tj
-/F1 9.5 Tf
+(3. Registrar rutas en backend/src/index.js:) Tj
+/F3 8.5 Tf
 1 0 0 1 42 415 Tm
-(\(creada\)="cargarTablero\(\)" />.) Tj
+(     const boardRoutes = require\('./routes/board.routes'\);) Tj
+/F3 8.5 Tf
+1 0 0 1 42 404 Tm
+(     // ...) Tj
+/F3 8.5 Tf
+1 0 0 1 42 393 Tm
+(     app.use\(boardRoutes\);) Tj
 /F1 9.5 Tf
-1 0 0 1 42 402.5 Tm
-(- Clic en una tarjeta: guarda la tarea en tareaSeleccionada = signal<Task |) Tj
-/F1 9.5 Tf
-1 0 0 1 42 390 Tm
-(null>\(null\) para abrir <app-task-detail [tarea]="tareaSeleccionada\(\)!") Tj
-/F1 9.5 Tf
-1 0 0 1 42 377.5 Tm
-(\(cerrar\)="tareaSeleccionada.set\(null\)" \(actualizada\)="cargarTablero\(\)" />.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 365 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 352.5 Tm
-(3. Componente TaskCard \(selector app-task-card\):) Tj
-/F1 9.5 Tf
-1 0 0 1 42 340 Tm
-(   - Entrada: tarea = input.required<Task>\(\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 327.5 Tm
-(   - Salidas: cambiarEstado = output<TaskStatus>\(\), seleccionar = output<Task>\(\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 315 Tm
-(- Muestra titulo, badge con tarea\(\).assigned_name || 'Sin asignar' y botones rapidos) Tj
-/F1 9.5 Tf
-1 0 0 1 42 302.5 Tm
-(\(<- y ->\) para avanzar o retroceder entre las 4 columnas \('todo' -> 'in_progress' ->) Tj
-/F1 9.5 Tf
-1 0 0 1 42 290 Tm
-('review' -> 'done'\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 277.5 Tm
+1 0 0 1 42 382 Tm
 () Tj
 /F1 8 Tf
-1 0 0 1 42 265 Tm
+1 0 0 1 42 369.5 Tm
 (____________________________________________________________________________________) Tj
 /F1 9.5 Tf
-1 0 0 1 42 255 Tm
-() Tj
-/F1 9 Tf
-1 0 0 1 42 242.5 Tm
-() Tj
-/F2 12.5 Tf
-1 0 0 1 42 234.5 Tm
-(13. Modulo 5 - Leonardo - ABM de Tareas y Comentarios \(Backend +) Tj
-/F2 12.5 Tf
-1 0 0 1 42 217.5 Tm
-(Frontend\)) Tj
-/F1 9.5 Tf
-1 0 0 1 42 200.5 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 188 Tm
-(Responsabilidad: Construir las tablas Tasks y Comments, el Backend de ABM de Tareas) Tj
-/F1 9.5 Tf
-1 0 0 1 42 175.5 Tm
-(\(task.*\) y Comentarios \(comment.*\), los servicios TaskService y CommentService, y los) Tj
-/F1 9.5 Tf
-1 0 0 1 42 163 Tm
-(componentes TaskForm, TaskDetail y Comments.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 150.5 Tm
+1 0 0 1 42 359.5 Tm
 () Tj
 /F2 10.5 Tf
-1 0 0 1 42 138 Tm
-(13.1 Base de Datos) Tj
+1 0 0 1 42 347 Tm
+(12.3 Frontend de Abel \(`features/tasks/`\)) Tj
 /F1 9.5 Tf
-1 0 0 1 42 124 Tm
-(Agregar las tablas Tasks y Comments al final de backend/src/database/schema.sql \(ver) Tj
-/F1 9.5 Tf
-1 0 0 1 42 111.5 Tm
-(seccion 7\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 99 Tm
-() Tj
-/F2 10.5 Tf
-1 0 0 1 42 86.5 Tm
-(13.2 Backend de Leonardo \(`task.*`, `comment.*` y `queries.js`\)) Tj
-/F1 9.5 Tf
-1 0 0 1 42 72.5 Tm
+1 0 0 1 42 333 Tm
 () Tj
 /F1 9.5 Tf
-1 0 0 1 42 60 Tm
-(1. En backend/src/database/queries.js, agregar dentro del module.exports:) Tj
+1 0 0 1 42 320.5 Tm
+(Archivos que construye Abel:) Tj
+/F1 9.5 Tf
+1 0 0 1 42 308 Tm
+(- frontend/src/app/features/tasks/models/board-column.ts \(BoardColumn\)) Tj
+/F1 9.5 Tf
+1 0 0 1 42 295.5 Tm
+(- frontend/src/app/features/tasks/services/board.ts \(BoardService\)) Tj
+/F1 9.5 Tf
+1 0 0 1 42 283 Tm
+(- frontend/src/app/features/tasks/kanban/ \(kanban.ts, kanban.html, kanban.css\)) Tj
+/F1 9.5 Tf
+1 0 0 1 42 270.5 Tm
+(- frontend/src/app/features/tasks/task-card/ \(task-card.ts, task-card.html,) Tj
+/F1 9.5 Tf
+1 0 0 1 42 258 Tm
+(task-card.css\)) Tj
+/F1 9.5 Tf
+1 0 0 1 42 245.5 Tm
+(- En frontend/src/app/app.routes.ts: agregar la ruta con carga perezosa antes de '':) Tj
+/F3 8.5 Tf
+1 0 0 1 42 233 Tm
+(    {) Tj
+/F3 8.5 Tf
+1 0 0 1 42 222 Tm
+(      path: 'groups/:groupId/board',) Tj
+/F3 8.5 Tf
+1 0 0 1 42 211 Tm
+(      loadComponent: \(\) => import\('./features/tasks/kanban/kanban'\).then\(m => m.Kanban\)) Tj
+/F3 8.5 Tf
+1 0 0 1 42 200 Tm
+(    }) Tj
+/F1 9.5 Tf
+1 0 0 1 42 189 Tm
+() Tj
+/F1 9.5 Tf
+1 0 0 1 42 176.5 Tm
+(1. Servicio BoardService \(features/tasks/services/board.ts\):) Tj
+/F1 9.5 Tf
+1 0 0 1 42 164 Tm
+(- obtenerTablero\(groupId: number\): Observable<{ columns: BoardColumn[]; tasks: Task[]) Tj
+/F1 9.5 Tf
+1 0 0 1 42 151.5 Tm
+(}>) Tj
+/F1 9.5 Tf
+1 0 0 1 42 139 Tm
+(   - crearColumna\(groupId: number, name: string, color?: string\): Observable<any>) Tj
+/F1 9.5 Tf
+1 0 0 1 42 126.5 Tm
+(   - actualizarColumna\(columnId: number, name: string, color: string\): Observable<any>) Tj
+/F1 9.5 Tf
+1 0 0 1 42 114 Tm
+(   - eliminarColumna\(columnId: number\): Observable<any>) Tj
+/F1 9.5 Tf
+1 0 0 1 42 101.5 Tm
+(   - moverTareaDeColumna\(taskId: number, columnId: number\): Observable<any>) Tj
+/F1 9.5 Tf
+1 0 0 1 42 89 Tm
+() Tj
+/F1 9.5 Tf
+1 0 0 1 42 76.5 Tm
+(2. Componente Kanban \(selector app-kanban\):) Tj
+/F1 9.5 Tf
+1 0 0 1 42 64 Tm
+(   - Carga inicial \(ngOnInit\):) Tj
 /F1 8 Tf
 1 0 0 1 275 24 Tm
 (Pagina 10 de 14) Tj
@@ -2002,198 +2014,192 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 24 0 R >>
 endobj
 26 0 obj
-<< /Length 5009 >>
+<< /Length 5158 >>
 stream
 BT
-/F3 8.5 Tf
+/F1 9.5 Tf
 1 0 0 1 42 790 Tm
+(     - Lee groupId con this.route.params.subscribe\(...\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 777.5 Tm
+(- Carga el grupo \(GET /groups/:id\) para mostrar *"Grupo #{{ g.group_number }} - {{) Tj
+/F1 9.5 Tf
+1 0 0 1 42 765 Tm
+(g.project_name }}"* y el boton "Volver al aula".) Tj
+/F1 9.5 Tf
+1 0 0 1 42 752.5 Tm
+(- Llama a boardService.obtenerTablero\(groupId\) y guarda columnas =) Tj
+/F1 9.5 Tf
+1 0 0 1 42 740 Tm
+(signal<BoardColumn[]>\([]\) y tareas = signal<Task[]>\([]\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 727.5 Tm
+(   - Renderizado dinamico de las columnas \(@for \(col of columnas\(\); track col.id\)\):) Tj
+/F1 9.5 Tf
+1 0 0 1 42 715 Tm
+(- Muestra las 4 columnas iniciales \(y cualquier columna nueva que agregue el grupo\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 702.5 Tm
+(- En cada columna filtra las tareas con obtenerTareasDeColumna\(col.id\) \(respetando) Tj
+/F1 9.5 Tf
+1 0 0 1 42 690 Tm
+(tambien el filtro por miembro responsable\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 677.5 Tm
+(- Incluye boton "+ Nueva Columna" en la cabecera del tablero para crear una columna) Tj
+/F1 9.5 Tf
+1 0 0 1 42 665 Tm
+(adicional al instante, y boton para eliminar/renombrar columnas.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 652.5 Tm
+(   - Integracion con los componentes de Leonardo:) Tj
+/F1 9.5 Tf
+1 0 0 1 42 640 Tm
+(- Boton "Nueva Tarea": abre <app-task-form [groupId]="groupId\(\)") Tj
+/F1 9.5 Tf
+1 0 0 1 42 627.5 Tm
+([columnId]="columnas\(\)[0].id" \(creada\)="cargarTablero\(\)" />.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 615 Tm
+(- Clic en una tarjeta: abre <app-task-detail [tarea]="tareaSeleccionada\(\)!") Tj
+/F1 9.5 Tf
+1 0 0 1 42 602.5 Tm
+(\(cerrar\)="tareaSeleccionada.set\(null\)" \(actualizada\)="cargarTablero\(\)" />.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 590 Tm
+() Tj
+/F1 9.5 Tf
+1 0 0 1 42 577.5 Tm
+(3. Componente TaskCard \(selector app-task-card\):) Tj
+/F1 9.5 Tf
+1 0 0 1 42 565 Tm
+(- Entradas: tarea = input.required<Task>\(\), puedeRetroceder = input<boolean>\(true\),) Tj
+/F1 9.5 Tf
+1 0 0 1 42 552.5 Tm
+(puedeAvanzar = input<boolean>\(true\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 540 Tm
+(- Salidas: mover = output<'anterior' | 'siguiente'>\(\), seleccionar = output<Task>\(\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 527.5 Tm
+(- Muestra titulo, badge del responsable \(tarea\(\).assigned_name || 'Sin asignar'\) y) Tj
+/F1 9.5 Tf
+1 0 0 1 42 515 Tm
+(botones \(<- y ->\) para pasar la tarea a la columna anterior o siguiente en orden de) Tj
+/F1 9.5 Tf
+1 0 0 1 42 502.5 Tm
+(position.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 490 Tm
+() Tj
+/F1 8 Tf
+1 0 0 1 42 477.5 Tm
+(____________________________________________________________________________________) Tj
+/F1 9.5 Tf
+1 0 0 1 42 467.5 Tm
+() Tj
+/F1 9 Tf
+1 0 0 1 42 455 Tm
+() Tj
+/F2 12.5 Tf
+1 0 0 1 42 447 Tm
+(13. Modulo 5 - Leonardo - ABM de Tareas y Comentarios \(`Tasks` y) Tj
+/F2 12.5 Tf
+1 0 0 1 42 430 Tm
+(`Comments`\)) Tj
+/F1 9.5 Tf
+1 0 0 1 42 413 Tm
+() Tj
+/F1 9.5 Tf
+1 0 0 1 42 400.5 Tm
+(Responsabilidad: Construir las tablas Tasks y Comments, el Backend de ABM de Tareas) Tj
+/F1 9.5 Tf
+1 0 0 1 42 388 Tm
+(\(task.*\) y Comentarios \(comment.*\), los servicios TaskService y CommentService, y los) Tj
+/F1 9.5 Tf
+1 0 0 1 42 375.5 Tm
+(componentes TaskForm, TaskDetail y Comments.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 363 Tm
+() Tj
+/F2 10.5 Tf
+1 0 0 1 42 350.5 Tm
+(13.1 Base de Datos \(Leonardo\)) Tj
+/F1 9.5 Tf
+1 0 0 1 42 336.5 Tm
+(Agregar las tablas Tasks y Comments al final de backend/src/database/schema.sql \(ver) Tj
+/F1 9.5 Tf
+1 0 0 1 42 324 Tm
+(seccion 7\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 311.5 Tm
+() Tj
+/F2 10.5 Tf
+1 0 0 1 42 299 Tm
+(13.2 Backend de Leonardo \(`task.*`, `comment.*` y `queries.js`\)) Tj
+/F1 9.5 Tf
+1 0 0 1 42 285 Tm
+() Tj
+/F1 9.5 Tf
+1 0 0 1 42 272.5 Tm
+(1. En backend/src/database/queries.js, agregar dentro del module.exports:) Tj
+/F3 8.5 Tf
+1 0 0 1 42 260 Tm
 (     // Queries de Leonardo - ABM de Tareas) Tj
 /F3 8.5 Tf
-1 0 0 1 42 779 Tm
+1 0 0 1 42 249 Tm
 (     obtenerTareaPorId: `${queryBaseSelectTareas}) Tj
 /F3 8.5 Tf
-1 0 0 1 42 768 Tm
+1 0 0 1 42 238 Tm
 (         WHERE t.id = @id`,) Tj
 /F3 8.5 Tf
-1 0 0 1 42 757 Tm
+1 0 0 1 42 227 Tm
 (  ) Tj
 /F3 8.5 Tf
-1 0 0 1 42 746 Tm
-(     crearTarea: `INSERT INTO Tasks \(group_id, assigned_to, title, description, status\)) Tj
+1 0 0 1 42 216 Tm
+(     crearTarea: `INSERT INTO Tasks \(group_id, column_id, assigned_to, title, description\)) Tj
 /F3 8.5 Tf
-1 0 0 1 42 735 Tm
+1 0 0 1 42 205 Tm
 (         OUTPUT INSERTED.id) Tj
 /F3 8.5 Tf
-1 0 0 1 42 724 Tm
-(         VALUES \(@group_id, @assigned_to, @title, @description, 'todo'\)`,) Tj
+1 0 0 1 42 194 Tm
+(         VALUES \(@group_id, @column_id, @assigned_to, @title, @description\)`,) Tj
 /F3 8.5 Tf
-1 0 0 1 42 713 Tm
+1 0 0 1 42 183 Tm
 (  ) Tj
 /F3 8.5 Tf
-1 0 0 1 42 702 Tm
+1 0 0 1 42 172 Tm
 (     actualizarTarea: `UPDATE Tasks) Tj
 /F3 8.5 Tf
-1 0 0 1 42 691 Tm
+1 0 0 1 42 161 Tm
 (         SET title = @title, description = @description, assigned_to = @assigned_to) Tj
 /F3 8.5 Tf
-1 0 0 1 42 680 Tm
+1 0 0 1 42 150 Tm
 (         WHERE id = @id`,) Tj
 /F3 8.5 Tf
-1 0 0 1 42 669 Tm
+1 0 0 1 42 139 Tm
 (  ) Tj
 /F3 8.5 Tf
-1 0 0 1 42 658 Tm
+1 0 0 1 42 128 Tm
 (     eliminarTarea: `DELETE FROM Tasks WHERE id = @id`,) Tj
 /F3 8.5 Tf
-1 0 0 1 42 647 Tm
+1 0 0 1 42 117 Tm
 (  ) Tj
 /F3 8.5 Tf
-1 0 0 1 42 636 Tm
+1 0 0 1 42 106 Tm
 (     // Queries de Leonardo - Comentarios) Tj
 /F3 8.5 Tf
-1 0 0 1 42 625 Tm
+1 0 0 1 42 95 Tm
 (     obtenerComentariosPorTarea: `SELECT id, task_id, author_name, content, created_at) Tj
 /F3 8.5 Tf
-1 0 0 1 42 614 Tm
+1 0 0 1 42 84 Tm
 (         FROM Comments) Tj
 /F3 8.5 Tf
-1 0 0 1 42 603 Tm
+1 0 0 1 42 73 Tm
 (         WHERE task_id = @task_id) Tj
 /F3 8.5 Tf
-1 0 0 1 42 592 Tm
+1 0 0 1 42 62 Tm
 (         ORDER BY created_at ASC`,) Tj
-/F3 8.5 Tf
-1 0 0 1 42 581 Tm
-(  ) Tj
-/F3 8.5 Tf
-1 0 0 1 42 570 Tm
-(     crearComentario: `INSERT INTO Comments \(task_id, author_name, content\)) Tj
-/F3 8.5 Tf
-1 0 0 1 42 559 Tm
-(         OUTPUT INSERTED.id) Tj
-/F3 8.5 Tf
-1 0 0 1 42 548 Tm
-(         VALUES \(@task_id, @author_name, @content\)`,) Tj
-/F3 8.5 Tf
-1 0 0 1 42 537 Tm
-(  ) Tj
-/F3 8.5 Tf
-1 0 0 1 42 526 Tm
-(     obtenerComentarioPorId: `SELECT id, task_id, author_name, content, created_at) Tj
-/F3 8.5 Tf
-1 0 0 1 42 515 Tm
-(         FROM Comments) Tj
-/F3 8.5 Tf
-1 0 0 1 42 504 Tm
-(         WHERE id = @id`,) Tj
-/F3 8.5 Tf
-1 0 0 1 42 493 Tm
-(  ) Tj
-/F3 8.5 Tf
-1 0 0 1 42 482 Tm
-(     eliminarComentario: `DELETE FROM Comments WHERE id = @id`,) Tj
-/F1 9.5 Tf
-1 0 0 1 42 471 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 458.5 Tm
-(2. Completar archivos de Tareas \(task.repository.js, task.service.js,) Tj
-/F1 9.5 Tf
-1 0 0 1 42 446 Tm
-(task.controller.js, task.routes.js\):) Tj
-/F1 9.5 Tf
-1 0 0 1 42 433.5 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 421 Tm
-(   | Metodo | URL | Body | Respuesta OK |) Tj
-/F1 9.5 Tf
-1 0 0 1 42 408.5 Tm
-(   |---|---|---|---|) Tj
-/F1 9.5 Tf
-1 0 0 1 42 396 Tm
-(| GET | /tasks/:id | - | { id, group_id, assigned_to, assigned_name, title,) Tj
-/F1 9.5 Tf
-1 0 0 1 42 383.5 Tm
-(description, status, created_at } |) Tj
-/F1 9.5 Tf
-1 0 0 1 42 371 Tm
-(| POST | /groups/:groupId/tasks | { "title": "Armar DER", "description": "...",) Tj
-/F1 9.5 Tf
-1 0 0 1 42 358.5 Tm
-("assigned_to": 1 } | { "message": "Tarea creada exitosamente", "id": 10 } |) Tj
-/F1 9.5 Tf
-1 0 0 1 42 346 Tm
-(| PUT | /tasks/:id | { "title": "...", "description": "...", "assigned_to": 1 } | {) Tj
-/F1 9.5 Tf
-1 0 0 1 42 333.5 Tm
-("message": "Tarea actualizada correctamente" } |) Tj
-/F1 9.5 Tf
-1 0 0 1 42 321 Tm
-(   | DELETE | /tasks/:id | - | { "message": "Tarea eliminada correctamente" } |) Tj
-/F1 9.5 Tf
-1 0 0 1 42 308.5 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 296 Tm
-(   Validaciones en task.service.js:) Tj
-/F1 9.5 Tf
-1 0 0 1 42 283.5 Tm
-(   - title obligatorio \(con .trim\(\)\), maximo 150 caracteres.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 271 Tm
-(- En GET, PUT y DELETE, verificar primero que la tarea exista con) Tj
-/F1 9.5 Tf
-1 0 0 1 42 258.5 Tm
-(obtenerTareaPorId\(id\); si no existe, lanzar throw new Error\('Tarea no encontrada'\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 246 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 233.5 Tm
-(3. Completar archivos de Comentarios \(comment.repository.js, comment.service.js,) Tj
-/F1 9.5 Tf
-1 0 0 1 42 221 Tm
-(comment.controller.js, comment.routes.js\):) Tj
-/F1 9.5 Tf
-1 0 0 1 42 208.5 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 196 Tm
-(   | Metodo | URL | Body | Respuesta OK |) Tj
-/F1 9.5 Tf
-1 0 0 1 42 183.5 Tm
-(   |---|---|---|---|) Tj
-/F1 9.5 Tf
-1 0 0 1 42 171 Tm
-(| GET | /tasks/:taskId/comments | - | [ { id, task_id, author_name, content,) Tj
-/F1 9.5 Tf
-1 0 0 1 42 158.5 Tm
-(created_at } ] |) Tj
-/F1 9.5 Tf
-1 0 0 1 42 146 Tm
-(| POST | /tasks/:taskId/comments | { "author_name": "Lautaro", "content": "Listo el) Tj
-/F1 9.5 Tf
-1 0 0 1 42 133.5 Tm
-(DER" } | { "message": "Comentario agregado exitosamente", "id": 1 } |) Tj
-/F1 9.5 Tf
-1 0 0 1 42 121 Tm
-(| DELETE | /comments/:id | { "author_name": "Lautaro" } | { "message": "Comentario) Tj
-/F1 9.5 Tf
-1 0 0 1 42 108.5 Tm
-(eliminado correctamente" } |) Tj
-/F1 9.5 Tf
-1 0 0 1 42 96 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 83.5 Tm
-(   Validaciones en comment.service.js:) Tj
-/F1 9.5 Tf
-1 0 0 1 42 71 Tm
-(   - author_name y content obligatorios \(no vacios, maximo 1000 caracteres\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 58.5 Tm
-(- Solo el autor puede eliminar su propio comentario \(if \(comentario.author_name !==) Tj
 /F1 8 Tf
 1 0 0 1 275 24 Tm
 (Pagina 11 de 14) Tj
@@ -2204,189 +2210,192 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 26 0 R >>
 endobj
 28 0 obj
-<< /Length 5224 >>
+<< /Length 4846 >>
 stream
 BT
-/F1 9.5 Tf
+/F3 8.5 Tf
 1 0 0 1 42 790 Tm
+(  ) Tj
+/F3 8.5 Tf
+1 0 0 1 42 779 Tm
+(     crearComentario: `INSERT INTO Comments \(task_id, author_name, content\)) Tj
+/F3 8.5 Tf
+1 0 0 1 42 768 Tm
+(         OUTPUT INSERTED.id) Tj
+/F3 8.5 Tf
+1 0 0 1 42 757 Tm
+(         VALUES \(@task_id, @author_name, @content\)`,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 746 Tm
+(  ) Tj
+/F3 8.5 Tf
+1 0 0 1 42 735 Tm
+(     obtenerComentarioPorId: `SELECT id, task_id, author_name, content, created_at) Tj
+/F3 8.5 Tf
+1 0 0 1 42 724 Tm
+(         FROM Comments) Tj
+/F3 8.5 Tf
+1 0 0 1 42 713 Tm
+(         WHERE id = @id`,) Tj
+/F3 8.5 Tf
+1 0 0 1 42 702 Tm
+(  ) Tj
+/F3 8.5 Tf
+1 0 0 1 42 691 Tm
+(     eliminarComentario: `DELETE FROM Comments WHERE id = @id`,) Tj
+/F1 9.5 Tf
+1 0 0 1 42 680 Tm
+() Tj
+/F1 9.5 Tf
+1 0 0 1 42 667.5 Tm
+(2. Completar archivos de Tareas \(task.repository.js, task.service.js,) Tj
+/F1 9.5 Tf
+1 0 0 1 42 655 Tm
+(task.controller.js, task.routes.js\):) Tj
+/F1 9.5 Tf
+1 0 0 1 42 642.5 Tm
+() Tj
+/F1 9.5 Tf
+1 0 0 1 42 630 Tm
+(   | Metodo | URL | Body | Respuesta OK |) Tj
+/F1 9.5 Tf
+1 0 0 1 42 617.5 Tm
+(   |---|---|---|---|) Tj
+/F1 9.5 Tf
+1 0 0 1 42 605 Tm
+(| GET | /tasks/:id | - | { id, group_id, column_id, column_name, assigned_to,) Tj
+/F1 9.5 Tf
+1 0 0 1 42 592.5 Tm
+(assigned_name, title, description, created_at } |) Tj
+/F1 9.5 Tf
+1 0 0 1 42 580 Tm
+(| POST | /groups/:groupId/tasks | { "column_id": 1, "title": "Armar DER",) Tj
+/F1 9.5 Tf
+1 0 0 1 42 567.5 Tm
+("description": "...", "assigned_to": 1 } | { "message": "Tarea creada exitosamente",) Tj
+/F1 9.5 Tf
+1 0 0 1 42 555 Tm
+("id": 10 } |) Tj
+/F1 9.5 Tf
+1 0 0 1 42 542.5 Tm
+(| PUT | /tasks/:id | { "title": "...", "description": "...", "assigned_to": 1 } | {) Tj
+/F1 9.5 Tf
+1 0 0 1 42 530 Tm
+("message": "Tarea actualizada correctamente" } |) Tj
+/F1 9.5 Tf
+1 0 0 1 42 517.5 Tm
+(   | DELETE | /tasks/:id | - | { "message": "Tarea eliminada correctamente" } |) Tj
+/F1 9.5 Tf
+1 0 0 1 42 505 Tm
+() Tj
+/F1 9.5 Tf
+1 0 0 1 42 492.5 Tm
+(   Validaciones en task.service.js:) Tj
+/F1 9.5 Tf
+1 0 0 1 42 480 Tm
+(   - title obligatorio \(con .trim\(\)\), maximo 150 caracteres.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 467.5 Tm
+(   - column_id obligatorio al crear la tarea.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 455 Tm
+(- En GET, PUT y DELETE, verificar primero que la tarea exista con) Tj
+/F1 9.5 Tf
+1 0 0 1 42 442.5 Tm
+(obtenerTareaPorId\(id\); si no existe, lanzar throw new Error\('Tarea no encontrada'\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 430 Tm
+() Tj
+/F1 9.5 Tf
+1 0 0 1 42 417.5 Tm
+(3. Completar archivos de Comentarios \(comment.repository.js, comment.service.js,) Tj
+/F1 9.5 Tf
+1 0 0 1 42 405 Tm
+(comment.controller.js, comment.routes.js\):) Tj
+/F1 9.5 Tf
+1 0 0 1 42 392.5 Tm
+() Tj
+/F1 9.5 Tf
+1 0 0 1 42 380 Tm
+(   | Metodo | URL | Body | Respuesta OK |) Tj
+/F1 9.5 Tf
+1 0 0 1 42 367.5 Tm
+(   |---|---|---|---|) Tj
+/F1 9.5 Tf
+1 0 0 1 42 355 Tm
+(| GET | /tasks/:taskId/comments | - | [ { id, task_id, author_name, content,) Tj
+/F1 9.5 Tf
+1 0 0 1 42 342.5 Tm
+(created_at } ] |) Tj
+/F1 9.5 Tf
+1 0 0 1 42 330 Tm
+(| POST | /tasks/:taskId/comments | { "author_name": "Lautaro", "content": "Listo el) Tj
+/F1 9.5 Tf
+1 0 0 1 42 317.5 Tm
+(DER" } | { "message": "Comentario agregado exitosamente", "id": 1 } |) Tj
+/F1 9.5 Tf
+1 0 0 1 42 305 Tm
+(| DELETE | /comments/:id | { "author_name": "Lautaro" } | { "message": "Comentario) Tj
+/F1 9.5 Tf
+1 0 0 1 42 292.5 Tm
+(eliminado correctamente" } |) Tj
+/F1 9.5 Tf
+1 0 0 1 42 280 Tm
+() Tj
+/F1 9.5 Tf
+1 0 0 1 42 267.5 Tm
+(   Validaciones en comment.service.js:) Tj
+/F1 9.5 Tf
+1 0 0 1 42 255 Tm
+(   - author_name y content obligatorios \(no vacios, maximo 1000 caracteres\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 242.5 Tm
+(- Solo el autor puede eliminar su propio comentario \(if \(comentario.author_name !==) Tj
+/F1 9.5 Tf
+1 0 0 1 42 230 Tm
 (author_name\) throw new Error\('Solo el autor puede eliminar este comentario'\)\).) Tj
 /F1 9.5 Tf
-1 0 0 1 42 777.5 Tm
+1 0 0 1 42 217.5 Tm
 () Tj
 /F1 9.5 Tf
-1 0 0 1 42 765 Tm
+1 0 0 1 42 205 Tm
 (4. Registrar en backend/src/index.js:) Tj
 /F3 8.5 Tf
-1 0 0 1 42 752.5 Tm
+1 0 0 1 42 192.5 Tm
 (     const taskRoutes = require\('./routes/task.routes'\);) Tj
 /F3 8.5 Tf
-1 0 0 1 42 741.5 Tm
+1 0 0 1 42 181.5 Tm
 (     const commentRoutes = require\('./routes/comment.routes'\);) Tj
 /F3 8.5 Tf
-1 0 0 1 42 730.5 Tm
+1 0 0 1 42 170.5 Tm
 (     // ...) Tj
 /F3 8.5 Tf
-1 0 0 1 42 719.5 Tm
+1 0 0 1 42 159.5 Tm
 (     app.use\(taskRoutes\);) Tj
 /F3 8.5 Tf
-1 0 0 1 42 708.5 Tm
+1 0 0 1 42 148.5 Tm
 (     app.use\(commentRoutes\);) Tj
 /F1 9.5 Tf
-1 0 0 1 42 697.5 Tm
+1 0 0 1 42 137.5 Tm
 () Tj
 /F1 8 Tf
-1 0 0 1 42 685 Tm
+1 0 0 1 42 125 Tm
 (____________________________________________________________________________________) Tj
 /F1 9.5 Tf
-1 0 0 1 42 675 Tm
+1 0 0 1 42 115 Tm
 () Tj
 /F2 10.5 Tf
-1 0 0 1 42 662.5 Tm
+1 0 0 1 42 102.5 Tm
 (13.3 Frontend de Leonardo \(`features/tasks/` y `features/comments/`\)) Tj
-/F1 9.5 Tf
-1 0 0 1 42 648.5 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 636 Tm
-(1. Modelos:) Tj
-/F1 9.5 Tf
-1 0 0 1 42 623.5 Tm
-(   - frontend/src/app/features/tasks/models/task.ts: Interfaces Task, TaskStatus.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 611 Tm
-(   - frontend/src/app/features/comments/models/comment.ts: Interfaz Comment.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 598.5 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 586 Tm
-(2. Servicios \(inject\(HttpClient\) y Observable<T>\):) Tj
-/F1 9.5 Tf
-1 0 0 1 42 573.5 Tm
-(   - frontend/src/app/features/tasks/services/task.ts \(TaskService\):) Tj
-/F1 9.5 Tf
-1 0 0 1 42 561 Tm
-(     - obtenerTareaPorId\(id: number\): Observable<Task>) Tj
-/F1 9.5 Tf
-1 0 0 1 42 548.5 Tm
-(- crearTarea\(groupId: number, body: { title: string; description?: string;) Tj
-/F1 9.5 Tf
-1 0 0 1 42 536 Tm
-(assigned_to?: number | null }\): Observable<any>) Tj
-/F1 9.5 Tf
-1 0 0 1 42 523.5 Tm
-(- actualizarTarea\(id: number, body: { title: string; description?: string;) Tj
-/F1 9.5 Tf
-1 0 0 1 42 511 Tm
-(assigned_to?: number | null }\): Observable<any>) Tj
-/F1 9.5 Tf
-1 0 0 1 42 498.5 Tm
-(     - eliminarTarea\(id: number\): Observable<any>) Tj
-/F1 9.5 Tf
-1 0 0 1 42 486 Tm
-(   - frontend/src/app/features/comments/services/comment.ts \(CommentService\):) Tj
-/F1 9.5 Tf
-1 0 0 1 42 473.5 Tm
-(     - obtenerComentarios\(taskId: number\): Observable<Comment[]>) Tj
-/F1 9.5 Tf
-1 0 0 1 42 461 Tm
-(- agregarComentario\(taskId: number, author_name: string, content: string\):) Tj
-/F1 9.5 Tf
-1 0 0 1 42 448.5 Tm
-(Observable<any>) Tj
-/F1 9.5 Tf
-1 0 0 1 42 436 Tm
-(     - eliminarComentario\(id: number, author_name: string\): Observable<any>) Tj
-/F1 9.5 Tf
-1 0 0 1 42 423.5 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 411 Tm
-(3. Componente TaskForm \(features/tasks/task-form/, selector app-task-form\):) Tj
-/F1 9.5 Tf
-1 0 0 1 42 398.5 Tm
-(   - Entrada: groupId = input.required<number>\(\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 386 Tm
-(   - Salidas: creada = output<void>\(\), cancelar = output<void>\(\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 373.5 Tm
-(- Campos: title, description y <select> de miembro responsable del grupo \(GET) Tj
-/F1 9.5 Tf
-1 0 0 1 42 361 Tm
-(/groups/:groupId/members\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 348.5 Tm
-(   - Al guardar llama a taskService.crearTarea\(...\) y emite creada.emit\(\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 336 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 323.5 Tm
-(4. Componente TaskDetail \(features/tasks/task-detail/, selector app-task-detail\):) Tj
-/F1 9.5 Tf
-1 0 0 1 42 311 Tm
-(   - Entrada: tarea = input.required<Task>\(\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 298.5 Tm
-(   - Salidas: cerrar = output<void>\(\), actualizada = output<void>\(\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 286 Tm
-(- Permite editar titulo, descripcion, responsable \(taskService.actualizarTarea\) o) Tj
-/F1 9.5 Tf
-1 0 0 1 42 273.5 Tm
-(eliminar la tarea \(taskService.eliminarTarea con confirm\(\)\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 261 Tm
-(- Abajo incluye el componente de comentarios: <app-comments [taskId]="tarea\(\).id" />.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 248.5 Tm
-() Tj
-/F1 9.5 Tf
-1 0 0 1 42 236 Tm
-(5. Componente Comments \(features/comments/comments/, selector app-comments\):) Tj
-/F1 9.5 Tf
-1 0 0 1 42 223.5 Tm
-(   - Entrada: taskId = input.required<number>\(\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 211 Tm
-(   - Lee el nombre del usuario actual desde localStorage.getItem\('gruplab_usuario'\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 198.5 Tm
-(- Muestra lista cronologica con fecha \(DatePipe: {{ c.created_at | date:'dd/MM/yyyy) Tj
-/F1 9.5 Tf
-1 0 0 1 42 186 Tm
-(HH:mm' }}\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 173.5 Tm
-(   - Muestra boton eliminar solo si c.author_name === usuarioActual\(\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 161 Tm
-(   - Textarea y boton "Comentar" que limpia el campo y recarga la lista.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 148.5 Tm
-() Tj
-/F1 8 Tf
-1 0 0 1 42 136 Tm
-(____________________________________________________________________________________) Tj
-/F1 9.5 Tf
-1 0 0 1 42 126 Tm
-() Tj
-/F1 9 Tf
-1 0 0 1 42 113.5 Tm
-() Tj
-/F2 12.5 Tf
-1 0 0 1 42 105.5 Tm
-(14. Como trabajar sin esperar al companero \(datos de prueba\)) Tj
 /F1 9.5 Tf
 1 0 0 1 42 88.5 Tm
 () Tj
-/F3 8.5 Tf
+/F1 9.5 Tf
 1 0 0 1 42 76 Tm
-(  -- 1. Crear aula, grupo y miembro desde peticionesTest.http \(o con estos INSERTs\):) Tj
-/F3 8.5 Tf
-1 0 0 1 42 65 Tm
-(  INSERT INTO Classrooms \(name, duenio, join_code\) VALUES \('Laboratorio Web', 'Lautaro',) Tj
+(1. Modelos:) Tj
+/F1 9.5 Tf
+1 0 0 1 42 63.5 Tm
+(   - frontend/src/app/features/tasks/models/task.ts: Interfaz Task.) Tj
 /F1 8 Tf
 1 0 0 1 275 24 Tm
 (Pagina 12 de 14) Tj
@@ -2397,192 +2406,195 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 28 0 R >>
 endobj
 30 0 obj
-<< /Length 5182 >>
+<< /Length 5538 >>
 stream
 BT
-/F3 8.5 Tf
+/F1 9.5 Tf
 1 0 0 1 42 790 Tm
-(  'GL-1111'\);) Tj
-/F3 8.5 Tf
-1 0 0 1 42 779 Tm
-(  INSERT INTO Groups \(classroom_id, group_number, project_name\) VALUES \(1, 1, 'Sistema) Tj
-/F3 8.5 Tf
-1 0 0 1 42 768 Tm
-(  Kanban'\);) Tj
-/F3 8.5 Tf
-1 0 0 1 42 757 Tm
-(  INSERT INTO Members \(classroom_id, group_id, nombre, rol\) VALUES \(1, 1, 'Lautaro',) Tj
-/F3 8.5 Tf
-1 0 0 1 42 746 Tm
-(  'profesor'\);) Tj
-/F3 8.5 Tf
-1 0 0 1 42 735 Tm
-(  ) Tj
-/F3 8.5 Tf
-1 0 0 1 42 724 Tm
-(  -- 2. Tareas de prueba en las 4 columnas \(para que Abel y Leonardo prueben de) Tj
-/F3 8.5 Tf
-1 0 0 1 42 713 Tm
-(  inmediato\):) Tj
-/F3 8.5 Tf
-1 0 0 1 42 702 Tm
-(  INSERT INTO Tasks \(group_id, assigned_to, title, description, status\) VALUES) Tj
-/F3 8.5 Tf
-1 0 0 1 42 691 Tm
-(  \(1, 1, 'Armar tablas SQL', 'Crear Tasks y Comments', 'done'\),) Tj
-/F3 8.5 Tf
-1 0 0 1 42 680 Tm
-(  \(1, 1, 'Endpoints de Tasks', 'Repository, Service y Controller', 'review'\),) Tj
-/F3 8.5 Tf
-1 0 0 1 42 669 Tm
-(  \(1, 1, 'Maquetar 4 columnas', 'Usar Bootstrap 5.3', 'in_progress'\),) Tj
-/F3 8.5 Tf
-1 0 0 1 42 658 Tm
-(  \(1, NULL, 'Agregar filtros', 'Filtrar por miembro responsable', 'todo'\);) Tj
-/F3 8.5 Tf
-1 0 0 1 42 647 Tm
-(  ) Tj
-/F3 8.5 Tf
-1 0 0 1 42 636 Tm
-(  -- 3. Comentario de prueba:) Tj
-/F3 8.5 Tf
-1 0 0 1 42 625 Tm
-(  INSERT INTO Comments \(task_id, author_name, content\) VALUES \(1, 'Lautaro', 'Tablas) Tj
-/F3 8.5 Tf
-1 0 0 1 42 614 Tm
-(  verificadas sin error 1785'\);) Tj
+(   - frontend/src/app/features/comments/models/comment.ts: Interfaz Comment.) Tj
 /F1 9.5 Tf
-1 0 0 1 42 603 Tm
+1 0 0 1 42 777.5 Tm
 () Tj
 /F1 9.5 Tf
-1 0 0 1 42 590.5 Tm
-(- Abel: Con esos INSERT ya puede desarrollar y probar todo su backend \(GET) Tj
+1 0 0 1 42 765 Tm
+(2. Servicios \(inject\(HttpClient\) y Observable<T>\):) Tj
 /F1 9.5 Tf
-1 0 0 1 42 578 Tm
-(/groups/1/board y PATCH /tasks/1/status\) y su frontend) Tj
+1 0 0 1 42 752.5 Tm
+(   - frontend/src/app/features/tasks/services/task.ts \(TaskService\):) Tj
 /F1 9.5 Tf
-1 0 0 1 42 565.5 Tm
-(\(http://localhost:4200/groups/1/board\) sin esperar los formularios de Leonardo.) Tj
+1 0 0 1 42 740 Tm
+(     - obtenerTareaPorId\(id: number\): Observable<Task>) Tj
 /F1 9.5 Tf
-1 0 0 1 42 553 Tm
-(- Leonardo: Con esos INSERT ya puede probar todo su backend \(POST /groups/1/tasks,) Tj
+1 0 0 1 42 727.5 Tm
+(- crearTarea\(groupId: number, body: { column_id: number; title: string; description?:) Tj
 /F1 9.5 Tf
-1 0 0 1 42 540.5 Tm
-(GET/PUT/DELETE /tasks/1 y /comments\) y probar sus componentes <app-task-form>,) Tj
+1 0 0 1 42 715 Tm
+(string; assigned_to?: number | null }\): Observable<any>) Tj
 /F1 9.5 Tf
-1 0 0 1 42 528 Tm
-(<app-task-detail> y <app-comments>.) Tj
+1 0 0 1 42 702.5 Tm
+(- actualizarTarea\(id: number, body: { title: string; description?: string;) Tj
 /F1 9.5 Tf
-1 0 0 1 42 515.5 Tm
+1 0 0 1 42 690 Tm
+(assigned_to?: number | null }\): Observable<any>) Tj
+/F1 9.5 Tf
+1 0 0 1 42 677.5 Tm
+(     - eliminarTarea\(id: number\): Observable<any>) Tj
+/F1 9.5 Tf
+1 0 0 1 42 665 Tm
+(   - frontend/src/app/features/comments/services/comment.ts \(CommentService\):) Tj
+/F1 9.5 Tf
+1 0 0 1 42 652.5 Tm
+(     - obtenerComentarios\(taskId: number\): Observable<Comment[]>) Tj
+/F1 9.5 Tf
+1 0 0 1 42 640 Tm
+(- agregarComentario\(taskId: number, author_name: string, content: string\):) Tj
+/F1 9.5 Tf
+1 0 0 1 42 627.5 Tm
+(Observable<any>) Tj
+/F1 9.5 Tf
+1 0 0 1 42 615 Tm
+(     - eliminarComentario\(id: number, author_name: string\): Observable<any>) Tj
+/F1 9.5 Tf
+1 0 0 1 42 602.5 Tm
 () Tj
-/F1 8 Tf
-1 0 0 1 42 503 Tm
-(____________________________________________________________________________________) Tj
 /F1 9.5 Tf
-1 0 0 1 42 493 Tm
+1 0 0 1 42 590 Tm
+(3. Componente TaskForm \(features/tasks/task-form/, selector app-task-form\):) Tj
+/F1 9.5 Tf
+1 0 0 1 42 577.5 Tm
+(- Entradas: groupId = input.required<number>\(\), columnId = input.required<number>\(\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 565 Tm
+(   - Salidas: creada = output<void>\(\), cancelar = output<void>\(\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 552.5 Tm
+(- Campos: title, description y <select> de miembro responsable del grupo \(GET) Tj
+/F1 9.5 Tf
+1 0 0 1 42 540 Tm
+(/groups/:groupId/members\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 527.5 Tm
+(   - Al guardar llama a taskService.crearTarea\(...\) y emite creada.emit\(\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 515 Tm
 () Tj
-/F1 9 Tf
-1 0 0 1 42 480.5 Tm
+/F1 9.5 Tf
+1 0 0 1 42 502.5 Tm
+(4. Componente TaskDetail \(features/tasks/task-detail/, selector app-task-detail\):) Tj
+/F1 9.5 Tf
+1 0 0 1 42 490 Tm
+(   - Entrada: tarea = input.required<Task>\(\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 477.5 Tm
+(   - Salidas: cerrar = output<void>\(\), actualizada = output<void>\(\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 465 Tm
+(- Permite editar titulo, descripcion, responsable \(taskService.actualizarTarea\) o) Tj
+/F1 9.5 Tf
+1 0 0 1 42 452.5 Tm
+(eliminar la tarea \(taskService.eliminarTarea con confirm\(\)\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 440 Tm
+(- Abajo incluye el componente de comentarios: <app-comments [taskId]="tarea\(\).id" />.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 427.5 Tm
 () Tj
-/F2 12.5 Tf
-1 0 0 1 42 472.5 Tm
-(15. Checklist de entrega por integrante) Tj
 /F1 9.5 Tf
-1 0 0 1 42 455.5 Tm
-() Tj
-/F2 10.5 Tf
-1 0 0 1 42 443 Tm
-(Comun a todos) Tj
+1 0 0 1 42 415 Tm
+(5. Componente Comments \(features/comments/comments/, selector app-comments\):) Tj
 /F1 9.5 Tf
-1 0 0 1 42 429 Tm
-(- [ ] Codigo limpio siguiendo las convenciones de las secciones 5 y 6 \(inject\(\),) Tj
+1 0 0 1 42 402.5 Tm
+(   - Entrada: taskId = input.required<number>\(\).) Tj
 /F1 9.5 Tf
-1 0 0 1 42 416.5 Tm
-(Signals, Observable<T>, Bootstrap 5.3\).) Tj
+1 0 0 1 42 390 Tm
+(   - Lee el nombre del usuario actual desde localStorage.getItem\('gruplab_usuario'\).) Tj
 /F1 9.5 Tf
-1 0 0 1 42 404 Tm
-(- [ ] Todas las respuestas de error del backend en formato { error: error.message }) Tj
+1 0 0 1 42 377.5 Tm
+(- Muestra lista cronologica con fecha \(DatePipe: {{ c.created_at | date:'dd/MM/yyyy) Tj
 /F1 9.5 Tf
-1 0 0 1 42 391.5 Tm
-(con status 400.) Tj
+1 0 0 1 42 365 Tm
+(HH:mm' }}\).) Tj
 /F1 9.5 Tf
-1 0 0 1 42 379 Tm
-(- [ ] npm run build dentro de frontend ejecutando con 0 errores.) Tj
+1 0 0 1 42 352.5 Tm
+(   - Muestra boton eliminar solo si c.author_name === usuarioActual\(\).) Tj
 /F1 9.5 Tf
-1 0 0 1 42 366.5 Tm
-(- [ ] Pull Request hacia develop sin conflictos.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 354 Tm
-() Tj
-/F2 10.5 Tf
-1 0 0 1 42 341.5 Tm
-(Luciano \(Modulo 1 - Aulas y Home\)) Tj
+1 0 0 1 42 340 Tm
+(   - Textarea y boton "Comentar" que limpia el campo y recarga la lista.) Tj
 /F1 9.5 Tf
 1 0 0 1 42 327.5 Tm
-(- [x] Backend completo de Aulas \(classroom.*\) con creacion de profesor en Members y) Tj
-/F1 9.5 Tf
+() Tj
+/F1 8 Tf
 1 0 0 1 42 315 Tm
-(borrado en cascada.) Tj
+(____________________________________________________________________________________) Tj
 /F1 9.5 Tf
-1 0 0 1 42 302.5 Tm
-(- [x] Frontend con Lazy Loading, RouterLink, inject\(\), Observable<T> e interfaces.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 290 Tm
-(- [x] Manejo de sesion y "Mis AuLabs" multirrol en ClassroomService.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 277.5 Tm
-(- [x] PanelAula con permisos de profesor y espacio para GroupList y MemberList.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 265 Tm
+1 0 0 1 42 305 Tm
 () Tj
-/F2 10.5 Tf
-1 0 0 1 42 252.5 Tm
-(Leandro \(Modulo 2 - Grupos\)) Tj
-/F1 9.5 Tf
-1 0 0 1 42 238.5 Tm
-(- [x] Backend de grupos \(group.*\) integrado y probado en peticionesTest.http.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 226 Tm
-(- [ ] GroupService e interfaz Group en features/groups/.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 213.5 Tm
-(- [ ] GroupList y creacion de grupo con navegacion a /groups/:groupId/board.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 201 Tm
+/F1 9 Tf
+1 0 0 1 42 292.5 Tm
 () Tj
-/F2 10.5 Tf
-1 0 0 1 42 188.5 Tm
-(Gonzalo \(Modulo 3 - Miembros\)) Tj
+/F2 12.5 Tf
+1 0 0 1 42 284.5 Tm
+(14. Como trabajar sin esperar al companero \(datos de prueba\)) Tj
 /F1 9.5 Tf
-1 0 0 1 42 174.5 Tm
-(- [x] Backend de miembros \(member.*\) integrado y probado en peticionesTest.http.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 162 Tm
-(- [ ] MemberService e interfaz Member en features/members/.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 149.5 Tm
-(- [ ] MemberList con asignacion de grupo mediante <select> y baja de miembro.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 137 Tm
+1 0 0 1 42 267.5 Tm
 () Tj
-/F2 10.5 Tf
-1 0 0 1 42 124.5 Tm
-(Abel \(Modulo 4 - Tablero Kanban de 4 Columnas - Backend + Frontend\)) Tj
-/F1 9.5 Tf
-1 0 0 1 42 110.5 Tm
-(- [ ] Queries y endpoints del tablero en board.repository.js, board.service.js,) Tj
-/F1 9.5 Tf
-1 0 0 1 42 98 Tm
-(board.controller.js y board.routes.js \(GET /groups/:groupId/board con filtro y PATCH) Tj
-/F1 9.5 Tf
-1 0 0 1 42 85.5 Tm
-(/tasks/:id/status validando los 4 estados\).) Tj
-/F1 9.5 Tf
-1 0 0 1 42 73 Tm
-(- [ ] BoardService en features/tasks/services/board.ts y ruta /groups/:groupId/board) Tj
-/F1 9.5 Tf
-1 0 0 1 42 60.5 Tm
-(en app.routes.ts.) Tj
+/F3 8.5 Tf
+1 0 0 1 42 255 Tm
+(  -- 1. Crear aula, grupo y miembro:) Tj
+/F3 8.5 Tf
+1 0 0 1 42 244 Tm
+(  INSERT INTO Classrooms \(name, duenio, join_code\) VALUES \('Laboratorio Web', 'Lautaro',) Tj
+/F3 8.5 Tf
+1 0 0 1 42 233 Tm
+(  'GL-1111'\);) Tj
+/F3 8.5 Tf
+1 0 0 1 42 222 Tm
+(  INSERT INTO Groups \(classroom_id, group_number, project_name\) VALUES \(1, 1, 'Sistema) Tj
+/F3 8.5 Tf
+1 0 0 1 42 211 Tm
+(  Kanban'\);) Tj
+/F3 8.5 Tf
+1 0 0 1 42 200 Tm
+(  INSERT INTO Members \(classroom_id, group_id, nombre, rol\) VALUES \(1, 1, 'Lautaro',) Tj
+/F3 8.5 Tf
+1 0 0 1 42 189 Tm
+(  'profesor'\);) Tj
+/F3 8.5 Tf
+1 0 0 1 42 178 Tm
+(  ) Tj
+/F3 8.5 Tf
+1 0 0 1 42 167 Tm
+(  -- 2. Crear las 4 columnas base del grupo 1 \(Tabla BoardColumns de Abel\):) Tj
+/F3 8.5 Tf
+1 0 0 1 42 156 Tm
+(  INSERT INTO BoardColumns \(group_id, name, position, color\) VALUES) Tj
+/F3 8.5 Tf
+1 0 0 1 42 145 Tm
+(  \(1, 'Por hacer', 1, 'secondary'\),) Tj
+/F3 8.5 Tf
+1 0 0 1 42 134 Tm
+(  \(1, 'En progreso', 2, 'primary'\),) Tj
+/F3 8.5 Tf
+1 0 0 1 42 123 Tm
+(  \(1, 'En revision', 3, 'warning'\),) Tj
+/F3 8.5 Tf
+1 0 0 1 42 112 Tm
+(  \(1, 'Terminado', 4, 'success'\);) Tj
+/F3 8.5 Tf
+1 0 0 1 42 101 Tm
+(  ) Tj
+/F3 8.5 Tf
+1 0 0 1 42 90 Tm
+(  -- 3. Crear tareas en distintas columnas \(Tabla Tasks de Leonardo\):) Tj
+/F3 8.5 Tf
+1 0 0 1 42 79 Tm
+(  INSERT INTO Tasks \(group_id, column_id, assigned_to, title, description\) VALUES) Tj
+/F3 8.5 Tf
+1 0 0 1 42 68 Tm
+(  \(1, 4, 1, 'Armar tablas SQL', 'Crear BoardColumns, Tasks y Comments'\),) Tj
+/F3 8.5 Tf
+1 0 0 1 42 57 Tm
+(  \(1, 3, 1, 'Endpoints de Tasks', 'Repository, Service y Controller'\),) Tj
 /F1 8 Tf
 1 0 0 1 275 24 Tm
 (Pagina 13 de 14) Tj
@@ -2593,50 +2605,176 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 30 0 R >>
 endobj
 32 0 obj
-<< /Length 1273 >>
+<< /Length 4815 >>
 stream
 BT
-/F1 9.5 Tf
+/F3 8.5 Tf
 1 0 0 1 42 790 Tm
-(- [ ] Componente Kanban con las 4 columnas \(todo, in_progress, review, done\) usando) Tj
+(  \(1, 2, 1, 'Maquetar columnas dinamicas', 'Usar Bootstrap 5.3'\),) Tj
+/F3 8.5 Tf
+1 0 0 1 42 779 Tm
+(  \(1, 1, NULL, 'Agregar filtros', 'Filtrar por miembro responsable'\);) Tj
+/F3 8.5 Tf
+1 0 0 1 42 768 Tm
+(  ) Tj
+/F3 8.5 Tf
+1 0 0 1 42 757 Tm
+(  -- 4. Comentario de prueba \(Tabla Comments de Leonardo\):) Tj
+/F3 8.5 Tf
+1 0 0 1 42 746 Tm
+(  INSERT INTO Comments \(task_id, author_name, content\) VALUES \(1, 'Lautaro', 'Tablas) Tj
+/F3 8.5 Tf
+1 0 0 1 42 735 Tm
+(  verificadas sin error 1785'\);) Tj
 /F1 9.5 Tf
-1 0 0 1 42 777.5 Tm
-(computed\(\) y filtros.) Tj
+1 0 0 1 42 724 Tm
+() Tj
+/F1 8 Tf
+1 0 0 1 42 711.5 Tm
+(____________________________________________________________________________________) Tj
 /F1 9.5 Tf
-1 0 0 1 42 765 Tm
-(- [ ] Componente TaskCard con botones de cambio de estado entre las 4 columnas y) Tj
+1 0 0 1 42 701.5 Tm
+() Tj
+/F1 9 Tf
+1 0 0 1 42 689 Tm
+() Tj
+/F2 12.5 Tf
+1 0 0 1 42 681 Tm
+(15. Checklist de entrega por integrante) Tj
 /F1 9.5 Tf
-1 0 0 1 42 752.5 Tm
-(apertura de detalle.) Tj
-/F1 9.5 Tf
-1 0 0 1 42 740 Tm
+1 0 0 1 42 664 Tm
 () Tj
 /F2 10.5 Tf
-1 0 0 1 42 727.5 Tm
+1 0 0 1 42 651.5 Tm
+(Comun a todos) Tj
+/F1 9.5 Tf
+1 0 0 1 42 637.5 Tm
+(- [ ] Codigo limpio siguiendo las convenciones de las secciones 5 y 6 \(inject\(\),) Tj
+/F1 9.5 Tf
+1 0 0 1 42 625 Tm
+(Signals, Observable<T>, Bootstrap 5.3\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 612.5 Tm
+(- [ ] Todas las respuestas de error del backend en formato { error: error.message }) Tj
+/F1 9.5 Tf
+1 0 0 1 42 600 Tm
+(con status 400.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 587.5 Tm
+(- [ ] npm run build dentro de frontend ejecutando con 0 errores.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 575 Tm
+(- [ ] Pull Request hacia develop sin conflictos.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 562.5 Tm
+() Tj
+/F2 10.5 Tf
+1 0 0 1 42 550 Tm
+(Luciano \(Modulo 1 - Aulas y Home\)) Tj
+/F1 9.5 Tf
+1 0 0 1 42 536 Tm
+(- [x] Tabla Classrooms y Backend completo \(classroom.*\) con creacion de profesor en) Tj
+/F1 9.5 Tf
+1 0 0 1 42 523.5 Tm
+(Members y borrado en cascada.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 511 Tm
+(- [x] Frontend con Lazy Loading, RouterLink, inject\(\), Observable<T> e interfaces.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 498.5 Tm
+(- [x] Manejo de sesion y "Mis AuLabs" multirrol en ClassroomService.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 486 Tm
+(- [x] PanelAula con permisos de profesor y espacio para GroupList y MemberList.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 473.5 Tm
+() Tj
+/F2 10.5 Tf
+1 0 0 1 42 461 Tm
+(Leandro \(Modulo 2 - Grupos\)) Tj
+/F1 9.5 Tf
+1 0 0 1 42 447 Tm
+(- [x] Tabla Groups y Backend \(group.*\) integrado y probado en peticionesTest.http.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 434.5 Tm
+(- [ ] GroupService e interfaz Group en features/groups/.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 422 Tm
+(- [ ] GroupList y creacion de grupo con navegacion a /groups/:groupId/board.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 409.5 Tm
+() Tj
+/F2 10.5 Tf
+1 0 0 1 42 397 Tm
+(Gonzalo \(Modulo 3 - Miembros\)) Tj
+/F1 9.5 Tf
+1 0 0 1 42 383 Tm
+(- [x] Tabla Members y Backend \(member.*\) integrado y probado en peticionesTest.http.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 370.5 Tm
+(- [ ] MemberService e interfaz Member en features/members/.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 358 Tm
+(- [ ] MemberList con asignacion de grupo mediante <select> y baja de miembro.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 345.5 Tm
+() Tj
+/F2 10.5 Tf
+1 0 0 1 42 333 Tm
+(Abel \(Modulo 4 - Tablero Kanban y Columnas Dinamicas - Backend + Frontend\)) Tj
+/F1 9.5 Tf
+1 0 0 1 42 319 Tm
+(- [ ] Tabla BoardColumns agregada a schema.sql.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 306.5 Tm
+(- [ ] Queries y endpoints en board.repository.js, board.service.js,) Tj
+/F1 9.5 Tf
+1 0 0 1 42 294 Tm
+(board.controller.js y board.routes.js \(inicializacion automatica de las 4 columnas) Tj
+/F1 9.5 Tf
+1 0 0 1 42 281.5 Tm
+(base, crear nueva columna, editar, eliminar y mover tarea de columna\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 269 Tm
+(- [ ] BoardService en features/tasks/services/board.ts y ruta /groups/:groupId/board) Tj
+/F1 9.5 Tf
+1 0 0 1 42 256.5 Tm
+(en app.routes.ts.) Tj
+/F1 9.5 Tf
+1 0 0 1 42 244 Tm
+(- [ ] Componentes Kanban \(renderizado de las 4 columnas + boton "+ Nueva Columna" +) Tj
+/F1 9.5 Tf
+1 0 0 1 42 231.5 Tm
+(filtros\) y TaskCard \(movimiento entre columnas\).) Tj
+/F1 9.5 Tf
+1 0 0 1 42 219 Tm
+() Tj
+/F2 10.5 Tf
+1 0 0 1 42 206.5 Tm
 (Leonardo \(Modulo 5 - ABM de Tareas y Comentarios - Backend + Frontend\)) Tj
 /F1 9.5 Tf
-1 0 0 1 42 713.5 Tm
+1 0 0 1 42 192.5 Tm
 (- [ ] Tablas Tasks y Comments agregadas a schema.sql.) Tj
 /F1 9.5 Tf
-1 0 0 1 42 701 Tm
+1 0 0 1 42 180 Tm
 (- [ ] Queries y endpoints de ABM de tareas \(task.*: GET /tasks/:id, POST) Tj
 /F1 9.5 Tf
-1 0 0 1 42 688.5 Tm
+1 0 0 1 42 167.5 Tm
 (/groups/:groupId/tasks, PUT /tasks/:id, DELETE /tasks/:id\) y comentarios \(comment.*:) Tj
 /F1 9.5 Tf
-1 0 0 1 42 676 Tm
+1 0 0 1 42 155 Tm
 (GET, POST, DELETE\) probados en peticionesTest.http.) Tj
 /F1 9.5 Tf
-1 0 0 1 42 663.5 Tm
+1 0 0 1 42 142.5 Tm
 (- [ ] TaskService y CommentService tipados con Observable<T>.) Tj
 /F1 9.5 Tf
-1 0 0 1 42 651 Tm
+1 0 0 1 42 130 Tm
 (- [ ] Componentes TaskForm, TaskDetail y Comments \(con autor desde localStorage y) Tj
 /F1 9.5 Tf
-1 0 0 1 42 638.5 Tm
+1 0 0 1 42 117.5 Tm
 (borrado solo por el autor\).) Tj
 /F1 9.5 Tf
-1 0 0 1 42 626 Tm
+1 0 0 1 42 105 Tm
 () Tj
 /F1 8 Tf
 1 0 0 1 275 24 Tm
@@ -2656,35 +2794,35 @@ xref
 0000000303 00000 n 
 0000000405 00000 n 
 0000000500 00000 n 
-0000005391 00000 n 
-0000005537 00000 n 
-0000011274 00000 n 
-0000011420 00000 n 
-0000016170 00000 n 
-0000016318 00000 n 
-0000021419 00000 n 
-0000021567 00000 n 
-0000026634 00000 n 
-0000026782 00000 n 
-0000031553 00000 n 
-0000031701 00000 n 
-0000036636 00000 n 
-0000036784 00000 n 
-0000041553 00000 n 
-0000041701 00000 n 
-0000046547 00000 n 
-0000046695 00000 n 
-0000051928 00000 n 
-0000052076 00000 n 
-0000057138 00000 n 
-0000057286 00000 n 
-0000062563 00000 n 
-0000062711 00000 n 
-0000067946 00000 n 
-0000068094 00000 n 
-0000069420 00000 n 
+0000005525 00000 n 
+0000005671 00000 n 
+0000011449 00000 n 
+0000011595 00000 n 
+0000016351 00000 n 
+0000016499 00000 n 
+0000021499 00000 n 
+0000021647 00000 n 
+0000026442 00000 n 
+0000026590 00000 n 
+0000031646 00000 n 
+0000031794 00000 n 
+0000036574 00000 n 
+0000036722 00000 n 
+0000041693 00000 n 
+0000041841 00000 n 
+0000046197 00000 n 
+0000046345 00000 n 
+0000051493 00000 n 
+0000051641 00000 n 
+0000056852 00000 n 
+0000057000 00000 n 
+0000061899 00000 n 
+0000062047 00000 n 
+0000067638 00000 n 
+0000067786 00000 n 
+0000072654 00000 n 
 trailer
 << /Size 34 /Root 1 0 R >>
 startxref
-69568
+72802
 %%EOF

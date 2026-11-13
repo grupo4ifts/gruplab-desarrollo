@@ -58,7 +58,7 @@ exports.eliminarColumna = async (id) => {
     return { message: 'Columna eliminada correctamente' };
 };
 
-exports.moverTareaDeColumna = async (id, column_id) => {
+/*exports.moverTareaDeColumna = async (id, column_id) => {
     const [tarea] = await taskRepository.obtenerTareaPorId(id);
     if (!tarea) {
         throw new Error('Tarea no encontrada');
@@ -71,4 +71,4 @@ exports.moverTareaDeColumna = async (id, column_id) => {
 
     await boardRepository.moverTareaDeColumna(id, column_id);
     return { message: 'Tarea movida de columna correctamente' };
-};
+};*/

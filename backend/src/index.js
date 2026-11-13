@@ -4,7 +4,7 @@ const memberRoutes = require('./routes/member.routes');
 const groupRoutes = require('./routes/group.routes');
 const boardRoutes = require('./routes/board.routes')
 const taskRoutes = require('./routes/task.routes')
-const commentRoutes = require('./routes/commnet.routes')
+const commentRoutes = require('./routes/comment.routes')
 const cors = require('cors');
 const app = express();
 

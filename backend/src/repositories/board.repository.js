@@ -1,4 +1,4 @@
-const {sql, getConnection} = require('../database/connection')
+const { sql, getConnection } = require('../database/connection')
 const queries = require('../database/queries')
 
 
@@ -13,19 +13,19 @@ exports.obtenerColumnasPorGrupo = async (groupId) => {
         throw new Error('Error al obtener las columnas del tablero');
     }
 };
- 
+
 exports.obtenerColumnaPorId = async (id) => {
     const pool = await getConnection();
     try {
         const resultado = await pool.request()
             .input('id', sql.Int, id)
             .query(queries.obtenerColumnaPorId);
-        return resultado.recordset[0] || null;
+        return resultado.recordset;
     } catch (error) {
         throw new Error('Error al obtener la columna');
     }
 };
- 
+
 exports.crearColumna = async (groupId, name, position, color) => {
     const pool = await getConnection();
     try {
@@ -40,7 +40,7 @@ exports.crearColumna = async (groupId, name, position, color) => {
         throw new Error('Error al crear la columna');
     }
 };
- 
+
 exports.actualizarColumna = async (id, name, color) => {
     const pool = await getConnection();
     try {
@@ -54,7 +54,7 @@ exports.actualizarColumna = async (id, name, color) => {
         throw new Error('Error al actualizar la columna');
     }
 };
- 
+
 exports.eliminarColumna = async (id) => {
     const pool = await getConnection();
     try {
@@ -79,7 +79,7 @@ exports.obtenerTareasPorGrupo = async (groupId) => {
         throw new Error('Error al obtener las tareas del tablero');
     }
 };
- 
+
 exports.moverTareaDeColumna = async (id, columnId) => {
     const pool = await getConnection();
     try {

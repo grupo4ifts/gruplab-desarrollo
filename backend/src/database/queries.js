@@ -1,3 +1,4 @@
+// QUERY BASE AULAS
 const queryBaseSelect = `SELECT
     id,
     name,
@@ -5,6 +6,7 @@ const queryBaseSelect = `SELECT
     join_code
 FROM Classrooms`;
 
+// QUERY BASE MIEMBROS
 const queryBaseSelectMiembros = `SELECT
     m.id,
     m.classroom_id,
@@ -17,6 +19,7 @@ const queryBaseSelectMiembros = `SELECT
 FROM Members m
 LEFT JOIN Groups g ON g.id = m.group_id`;
 
+// QUERY BASE GRUPOS
 const queryBaseSelectGrupos = `SELECT
     id,
     classroom_id,
@@ -24,7 +27,34 @@ const queryBaseSelectGrupos = `SELECT
     project_name
 FROM Groups`;
 
+// QUERY BASE COLUMNAS DE TABLERO
+const queryBaseSelectColumnas = `SELECT
+    id,
+    group_id,
+    name,
+    position,
+    color
+FROM BoardColumns`;
+
+// QUERY BASE TAREAS
+const queryBaseSelectTareas = `SELECT
+    t.id,
+    t.group_id,
+    t.column_id,
+    c.name AS column_name,
+    t.assigned_to,
+    m.nombre AS assigned_name,
+    t.title,
+    t.description,
+    t.created_at
+FROM Tasks t
+INNER JOIN BoardColumns c ON c.id = t.column_id
+LEFT JOIN Members m ON m.id = t.assigned_to`;
+
 module.exports = {
+
+    // AULAS 
+
     obtenerAulas: queryBaseSelect,
 
     crearAula: `INSERT INTO Classrooms
@@ -41,6 +71,8 @@ module.exports = {
 
     eliminarAula: `DELETE FROM Classrooms WHERE id = @id`,
 
+
+    // MIEMBROS 
 
     obtenerMiembrosPorAula: `${queryBaseSelectMiembros}
         WHERE m.classroom_id = @classroom_id
@@ -64,9 +96,7 @@ module.exports = {
 
     asignarGrupo: `UPDATE Members SET group_id = @group_id WHERE id = @id`,
 
-
     obtenerAulaDelGrupo: `SELECT classroom_id FROM Groups WHERE id = @group_id`,
-
 
     liberarTareasDelMiembro: `IF OBJECT_ID('Tasks') IS NOT NULL
         UPDATE Tasks SET assigned_to = NULL WHERE assigned_to = @id`,
@@ -74,6 +104,9 @@ module.exports = {
     eliminarMiembro: `DELETE FROM Members WHERE id = @id`,
 
     eliminarMiembrosPorAula: `DELETE FROM Members WHERE classroom_id = @classroom_id`,
+
+
+    // GRUPOS 
 
     obtenerGruposPorAula: `${queryBaseSelectGrupos}
         WHERE classroom_id = @classroom_id
@@ -93,91 +126,65 @@ module.exports = {
 
     eliminarGrupo: `DELETE FROM Groups WHERE id = @id`,
 
-};
 
-//------------------------------------------------------------------
-const queryBaseSelectColumnas = `SELECT
-    id,
-    group_id,
-    name,
-    position,
-    color
-FROM BoardColumns`;
+    // TABLERO 
+
+    obtenerColumnasPorGrupo: `${queryBaseSelectColumnas}
+        WHERE group_id = @group_id
+        ORDER BY position ASC`,
+
+    obtenerColumnaPorId: `${queryBaseSelectColumnas}
+        WHERE id = @id`,
+
+    crearColumna: `INSERT INTO BoardColumns (group_id, name, position, color)
+        OUTPUT INSERTED.id
+        VALUES (@group_id, @name, @position, @color)`,
+
+    actualizarColumna: `UPDATE BoardColumns
+        SET name = @name, color = @color
+        WHERE id = @id`,
+
+    eliminarColumna: `DELETE FROM BoardColumns WHERE id = @id`,
+
+    obtenerTareasPorGrupo: `${queryBaseSelectTareas}
+        WHERE t.group_id = @group_id
+        ORDER BY t.created_at ASC`,
+
+    moverTareaDeColumna: `UPDATE Tasks
+        SET column_id = @column_id
+        WHERE id = @id`,
 
 
-const queryBaseSelectTareas = `SELECT
-    t.id,
-    t.group_id,
-    t.column_id,
-    c.name AS column_name,
-    t.assigned_to,
-    m.nombre AS assigned_name,
-    t.title,
-    t.description,
-    t.created_at
-FROM Tasks t
-INNER JOIN BoardColumns c ON c.id = t.column_id
-LEFT JOIN Members m ON m.id = t.assigned_to`;
+    // TAREAS 
 
-
-module.exports = {
-
-obtenerColumnasPorGrupo: `${queryBaseSelectColumnas}
-    WHERE group_id = @group_id
-    ORDER BY position ASC`,
-
-obtenerColumnaPorId: `${queryBaseSelectColumnas}
-    WHERE id = @id`,
-
-crearColumna: `INSERT INTO BoardColumns (group_id, name, position, color)
-    OUTPUT INSERTED.id
-    VALUES (@group_id, @name, @position, @color)`,
-
-actualizarColumna: `UPDATE BoardColumns
-    SET name = @name, color = @color
-    WHERE id = @id`,
-
-eliminarColumna: `DELETE FROM BoardColumns WHERE id = @id`,
-
-obtenerTareasPorGrupo: `${queryBaseSelectTareas}
-    WHERE t.group_id = @group_id
-    ORDER BY t.created_at ASC`,
-
-moverTareaDeColumna: `UPDATE Tasks
-    SET column_id = @column_id
-    WHERE id = @id`,
-}
-
-//
-
-module.exports = {
     obtenerTareaPorId: `${queryBaseSelectTareas}
-    WHERE t.id = @id`,
+        WHERE t.id = @id`,
 
-crearTarea: `INSERT INTO Tasks (group_id, column_id, assigned_to, title, description)
-    OUTPUT INSERTED.id
-    VALUES (@group_id, @column_id, @assigned_to, @title, @description)`,
+    crearTarea: `INSERT INTO Tasks (group_id, column_id, assigned_to, title, description)
+        OUTPUT INSERTED.id
+        VALUES (@group_id, @column_id, @assigned_to, @title, @description)`,
 
-actualizarTarea: `UPDATE Tasks
-    SET title = @title, description = @description, assigned_to = @assigned_to
-    WHERE id = @id`,
+    actualizarTarea: `UPDATE Tasks
+        SET title = @title, description = @description, assigned_to = @assigned_to
+        WHERE id = @id`,
 
-eliminarTarea: `DELETE FROM Tasks WHERE id = @id`,
-}
+    eliminarTarea: `DELETE FROM Tasks WHERE id = @id`,
 
-module.exports = {
+
+    // COMENTARIOS 
+
     obtenerComentariosPorTarea: `SELECT id, task_id, author_name, content, created_at
-    FROM Comments
-    WHERE task_id = @task_id
-    ORDER BY created_at ASC`,
+        FROM Comments
+        WHERE task_id = @task_id
+        ORDER BY created_at ASC`,
 
-crearComentario: `INSERT INTO Comments (task_id, author_name, content)
-    OUTPUT INSERTED.id
-    VALUES (@task_id, @author_name, @content)`,
+    crearComentario: `INSERT INTO Comments (task_id, author_name, content)
+        OUTPUT INSERTED.id
+        VALUES (@task_id, @author_name, @content)`,
 
-obtenerComentarioPorId: `SELECT id, task_id, author_name, content, created_at
-    FROM Comments
-    WHERE id = @id`,
+    obtenerComentarioPorId: `SELECT id, task_id, author_name, content, created_at
+        FROM Comments
+        WHERE id = @id`,
 
-eliminarComentario: `DELETE FROM Comments WHERE id = @id`,
-}
+    eliminarComentario: `DELETE FROM Comments WHERE id = @id`
+};

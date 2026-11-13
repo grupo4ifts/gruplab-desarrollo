@@ -58,50 +58,40 @@ exports.agregarMiembro = async (classroomId, nombre, email, rol) => {
 };
 
 exports.asignarGrupo = async (id, groupId) => {
-    if (!esIdValido(id)) {
-        throw new Error('Id de miembro invalido');
-    }
+    const [miembro] = await memberRepository.obtenerMiembroPorId(id);
 
-    const miembro = await memberRepository.obtenerMiembroPorId(id);
-    if (miembro.length === 0) {
+    if (!miembro) {
         throw new Error('Miembro no encontrado');
     }
-
-    if (groupId === null || groupId === undefined || groupId === '') {
+    if (!groupId) {
         await memberRepository.asignarGrupo(id, null);
         return { message: 'Miembro quitado del grupo correctamente' };
     }
 
-    if (!esIdValido(groupId)) {
-        throw new Error('Id de grupo invalido');
-    }
-  
-    const grupo = await memberRepository.obtenerAulaDelGrupo(groupId);
-    if (grupo.length === 0) {
+    
+    const [grupo] = await memberRepository.obtenerAulaDelGrupo(groupId);
+
+    if (!grupo) {
         throw new Error('Grupo no encontrado');
     }
-    if (grupo[0].classroom_id !== miembro[0].classroom_id) {
+    if (grupo.classroom_id !== miembro.classroom_id) {
         throw new Error('El grupo no pertenece al aula del miembro');
     }
+
     await memberRepository.asignarGrupo(id, groupId);
     return { message: 'Grupo asignado correctamente' };
 };
 
+
 exports.eliminarMiembro = async (id) => {
-    if (!esIdValido(id)) {
-        throw new Error('Id de miembro invalido');
-    }
-    const miembro = await memberRepository.obtenerMiembroPorId(id);
-    if (miembro.length === 0) {
-        throw new Error('Miembro no encontrado');
+    const [miembro] = await memberRepository.obtenerMiembroPorId(id);
+
+    if (!miembro) {
+        throw new Error('Miembro no encontrado para eliminar');
     }
 
-    if (typeof taskRepository.desasignarTareasDeMiembro === 'function') {
-        await taskRepository.desasignarTareasDeMiembro(id);
-    } else {
-        await memberRepository.liberarTareasDelMiembro(id);
-    }
-
+    // Antes de borrar, se liberan sus tareas para no romper la Foreign Key de Tasks.assigned_to
+    await memberRepository.liberarTareasDelMiembro(id);
     await memberRepository.eliminarMiembro(id);
     return { message: 'Miembro eliminado correctamente' };
 };

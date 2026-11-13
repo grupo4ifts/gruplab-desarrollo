@@ -94,3 +94,90 @@ module.exports = {
     eliminarGrupo: `DELETE FROM Groups WHERE id = @id`,
 
 };
+
+//------------------------------------------------------------------
+const queryBaseSelectColumnas = `SELECT
+    id,
+    group_id,
+    name,
+    position,
+    color
+FROM BoardColumns`;
+
+
+const queryBaseSelectTareas = `SELECT
+    t.id,
+    t.group_id,
+    t.column_id,
+    c.name AS column_name,
+    t.assigned_to,
+    m.nombre AS assigned_name,
+    t.title,
+    t.description,
+    t.created_at
+FROM Tasks t
+INNER JOIN BoardColumns c ON c.id = t.column_id
+LEFT JOIN Members m ON m.id = t.assigned_to`;
+
+
+module.exports = {
+
+obtenerColumnasPorGrupo: `${queryBaseSelectColumnas}
+    WHERE group_id = @group_id
+    ORDER BY position ASC`,
+
+obtenerColumnaPorId: `${queryBaseSelectColumnas}
+    WHERE id = @id`,
+
+crearColumna: `INSERT INTO BoardColumns (group_id, name, position, color)
+    OUTPUT INSERTED.id
+    VALUES (@group_id, @name, @position, @color)`,
+
+actualizarColumna: `UPDATE BoardColumns
+    SET name = @name, color = @color
+    WHERE id = @id`,
+
+eliminarColumna: `DELETE FROM BoardColumns WHERE id = @id`,
+
+obtenerTareasPorGrupo: `${queryBaseSelectTareas}
+    WHERE t.group_id = @group_id
+    ORDER BY t.created_at ASC`,
+
+moverTareaDeColumna: `UPDATE Tasks
+    SET column_id = @column_id
+    WHERE id = @id`,
+}
+
+//
+
+module.exports = {
+    obtenerTareaPorId: `${queryBaseSelectTareas}
+    WHERE t.id = @id`,
+
+crearTarea: `INSERT INTO Tasks (group_id, column_id, assigned_to, title, description)
+    OUTPUT INSERTED.id
+    VALUES (@group_id, @column_id, @assigned_to, @title, @description)`,
+
+actualizarTarea: `UPDATE Tasks
+    SET title = @title, description = @description, assigned_to = @assigned_to
+    WHERE id = @id`,
+
+eliminarTarea: `DELETE FROM Tasks WHERE id = @id`,
+}
+
+module.exports = {
+    obtenerComentariosPorTarea: `SELECT id, task_id, author_name, content, created_at
+    FROM Comments
+    WHERE task_id = @task_id
+    ORDER BY created_at ASC`,
+
+crearComentario: `INSERT INTO Comments (task_id, author_name, content)
+    OUTPUT INSERTED.id
+    VALUES (@task_id, @author_name, @content)`,
+
+obtenerComentarioPorId: `SELECT id, task_id, author_name, content, created_at
+    FROM Comments
+    WHERE id = @id`,
+
+eliminarComentario: `DELETE FROM Comments WHERE id = @id`,
+}

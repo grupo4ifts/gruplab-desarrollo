@@ -1,0 +1,17 @@
+<div class="card shadow-sm border-0 tarjeta" (click)="seleccionar.emit(tarea())">
+  <div class="card-body p-3">
+    <h3 class="h6 fw-bold mb-1">{{ tarea().title }}</h3>
+    @if (tarea().description) {
+    <p class="text-muted small mb-2 text-truncate">{{ tarea().description }}</p>
+    }
+    <div class="d-flex justify-content-between align-items-center gap-2">
+      <small class="badge bg-light text-dark border text-truncate">👤 {{ tarea().assigned_name || 'Sin asignar' }}</small>
+      <div class="d-flex align-items-center gap-1">
+        <button class="btn btn-outline-secondary btn-sm" title="Columna anterior" [disabled]="!puedeRetroceder()"
+          (click)="moverA('anterior', $event)">←</button>
+        <button class="btn btn-outline-secondary btn-sm" title="Columna siguiente" [disabled]="!puedeAvanzar()"
+          (click)="moverA('siguiente', $event)">→</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -19,5 +19,9 @@ export const routes: Routes = [
     path: 'classrooms/:id', 
     loadComponent: () => import('./features/classrooms/panel-aula/panel-aula').then(m => m.PanelAula) 
   },
+  {
+    path: 'groups/:groupId/board',
+    loadComponent: () => import('./features/tasks/kanban/kanban').then(m => m.Kanban)
+  },
   { path: '**', redirectTo: 'classrooms' }
 ];

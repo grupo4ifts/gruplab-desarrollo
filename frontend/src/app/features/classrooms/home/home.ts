@@ -7,8 +7,7 @@ import { ClassroomService } from '../services/classroom';
   selector: 'app-home',
   standalone: true,
   imports: [RouterLink],
-  templateUrl: './home.html',
-  styleUrl: './home.css'
+  templateUrl: './home.html'
 })
 export class Home implements OnInit {
   private classroomService = inject(ClassroomService);

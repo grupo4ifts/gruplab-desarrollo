@@ -1,0 +1,54 @@
+<p class="text-muted small mb-3">
+  Total: <strong>{{ miembros().length }}</strong> {{ miembros().length === 1 ? 'miembro' : 'miembros' }}
+</p>
+
+@if (mensajeError()) {
+  <div class="alert alert-danger py-2" role="alert">{{ mensajeError() }}</div>
+}
+
+@if (cargando()) {
+  <p class="text-muted">Cargando miembros...</p>
+} @else {
+  <ul class="list-group list-group-flush">
+    @for (miembro of miembros(); track miembro.id) {
+          <li class="list-group-item px-0 d-flex justify-content-between align-items-center flex-wrap gap-2"
+          [class.miembro-profesor]="miembro.rol === 'profesor'">
+        <div>
+          <div class="fw-semibold">
+            {{ miembro.nombre }}
+            @if (miembro.rol === 'profesor') {
+              <span class="badge bg-primary ms-1">Profesor</span>
+            } @else {
+              <span class="badge bg-light text-dark border ms-1">Alumno</span>
+            }
+          </div>
+          @if (miembro.email) {
+            <div class="small text-muted">{{ miembro.email }}</div>
+          }
+          @if (miembro.rol === 'alumno') {
+            <div class="small text-muted">Grupo: {{ miembro.group_name || 'Sin grupo' }}</div>
+          }
+        </div>
+
+        @if (miembro.rol === 'alumno') {
+          <div class="d-flex align-items-center gap-2">
+                <select class="form-select form-select-sm select-grupo" (change)="asignarGrupo(miembro, $event)">
+              <option value="" [selected]="!miembro.group_id">Sin grupo</option>
+              @for (grupo of grupos(); track grupo.id) {
+                <option [value]="grupo.id" [selected]="grupo.id === miembro.group_id">
+                  Grupo {{ grupo.group_number }} - {{ grupo.project_name }}
+                </option>
+              }
+            </select>
+
+            @if (esProfesor()) {
+              <button class="btn btn-sm btn-outline-danger" (click)="eliminarMiembro(miembro)">Eliminar</button>
+            }
+          </div>
+        }
+      </li>
+    } @empty {
+      <li class="list-group-item px-0 text-muted">Todavia no hay miembros en esta aula.</li>
+    }
+  </ul>
+}

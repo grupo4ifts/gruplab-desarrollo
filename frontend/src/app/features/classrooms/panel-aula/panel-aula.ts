@@ -8,8 +8,7 @@ import { GroupList } from '../../groups/group-list/group-list';
   selector: 'app-panel-aula',
   standalone: true,
   imports: [RouterLink, GroupList],
-  templateUrl: './panel-aula.html',
-  styleUrl: './panel-aula.css'
+  templateUrl: './panel-aula.html'
 })
 export class PanelAula implements OnInit {
   private route = inject(ActivatedRoute);

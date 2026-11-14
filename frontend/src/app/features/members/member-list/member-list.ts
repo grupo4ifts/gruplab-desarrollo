@@ -1,6 +1,9 @@
-import { Component, OnInit, computed, input, signal } from '@angular/core';
+import { Component, OnInit, computed, inject, input, signal } from '@angular/core';
 import { MemberService } from '../services/member';
+import { GrupoDelAula, Member } from '../models/member';
 import { GroupService } from '../../groups/services/group';
+import { ClassroomService } from '../../classrooms/services/classroom';
+import { UsuarioSession } from '../../classrooms/models/classroom';
 
 
 @Component({
@@ -11,74 +14,78 @@ import { GroupService } from '../../groups/services/group';
   styleUrl: './member-list.css'
 })
 export class MemberList implements OnInit {
+  private memberService = inject(MemberService);
+  private groupService = inject(GroupService);
+  private classroomService = inject(ClassroomService);
+
   
   classroomId = input.required<number>();
 
-  
-  miembros = signal<any[]>([]);
-  grupos = signal<any[]>([]);
+ 
+  miembros = signal<Member[]>([]);
+  grupos = signal<GrupoDelAula[]>([]);
   cargando = signal(true);
   mensajeError = signal('');
 
   
-  usuario = signal<any>(JSON.parse(localStorage.getItem('gruplab_usuario') || '{}'));
+  usuario = signal<UsuarioSession | null>(this.classroomService.obtenerSesion());
 
   
-  esProfesor = computed(() => this.usuario().rol === 'profesor');
+  esProfesor = computed(() => this.usuario()?.rol === 'profesor');
 
-  constructor(
-    private memberService: MemberService,
-    private groupService: GroupService
-  ) { }
-
-  ngOnInit() {
+  ngOnInit(): void {
     this.cargarMiembros();
     this.cargarGrupos();
   }
 
-  cargarMiembros() {
+  
+  cargarMiembros(): void {
     this.memberService.obtenerMiembrosPorAula(this.classroomId()).subscribe({
-      next: (data: any) => {
-        this.miembros.set(data);
+      next: (miembros: Member[]) => {
+        this.miembros.set(miembros);
         this.cargando.set(false);
       },
-      error: (error: any) => {
-        this.mensajeError.set(error.error?.error || 'No se pudieron cargar los miembros');
+      error: (err: any) => {
+        this.mensajeError.set(err.error?.error || 'No se pudieron cargar los miembros');
         this.cargando.set(false);
       }
     });
   }
 
-  cargarGrupos() {
+  
+
+  cargarGrupos(): void {
     this.groupService.obtenerGrupos(this.classroomId()).subscribe({
-      next: (data: any) => this.grupos.set(data),
-      error: (error: any) => console.error('Error al obtener grupos', error)
+      next: (grupos) => this.grupos.set(grupos as GrupoDelAula[]),
+      error: (err: any) => console.error('Error al obtener grupos', err)
     });
   }
 
   
-  asignarGrupo(miembro: any, event: Event) {
+
+  asignarGrupo(miembro: Member, event: Event): void {
     const valor = (event.target as HTMLSelectElement).value;
     const groupId = valor === '' ? null : Number(valor);
 
     this.mensajeError.set('');
     this.memberService.asignarGrupo(miembro.id, groupId).subscribe({
       next: () => this.cargarMiembros(),
-      error: (error: any) => {
-        this.mensajeError.set(error.error?.error || 'No se pudo asignar el grupo');
-        
+      error: (err: any) => {
+        this.mensajeError.set(err.error?.error || 'No se pudo asignar el grupo');
         this.cargarMiembros();
       }
     });
   }
 
-  eliminarMiembro(miembro: any) {
+  
+
+  eliminarMiembro(miembro: Member): void {
     if (!confirm(`Estas seguro de que deseas eliminar a ${miembro.nombre} del aula?`)) return;
 
     this.mensajeError.set('');
     this.memberService.eliminarMiembro(miembro.id).subscribe({
       next: () => this.cargarMiembros(),
-      error: (error: any) => this.mensajeError.set(error.error?.error || 'No se pudo eliminar el miembro')
+      error: (err: any) => this.mensajeError.set(err.error?.error || 'No se pudo eliminar el miembro')
     });
   }
 }

@@ -2,13 +2,14 @@ import { Component, signal, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ClassroomService } from '../services/classroom';
 import { Classroom, UsuarioSession } from '../models/classroom';
+import { GroupList } from '../../groups/group-list/group-list';
 
 // Componente principal del panel de control de un aula especifica
 // Carga los detalles del aula a partir del parametro :id de la ruta y administra permisos segun el rol
 @Component({
   selector: 'app-panel-aula',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, GroupList],
   templateUrl: './panel-aula.html',
   styleUrl: './panel-aula.css'
 })

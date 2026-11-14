@@ -8,8 +8,7 @@ import { Group } from '../models/group';
 @Component({
   selector: 'app-group-list',
   imports: [ReactiveFormsModule, RouterLink],
-  templateUrl: './group-list.html',
-  styleUrl: './group-list.css'
+  templateUrl: './group-list.html'
 })
 export class GroupList {
   private readonly _groupService = inject(GroupService);

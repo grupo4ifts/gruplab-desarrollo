@@ -186,5 +186,9 @@ module.exports = {
         FROM Comments
         WHERE id = @id`,
 
+    editarComentario: `UPDATE Comments
+    SET content = @content
+    WHERE id = @id`,
+
     eliminarComentario: `DELETE FROM Comments WHERE id = @id`
 };

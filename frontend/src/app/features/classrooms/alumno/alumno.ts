@@ -7,8 +7,7 @@ import { Classroom } from '../models/classroom';
   selector: 'app-alumno',
   standalone: true,
   imports: [RouterLink],
-  templateUrl: './alumno.html',
-  styleUrl: './alumno.css'
+  templateUrl: './alumno.html'
 })
 export class Alumno {
   private classroomService = inject(ClassroomService);

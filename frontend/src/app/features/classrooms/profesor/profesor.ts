@@ -7,8 +7,7 @@ import { CrearAulaResponse } from '../models/classroom';
   selector: 'app-profesor',
   standalone: true,
   imports: [RouterLink],
-  templateUrl: './profesor.html',
-  styleUrl: './profesor.css'
+  templateUrl: './profesor.html'
 })
 export class Profesor {
   private classroomService = inject(ClassroomService);

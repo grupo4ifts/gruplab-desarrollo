@@ -7,8 +7,7 @@ import { Classroom, UsuarioSession } from '../models/classroom';
   selector: 'app-panel-aula',
   standalone: true,
   imports: [RouterLink],
-  templateUrl: './panel-aula.html',
-  styleUrl: './panel-aula.css'
+  templateUrl: './panel-aula.html'
 })
 export class PanelAula implements OnInit {
   private route = inject(ActivatedRoute);

@@ -87,7 +87,7 @@ gruplab-fe-be/
             alumno/              (Formulario de ingreso por codigo)
             panel-aula/          (Panel del aula con permisos de profesor/alumno y espacio para Grupos y Miembros)
           groups/                (Pendiente Frontend - Leandro)
-          members/               (Pendiente Frontend - Gonzalo)
+          members/               (LISTO - Gonzalo: models/member.ts, services/member.ts, member-list)
           tasks/                 (Abel LISTO / Pendiente TaskService, TaskForm y TaskDetail de Leonardo)
             models/board-column.ts (LISTO - Abel: BoardColumn, Tablero, GrupoTablero)
             models/task.ts       (LISTO - Task)
@@ -117,9 +117,9 @@ Cada integrante es duenio de sus propias tablas SQL, su propio Backend (Reposito
 |---|---|---|---|---|---|
 | **Luciano** | Aulas, Home y Panel del Aula | `Classrooms` | `classroom.*` | `features/classrooms` (`Home`, `Profesor`, `Alumno`, `PanelAula`) | **100% Completado** |
 | **Leandro** | Grupos de trabajo | `Groups` | `group.*` | `features/groups` (`GroupService`, `GroupList`) | Backend listo / Falta Front |
-| **Gonzalo** | Miembros del aula | `Members` | `member.*` | `features/members` (`MemberService`, `MemberList`) | Backend listo / Falta Front |
+| **Gonzalo** | Miembros del aula | `Members` | `member.*` | `features/members` (`MemberService`, `MemberList`, `models/member.ts`) | **Completado** (espera `GroupService` de Leandro para compilar) |
 | **Abel** | **Tablero Kanban y Columnas Dinamicas** (4 columnas iniciales + crear/editar/borrar columna y mover tarea) | `BoardColumns` | `board.*` (`board.repository`, `board.service`, `board.controller`, `board.routes`) | `features/tasks` (`BoardService`, `Kanban`, `TaskCard`) | **Backend y Front listos** (falta conectar con `TaskForm`/`TaskDetail` de Leo) |
-| **Leonardo** | **ABM de Tareas y Comentarios** | `Tasks`, `Comments` | `task.*` y `comment.*` | `features/tasks` (`TaskService`, `TaskForm`, `TaskDetail`) y `features/comments` (`CommentService`, `Comments`) | Pendiente |
+| **Leonardo** | **ABM de Tareas y Comentarios** | `Tasks`, `Comments` | `task.*` y `comment.*` | `features/tasks` (`TaskService`, `TaskForm`, `TaskDetail`) y `features/comments` (`CommentService`, `Comments`) | En progreso (`comment.*` parcial en `leo-comments` / Falta `task.*` y Front) |
 
 ---
 
@@ -420,7 +420,7 @@ Todo el modulo 1 ya se encuentra finalizado, documentado y compilando sin errore
     - `DELETE /groups/:id`
 - **Frontend pendiente (`features/groups/`)**:
   - `models/group.ts`: Interfaz `Group` (`id`, `classroom_id`, `group_number`, `project_name`).
-  - `services/group.ts` (`GroupService` con `inject(HttpClient)`).
+  - `services/group.ts` (`GroupService` con `inject(HttpClient)` y metodo `obtenerGrupos(classroomId: number)` — requerido tambien por `MemberList` de Gonzalo).
   - `group-list/` (`app-group-list` con `classroomId = input.required<number>()`): lista los grupos del aula, permite crear uno nuevo y tiene el boton **"Ver tablero"** con `[routerLink]="['/groups', grupo.id, 'board']"`.
 
 ---
@@ -749,20 +749,21 @@ INSERT INTO Comments (task_id, author_name, content) VALUES (1, 'Lautaro', 'Tabl
 - [ ] `GroupList` y creacion de grupo con navegacion a `/groups/:groupId/board`.
 
 ### Gonzalo (Modulo 3 - Miembros)
-- [x] Tabla `Members` y Backend (`member.*`) integrado y probado en `peticionesTest.http`.
-- [ ] Lanzar mensajes limpios en los `catch` de `member.repository.js` y llamar a `liberarTareasDelMiembro` en `eliminarMiembro`.
-- [ ] `MemberService` e interfaz `Member` en `features/members/`.
-- [ ] `MemberList` con asignacion de grupo mediante `<select>` y baja de miembro.
+- [x] Tabla `Members` y Backend (`member.*`) integrado, con `try/catch` en repository y `liberarTareasDelMiembro` en service.
+- [x] `models/member.ts` (`Member`, `GrupoDelAula`) y `MemberService` tipado con `Observable<T>` e `inject()`.
+- [x] `MemberList` con asignacion de grupo mediante `<select>`, lectura de sesion via `ClassroomService` y baja de miembro.
+- [ ] Incrustar `<app-member-list [classroomId]="a.id" />` en `PanelAula` una vez que este `GroupService` de Leandro.
 
 ### Abel (Modulo 4 - Tablero Kanban y Columnas Dinamicas - Backend + Frontend)
 - [x] Tabla `BoardColumns` agregada a `schema.sql` y queries unificadas en `queries.js`.
 - [x] Backend en `board.repository.js`, `board.service.js`, `board.controller.js` y `board.routes.js`.
 - [x] `BoardService` en `features/tasks/services/board.ts` y ruta `/groups/:groupId/board` en `app.routes.ts`.
 - [x] Componentes `Kanban` (4 columnas base + nueva columna + filtros) y `TaskCard`.
-- [x] Descomentar `moverTareaDeColumna` en `board.service.js` y conectar `<app-task-form>` y `<app-task-detail>` cuando Leonardo termine su modulo.
+- [ ] Conectar `<app-task-form>` y `<app-task-detail>` en `Kanban` cuando Leonardo termine su modulo.
 
 ### Leonardo (Modulo 5 - ABM de Tareas y Comentarios - Backend + Frontend)
 - [x] Tablas `Tasks` y `Comments` agregadas a `schema.sql` y queries base en `queries.js`.
-- [ ] Completar `task.*` (`GET /tasks/:id`, `POST /groups/:groupId/tasks`, `PUT /tasks/:id`, `DELETE /tasks/:id`, incluyendo `taskRepository.obtenerTareaPorId` que necesita Abel) y `comment.*` (`GET`, `POST`, `DELETE`).
+- [ ] Completar `comment.*` en `leo-comments` (faltan metodos en `comment.repository.js`, rutas `GET`/`PUT`/`DELETE` y alinear `{ error: error.message }`).
+- [ ] Completar `task.*` (`GET /tasks/:id`, `POST /groups/:groupId/tasks`, `PUT /tasks/:id`, `DELETE /tasks/:id`, incluyendo `taskRepository.obtenerTareaPorId` que necesita Abel).
 - [ ] `TaskService` y `CommentService` tipados con `Observable<T>`.
 - [ ] Componentes `TaskForm`, `TaskDetail` y `Comments` (con autor desde `ClassroomService.obtenerSesion()` y borrado solo por el autor).

@@ -1,60 +1,41 @@
 const memberRepository = require('../repositories/member.repository');
 const classroomRepository = require('../repositories/classroom.repository');
-const taskRepository = require('../repositories/task.repository');
-
-const ROLES_VALIDOS = ['profesor', 'alumno'];
-
-const esIdValido = (valor) => Number.isInteger(Number(valor)) && Number(valor) > 0;
 
 exports.obtenerMiembrosPorAula = async (classroomId) => {
-    if (!esIdValido(classroomId)) {
-        throw new Error('Id de aula invalido');  
-    }    
+    if (!classroomId) {
+        throw new Error('Falta el id del aula');
+    }
+
     return await memberRepository.obtenerMiembrosPorAula(classroomId);
 };
 
 exports.obtenerMiembrosPorGrupo = async (groupId) => {
-    if (!esIdValido(groupId)) {
-        throw new Error('Id de grupo invalido');
+    if (!groupId) {
+        throw new Error('Falta el id del grupo');
     }
+
     return await memberRepository.obtenerMiembrosPorGrupo(groupId);
 };
 
 exports.agregarMiembro = async (classroomId, nombre, email, rol) => {
-    if (!esIdValido(classroomId)) {
-        throw new Error('Id de aula invalido');
-    }
-    
-    const nombreLimpio = (nombre || '').trim();
-    if (!nombreLimpio) {
-        throw new Error('El nombre es obligatorio');   
-    }
-    if (nombreLimpio.length > 100) {                    
-        throw new Error('El nombre no puede superar los 100 caracteres');
+    if (!classroomId || !nombre || !nombre.trim()) {
+        throw new Error('Faltan datos para registrar el miembro');
     }
 
-    const rolFinal = rol || 'alumno';
-    if (!ROLES_VALIDOS.includes(rolFinal)) {
-        throw new Error("El rol solo puede ser 'profesor' o 'alumno'");
-    }
-
-    const emailLimpio = (email || '').trim() || null;
-    if (emailLimpio && emailLimpio.length > 100) {
-        throw new Error('El email no puede superar los 100 caracteres');
-    }
-    
-    const aula = await classroomRepository.obtenerAulaPorId(classroomId);
-    if (!aula || aula.length === 0) {
+    const [aula] = await classroomRepository.obtenerAulaPorId(classroomId);
+    if (!aula) {
         throw new Error('Aula no encontrada');
     }
 
-   const existente = await memberRepository.obtenerMiembroPorNombre(classroomId, nombreLimpio);
-    if (existente.length > 0) {
-        return { message: 'El miembro ya estaba registrado en el aula', id: existente[0].id };
+    const [existente] = await memberRepository.obtenerMiembroPorNombre(classroomId, nombre.trim());
+    if (existente) {
+        return { message: 'El miembro ya estaba registrado en el aula', id: existente.id };
     }
 
-    const nuevo = await memberRepository.agregarMiembro(classroomId, nombreLimpio, emailLimpio, rolFinal);
-    return { message: 'Miembro agregado exitosamente', id: nuevo[0].id };
+    const rolFinal = rol === 'profesor' ? 'profesor' : 'alumno';
+    const [nuevo] = await memberRepository.agregarMiembro(classroomId, nombre.trim(), email || null, rolFinal);
+
+    return { message: 'Miembro agregado exitosamente', id: nuevo.id };
 };
 
 exports.asignarGrupo = async (id, groupId) => {
@@ -68,7 +49,6 @@ exports.asignarGrupo = async (id, groupId) => {
         return { message: 'Miembro quitado del grupo correctamente' };
     }
 
-    
     const [grupo] = await memberRepository.obtenerAulaDelGrupo(groupId);
 
     if (!grupo) {
@@ -82,7 +62,6 @@ exports.asignarGrupo = async (id, groupId) => {
     return { message: 'Grupo asignado correctamente' };
 };
 
-
 exports.eliminarMiembro = async (id) => {
     const [miembro] = await memberRepository.obtenerMiembroPorId(id);
 
@@ -90,7 +69,6 @@ exports.eliminarMiembro = async (id) => {
         throw new Error('Miembro no encontrado para eliminar');
     }
 
-    // Antes de borrar, se liberan sus tareas para no romper la Foreign Key de Tasks.assigned_to
     await memberRepository.liberarTareasDelMiembro(id);
     await memberRepository.eliminarMiembro(id);
     return { message: 'Miembro eliminado correctamente' };

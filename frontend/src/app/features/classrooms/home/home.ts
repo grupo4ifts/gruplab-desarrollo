@@ -3,16 +3,11 @@ import { Router, RouterLink } from '@angular/router';
 import { AuLab, UsuarioSession } from '../models/classroom';
 import { ClassroomService } from '../services/classroom';
 
-
-
-
-
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [RouterLink],
-  templateUrl: './home.html',
-  styleUrl: './home.css'
+  templateUrl: './home.html'
 })
 export class Home implements OnInit {
   private classroomService = inject(ClassroomService);

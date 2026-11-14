@@ -1,0 +1,160 @@
+@if (!cargando() || columnas().length > 0) {
+<div class="row g-4">
+  <div class="col-12">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+        <div>
+          @if (grupo(); as g) {
+          <h1 class="h3 fw-bold mb-1">Grupo #{{ g.group_number }} - {{ g.project_name }}</h1>
+          } @else {
+          <h1 class="h3 fw-bold mb-1">Tablero del Grupo</h1>
+          }
+          <div class="d-flex align-items-center gap-2 text-muted flex-wrap">
+            <span>Tablero Kanban</span>
+            <span>•</span>
+            <span class="badge bg-light text-dark border">{{ columnas().length }} columnas</span>
+            <span class="badge bg-light text-dark border">{{ tareas().length }} tareas</span>
+          </div>
+        </div>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          @if (!mostrarFormColumna()) {
+          <button class="btn btn-primary" (click)="alternarFormColumna()">+ Nueva Columna</button>
+          }
+          @if (grupo(); as g) {
+          <button class="btn btn-outline-secondary" [routerLink]="['/classrooms', g.classroom_id]">Volver al aula</button>
+          } @else {
+          <button class="btn btn-outline-secondary" routerLink="/classrooms">Volver al inicio</button>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @if (mostrarFormColumna()) {
+  <div class="col-12">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4">
+        <h2 class="h5 fw-bold mb-3">Nueva Columna</h2>
+        <div class="row g-3 align-items-end">
+          <div class="col-md-6">
+            <label class="form-label text-muted small">Nombre de la Columna</label>
+            <input type="text" class="form-control" maxlength="50" placeholder="Ej: Testing" [value]="nombreNuevaColumna()"
+              (input)="nombreNuevaColumna.set(inputNombreColumna.value)" #inputNombreColumna>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label text-muted small">Color</label>
+            <select class="form-select" [value]="colorNuevaColumna()"
+              (change)="colorNuevaColumna.set(selectColorColumna.value)" #selectColorColumna>
+              @for (c of colores; track c.valor) {
+              <option [value]="c.valor">{{ c.nombre }}</option>
+              }
+            </select>
+          </div>
+          <div class="col-md-3 d-flex gap-2">
+            <button class="btn btn-primary px-4" (click)="crearColumna()">Crear</button>
+            <button class="btn btn-outline-secondary" (click)="alternarFormColumna()">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+
+  <div class="col-12">
+    @if (mensajeError()) {
+    <div class="alert alert-danger py-2 mb-3">{{ mensajeError() }}</div>
+    }
+
+    <div class="d-flex align-items-center gap-2 mb-3">
+      <label class="form-label text-muted small mb-0">Responsable:</label>
+      <select class="form-select form-select-sm w-auto" [value]="filtroMiembro()"
+        (change)="filtroMiembro.set(selectFiltro.value)" #selectFiltro>
+        <option value="todos">Todos los miembros</option>
+        <option value="sin">Sin asignar</option>
+        @for (m of miembrosConTareas(); track m.id) {
+        <option [value]="m.id">{{ m.nombre }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="tablero d-flex gap-3 pb-3">
+      @for (col of columnasOrdenadas(); track col.id) {
+      <div class="columna card shadow-sm border-0 border-top border-4 border-{{ col.color }}">
+        <div class="card-header bg-white py-3">
+          @if (editandoColumnaId() === col.id) {
+          <div class="d-flex flex-column gap-2">
+            <input type="text" class="form-control form-control-sm" maxlength="50" [value]="nombreEdicion()"
+              (input)="nombreEdicion.set(inputEdicion.value)" #inputEdicion>
+            <select class="form-select form-select-sm" [value]="colorEdicion()"
+              (change)="colorEdicion.set(selectEdicion.value)" #selectEdicion>
+              @for (c of colores; track c.valor) {
+              <option [value]="c.valor">{{ c.nombre }}</option>
+              }
+            </select>
+            <div class="d-flex gap-2">
+              <button class="btn btn-primary btn-sm flex-fill" (click)="guardarEdicion(col)">Guardar</button>
+              <button class="btn btn-outline-secondary btn-sm flex-fill" (click)="cancelarEdicion()">Cancelar</button>
+            </div>
+          </div>
+          } @else {
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-2">
+              <h2 class="h6 fw-bold mb-0">{{ col.name }}</h2>
+              <span class="badge bg-{{ col.color }}">{{ obtenerTareasDeColumna(col.id).length }}</span>
+            </div>
+            <div class="d-flex align-items-center gap-1">
+              <button class="btn btn-outline-secondary btn-sm" title="Editar columna" (click)="iniciarEdicion(col)">✎</button>
+              <button class="btn btn-outline-danger btn-sm" title="Eliminar columna" (click)="eliminarColumna(col)">✕</button>
+            </div>
+          </div>
+          }
+        </div>
+        <div class="card-body bg-light d-flex flex-column gap-2">
+          @for (t of obtenerTareasDeColumna(col.id); track t.id) {
+          <app-task-card [tarea]="t" [puedeRetroceder]="puedeRetroceder(col.id)" [puedeAvanzar]="puedeAvanzar(col.id)"
+            (mover)="moverTarea(t, $event)" (seleccionar)="tareaSeleccionada.set($event)" />
+          } @empty {
+          <p class="text-muted small text-center my-3">Sin tareas</p>
+          }
+        </div>
+      </div>
+      } @empty {
+      <p class="text-muted">Este grupo no tiene columnas.</p>
+      }
+    </div>
+  </div>
+</div>
+} @else {
+<div class="d-flex justify-content-center py-5">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Cargando...</span>
+  </div>
+</div>
+}
+
+@if (tareaSeleccionada(); as t) {
+<div class="modal d-block fondo-modal" tabindex="-1" (click)="tareaSeleccionada.set(null)">
+  <div class="modal-dialog modal-dialog-centered" (click)="$event.stopPropagation()">
+    <div class="modal-content border-0 shadow-sm">
+      <div class="modal-header bg-white py-3">
+        <h2 class="modal-title h5 fw-bold">{{ t.title }}</h2>
+        <button type="button" class="btn-close" (click)="tareaSeleccionada.set(null)"></button>
+      </div>
+      <div class="modal-body p-4">
+        <p class="text-secondary mb-3">{{ t.description || 'Sin descripcion' }}</p>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <span class="badge bg-light text-dark border">Columna: {{ nombreColumna(t.column_id) }}</span>
+          <span class="badge bg-light text-dark border">👤 {{ t.assigned_name || 'Sin asignar' }}</span>
+          <span class="badge bg-light text-dark border">{{ t.created_at | date:'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary" [disabled]="!puedeRetroceder(t.column_id)"
+          (click)="moverTarea(t, 'anterior'); tareaSeleccionada.set(null)">← Anterior</button>
+        <button class="btn btn-outline-secondary" [disabled]="!puedeAvanzar(t.column_id)"
+          (click)="moverTarea(t, 'siguiente'); tareaSeleccionada.set(null)">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+</div>
+}

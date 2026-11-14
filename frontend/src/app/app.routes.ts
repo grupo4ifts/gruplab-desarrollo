@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 
-// Tabla de enrutamiento principal de la aplicacion con carga perezosa (lazy loading)
 export const routes: Routes = [
   { path: '', redirectTo: 'classrooms', pathMatch: 'full' },
   { 
@@ -18,6 +17,10 @@ export const routes: Routes = [
   { 
     path: 'classrooms/:id', 
     loadComponent: () => import('./features/classrooms/panel-aula/panel-aula').then(m => m.PanelAula) 
+  },
+  {
+    path: 'groups/:groupId/board',
+    loadComponent: () => import('./features/tasks/kanban/kanban').then(m => m.Kanban)
   },
   { path: '**', redirectTo: 'classrooms' }
 ];

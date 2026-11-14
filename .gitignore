@@ -4,3 +4,4 @@ backend/.env
 *.http
 docs
 .env
+*.env

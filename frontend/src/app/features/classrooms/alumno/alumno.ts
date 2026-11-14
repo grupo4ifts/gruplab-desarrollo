@@ -14,8 +14,6 @@ export class Alumno {
   private classroomService = inject(ClassroomService);
   private router = inject(Router);
 
-  // SIGNALS DEL FORMULARIO
-
   codigoAcceso = signal('');
 
   nombre = signal('');
@@ -23,8 +21,6 @@ export class Alumno {
   email = signal('');
 
   errorMsg = signal('');
-
-  // Valida el codigo ingresado por el alumno mediante suscripcion al servicio de classroom, luego establece el AuLab activo y redirige al aula si es correcto
 
   validar(): void {
     this.classroomService.obtenerAulaPorCodigo(this.codigoAcceso()).subscribe({

@@ -28,7 +28,6 @@ CREATE TABLE Members (
     rol          VARCHAR (20)  DEFAULT 'alumno' NOT NULL,
     created_at   DATETIME      DEFAULT GETDATE()
 );
----
 CREATE TABLE BoardColumns (
     id         INT          IDENTITY (1, 1) PRIMARY KEY,
     group_id   INT          NOT NULL FOREIGN KEY REFERENCES Groups (id) ON DELETE CASCADE,
@@ -36,7 +35,6 @@ CREATE TABLE BoardColumns (
     position   INT          NOT NULL, 
     color      VARCHAR (20) DEFAULT 'secondary' NOT NULL 
 );
----
 CREATE TABLE Tasks (
     id          INT            IDENTITY (1, 1) PRIMARY KEY,
     group_id    INT            NOT NULL,
@@ -46,7 +44,6 @@ CREATE TABLE Tasks (
     description VARCHAR (1000) NULL,
     created_at  DATETIME       DEFAULT GETDATE()
 );
-
 
 CREATE TABLE Comments (
     id          INT            IDENTITY (1, 1) PRIMARY KEY,

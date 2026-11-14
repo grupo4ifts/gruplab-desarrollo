@@ -1,4 +1,3 @@
-// QUERY BASE AULAS
 const queryBaseSelect = `SELECT
     id,
     name,
@@ -6,7 +5,6 @@ const queryBaseSelect = `SELECT
     join_code
 FROM Classrooms`;
 
-// QUERY BASE MIEMBROS
 const queryBaseSelectMiembros = `SELECT
     m.id,
     m.classroom_id,
@@ -19,7 +17,6 @@ const queryBaseSelectMiembros = `SELECT
 FROM Members m
 LEFT JOIN Groups g ON g.id = m.group_id`;
 
-// QUERY BASE GRUPOS
 const queryBaseSelectGrupos = `SELECT
     id,
     classroom_id,
@@ -27,7 +24,6 @@ const queryBaseSelectGrupos = `SELECT
     project_name
 FROM Groups`;
 
-// QUERY BASE COLUMNAS DE TABLERO
 const queryBaseSelectColumnas = `SELECT
     id,
     group_id,
@@ -36,7 +32,6 @@ const queryBaseSelectColumnas = `SELECT
     color
 FROM BoardColumns`;
 
-// QUERY BASE TAREAS
 const queryBaseSelectTareas = `SELECT
     t.id,
     t.group_id,
@@ -53,8 +48,6 @@ LEFT JOIN Members m ON m.id = t.assigned_to`;
 
 module.exports = {
 
-    // AULAS 
-
     obtenerAulas: queryBaseSelect,
 
     crearAula: `INSERT INTO Classrooms
@@ -70,9 +63,6 @@ module.exports = {
         WHERE id = @id`,
 
     eliminarAula: `DELETE FROM Classrooms WHERE id = @id`,
-
-
-    // MIEMBROS 
 
     obtenerMiembrosPorAula: `${queryBaseSelectMiembros}
         WHERE m.classroom_id = @classroom_id
@@ -105,9 +95,6 @@ module.exports = {
 
     eliminarMiembrosPorAula: `DELETE FROM Members WHERE classroom_id = @classroom_id`,
 
-
-    // GRUPOS 
-
     obtenerGruposPorAula: `${queryBaseSelectGrupos}
         WHERE classroom_id = @classroom_id
         ORDER BY group_number`,
@@ -125,9 +112,6 @@ module.exports = {
         WHERE id = @id`,
 
     eliminarGrupo: `DELETE FROM Groups WHERE id = @id`,
-
-
-    // TABLERO 
 
     obtenerColumnasPorGrupo: `${queryBaseSelectColumnas}
         WHERE group_id = @group_id
@@ -154,9 +138,6 @@ module.exports = {
         SET column_id = @column_id
         WHERE id = @id`,
 
-
-    // TAREAS 
-
     obtenerTareaPorId: `${queryBaseSelectTareas}
         WHERE t.id = @id`,
 
@@ -169,9 +150,6 @@ module.exports = {
         WHERE id = @id`,
 
     eliminarTarea: `DELETE FROM Tasks WHERE id = @id`,
-
-
-    // COMENTARIOS 
 
     obtenerComentariosPorTarea: `SELECT id, task_id, author_name, content, created_at
         FROM Comments

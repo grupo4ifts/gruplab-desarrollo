@@ -14,8 +14,6 @@ export class Profesor {
   private classroomService = inject(ClassroomService);
   private router = inject(Router);
 
-  // SIGNALS DEL FORMULARIO
-
   name = signal('');
 
   duenio = signal('');
@@ -23,8 +21,6 @@ export class Profesor {
   email = signal('');
 
   errorMsg = signal('');
-
-  // Como profesor, se crea el aula mediante el completado del formulario y el envio de peticion al backend
 
   crear(): void {
     this.classroomService.crearAula(this.name(), this.duenio(), this.email()).subscribe({

@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 
-// Tabla de enrutamiento principal de la aplicacion con carga perezosa (lazy loading)
 export const routes: Routes = [
   { path: '', redirectTo: 'classrooms', pathMatch: 'full' },
   { 

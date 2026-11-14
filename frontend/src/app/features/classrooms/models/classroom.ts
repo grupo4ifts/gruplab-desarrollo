@@ -1,6 +1,3 @@
-// INTERFACES UTILIZADAS
-
-// Modelo de lo que devuelve el backend al pedir las aulas
 export interface Classroom {
   id: number;
   name: string;
@@ -8,7 +5,6 @@ export interface Classroom {
   join_code: string;
 }
 
-// Modelo de lo que devuelve el backend al crear un aula
 export interface CrearAulaResponse {
   message: string;
   aulaId: number;
@@ -16,12 +12,9 @@ export interface CrearAulaResponse {
   memberId?: number;
 }
 
-// Generaliza las respuestas del backend con un simple mensaje (eliminar, salir, etc.)
 export interface EliminarAulaResponse {
   message: string;
 }
-
-// Lo que se guarda del usuario en el localStorage
 
 export interface UsuarioSession {
   nombre: string;
@@ -30,8 +23,6 @@ export interface UsuarioSession {
   classroomName?: string;
   memberId?: number;
 }
-
-// Todos los campos que vienen de la DB y que se utilizan en el localStorage. Por ejemplo: id, name, duenio, join_code de la db y nombreAula, nombreUsuario del frontend
 
 export interface AuLab {
   classroomId: number;

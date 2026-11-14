@@ -1,5 +1,5 @@
-import { Component, signal, inject, input, OnInit } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, signal, inject, input } from '@angular/core';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 import { GroupService } from '../services/group';
@@ -7,13 +7,13 @@ import { Group } from '../models/group';
 
 @Component({
   selector: 'app-group-list',
-  standalone: true,
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './group-list.html',
   styleUrl: './group-list.css'
 })
-export class GroupList implements OnInit {
-  private groupService = inject(GroupService);
+export class GroupList {
+  private readonly _groupService = inject(GroupService);
+  private readonly _formBuilder = inject(FormBuilder);
 
   readonly classroomId = input.required<number>();
 
@@ -23,9 +23,8 @@ export class GroupList implements OnInit {
 
   protected readonly editandoId = signal<number | null>(null);
 
-  protected readonly nombreProyecto = new FormControl('', {
-    nonNullable: true,
-    validators: [Validators.required, Validators.maxLength(100)]
+  protected readonly formulario = this._formBuilder.nonNullable.group({
+    nombreProyecto: ['', [Validators.required, Validators.maxLength(100)]]
   });
 
   protected readonly nombreEdicion = new FormControl('', {
@@ -39,7 +38,7 @@ export class GroupList implements OnInit {
 
   protected cargarGrupos(): void {
     this.cargando.set(true);
-    this.groupService.obtenerGrupos(this.classroomId()).subscribe({
+    this._groupService.obtenerGrupos(this.classroomId()).subscribe({
       next: (grupos: Group[]) => {
         this.grupos.set(grupos);
         this.cargando.set(false);
@@ -52,11 +51,15 @@ export class GroupList implements OnInit {
   }
 
   protected crear(): void {
-    if (this.nombreProyecto.invalid) return;
-    this.groupService.crearGrupo(this.classroomId(), this.nombreProyecto.value).subscribe({
+    if (this.formulario.invalid) {
+      this.formulario.markAllAsTouched();
+      return;
+    }
+    const { nombreProyecto } = this.formulario.getRawValue();
+    this._groupService.crearGrupo(this.classroomId(), nombreProyecto).subscribe({
       next: () => {
         this.errorMsg.set('');
-        this.nombreProyecto.reset();
+        this.formulario.reset();
         this.cargarGrupos();
       },
       error: (err: HttpErrorResponse) => {
@@ -76,7 +79,7 @@ export class GroupList implements OnInit {
 
   protected guardar(id: number): void {
     if (this.nombreEdicion.invalid) return;
-    this.groupService.actualizarGrupo(id, this.nombreEdicion.value).subscribe({
+    this._groupService.actualizarGrupo(id, this.nombreEdicion.value).subscribe({
       next: () => {
         this.errorMsg.set('');
         this.editandoId.set(null);
@@ -90,7 +93,7 @@ export class GroupList implements OnInit {
 
   protected eliminar(grupo: Group): void {
     if (confirm(`Estas seguro de que deseas eliminar el Grupo ${grupo.group_number}?`)) {
-      this.groupService.eliminarGrupo(grupo.id).subscribe({
+      this._groupService.eliminarGrupo(grupo.id).subscribe({
         next: () => {
           this.errorMsg.set('');
           this.cargarGrupos();

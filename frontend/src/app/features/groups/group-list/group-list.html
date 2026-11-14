@@ -2,13 +2,18 @@
 <div class="alert alert-danger" role="alert">{{ errorMsg() }}</div>
 }
 
-<form class="mb-3" (submit)="$event.preventDefault(); crear()">
+<form class="mb-3" [formGroup]="formulario" (ngSubmit)="crear()">
   <div class="input-group">
-    <input type="text" class="form-control" placeholder="Nombre del proyecto" [formControl]="nombreProyecto" />
-    <button type="submit" class="btn btn-primary" [disabled]="nombreProyecto.invalid">Crear grupo</button>
+    <input type="text" class="form-control" placeholder="Nombre del proyecto"
+           formControlName="nombreProyecto"
+           [class.is-invalid]="formulario.controls.nombreProyecto.touched && formulario.controls.nombreProyecto.invalid" />
+    <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">Crear grupo</button>
   </div>
-  @if (nombreProyecto.touched && nombreProyecto.invalid) {
-  <div class="form-text text-danger">El nombre es obligatorio y no puede superar los 100 caracteres.</div>
+  @if (formulario.controls.nombreProyecto.touched && formulario.controls.nombreProyecto.hasError('required')) {
+  <div class="form-text text-danger">El nombre es obligatorio.</div>
+  }
+  @if (formulario.controls.nombreProyecto.touched && formulario.controls.nombreProyecto.hasError('maxlength')) {
+  <div class="form-text text-danger">El nombre no puede superar los 100 caracteres.</div>
   }
 </form>
 

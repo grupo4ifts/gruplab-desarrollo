@@ -27,3 +27,9 @@
 .comentario p {
   white-space: pre-wrap;
 }
+
+.comentario small {
+  display: block;
+  color: gray;
+  margin-top: 5px;
+}

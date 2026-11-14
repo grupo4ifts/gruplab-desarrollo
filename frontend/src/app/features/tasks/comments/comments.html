@@ -3,8 +3,6 @@
 
   <h3>Comentarios</h3>
 
-  <p>{{ mensajeError() }}</p>
-
   <div class="formulario-comentario">
 
     <label>Escribí un comentario</label>
@@ -17,14 +15,44 @@
       (input)="contenido.set($any($event.target).value)">
     </textarea>
 
-    <button (click)="crearComentario()">
-      Publicar comentario
-    </button>
+    <button (click)="crearComentario()">Publicar comentario</button>
 
   </div>
 
   <hr>
 
-  <div id="listaComentarios"></div>
+  <div *ngFor="let comentario of comentarios()" class="comentario">
+
+    <strong>{{ comentario.author_name }}</strong>
+
+    <small>{{ comentario.created_at | date:'dd/MM/yyyy HH:mm' }}</small>
+
+    <div *ngIf="comentarioEditando() === comentario.id">
+
+      <textarea
+        rows="3"
+        [value]="contenidoEdicion()"
+        (input)="contenidoEdicion.set($any($event.target).value)">
+      </textarea>
+
+      <button (click)="guardarEdicion(comentario)">Guardar</button>
+
+      <button (click)="cancelarEdicion()">Cancelar</button>
+
+    </div>
+
+    <div *ngIf="comentarioEditando() !== comentario.id">
+
+      <p>{{ comentario.content }}</p>
+
+      <button (click)="iniciarEdicion(comentario)">Editar</button>
+
+      <button (click)="eliminarComentario(comentario)">Eliminar</button>
+
+    </div>
+
+  </div>
+
+  <p *ngIf="comentarios().length === 0">Todavía no hay comentarios.</p>
 
 </div>

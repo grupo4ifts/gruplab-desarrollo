@@ -1,11 +1,12 @@
 const classroomRepository = require('../repositories/classroom.repository');
+const memberRepository = require('../repositories/member.repository');
 
 exports.obtenerAulas = async () => {
     const aulas = await classroomRepository.obtenerAulas();
     return aulas;
 };
 
-exports.crearAula = async (name, duenio) => {
+exports.crearAula = async (name, duenio, email) => {
     if (!name || !duenio) {
         throw new Error('Faltan datos para crear el aula');
     }
@@ -21,7 +22,9 @@ exports.crearAula = async (name, duenio) => {
     const [newAula] = await classroomRepository.crearAula(name, join_code, duenio);
     const aulaId = newAula.id;
 
-    return { message: 'Aula creada exitosamente', aulaId, join_code };
+    const [miembro] = await memberRepository.agregarMiembro(aulaId, duenio, email, 'profesor');
+
+    return { message: 'Aula creada exitosamente', aulaId, join_code, memberId: miembro?.id };
 };
 
 exports.obtenerAulaPorCodigo = async (join_code) => {
@@ -50,6 +53,8 @@ exports.eliminarAula = async (id) => {
     if (!aula) {
         throw new Error('Aula no encontrada para eliminar');
     }
+
+    await memberRepository.eliminarMiembrosPorAula(id);
 
     await classroomRepository.eliminarAula(id);
     return { message: 'Aula eliminada correctamente' };

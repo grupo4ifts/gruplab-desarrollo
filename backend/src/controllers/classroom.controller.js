@@ -11,8 +11,8 @@ exports.obtenerAulas = async (req, res) => {
 
 exports.crearAula = async (req, res) => {
     try {
-        const { name, duenio } = req.body || {};
-        const resultado = await classroomService.crearAula(name, duenio);
+        const { name, duenio, email } = req.body || {};
+        const resultado = await classroomService.crearAula(name, duenio, email);
         res.status(200).json(resultado);
     } catch (error) {
         res.status(400).json({ error: error.message });

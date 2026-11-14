@@ -2,7 +2,7 @@
 
 Documento de trabajo para los 5 integrantes. Actualizado con el avance real del repositorio (rama `develop` / `luciano-aulas`). Define que hace cada uno, que archivos toca, que tablas crea, que endpoints expone, que componentes construye y como se conecta con los demas.
 
-Stack: Node.js + Express + SQL Server (`mssql`) en backend, Angular 21 Standalone + Bootstrap 5.3 en frontend, JavaScript (CommonJS) y TypeScript.
+Stack: Node.js + Express + SQL Server (`mssql`) en backend, Angular 21 Standalone + Bootstrap 5.0.2 en frontend, JavaScript (CommonJS) y TypeScript.
 
 ---
 
@@ -40,44 +40,44 @@ gruplab-fe-be/
       database/
         config.js                (dotenv y dbConfig)
         connection.js            (getConnection y sql con manejo de errores)
-        queries.js               (queries unificadas de todos los modulos)
-        schema.sql               (tablas SQL del proyecto)
+        queries.js               (35 queries unificadas de todos los modulos en un unico module.exports)
+        schema.sql               (6 tablas SQL completas: Classrooms, Groups, Members, BoardColumns, Tasks, Comments)
       routes/
         classroom.routes.js      (LISTO - Luciano)
         group.routes.js          (LISTO - Leandro)
         member.routes.js         (LISTO - Gonzalo)
-        board.routes.js          (Pendiente - Abel: Columnas y Tablero)
-        task.routes.js           (Pendiente - Leonardo: Tareas)
-        comment.routes.js        (Pendiente - Leonardo: Comentarios)
+        board.routes.js          (LISTO - Abel)
+        task.routes.js           (Router base / Pendiente endpoints - Leonardo)
+        comment.routes.js        (Router base / Pendiente endpoints - Leonardo)
       controllers/
         classroom.controller.js  (LISTO - Luciano)
         group.controller.js      (LISTO - Leandro)
         member.controller.js     (LISTO - Gonzalo)
-        board.controller.js      (Pendiente - Abel)
+        board.controller.js      (LISTO - Abel)
         task.controller.js       (Pendiente - Leonardo)
         comment.controller.js    (Pendiente - Leonardo)
       services/
         classroom.service.js     (LISTO - Luciano)
         group.service.js         (LISTO - Leandro)
         member.service.js        (LISTO - Gonzalo)
-        board.service.js         (Pendiente - Abel)
+        board.service.js         (LISTO - Abel - falta descomentar moverTareaDeColumna cuando este task.repository)
         task.service.js          (Pendiente - Leonardo)
         comment.service.js       (Pendiente - Leonardo)
       repositories/
         classroom.repository.js  (LISTO - Luciano)
         group.repository.js      (LISTO - Leandro)
         member.repository.js     (LISTO - Gonzalo)
-        board.repository.js      (Pendiente - Abel)
+        board.repository.js      (LISTO - Abel)
         task.repository.js       (Pendiente - Leonardo)
         comment.repository.js    (Pendiente - Leonardo)
   frontend/
     src/
-      index.html                 (incluye Bootstrap 5.3 CSS via CDN)
+      index.html                 (incluye Bootstrap 5.0.2 CSS via CDN)
       main.ts
       app/
         app.ts / app.html        (Header con RouterLink a /classrooms, router-outlet y Footer)
         app.config.ts            (provideRouter y provideHttpClient)
-        app.routes.ts            (Rutas con carga perezosa / lazy loading)
+        app.routes.ts            (Rutas con carga perezosa: classrooms/* y groups/:groupId/board)
         features/
           classrooms/            (MODULO 1 COMPLETO - Luciano)
             models/classroom.ts  (Interfaces: Classroom, CrearAulaResponse, UsuarioSession, AuLab)
@@ -88,13 +88,13 @@ gruplab-fe-be/
             panel-aula/          (Panel del aula con permisos de profesor/alumno y espacio para Grupos y Miembros)
           groups/                (Pendiente Frontend - Leandro)
           members/               (Pendiente Frontend - Gonzalo)
-          tasks/                 (Compartido sin pisarse entre Abel y Leonardo)
-            models/board-column.ts (Pendiente - Abel: Interfaz BoardColumn)
-            models/task.ts       (Pendiente - Leonardo/Abel: Interfaz Task)
-            services/board.ts    (Pendiente - Abel: BoardService)
+          tasks/                 (Abel LISTO / Pendiente TaskService, TaskForm y TaskDetail de Leonardo)
+            models/board-column.ts (LISTO - Abel: BoardColumn, Tablero, GrupoTablero)
+            models/task.ts       (LISTO - Task)
+            services/board.ts    (LISTO - Abel: BoardService)
             services/task.ts     (Pendiente - Leonardo: TaskService)
-            kanban/              (Pendiente - Abel: Tablero con 4 columnas base + agregar columna)
-            task-card/           (Pendiente - Abel: Tarjeta de tarea y movimiento entre columnas)
+            kanban/              (LISTO - Abel: Tablero con 4 columnas base + agregar columna + filtros)
+            task-card/           (LISTO - Abel: Tarjeta de tarea y movimiento entre columnas)
             task-form/           (Pendiente - Leonardo: Crear tarea)
             task-detail/         (Pendiente - Leonardo: Ver/Editar/Borrar tarea)
           comments/              (Pendiente Frontend - Leonardo)
@@ -118,7 +118,7 @@ Cada integrante es duenio de sus propias tablas SQL, su propio Backend (Reposito
 | **Luciano** | Aulas, Home y Panel del Aula | `Classrooms` | `classroom.*` | `features/classrooms` (`Home`, `Profesor`, `Alumno`, `PanelAula`) | **100% Completado** |
 | **Leandro** | Grupos de trabajo | `Groups` | `group.*` | `features/groups` (`GroupService`, `GroupList`) | Backend listo / Falta Front |
 | **Gonzalo** | Miembros del aula | `Members` | `member.*` | `features/members` (`MemberService`, `MemberList`) | Backend listo / Falta Front |
-| **Abel** | **Tablero Kanban y Columnas Dinamicas** (4 columnas iniciales + crear/editar/borrar columna y mover tarea) | `BoardColumns` | `board.*` (`board.repository`, `board.service`, `board.controller`, `board.routes`) | `features/tasks` (`BoardService`, `Kanban`, `TaskCard`) | Pendiente |
+| **Abel** | **Tablero Kanban y Columnas Dinamicas** (4 columnas iniciales + crear/editar/borrar columna y mover tarea) | `BoardColumns` | `board.*` (`board.repository`, `board.service`, `board.controller`, `board.routes`) | `features/tasks` (`BoardService`, `Kanban`, `TaskCard`) | **Backend y Front listos** (falta conectar con `TaskForm`/`TaskDetail` de Leo) |
 | **Leonardo** | **ABM de Tareas y Comentarios** | `Tasks`, `Comments` | `task.*` y `comment.*` | `features/tasks` (`TaskService`, `TaskForm`, `TaskDetail`) y `features/comments` (`CommentService`, `Comments`) | Pendiente |
 
 ---
@@ -260,14 +260,13 @@ exports.crearColumna = async (req, res) => {
      loadComponent: () => import('./features/tasks/kanban/kanban').then(m => m.Kanban)
    }
    ```
-9. **Estilos con Bootstrap 5.3**: Ya esta cargado en `index.html`. Usar clases nativas de Bootstrap (`card`, `shadow-sm`, `btn`, `badge`, `form-control`, `row`, `col`).
+9. **Estilos con Bootstrap 5.0.2**: Ya esta cargado en `index.html`. Usar clases nativas compatibles con Bootstrap 5.0.2 (`card`, `shadow-sm`, `btn`, `badge`, `form-control`, `row`, `col`, `bg-light`, `border-primary`). No usar clases exclusivas de 5.3 como `*-subtle`.
 
 ---
 
 ## 7. Base de datos completa (`schema.sql`)
 
-Las tablas 1 (`Classrooms`), 2 (`Groups`) y 3 (`Members`) **ya estan creadas en `schema.sql`**.
-Se agregan al final la tabla 4 (`BoardColumns` de Abel) y las tablas 5 y 6 (`Tasks` y `Comments` de Leonardo):
+Las 6 tablas (`Classrooms`, `Groups`, `Members`, `BoardColumns`, `Tasks` y `Comments`) **ya estan agregadas en `backend/src/database/schema.sql`** y sus 35 queries ya estan unificadas en `backend/src/database/queries.js`:
 
 ```sql
 -- 1. Luciano (YA EXISTE)
@@ -732,7 +731,7 @@ INSERT INTO Comments (task_id, author_name, content) VALUES (1, 'Lautaro', 'Tabl
 ## 15. Checklist de entrega por integrante
 
 ### Comun a todos
-- [ ] Codigo limpio siguiendo las convenciones de las secciones 5 y 6 (`inject()`, Signals, `Observable<T>`, Bootstrap 5.3).
+- [ ] Codigo limpio siguiendo las convenciones de las secciones 5 y 6 (`inject()`, Signals, `Observable<T>`, Bootstrap 5.0.2).
 - [ ] Todas las respuestas de error del backend en formato `{ error: error.message }` con status 400.
 - [ ] `npm run build` dentro de `frontend` ejecutando con **0 errores**.
 - [ ] Pull Request hacia `develop` sin conflictos.
@@ -745,22 +744,25 @@ INSERT INTO Comments (task_id, author_name, content) VALUES (1, 'Lautaro', 'Tabl
 
 ### Leandro (Modulo 2 - Grupos)
 - [x] Tabla `Groups` y Backend (`group.*`) integrado y probado en `peticionesTest.http`.
+- [ ] Agregar `try/catch` en `group.repository.js` para no exponer errores SQL.
 - [ ] `GroupService` e interfaz `Group` en `features/groups/`.
 - [ ] `GroupList` y creacion de grupo con navegacion a `/groups/:groupId/board`.
 
 ### Gonzalo (Modulo 3 - Miembros)
 - [x] Tabla `Members` y Backend (`member.*`) integrado y probado en `peticionesTest.http`.
+- [ ] Lanzar mensajes limpios en los `catch` de `member.repository.js` y llamar a `liberarTareasDelMiembro` en `eliminarMiembro`.
 - [ ] `MemberService` e interfaz `Member` en `features/members/`.
 - [ ] `MemberList` con asignacion de grupo mediante `<select>` y baja de miembro.
 
 ### Abel (Modulo 4 - Tablero Kanban y Columnas Dinamicas - Backend + Frontend)
-- [ ] Tabla `BoardColumns` agregada a `schema.sql`.
-- [ ] Queries y endpoints en `board.repository.js`, `board.service.js`, `board.controller.js` y `board.routes.js` (inicializacion automatica de las 4 columnas base, crear nueva columna, editar, eliminar y mover tarea de columna).
-- [ ] `BoardService` en `features/tasks/services/board.ts` y ruta `/groups/:groupId/board` en `app.routes.ts`.
-- [ ] Componentes `Kanban` (renderizado de las 4 columnas + boton "+ Nueva Columna" + filtros) y `TaskCard` (movimiento entre columnas).
+- [x] Tabla `BoardColumns` agregada a `schema.sql` y queries unificadas en `queries.js`.
+- [x] Backend en `board.repository.js`, `board.service.js`, `board.controller.js` y `board.routes.js`.
+- [x] `BoardService` en `features/tasks/services/board.ts` y ruta `/groups/:groupId/board` en `app.routes.ts`.
+- [x] Componentes `Kanban` (4 columnas base + nueva columna + filtros) y `TaskCard`.
+- [x] Descomentar `moverTareaDeColumna` en `board.service.js` y conectar `<app-task-form>` y `<app-task-detail>` cuando Leonardo termine su modulo.
 
 ### Leonardo (Modulo 5 - ABM de Tareas y Comentarios - Backend + Frontend)
-- [ ] Tablas `Tasks` y `Comments` agregadas a `schema.sql`.
-- [ ] Queries y endpoints de ABM de tareas (`task.*`: `GET /tasks/:id`, `POST /groups/:groupId/tasks`, `PUT /tasks/:id`, `DELETE /tasks/:id`) y comentarios (`comment.*`: `GET`, `POST`, `DELETE`) probados en `peticionesTest.http`.
+- [x] Tablas `Tasks` y `Comments` agregadas a `schema.sql` y queries base en `queries.js`.
+- [ ] Completar `task.*` (`GET /tasks/:id`, `POST /groups/:groupId/tasks`, `PUT /tasks/:id`, `DELETE /tasks/:id`, incluyendo `taskRepository.obtenerTareaPorId` que necesita Abel) y `comment.*` (`GET`, `POST`, `DELETE`).
 - [ ] `TaskService` y `CommentService` tipados con `Observable<T>`.
-- [ ] Componentes `TaskForm`, `TaskDetail` y `Comments` (con autor desde `localStorage` y borrado solo por el autor).
+- [ ] Componentes `TaskForm`, `TaskDetail` y `Comments` (con autor desde `ClassroomService.obtenerSesion()` y borrado solo por el autor).

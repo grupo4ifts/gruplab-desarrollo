@@ -1,4 +1,5 @@
 const commentRepository = require('../repositories/comment.repository')
+
 //verifico que tengo la tarea
 exports.vetificoTarea = async (idTarea) => {
     const tareaID = await commentRepository.obtenertarea(idTarea)
@@ -15,7 +16,7 @@ exports.crearComentario = async (tareaID, autorName, contenido) => {
 
     await exports.vetificoTarea(tareaID) //accedo a la funcion exportada
 
-    if (!autorName || !contenido.trim()) {//verifico que no sean nula o indefinida y los campos no esten vacíos o no tengan espacios
+    if (!autorName || !autorName.trim()) {//verifico que no sean nula o indefinida y los campos no esten vacíos o no tengan espacios
         throw new Error('Error: Falta el nombre del autor del comentario.')
     }
     if (!contenido || !contenido.trim()) {//verifico que no sean nula o indefinida y los campos no esten vacíos o no tengan espacios
@@ -37,6 +38,59 @@ exports.crearComentario = async (tareaID, autorName, contenido) => {
     }
 }
 
-exports.obtenerComentario = async () => { }
-exports.editarComentario = async () => { }
-exports.eliminarComentario = async () => { }
+exports.obtenerComentario = async (tareaID) => { 
+    await exports.vetificoTarea(tareaID)
+
+    const comentarios = await commentRepository.obtenerComentario(tareaID)
+
+    return comentarios
+}
+
+exports.editarComentario = async (comentarioID, autorName, contenido) => {
+
+    if (!autorName || !autorName.trim()) {
+        throw new Error('Error: Falta el nombre del autor del comentario.')
+    }
+
+    if (!contenido || !contenido.trim()) {
+        throw new Error('Error: El comentario esta vacio. Verifique e intente nuevamente.')
+    }
+
+    if (contenido.length > 1000) {
+        throw new Error('Error: El comentario introducido esta fuera de rango establecido.')
+    }
+
+    const comentario = await commentRepository.obtenerComentarioPorID(comentarioID)
+
+    if (!comentario) {
+        throw new Error('No hay comentarios Realizados.')
+    }
+
+    if (comentario.author_name !== autorName) {
+        throw new Error('Acceso denegado: No tenes permiso para editar este comentario.')
+    }
+
+    return await commentRepository.editarComentario(
+        comentarioID,
+        contenido
+    )
+}
+
+exports.eliminarComentario = async (comentarioID, autorName) => {
+
+    if (!autorName || !autorName.trim()) { //verifico que no sean nula o indefinida y los campos no esten vacíos o no tengan espacios
+        throw new Error('Error: Falta el nombre del autor del comentario.')
+    }
+
+    const comentario = await commentRepository.obtenerComentarioPorID(comentarioID)
+
+    if (!comentario) {
+        throw new Error('No hay comentarios Realizados.')
+    }
+
+    if (comentario.author_name !== autorName) {
+        throw new Error('Acceso denegado: No tenes permiso para eliminar el comentario.')
+    }
+
+    return await commentRepository.eliminarComentario(comentarioID)
+}

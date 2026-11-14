@@ -1,0 +1,30 @@
+
+<div class="lista-comentarios">
+
+  <h3>Comentarios</h3>
+
+  <p>{{ mensajeError() }}</p>
+
+  <div class="formulario-comentario">
+
+    <label>Escribí un comentario</label>
+
+    <textarea
+      rows="3"
+      maxlength="1000"
+      placeholder="Escribí tu comentario..."
+      [value]="contenido()"
+      (input)="contenido.set($any($event.target).value)">
+    </textarea>
+
+    <button (click)="crearComentario()">
+      Publicar comentario
+    </button>
+
+  </div>
+
+  <hr>
+
+  <div id="listaComentarios"></div>
+
+</div>

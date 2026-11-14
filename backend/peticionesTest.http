@@ -84,5 +84,19 @@ Content-Type: application/json
   "project_name": "Sistema de Gestión Web"
 }
 
+# ==========================================================
+# 4. COMENTARIOS (Comments)
+# ==========================================================
+
+### Crear comentario en una tarea
+POST {{baseUrl}}/comments
+Content-Type: application/json
+
+{
+  "tareaID": 1,
+  "autorName": "Leo",
+  "contenido": "Este es un comentario de prueba para verificar que la operación de creación funciona correctamente y que los datos se guardan en la base de datos."
+}
+
 ### Eliminar grupo por ID
 DELETE {{baseUrl}}/groups/1

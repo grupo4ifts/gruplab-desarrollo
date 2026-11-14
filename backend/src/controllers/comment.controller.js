@@ -10,7 +10,7 @@ exports.crearComentario = async (req, res) => {
         res.status(200).json(respuesta.mensaje)
 
     } catch (error) {
-        res.status(400).json(error)
+        res.status(400).json({mensaje: error.message})
     }
 
 

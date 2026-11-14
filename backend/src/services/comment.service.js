@@ -13,15 +13,15 @@ exports.vetificoTarea = async (idTarea) => {
 
 exports.crearComentario = async (tareaID, autorName, contenido) => {
 
-    const verificoTarea = await exports.vetificoTarea(tareaID) //accedo a la funcion exportada
+    await exports.vetificoTarea(tareaID) //accedo a la funcion exportada
 
-    if (!autorName) {
+    if (!autorName || !contenido.trim()) {//verifico que no sean nula o indefinida y los campos no esten vacíos o no tengan espacios
         throw new Error('Error: Falta el nombre del autor del comentario.')
     }
-    if (!contenido.trim()) {//verifico que los campos no esten vacíos o no tengan espacios
+    if (!contenido || !contenido.trim()) {//verifico que no sean nula o indefinida y los campos no esten vacíos o no tengan espacios
         throw new Error('Error: El comentario esta vacio. Verifique e intente nuevamente.')
     }
-    if (contenido.length < 100 || contenido.length > 1000) {
+    if (contenido.length > 1000) {
         throw new Error('Error: El comentario introducido esta fuera de rango establecido.')
     }
 

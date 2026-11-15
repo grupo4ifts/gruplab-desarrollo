@@ -52,8 +52,8 @@ module.exports = {
 
     crearAula: `INSERT INTO Classrooms
         (name, join_code, duenio)
-    OUTPUT INSERTED.id
-    VALUES
+        OUTPUT INSERTED.id
+        VALUES
         (@name, @join_code, @duenio)`,
 
     obtenerAulaPorCodigo: `${queryBaseSelect}

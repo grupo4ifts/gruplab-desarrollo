@@ -2,11 +2,12 @@ import { Component, signal, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ClassroomService } from '../services/classroom';
 import { Classroom, UsuarioSession } from '../models/classroom';
+import { GroupList } from '../../groups/group-list/group-list';
 
 @Component({
   selector: 'app-panel-aula',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, GroupList],
   templateUrl: './panel-aula.html'
 })
 export class PanelAula implements OnInit {

@@ -30,9 +30,9 @@
           }
         </div>
 
-        @if (miembro.rol === 'alumno') {
+        @if (miembro.rol === 'alumno' && esProfesor()) {
           <div class="d-flex align-items-center gap-2">
-                <select class="form-select form-select-sm select-grupo" (change)="asignarGrupo(miembro, $event)">
+            <select class="form-select form-select-sm select-grupo" (change)="asignarGrupo(miembro, $event)">
               <option value="" [selected]="!miembro.group_id">Sin grupo</option>
               @for (grupo of grupos(); track grupo.id) {
                 <option [value]="grupo.id" [selected]="grupo.id === miembro.group_id">
@@ -41,9 +41,7 @@
               }
             </select>
 
-            @if (esProfesor()) {
-              <button class="btn btn-sm btn-outline-danger" (click)="eliminarMiembro(miembro)">Eliminar</button>
-            }
+            <button class="btn btn-sm btn-outline-danger" (click)="eliminarMiembro(miembro)">Eliminar</button>
           </div>
         }
       </li>

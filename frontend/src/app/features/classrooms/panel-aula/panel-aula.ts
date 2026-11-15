@@ -3,11 +3,12 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ClassroomService } from '../services/classroom';
 import { Classroom, UsuarioSession } from '../models/classroom';
 import { GroupList } from '../../groups/group-list/group-list';
+import { MemberList } from '../../members/member-list/member-list';
 
 @Component({
   selector: 'app-panel-aula',
   standalone: true,
-  imports: [RouterLink, GroupList],
+  imports: [RouterLink, GroupList, MemberList],
   templateUrl: './panel-aula.html'
 })
 export class PanelAula implements OnInit {

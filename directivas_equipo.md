@@ -39,7 +39,7 @@ gruplab-fe-be/
       index.js                   (servidor Express, middlewares y registro de rutas)
       database/
         config.js                (dotenv y dbConfig)
-        connection.js            (getConnection y sql con manejo de errores)
+        connection.js            (getConnection y sql; los errores los captura cada repository)
         queries.js               (35 queries unificadas de todos los modulos en un unico module.exports)
         schema.sql               (6 tablas SQL completas: Classrooms, Groups, Members, BoardColumns, Tasks, Comments)
       routes/
@@ -173,8 +173,8 @@ const { sql, getConnection } = require('../database/connection');
 const queries = require('../database/queries');
 
 exports.obtenerColumnasPorGrupo = async (groupId) => {
-    const pool = await getConnection();
     try {
+        const pool = await getConnection();
         const resultado = await pool.request()
             .input('group_id', sql.Int, groupId)
             .query(queries.obtenerColumnasPorGrupo);
@@ -744,7 +744,7 @@ INSERT INTO Comments (task_id, author_name, content) VALUES (1, 'Lautaro', 'Tabl
 
 ### Leandro (Modulo 2 - Grupos)
 - [x] Tabla `Groups` y Backend (`group.*`) integrado y probado en `peticionesTest.http`.
-- [ ] Agregar `try/catch` en `group.repository.js` para no exponer errores SQL.
+- [x] `try/catch` completo en `group.repository.js` (y `getConnection()` dentro de `try` en todos los repositories).
 - [ ] `GroupService` e interfaz `Group` en `features/groups/`.
 - [ ] `GroupList` y creacion de grupo con navegacion a `/groups/:groupId/board`.
 

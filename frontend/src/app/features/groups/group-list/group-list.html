@@ -2,6 +2,7 @@
 <div class="alert alert-danger" role="alert">{{ errorMsg() }}</div>
 }
 
+@if (esProfesor()) {
 <form class="mb-3" [formGroup]="formulario" (ngSubmit)="crear()">
   <div class="input-group">
     <input type="text" class="form-control" placeholder="Nombre del proyecto"
@@ -16,6 +17,7 @@
   <div class="form-text text-danger">El nombre no puede superar los 100 caracteres.</div>
   }
 </form>
+}
 
 @if (cargando()) {
 <div class="d-flex justify-content-center py-3">
@@ -38,11 +40,25 @@
     <div>
       <strong>Grupo {{ g.group_number }}</strong>
       <span class="text-muted"> - {{ g.project_name }}</span>
+      @if (!esProfesor() && miGrupoId() === g.id) {
+      <span class="badge bg-success ms-2">Tu grupo</span>
+      }
     </div>
     <div class="d-flex gap-2">
+      @if (esProfesor()) {
       <a class="btn btn-sm btn-outline-primary" [routerLink]="['/groups', g.id, 'board']">Ver tablero</a>
       <button class="btn btn-sm btn-outline-secondary" (click)="editar(g)">Editar</button>
       <button class="btn btn-sm btn-outline-danger" (click)="eliminar(g)">Eliminar</button>
+      } @else {
+        @if (miGrupoId() === g.id) {
+        <a class="btn btn-sm btn-outline-primary" [routerLink]="['/groups', g.id, 'board']">Ver tablero</a>
+        <button class="btn btn-sm btn-outline-danger" (click)="salirDelGrupo()">Salir</button>
+        } @else if (!miGrupoId()) {
+        <button class="btn btn-sm btn-primary" (click)="unirseAGrupo(g.id)">Unirme</button>
+        } @else {
+        <span class="badge bg-light text-muted border align-self-center">Otro grupo</span>
+        }
+      }
     </div>
     }
   </li>

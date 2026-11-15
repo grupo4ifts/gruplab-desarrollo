@@ -68,10 +68,11 @@ exports.agregarMiembro = async (classroom_id, nombre, email, rol) => {
 exports.asignarGrupo = async (id, group_id) => {
     try {
         const pool = await getConnection();
-        await pool.request()
+        const resultado = await pool.request()
             .input('id', sql.Int, id)
             .input('group_id', sql.Int, group_id)
             .query(queries.asignarGrupo);
+        return resultado.rowsAffected[0];
     } catch (error) {
         throw new Error('Error al asignar el grupo al miembro');
     }
@@ -92,9 +93,10 @@ exports.obtenerAulaDelGrupo = async (group_id) => {
 exports.liberarTareasDelMiembro = async (id) => {
     try {
         const pool = await getConnection();
-        await pool.request()
+        const resultado = await pool.request()
             .input('id', sql.Int, id)
             .query(queries.liberarTareasDelMiembro);
+        return resultado.rowsAffected[0];
     } catch (error) {
         throw new Error('Error al liberar las tareas del miembro');
     }
@@ -103,9 +105,10 @@ exports.liberarTareasDelMiembro = async (id) => {
 exports.eliminarMiembro = async (id) => {
     try {
         const pool = await getConnection();
-        await pool.request()
+        const resultado = await pool.request()
             .input('id', sql.Int, id)
             .query(queries.eliminarMiembro);
+        return resultado.rowsAffected[0];
     } catch (error) {
         throw new Error('Error al eliminar el miembro');
     }
@@ -114,9 +117,10 @@ exports.eliminarMiembro = async (id) => {
 exports.eliminarMiembrosPorAula = async (classroom_id) => {
     try {
         const pool = await getConnection();
-        await pool.request()
+        const resultado = await pool.request()
             .input('classroom_id', sql.Int, classroom_id)
             .query(queries.eliminarMiembrosPorAula);
+        return resultado.rowsAffected[0];
     } catch (error) {
         throw new Error('Error al eliminar los miembros del aula');
     }

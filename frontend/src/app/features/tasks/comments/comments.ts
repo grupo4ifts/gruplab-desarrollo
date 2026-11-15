@@ -1,4 +1,3 @@
-
 import { Component, OnInit, inject, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Comment } from '../models/comment';
@@ -33,7 +32,10 @@ export class Comments implements OnInit {
     this.commentService.obtenerComentarios(this.tareaID()).subscribe({
       next: (respuesta) => {
         this.comentarios.set(respuesta);
-      }
+      },
+        error: (error) => {
+    alert(error.error?.mensaje || 'Error: No se pudo cargar los comentarios');
+  }
     });
   }
 
@@ -50,6 +52,9 @@ export class Comments implements OnInit {
       next: () => {
         this.contenido.set('');
         this.cargarComentarios();
+      },
+      error: (error) => {
+        alert(error.error?.mensaje || 'Error: No se pudo crear su comentario');
       }
     });
   }
@@ -74,6 +79,9 @@ export class Comments implements OnInit {
         this.comentarioEditando.set(null);
         this.contenidoEdicion.set('');
         this.cargarComentarios();
+       },
+      error: (error) => {
+        alert(error.error?.mensaje || 'Error: Su comentario no se pudo editar, Intente nuevamente.');
       }
     });
   }
@@ -89,6 +97,9 @@ export class Comments implements OnInit {
     ).subscribe({
       next: () => {
         this.cargarComentarios();
+       },
+      error: (error) => {
+        alert(error.error?.mensaje || 'Error: Su comentario no se pudo eliminar, Intente nuevamente');
       }
     });
   }

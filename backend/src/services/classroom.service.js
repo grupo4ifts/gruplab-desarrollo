@@ -28,7 +28,7 @@ exports.crearAula = async (name, duenio, email) => {
 };
 
 exports.obtenerAulaPorCodigo = async (join_code) => {
-    const [aula] = await classroomRepository.obtenerAulaPorCodigo(join_code);
+    const [aula] = await classroomRepository.obtenerAulaPorCodigo(join_code.trim().toUpperCase());
 
     if (!aula) {
         throw new Error('Aula no encontrada');

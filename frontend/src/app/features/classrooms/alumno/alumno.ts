@@ -1,43 +1,59 @@
 import { Component, signal, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ClassroomService } from '../services/classroom';
 import { Classroom } from '../models/classroom';
+import { MemberService } from '../../members/services/member';
 
 @Component({
   selector: 'app-alumno',
   standalone: true,
-  imports: [RouterLink],
-  templateUrl: './alumno.html',
-  styleUrl: './alumno.css'
+  imports: [RouterLink, ReactiveFormsModule],
+  templateUrl: './alumno.html'
 })
 export class Alumno {
   private classroomService = inject(ClassroomService);
+  private memberService = inject(MemberService);
   private router = inject(Router);
-
-  // SIGNALS DEL FORMULARIO
-
-  codigoAcceso = signal('');
-
-  nombre = signal('');
-
-  email = signal('');
+  private fb = inject(FormBuilder);
 
   errorMsg = signal('');
 
-  // Valida el codigo ingresado por el alumno mediante suscripcion al servicio de classroom, luego establece el AuLab activo y redirige al aula si es correcto
+  formulario = this.fb.nonNullable.group({
+    codigoAcceso: ['', [Validators.required]],
+    nombre: ['', [Validators.required, Validators.maxLength(100)]],
+    email: ['', [Validators.email, Validators.maxLength(100)]]
+  });
 
   validar(): void {
-    this.classroomService.obtenerAulaPorCodigo(this.codigoAcceso()).subscribe({
-      next: (aula: Classroom) => {
-        this.classroomService.establecerAuLabActivo({
-          classroomId: aula.id,
-          nombreAula: aula.name,
-          rol: 'alumno',
-          nombreUsuario: this.nombre().trim() || 'Alumno',
-          join_code: aula.join_code
-        });
+    if (this.formulario.invalid) {
+      this.formulario.markAllAsTouched();
+      return;
+    }
 
-        this.router.navigate(['/classrooms', aula.id]);
+    const { codigoAcceso, nombre, email } = this.formulario.getRawValue();
+    const nombreUsuario = nombre.trim();
+    const emailUsuario = email.trim() || undefined;
+
+    this.classroomService.obtenerAulaPorCodigo(codigoAcceso.trim()).subscribe({
+      next: (aula: Classroom) => {
+        this.memberService.agregarMiembro(aula.id, nombreUsuario, 'alumno', emailUsuario).subscribe({
+          next: (resp) => {
+            this.classroomService.establecerAuLabActivo({
+              classroomId: aula.id,
+              nombreAula: aula.name,
+              rol: 'alumno',
+              nombreUsuario,
+              join_code: aula.join_code,
+              memberId: resp.id
+            });
+
+            this.router.navigate(['/classrooms', aula.id]);
+          },
+          error: (err: any) => {
+            this.errorMsg.set(err.error?.error || 'No se pudo registrar el alumno en el aula.');
+          }
+        });
       },
       error: (err: any) => {
         this.errorMsg.set(err.error?.error || 'Aula no encontrada.');

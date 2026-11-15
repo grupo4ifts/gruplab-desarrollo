@@ -3,8 +3,8 @@ const queries = require('../database/queries')
 
 
 exports.obtenerColumnasPorGrupo = async (groupId) => {
-    const pool = await getConnection();
     try {
+        const pool = await getConnection();
         const resultado = await pool.request()
             .input('group_id', sql.Int, groupId)
             .query(queries.obtenerColumnasPorGrupo);
@@ -15,8 +15,8 @@ exports.obtenerColumnasPorGrupo = async (groupId) => {
 };
 
 exports.obtenerColumnaPorId = async (id) => {
-    const pool = await getConnection();
     try {
+        const pool = await getConnection();
         const resultado = await pool.request()
             .input('id', sql.Int, id)
             .query(queries.obtenerColumnaPorId);
@@ -27,8 +27,8 @@ exports.obtenerColumnaPorId = async (id) => {
 };
 
 exports.crearColumna = async (groupId, name, position, color) => {
-    const pool = await getConnection();
     try {
+        const pool = await getConnection();
         const resultado = await pool.request()
             .input('group_id', sql.Int, groupId)
             .input('name', sql.NVarChar(50), name)
@@ -42,8 +42,8 @@ exports.crearColumna = async (groupId, name, position, color) => {
 };
 
 exports.actualizarColumna = async (id, name, color) => {
-    const pool = await getConnection();
     try {
+        const pool = await getConnection();
         const resultado = await pool.request()
             .input('id', sql.Int, id)
             .input('name', sql.NVarChar(50), name)
@@ -56,8 +56,8 @@ exports.actualizarColumna = async (id, name, color) => {
 };
 
 exports.eliminarColumna = async (id) => {
-    const pool = await getConnection();
     try {
+        const pool = await getConnection();
         const resultado = await pool.request()
             .input('id', sql.Int, id)
             .query(queries.eliminarColumna);
@@ -69,8 +69,8 @@ exports.eliminarColumna = async (id) => {
 
 
 exports.obtenerTareasPorGrupo = async (groupId) => {
-    const pool = await getConnection();
     try {
+        const pool = await getConnection();
         const resultado = await pool.request()
             .input('group_id', sql.Int, groupId)
             .query(queries.obtenerTareasPorGrupo);
@@ -81,8 +81,8 @@ exports.obtenerTareasPorGrupo = async (groupId) => {
 };
 
 exports.moverTareaDeColumna = async (id, columnId) => {
-    const pool = await getConnection();
     try {
+        const pool = await getConnection();
         const resultado = await pool.request()
             .input('id', sql.Int, id)
             .input('column_id', sql.Int, columnId)

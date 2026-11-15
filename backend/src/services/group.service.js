@@ -1,9 +1,19 @@
 const groupRepository = require('../repositories/group.repository');
+const classroomRepository = require('../repositories/classroom.repository');
 
-exports.obtenerGruposPorAula = async (classroom_id) => {
+const validarAula = async (classroom_id) => {
     if (!classroom_id) {
         throw new Error('Falta el id del aula');
     }
+
+    const [aula] = await classroomRepository.obtenerAulaPorId(classroom_id);
+    if (!aula) {
+        throw new Error('Aula no encontrada');
+    }
+};
+
+exports.obtenerGruposPorAula = async (classroom_id) => {
+    await validarAula(classroom_id);
     return await groupRepository.obtenerGruposPorAula(classroom_id);
 };
 
@@ -15,19 +25,21 @@ exports.obtenerGrupoPorId = async (id) => {
     return grupo;
 };
 
-exports.crearGrupo = async (classroom_id, project_name, group_number) => {
-    if (!classroom_id || !project_name) {
+exports.crearGrupo = async (classroom_id, project_name) => {
+    if (!project_name) {
         throw new Error('Faltan datos para crear el grupo');
     }
+    await validarAula(classroom_id);
 
-    let numeroFinal = group_number;
-    if (!numeroFinal) {
-        const grupos = await groupRepository.obtenerGruposPorAula(classroom_id);
-        numeroFinal = grupos.length + 1;
+    const grupos = await groupRepository.obtenerGruposPorAula(classroom_id);
+
+    let group_number = 1;
+    if (grupos.length > 0) {
+        group_number = grupos[grupos.length - 1].group_number + 1;
     }
 
-    await groupRepository.crearGrupo(classroom_id, numeroFinal, project_name.trim());
-    return { message: 'Grupo creado exitosamente', group_number: numeroFinal };
+    await groupRepository.crearGrupo(classroom_id, group_number, project_name.trim());
+    return { message: 'Grupo creado exitosamente', group_number };
 };
 
 exports.actualizarGrupo = async (id, project_name) => {

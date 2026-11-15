@@ -1,0 +1,12 @@
+
+.miembro-profesor {
+  background-color: #f0f6ff;
+  border-left: 4px solid #0d6efd;
+  padding-left: 0.75rem !important;
+}
+
+
+.select-grupo {
+  width: auto;
+  max-width: 260px;
+}

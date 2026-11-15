@@ -1,131 +1,127 @@
 const { sql, getConnection } = require('../database/connection');
 const queries = require('../database/queries');
 
-
-exports.obtenerMiembrosPorAula = async (classroomId) => {
-    const pool = await getConnection();
+exports.obtenerMiembrosPorAula = async (classroom_id) => {
     try {
+        const pool = await getConnection();
         const resultado = await pool.request()
-            .input('classroom_id', sql.Int, classroomId)
+            .input('classroom_id', sql.Int, classroom_id)
             .query(queries.obtenerMiembrosPorAula);
         return resultado.recordset;
     } catch (error) {
-        throw error;
+        throw new Error('No se pudieron obtener los miembros del aula');
     }
 };
 
-exports.obtenerMiembrosPorGrupo = async (groupId) => {
-    const pool = await getConnection();
+exports.obtenerMiembrosPorGrupo = async (group_id) => {
     try {
+        const pool = await getConnection();
         const resultado = await pool.request()
-            .input('group_id', sql.Int, groupId)
+            .input('group_id', sql.Int, group_id)
             .query(queries.obtenerMiembrosPorGrupo);
         return resultado.recordset;
     } catch (error) {
-        throw error;
+        throw new Error('No se pudieron obtener los miembros del grupo');
     }
 };
 
-
 exports.obtenerMiembroPorId = async (id) => {
-    const pool = await getConnection();
     try {
+        const pool = await getConnection();
         const resultado = await pool.request()
             .input('id', sql.Int, id)
             .query(queries.obtenerMiembroPorId);
         return resultado.recordset;
     } catch (error) {
-        throw error;
+        throw new Error('Error al obtener el miembro');
     }
 };
 
-exports.obtenerMiembroPorNombre = async (classroomId, nombre) => {
-    const pool = await getConnection();
+exports.obtenerMiembroPorNombre = async (classroom_id, nombre) => {
     try {
+        const pool = await getConnection();
         const resultado = await pool.request()
-            .input('classroom_id', sql.Int, classroomId)
-            .input('nombre', sql.NVarChar, nombre)
+            .input('classroom_id', sql.Int, classroom_id)
+            .input('nombre', sql.VarChar, nombre)
             .query(queries.obtenerMiembroPorNombre);
         return resultado.recordset;
     } catch (error) {
-        throw error;
+        throw new Error('Error al buscar el miembro por nombre');
     }
 };
 
-exports.agregarMiembro = async (classroomId, nombre, email, rol) => {
-    const pool = await getConnection();
+exports.agregarMiembro = async (classroom_id, nombre, email, rol) => {
     try {
+        const pool = await getConnection();
         const resultado = await pool.request()
-            .input('classroom_id', sql.Int, classroomId)
-            .input('nombre', sql.NVarChar, nombre)
-            .input('email', sql.NVarChar, email)
-            .input('rol', sql.NVarChar, rol)
+            .input('classroom_id', sql.Int, classroom_id)
+            .input('nombre', sql.VarChar, nombre)
+            .input('email', sql.VarChar, email)
+            .input('rol', sql.VarChar, rol)
             .query(queries.agregarMiembro);
         return resultado.recordset;
     } catch (error) {
-        throw error;
+        throw new Error('Error al agregar el miembro');
     }
 };
 
-exports.asignarGrupo = async (id, groupId) => {
-    const pool = await getConnection();
+exports.asignarGrupo = async (id, group_id) => {
     try {
+        const pool = await getConnection();
         const resultado = await pool.request()
             .input('id', sql.Int, id)
-            .input('group_id', sql.Int, groupId)
+            .input('group_id', sql.Int, group_id)
             .query(queries.asignarGrupo);
         return resultado.rowsAffected[0];
     } catch (error) {
-        throw error;
+        throw new Error('Error al asignar el grupo al miembro');
     }
 };
 
-
-exports.obtenerAulaDelGrupo = async (groupId) => {
-    const pool = await getConnection();
+exports.obtenerAulaDelGrupo = async (group_id) => {
     try {
+        const pool = await getConnection();
         const resultado = await pool.request()
-            .input('group_id', sql.Int, groupId)
+            .input('group_id', sql.Int, group_id)
             .query(queries.obtenerAulaDelGrupo);
         return resultado.recordset;
     } catch (error) {
-        throw error;
+        throw new Error('Error al obtener el grupo');
     }
 };
 
-
 exports.liberarTareasDelMiembro = async (id) => {
-    const pool = await getConnection();
     try {
-        await pool.request()
+        const pool = await getConnection();
+        const resultado = await pool.request()
             .input('id', sql.Int, id)
             .query(queries.liberarTareasDelMiembro);
+        return resultado.rowsAffected[0];
     } catch (error) {
-        throw error;
+        throw new Error('Error al liberar las tareas del miembro');
     }
 };
 
 exports.eliminarMiembro = async (id) => {
-    const pool = await getConnection();
     try {
+        const pool = await getConnection();
         const resultado = await pool.request()
             .input('id', sql.Int, id)
             .query(queries.eliminarMiembro);
         return resultado.rowsAffected[0];
     } catch (error) {
-        throw error;
+        throw new Error('Error al eliminar el miembro');
     }
 };
 
-
-exports.eliminarMiembrosPorAula = async (classroomId) => {
-    const pool = await getConnection();
+exports.eliminarMiembrosPorAula = async (classroom_id) => {
     try {
+        const pool = await getConnection();
         const resultado = await pool.request()
-            .input('classroom_id', sql.Int, classroomId)
+            .input('classroom_id', sql.Int, classroom_id)
             .query(queries.eliminarMiembrosPorAula);
         return resultado.rowsAffected[0];
     } catch (error) {
-        throw error;
+        throw new Error('Error al eliminar los miembros del aula');
     }
 };

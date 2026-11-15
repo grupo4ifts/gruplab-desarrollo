@@ -1,4 +1,5 @@
 const memberRepository = require('../repositories/member.repository');
+const classroomRepository = require('../repositories/classroom.repository');
 
 exports.obtenerMiembrosPorAula = async (classroomId) => {
     if (!classroomId) {
@@ -17,12 +18,16 @@ exports.obtenerMiembrosPorGrupo = async (groupId) => {
 };
 
 exports.agregarMiembro = async (classroomId, nombre, email, rol) => {
-    if (!classroomId || !nombre) {
+    if (!classroomId || !nombre || !nombre.trim()) {
         throw new Error('Faltan datos para registrar el miembro');
     }
 
-    const [existente] = await memberRepository.obtenerMiembroPorNombre(classroomId, nombre.trim());
+    const [aula] = await classroomRepository.obtenerAulaPorId(classroomId);
+    if (!aula) {
+        throw new Error('Aula no encontrada');
+    }
 
+    const [existente] = await memberRepository.obtenerMiembroPorNombre(classroomId, nombre.trim());
     if (existente) {
         return { message: 'El miembro ya estaba registrado en el aula', id: existente.id };
     }
@@ -44,6 +49,15 @@ exports.asignarGrupo = async (id, groupId) => {
         return { message: 'Miembro quitado del grupo correctamente' };
     }
 
+    const [grupo] = await memberRepository.obtenerAulaDelGrupo(groupId);
+
+    if (!grupo) {
+        throw new Error('Grupo no encontrado');
+    }
+    if (grupo.classroom_id !== miembro.classroom_id) {
+        throw new Error('El grupo no pertenece al aula del miembro');
+    }
+
     await memberRepository.asignarGrupo(id, groupId);
     return { message: 'Grupo asignado correctamente' };
 };
@@ -55,6 +69,7 @@ exports.eliminarMiembro = async (id) => {
         throw new Error('Miembro no encontrado para eliminar');
     }
 
+    await memberRepository.liberarTareasDelMiembro(id);
     await memberRepository.eliminarMiembro(id);
     return { message: 'Miembro eliminado correctamente' };
 };

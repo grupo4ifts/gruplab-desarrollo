@@ -8,25 +8,48 @@
           <div class="alert alert-danger py-2 mb-3">{{ errorMsg() }}</div>
         }
 
-        <div class="mb-3">
-          <label class="form-label text-muted small">Nombre del Aula</label>
-          <input type="text" class="form-control" [value]="name()" (input)="name.set(inputName.value)" #inputName placeholder="Ej: Laboratorio de Computacion">
-        </div>
+        <form [formGroup]="formulario" (ngSubmit)="crear()">
+          <div class="mb-3">
+            <label class="form-label text-muted small">Nombre del Aula</label>
+            <input type="text" class="form-control" formControlName="name" placeholder="Ej: Laboratorio de Computacion"
+              [class.is-invalid]="formulario.controls.name.touched && formulario.controls.name.invalid">
+            @if (formulario.controls.name.touched && formulario.controls.name.hasError('required')) {
+              <div class="invalid-feedback">El nombre del aula es obligatorio.</div>
+            }
+            @if (formulario.controls.name.touched && formulario.controls.name.hasError('maxlength')) {
+              <div class="invalid-feedback">El nombre no puede superar los 100 caracteres.</div>
+            }
+          </div>
 
-        <div class="mb-3">
-          <label class="form-label text-muted small">Nombre del Profesor</label>
-          <input type="text" class="form-control" [value]="duenio()" (input)="duenio.set(inputDuenio.value)" #inputDuenio placeholder="Ej: Prof. Perez">
-        </div>
+          <div class="mb-3">
+            <label class="form-label text-muted small">Nombre del Profesor</label>
+            <input type="text" class="form-control" formControlName="duenio" placeholder="Ej: Prof. Perez"
+              [class.is-invalid]="formulario.controls.duenio.touched && formulario.controls.duenio.invalid">
+            @if (formulario.controls.duenio.touched && formulario.controls.duenio.hasError('required')) {
+              <div class="invalid-feedback">El nombre del profesor es obligatorio.</div>
+            }
+            @if (formulario.controls.duenio.touched && formulario.controls.duenio.hasError('maxlength')) {
+              <div class="invalid-feedback">El nombre no puede superar los 100 caracteres.</div>
+            }
+          </div>
 
-        <div class="mb-4">
-          <label class="form-label text-muted small">Email (opcional)</label>
-          <input type="text" class="form-control" [value]="email()" (input)="email.set(inputEmail.value)" #inputEmail placeholder="profesor@mail.com">
-        </div>
+          <div class="mb-4">
+            <label class="form-label text-muted small">Email (opcional)</label>
+            <input type="email" class="form-control" formControlName="email" placeholder="profesor@mail.com"
+              [class.is-invalid]="formulario.controls.email.touched && formulario.controls.email.invalid">
+            @if (formulario.controls.email.touched && formulario.controls.email.hasError('email')) {
+              <div class="invalid-feedback">El formato del email no es valido.</div>
+            }
+            @if (formulario.controls.email.touched && formulario.controls.email.hasError('maxlength')) {
+              <div class="invalid-feedback">El email no puede superar los 100 caracteres.</div>
+            }
+          </div>
 
-        <div class="d-flex gap-2">
-          <button class="btn btn-primary px-4" (click)="crear()">Crear Aula</button>
-          <a class="btn btn-outline-secondary" routerLink="/classrooms">Volver</a>
-        </div>
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary px-4">Crear Aula</button>
+            <a class="btn btn-outline-secondary" routerLink="/classrooms">Volver</a>
+          </div>
+        </form>
       </div>
     </div>
   </div>

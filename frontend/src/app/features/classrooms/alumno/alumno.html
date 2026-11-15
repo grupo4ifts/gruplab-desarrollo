@@ -8,25 +8,45 @@
           <div class="alert alert-danger py-2 mb-3">{{ errorMsg() }}</div>
         }
 
-        <div class="mb-3">
-          <label class="form-label text-muted small">Codigo de Acceso</label>
-          <input type="text" class="form-control" [value]="codigoAcceso()" (input)="codigoAcceso.set(inputCodigo.value)" #inputCodigo placeholder="Ej: GL-1234">
-        </div>
+        <form [formGroup]="formulario" (ngSubmit)="validar()">
+          <div class="mb-3">
+            <label class="form-label text-muted small">Codigo de Acceso</label>
+            <input type="text" class="form-control" formControlName="codigoAcceso" placeholder="Ej: GL-1234"
+              [class.is-invalid]="formulario.controls.codigoAcceso.touched && formulario.controls.codigoAcceso.invalid">
+            @if (formulario.controls.codigoAcceso.touched && formulario.controls.codigoAcceso.hasError('required')) {
+              <div class="invalid-feedback">El codigo de acceso es obligatorio.</div>
+            }
+          </div>
 
-        <div class="mb-3">
-          <label class="form-label text-muted small">Tu Nombre y Apellido</label>
-          <input type="text" class="form-control" [value]="nombre()" (input)="nombre.set(inputNombre.value)" #inputNombre placeholder="Ej: Juan Perez">
-        </div>
+          <div class="mb-3">
+            <label class="form-label text-muted small">Tu Nombre y Apellido</label>
+            <input type="text" class="form-control" formControlName="nombre" placeholder="Ej: Juan Perez"
+              [class.is-invalid]="formulario.controls.nombre.touched && formulario.controls.nombre.invalid">
+            @if (formulario.controls.nombre.touched && formulario.controls.nombre.hasError('required')) {
+              <div class="invalid-feedback">Tu nombre es obligatorio.</div>
+            }
+            @if (formulario.controls.nombre.touched && formulario.controls.nombre.hasError('maxlength')) {
+              <div class="invalid-feedback">El nombre no puede superar los 100 caracteres.</div>
+            }
+          </div>
 
-        <div class="mb-4">
-          <label class="form-label text-muted small">Email (opcional)</label>
-          <input type="text" class="form-control" [value]="email()" (input)="email.set(inputEmail.value)" #inputEmail placeholder="alumno@mail.com">
-        </div>
+          <div class="mb-4">
+            <label class="form-label text-muted small">Email (opcional)</label>
+            <input type="email" class="form-control" formControlName="email" placeholder="alumno@mail.com"
+              [class.is-invalid]="formulario.controls.email.touched && formulario.controls.email.invalid">
+            @if (formulario.controls.email.touched && formulario.controls.email.hasError('email')) {
+              <div class="invalid-feedback">El formato del email no es valido.</div>
+            }
+            @if (formulario.controls.email.touched && formulario.controls.email.hasError('maxlength')) {
+              <div class="invalid-feedback">El email no puede superar los 100 caracteres.</div>
+            }
+          </div>
 
-        <div class="d-flex gap-2">
-          <button class="btn btn-primary px-4" (click)="validar()">Ingresar</button>
-          <a class="btn btn-outline-secondary" routerLink="/classrooms">Volver</a>
-        </div>
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary px-4">Ingresar</button>
+            <a class="btn btn-outline-secondary" routerLink="/classrooms">Volver</a>
+          </div>
+        </form>
       </div>
     </div>
   </div>

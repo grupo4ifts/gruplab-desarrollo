@@ -32,7 +32,7 @@
         <h2 class="h5 fw-bold mb-0">Grupos de Trabajo</h2>
       </div>
       <div class="card-body">
-        <app-group-list [classroomId]="a.id" />
+        <app-group-list [classroomId]="a.id" (gruposActualizados)="memberList.cargarGrupos(); memberList.cargarMiembros()" />
       </div>
     </div>
   </div>
@@ -43,7 +43,7 @@
         <h2 class="h5 fw-bold mb-0">Miembros del Aula</h2>
       </div>
       <div class="card-body">
-        <app-member-list [classroomId]="a.id" />
+        <app-member-list #memberList [classroomId]="a.id" />
       </div>
     </div>
   </div>

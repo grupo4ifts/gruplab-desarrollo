@@ -1,4 +1,5 @@
 import { Component, signal, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ClassroomService } from '../services/classroom';
 import { Classroom } from '../models/classroom';
@@ -7,27 +8,34 @@ import { MemberService } from '../../members/services/member';
 @Component({
   selector: 'app-alumno',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './alumno.html'
 })
 export class Alumno {
   private classroomService = inject(ClassroomService);
   private memberService = inject(MemberService);
   private router = inject(Router);
-
-  codigoAcceso = signal('');
-
-  nombre = signal('');
-
-  email = signal('');
+  private fb = inject(FormBuilder);
 
   errorMsg = signal('');
 
-  validar(): void {
-    const nombreUsuario = this.nombre().trim() || 'Alumno';
-    const emailUsuario = this.email().trim() || undefined;
+  formulario = this.fb.nonNullable.group({
+    codigoAcceso: ['', [Validators.required]],
+    nombre: ['', [Validators.required, Validators.maxLength(100)]],
+    email: ['', [Validators.email, Validators.maxLength(100)]]
+  });
 
-    this.classroomService.obtenerAulaPorCodigo(this.codigoAcceso()).subscribe({
+  validar(): void {
+    if (this.formulario.invalid) {
+      this.formulario.markAllAsTouched();
+      return;
+    }
+
+    const { codigoAcceso, nombre, email } = this.formulario.getRawValue();
+    const nombreUsuario = nombre.trim();
+    const emailUsuario = email.trim() || undefined;
+
+    this.classroomService.obtenerAulaPorCodigo(codigoAcceso.trim()).subscribe({
       next: (aula: Classroom) => {
         this.memberService.agregarMiembro(aula.id, nombreUsuario, 'alumno', emailUsuario).subscribe({
           next: (resp) => {

@@ -1,4 +1,4 @@
-import { Component, computed, signal, inject, input } from '@angular/core';
+import { Component, computed, signal, inject, input, output } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
@@ -20,6 +20,7 @@ export class GroupList {
   private readonly _formBuilder = inject(FormBuilder);
 
   readonly classroomId = input.required<number>();
+  readonly gruposActualizados = output<void>();
 
   protected readonly grupos = signal<Group[]>([]);
   protected readonly cargando = signal(false);
@@ -125,6 +126,7 @@ export class GroupList {
         this.errorMsg.set('');
         this.formulario.reset();
         this.cargarGrupos();
+        this.gruposActualizados.emit();
       },
       error: (err: HttpErrorResponse) => {
         this.errorMsg.set(err.error?.error ?? 'No se pudo crear el grupo.');
@@ -148,6 +150,7 @@ export class GroupList {
         this.errorMsg.set('');
         this.editandoId.set(null);
         this.cargarGrupos();
+        this.gruposActualizados.emit();
       },
       error: (err: HttpErrorResponse) => {
         this.errorMsg.set(err.error?.error ?? 'No se pudo actualizar el grupo.');
@@ -161,6 +164,7 @@ export class GroupList {
         next: () => {
           this.errorMsg.set('');
           this.cargarGrupos();
+          this.gruposActualizados.emit();
         },
         error: (err: HttpErrorResponse) => {
           this.errorMsg.set(err.error?.error ?? 'No se pudo eliminar el grupo.');

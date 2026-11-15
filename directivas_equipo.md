@@ -17,8 +17,8 @@ Stack: Node.js + Express + SQL Server (`mssql`) en backend, Angular 21 Standalon
 7. Base de datos completa (`schema.sql`)
 8. Contratos de integracion entre modulos
 9. Modulo 1 - Luciano - Aulas y Home (COMPLETADO)
-10. Modulo 2 - Leandro - Grupos (Backend listo / Falta Frontend)
-11. Modulo 3 - Gonzalo - Miembros (Backend listo / Falta Frontend)
+10. Modulo 2 - Leandro - Grupos (COMPLETADO)
+11. Modulo 3 - Gonzalo - Miembros (COMPLETADO)
 12. Modulo 4 - Abel - Tablero Kanban y Columnas Dinamicas (`BoardColumns`)
 13. Modulo 5 - Leonardo - ABM de Tareas y Comentarios (`Tasks` y `Comments`)
 14. Como trabajar sin esperar al companero (datos de prueba)
@@ -85,9 +85,9 @@ gruplab-fe-be/
             home/                (Home + listado multirrol "Mis AuLabs")
             profesor/            (Formulario de creacion de aula)
             alumno/              (Formulario de ingreso por codigo)
-            panel-aula/          (Panel del aula con permisos de profesor/alumno y espacio para Grupos y Miembros)
-          groups/                (Pendiente Frontend - Leandro)
-          members/               (INTEGRADO en develop - Gonzalo: models/member.ts, services/member.ts, member-list)
+            panel-aula/          (Panel del aula con permisos de profesor/alumno, GroupList y MemberList integrados)
+          groups/                (LISTO - Leandro: models/group.ts, services/group.ts, group-list con permisos por rol)
+          members/               (LISTO - Gonzalo: models/member.ts, services/member.ts, member-list)
           tasks/                 (Abel LISTO / Pendiente TaskService, TaskForm y TaskDetail de Leonardo)
             models/board-column.ts (LISTO - Abel: BoardColumn, Tablero, GrupoTablero)
             models/task.ts       (LISTO - Task)
@@ -116,8 +116,8 @@ Cada integrante es duenio de sus propias tablas SQL, su propio Backend (Reposito
 | Integrante | Modulo | Tablas SQL | Archivos Backend | Carpeta / Componentes Frontend | Estado actual |
 |---|---|---|---|---|---|
 | **Luciano** | Aulas, Home y Panel del Aula | `Classrooms` | `classroom.*` | `features/classrooms` (`Home`, `Profesor`, `Alumno`, `PanelAula`) | **100% Completado** |
-| **Leandro** | Grupos de trabajo | `Groups` | `group.*` | `features/groups` (`GroupService`, `GroupList`) | Backend listo / Falta Front |
-| **Gonzalo** | Miembros del aula | `Members` | `member.*` | `features/members` (`MemberService`, `MemberList`, `models/member.ts`) | **Integrado en `develop`** (espera `GroupService` de Leandro para compilar) |
+| **Leandro** | Grupos de trabajo | `Groups` | `group.*` | `features/groups` (`GroupService`, `GroupList`) | **100% Completado** |
+| **Gonzalo** | Miembros del aula | `Members` | `member.*` | `features/members` (`MemberService`, `MemberList`, `models/member.ts`) | **100% Completado** |
 | **Abel** | **Tablero Kanban y Columnas Dinamicas** (4 columnas iniciales + crear/editar/borrar columna y mover tarea) | `BoardColumns` | `board.*` (`board.repository`, `board.service`, `board.controller`, `board.routes`) | `features/tasks` (`BoardService`, `Kanban`, `TaskCard`) | **Integrado en `develop`** (falta conectar `TaskForm`/`TaskDetail` de Leo) |
 | **Leonardo** | **ABM de Tareas y Comentarios** | `Tasks`, `Comments` | `task.*` y `comment.*` | `features/tasks` (`TaskService`, `TaskForm`, `TaskDetail`) y `features/comments` (`CommentService`, `Comments`) | En `develop`: solo tablas y queries / Avance parcial en `leo-comments` |
 
@@ -404,8 +404,9 @@ Todo el modulo 1 ya se encuentra finalizado, documentado y compilando sin errore
   - Al eliminar un aula, elimina primero los miembros asociados (`eliminarMiembrosPorAula`) y luego el aula.
 - **Frontend (`features/classrooms/`)**:
   - Rutas con lazy loading: `/classrooms` (`Home`), `/classrooms/nuevo` (`Profesor`), `/classrooms/unirse` (`Alumno`), `/classrooms/:id` (`PanelAula`).
+  - `Alumno`: al validar el codigo, registra/recupera al alumno en `Members` (`MemberService.agregarMiembro`) y guarda su `memberId` en la sesion.
   - Manejo de **"Mis AuLabs"** en `Home`: tarjetas que distinguen si sos Profesor o Alumno en cada aula.
-  - `PanelAula`: muestra cabecera, codigo del aula, usuario conectado, boton "Eliminar Aula" (exclusivo para rol profesor) y deja listas las dos columnas para `GroupList` (Leandro) y `MemberList` (Gonzalo).
+  - `PanelAula`: muestra cabecera, codigo del aula, usuario conectado, boton "Eliminar Aula" (exclusivo para rol profesor) e incrusta `<app-group-list [classroomId]="a.id" />` y `<app-member-list [classroomId]="a.id" />`.
 
 ---
 
@@ -418,10 +419,10 @@ Todo el modulo 1 ya se encuentra finalizado, documentado y compilando sin errore
     - `POST /classrooms/:classroomId/groups` -> Body: `{ group_number, project_name }`
     - `PUT /groups/:id` -> Body: `{ project_name }`
     - `DELETE /groups/:id`
-- **Frontend pendiente (`features/groups/`)**:
+- **Frontend (`features/groups/`)**: Ya integrado y funcionando:
   - `models/group.ts`: Interfaz `Group` (`id`, `classroom_id`, `group_number`, `project_name`).
-  - `services/group.ts` (`GroupService` con `inject(HttpClient)` y metodo `obtenerGrupos(classroomId: number)` — requerido tambien por `MemberList` de Gonzalo).
-  - `group-list/` (`app-group-list` con `classroomId = input.required<number>()`): lista los grupos del aula, permite crear uno nuevo y tiene el boton **"Ver tablero"** con `[routerLink]="['/groups', grupo.id, 'board']"`.
+  - `services/group.ts` (`GroupService` con `inject(HttpClient)` y metodo `obtenerGrupos(classroomId: number)`).
+  - `group-list/` (`app-group-list` con `classroomId = input.required<number>()`): el profesor puede crear, editar, eliminar y ver el tablero de cualquier grupo; el alumno puede unirse a un grupo si no tiene, salir de su grupo y ver unicamente el tablero de su grupo.
 
 ---
 
@@ -434,10 +435,10 @@ Todo el modulo 1 ya se encuentra finalizado, documentado y compilando sin errore
     - `POST /classrooms/:classroomId/members` -> Body: `{ nombre, email, rol }`
     - `PUT /members/:id/group` -> Body: `{ group_id }`
     - `DELETE /members/:id`
-- **Frontend pendiente (`features/members/`)**:
+- **Frontend (`features/members/`)**: Ya integrado y funcionando:
   - `models/member.ts`: Interfaz `Member`.
   - `services/member.ts` (`MemberService` con `inject(HttpClient)`).
-  - `member-list/` (`app-member-list` con `classroomId = input.required<number>()`): muestra miembros del aula, diferencia al profesor con un badge, y permite asignar grupo a cada alumno con un `<select>`.
+  - `member-list/` (`app-member-list` con `classroomId = input.required<number>()`): muestra miembros del aula, diferencia al profesor con un badge, y permite unicamente al rol `profesor` asignar/mover de grupo a cada alumno y eliminar miembros.
 
 ---
 
@@ -740,18 +741,18 @@ INSERT INTO Comments (task_id, author_name, content) VALUES (1, 'Lautaro', 'Tabl
 - [x] Tabla `Classrooms` y Backend completo (`classroom.*`) con creacion de profesor en `Members` y borrado en cascada.
 - [x] Frontend con Lazy Loading, `RouterLink`, `inject()`, `Observable<T>` e interfaces.
 - [x] Manejo de sesion y **"Mis AuLabs"** multirrol en `ClassroomService`.
-- [x] `PanelAula` con permisos de profesor y espacio para `GroupList` y `MemberList`.
+- [x] `PanelAula` con permisos de profesor, `GroupList` y `MemberList` incrustados, y registro de alumnos en `Members` al ingresar.
 
 ### Leandro (Modulo 2 - Grupos)
 - [x] Tabla `Groups` y Backend (`group.*`) integrado y probado en `peticionesTest.http`.
 - [x] `try/catch` completo en `group.repository.js` (y `getConnection()` dentro de `try` en todos los repositories).
-- [ ] `GroupService` e interfaz `Group` en `features/groups/`.
-- [ ] `GroupList` y creacion de grupo con navegacion a `/groups/:groupId/board`.
+- [x] `GroupService` e interfaz `Group` en `features/groups/`.
+- [x] `GroupList` y creacion de grupo con navegacion a `/groups/:groupId/board` y permisos por rol.
 
 ### Gonzalo (Modulo 3 - Miembros)
 - [x] Tabla `Members` y Backend (`member.*`) integrado en `develop`, con `try/catch` en repository y `liberarTareasDelMiembro` en service.
 - [x] `models/member.ts`, `MemberService` (`inject()` + `Observable<T>`) y `MemberList` integrados en `develop`.
-- [ ] Incrustar `<app-member-list [classroomId]="a.id" />` en `PanelAula` una vez que este `GroupService` de Leandro.
+- [x] Incrustar `<app-member-list [classroomId]="a.id" />` en `PanelAula`.
 
 ### Abel (Modulo 4 - Tablero Kanban y Columnas Dinamicas - Backend + Frontend)
 - [x] Tabla `BoardColumns` agregada a `schema.sql` y queries unificadas en `queries.js`.

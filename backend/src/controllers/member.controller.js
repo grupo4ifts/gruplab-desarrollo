@@ -1,6 +1,4 @@
 const memberService = require('../services/member.service');
-
-
 exports.obtenerMiembrosPorAula = async (req, res) => {
     try {
         const { classroomId } = req.params;

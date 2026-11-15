@@ -1,20 +1,19 @@
 const commentRepository = require('../repositories/comment.repository')
 
 //verifico que tengo la tarea
-exports.vetificoTarea = async (idTarea) => {
+exports.verificarTarea = async (idTarea) => {
     const tareaID = await commentRepository.obtenertarea(idTarea)
 
     if (tareaID.length === 0) {
         throw new Error('Error: La tarea no existe.')
     }
-    else {
-        return tareaID
-    }
+    
+    return tareaID
 }
 
 exports.crearComentario = async (tareaID, autorName, contenido) => {
 
-    await exports.vetificoTarea(tareaID) //accedo a la funcion exportada
+    await exports.verificarTarea(tareaID) //accedo a la funcion exportada
 
     if (!autorName || !autorName.trim()) {//verifico que no sean nula o indefinida y los campos no esten vacíos o no tengan espacios
         throw new Error('Error: Falta el nombre del autor del comentario.')
@@ -39,7 +38,7 @@ exports.crearComentario = async (tareaID, autorName, contenido) => {
 }
 
 exports.obtenerComentario = async (tareaID) => { 
-    await exports.vetificoTarea(tareaID)
+    await exports.verificarTarea(tareaID)
 
     const comentarios = await commentRepository.obtenerComentario(tareaID)
 

@@ -23,6 +23,7 @@ Stack: Node.js + Express + SQL Server (`mssql`) en backend, Angular 21 Standalon
 13. Modulo 5 - Leonardo - ABM de Tareas y Comentarios (`Tasks` y `Comments`)
 14. Como trabajar sin esperar al companero (datos de prueba)
 15. Checklist de entrega por integrante
+16. Roadmap / MVP 2.0 (Mejoras futuras)
 
 ---
 
@@ -41,7 +42,7 @@ gruplab-fe-be/
         config.js                (dotenv y dbConfig)
         connection.js            (getConnection y sql; los errores los captura cada repository)
         queries.js               (35 queries unificadas de todos los modulos en un unico module.exports)
-        schema.sql               (6 tablas SQL completas: Classrooms, Groups, Members, BoardColumns, Tasks, Comments)
+        schema.sql               (6 tablas SQL completas + datos de prueba: 10 aulas, grupos, miembros, columnas, tareas y comentarios)
       routes/
         classroom.routes.js      (LISTO - Luciano)
         group.routes.js          (LISTO - Leandro)
@@ -60,7 +61,7 @@ gruplab-fe-be/
         classroom.service.js     (LISTO - Luciano)
         group.service.js         (LISTO - Leandro)
         member.service.js        (LISTO - Gonzalo)
-        board.service.js         (LISTO - Abel - falta descomentar moverTareaDeColumna cuando este task.repository)
+        board.service.js         (LISTO - Abel - moverTareaDeColumna activo con taskRepository.obtenerTareaPorId)
         task.service.js          (Pendiente - Leonardo)
         comment.service.js       (Pendiente - Leonardo)
       repositories/
@@ -68,7 +69,7 @@ gruplab-fe-be/
         group.repository.js      (LISTO - Leandro)
         member.repository.js     (LISTO - Gonzalo)
         board.repository.js      (LISTO - Abel)
-        task.repository.js       (Pendiente - Leonardo)
+        task.repository.js       (Parcial: obtenerTareaPorId listo / Pendiente resto - Leonardo)
         comment.repository.js    (Pendiente - Leonardo)
   frontend/
     src/
@@ -763,7 +764,21 @@ INSERT INTO Comments (task_id, author_name, content) VALUES (1, 'Lautaro', 'Tabl
 
 ### Leonardo (Modulo 5 - ABM de Tareas y Comentarios - Backend + Frontend)
 - [x] Tablas `Tasks` y `Comments` agregadas a `schema.sql` y queries base en `queries.js`.
-- [ ] Completar `comment.*` en `leo-comments` (faltan metodos en `comment.repository.js`, rutas `GET`/`PUT`/`DELETE` y alinear `{ error: error.message }`).
-- [ ] Completar `task.*` (`GET /tasks/:id`, `POST /groups/:groupId/tasks`, `PUT /tasks/:id`, `DELETE /tasks/:id`, incluyendo `taskRepository.obtenerTareaPorId` que necesita Abel).
-- [ ] `TaskService` y `CommentService` tipados con `Observable<T>`.
-- [ ] Componentes `TaskForm`, `TaskDetail` y `Comments` (con autor desde `ClassroomService.obtenerSesion()` y borrado solo por el autor).
+- [x] `taskRepository.obtenerTareaPorId` implementado en `task.repository.js` para habilitar `moverTareaDeColumna` en el tablero.
+- [ ] Mergear `leo-comments` con `develop`, agregar `try/catch` en `comment.repository.js`, `req.body || {}` y `{ error: error.message }` en `comment.controller.js`, y abrir PR.
+- [ ] Completar `task.*` (`GET /tasks/:id`, `POST /groups/:groupId/tasks`, `PUT /tasks/:id`, `DELETE /tasks/:id`).
+- [ ] `TaskService` tipado con `Observable<T>` y alinear `Comments` a `@if`/`@for` con manejo de errores.
+- [ ] Componentes `TaskForm` y `TaskDetail` (e integrar `<app-comments>`).
+
+---
+
+## 16. Roadmap / MVP 2.0 (Mejoras futuras)
+
+Funcionalidades planificadas para la siguiente iteracion (fuera del alcance del MVP actual):
+
+1. **Cambiar rol**: permitir al rol `profesor` cambiar el rol de un miembro (`alumno` ↔ `profesor`) desde `MemberList` con endpoint `PUT /members/:id/rol`.
+2. **Login y autenticacion real**: registro e inicio de sesion con credenciales y tokens/sesiones persistentes (dejando atras el uso exclusivo de `localStorage` sin autenticacion).
+3. **Mejora del sistema de metricas**: panel de estadisticas y progreso por aula, por grupo y por alumno (tareas completadas, tiempos, actividad).
+4. **Tableros individuales**: permitir crear y gestionar tableros Kanban personales ademas de los tableros grupales.
+5. **Invitacion a grupos o solicitud**: tabla `GroupRequests` y flujo completo para que un alumno que salio de un grupo solo pueda unirse a otro mediante solicitud o invitacion aceptada (mientras el profesor conserva la asignacion directa).
+6. **Invitacion por mail**: envio de invitaciones a aulas o grupos por correo electronico usando el email registrado del usuario.

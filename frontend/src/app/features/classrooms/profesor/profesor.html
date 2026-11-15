@@ -2,11 +2,23 @@
   <div class="col-md-6">
     <div class="card shadow-sm border-0">
       <div class="card-body p-4">
-        <h2 class="h4 card-title mb-3 fw-bold">Crear Nueva Aula</h2>
+        <div class="btn-group w-100 mb-3" role="group">
+          <button type="button" class="btn" [class.btn-primary]="modo() === 'crear'"
+            [class.btn-outline-primary]="modo() !== 'crear'" (click)="cambiarModo('crear')">
+            Crear Nueva Aula
+          </button>
+          <button type="button" class="btn" [class.btn-primary]="modo() === 'ingresar'"
+            [class.btn-outline-primary]="modo() !== 'ingresar'" (click)="cambiarModo('ingresar')">
+            Ingresar a Aula Existente
+          </button>
+        </div>
 
         @if (errorMsg()) {
           <div class="alert alert-danger py-2 mb-3">{{ errorMsg() }}</div>
         }
+
+        @if (modo() === 'crear') {
+        <h2 class="h4 card-title mb-3 fw-bold">Crear Nueva Aula</h2>
 
         <form [formGroup]="formulario" (ngSubmit)="crear()">
           <div class="mb-3">
@@ -50,6 +62,37 @@
             <a class="btn btn-outline-secondary" routerLink="/classrooms">Volver</a>
           </div>
         </form>
+        } @else {
+        <h2 class="h4 card-title mb-3 fw-bold">Ingresar como Profesor</h2>
+
+        <form [formGroup]="formularioIngreso" (ngSubmit)="ingresar()">
+          <div class="mb-3">
+            <label class="form-label text-muted small">Codigo de Acceso</label>
+            <input type="text" class="form-control" formControlName="codigoAcceso" placeholder="Ej: GL-1001"
+              [class.is-invalid]="formularioIngreso.controls.codigoAcceso.touched && formularioIngreso.controls.codigoAcceso.invalid">
+            @if (formularioIngreso.controls.codigoAcceso.touched && formularioIngreso.controls.codigoAcceso.hasError('required')) {
+              <div class="invalid-feedback">El codigo de acceso es obligatorio.</div>
+            }
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label text-muted small">Nombre del Profesor</label>
+            <input type="text" class="form-control" formControlName="duenio" placeholder="Ej: Prof. Luciano"
+              [class.is-invalid]="formularioIngreso.controls.duenio.touched && formularioIngreso.controls.duenio.invalid">
+            @if (formularioIngreso.controls.duenio.touched && formularioIngreso.controls.duenio.hasError('required')) {
+              <div class="invalid-feedback">El nombre del profesor es obligatorio.</div>
+            }
+            @if (formularioIngreso.controls.duenio.touched && formularioIngreso.controls.duenio.hasError('maxlength')) {
+              <div class="invalid-feedback">El nombre no puede superar los 100 caracteres.</div>
+            }
+          </div>
+
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary px-4">Ingresar</button>
+            <a class="btn btn-outline-secondary" routerLink="/classrooms">Volver</a>
+          </div>
+        </form>
+        }
       </div>
     </div>
   </div>

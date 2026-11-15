@@ -109,9 +109,18 @@
           </div>
           }
         </div>
-        <div class="card-body bg-light d-flex flex-column gap-2">
+        <div class="card-body bg-light d-flex flex-column gap-2"
+          [class.border]="columnaSobreId() === col.id"
+          [class.border-primary]="columnaSobreId() === col.id"
+          (dragover)="permitirSoltar($event, col.id)"
+          (dragleave)="columnaSobreId.set(null)"
+          (drop)="soltarTarea($event, col)">
           @for (t of obtenerTareasDeColumna(col.id); track t.id) {
-          <app-task-card [tarea]="t" [puedeRetroceder]="puedeRetroceder(col.id)" [puedeAvanzar]="puedeAvanzar(col.id)"
+          <app-task-card
+            draggable="true"
+            (dragstart)="iniciarArrastre(t)"
+            (dragend)="tareaArrastrada.set(null); columnaSobreId.set(null)"
+            [tarea]="t" [puedeRetroceder]="puedeRetroceder(col.id)" [puedeAvanzar]="puedeAvanzar(col.id)"
             (mover)="moverTarea(t, $event)" (seleccionar)="tareaSeleccionada.set($event)" />
           } @empty {
           <p class="text-muted small text-center my-3">Sin tareas</p>

@@ -50,6 +50,9 @@ export class Kanban implements OnInit {
   nombreEdicion = signal<string>('');
   colorEdicion = signal<string>('secondary');
 
+  tareaArrastrada = signal<Task | null>(null);
+  columnaSobreId = signal<number | null>(null);
+
   columnasOrdenadas = computed(() =>
     [...this.columnas()].sort((a, b) => a.position - b.position)
   );
@@ -219,5 +222,31 @@ export class Kanban implements OnInit {
 
   private mostrarError(error: any, porDefecto: string): void {
     this.mensajeError.set(error?.error?.error || porDefecto);
+  }
+
+  iniciarArrastre(tarea: Task): void {
+    this.tareaArrastrada.set(tarea);
+  }
+  permitirSoltar(evento: DragEvent, columnId: number): void {
+    evento.preventDefault();
+    this.columnaSobreId.set(columnId);
+  }
+  soltarTarea(evento: DragEvent, columnaDestino: BoardColumn): void {
+    evento.preventDefault();
+    const tarea = this.tareaArrastrada();
+    this.tareaArrastrada.set(null);
+    this.columnaSobreId.set(null);
+    if (!tarea || tarea.column_id === columnaDestino.id) return;
+    this.boardService.moverTareaDeColumna(tarea.id, columnaDestino.id).subscribe({
+      next: () => {
+        this.mensajeError.set('');
+        this.tareas.update(lista => lista.map(t =>
+          t.id === tarea.id
+            ? { ...t, column_id: columnaDestino.id, column_name: columnaDestino.name }
+            : t
+        ));
+      },
+      error: (error: any) => this.mostrarError(error, 'No se pudo mover la tarea')
+    });
   }
 }

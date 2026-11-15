@@ -5,14 +5,21 @@
     <div class="alert alert-danger py-2 mb-3">{{ errorMsg() }}</div>
   }
 
-  <div class="mb-3">
+  <form class="mb-3" [formGroup]="formularioComentario" (ngSubmit)="crearComentario()">
     <label class="form-label text-muted small">Escribi un comentario</label>
     <textarea class="form-control mb-2" rows="3" maxlength="1000" placeholder="Escribi tu comentario..."
-      [value]="contenido()" (input)="contenido.set($any($event.target).value)"></textarea>
+      formControlName="contenido"
+      [class.is-invalid]="formularioComentario.controls.contenido.touched && formularioComentario.controls.contenido.invalid"></textarea>
+    @if (formularioComentario.controls.contenido.touched && formularioComentario.controls.contenido.hasError('required')) {
+      <div class="invalid-feedback mb-2">El comentario no puede estar vacio.</div>
+    }
+    @if (formularioComentario.controls.contenido.touched && formularioComentario.controls.contenido.hasError('maxlength')) {
+      <div class="invalid-feedback mb-2">El comentario no puede superar los 1000 caracteres.</div>
+    }
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn btn-primary btn-sm" (click)="crearComentario()">Publicar comentario</button>
+      <button type="submit" class="btn btn-primary btn-sm">Publicar comentario</button>
     </div>
-  </div>
+  </form>
 
   <hr>
 
@@ -24,12 +31,17 @@
       </div>
 
       @if (comentarioEditando() === comentario.id) {
-        <textarea class="form-control mb-2" rows="3" maxlength="1000" [value]="contenidoEdicion()"
-          (input)="contenidoEdicion.set($any($event.target).value)"></textarea>
-        <div class="d-flex gap-2">
-          <button type="button" class="btn btn-primary btn-sm" (click)="guardarEdicion(comentario)">Guardar</button>
-          <button type="button" class="btn btn-outline-secondary btn-sm" (click)="cancelarEdicion()">Cancelar</button>
-        </div>
+        <form [formGroup]="formularioEdicion" (ngSubmit)="guardarEdicion(comentario)">
+          <textarea class="form-control mb-2" rows="3" maxlength="1000" formControlName="contenido"
+            [class.is-invalid]="formularioEdicion.controls.contenido.touched && formularioEdicion.controls.contenido.invalid"></textarea>
+          @if (formularioEdicion.controls.contenido.touched && formularioEdicion.controls.contenido.hasError('required')) {
+            <div class="invalid-feedback mb-2">El comentario no puede estar vacio.</div>
+          }
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+            <button type="button" class="btn btn-outline-secondary btn-sm" (click)="cancelarEdicion()">Cancelar</button>
+          </div>
+        </form>
       } @else {
         <p class="mb-2" style="white-space: pre-wrap;">{{ comentario.content }}</p>
 

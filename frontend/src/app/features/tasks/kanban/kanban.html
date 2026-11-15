@@ -17,6 +17,9 @@
           </div>
         </div>
         <div class="d-flex align-items-center gap-2 flex-wrap">
+          <button class="btn btn-outline-primary" (click)="mostrarParticipacion.set(!mostrarParticipacion())">
+            {{ mostrarParticipacion() ? 'Ocultar Participacion' : 'Participacion' }}
+          </button>
           @if (!mostrarFormTarea() && columnasOrdenadas().length > 0) {
           <button class="btn btn-success" (click)="alternarFormTarea()">+ Nueva Tarea</button>
           }
@@ -33,46 +36,93 @@
     </div>
   </div>
 
+  @if (mostrarParticipacion()) {
+  <div class="col-12">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+          <h2 class="h5 fw-bold mb-0">Participacion del Grupo</h2>
+          <span class="text-muted small">
+            Total: {{ tareas().length }} tareas • Sin asignar: {{ tareasSinAsignar() }}
+          </span>
+        </div>
+
+        @for (p of participacionMiembros(); track p.id) {
+          <div class="mb-3">
+            <div class="d-flex justify-content-between align-items-center small mb-1">
+              <span class="fw-semibold">{{ p.nombre }}</span>
+              <span class="text-muted">
+                {{ p.asignadas }} asignadas ({{ p.terminadas }} terminadas) — {{ p.porcentaje }}%
+              </span>
+            </div>
+            <div class="progress" style="height: 8px;">
+              <div class="progress-bar bg-primary" role="progressbar"
+                [style.width.%]="p.porcentaje"
+                [attr.aria-valuenow]="p.porcentaje" aria-valuemin="0" aria-valuemax="100">
+              </div>
+            </div>
+          </div>
+        } @empty {
+          <p class="text-muted small mb-0">No hay miembros asignados a este grupo.</p>
+        }
+      </div>
+    </div>
+  </div>
+  }
+
   @if (mostrarFormTarea()) {
   <div class="col-12">
     <div class="card shadow-sm border-0">
       <div class="card-body p-4">
         <h2 class="h5 fw-bold mb-3">Nueva Tarea</h2>
-        <div class="row g-3">
+        <form class="row g-3" [formGroup]="formularioTarea" (ngSubmit)="crearTarea()">
           <div class="col-md-6">
             <label class="form-label text-muted small">Titulo</label>
             <input type="text" class="form-control" maxlength="150" placeholder="Ej: Implementar login"
-              [value]="tituloNuevaTarea()" (input)="tituloNuevaTarea.set($any($event.target).value)">
+              formControlName="title"
+              [class.is-invalid]="formularioTarea.controls.title.touched && formularioTarea.controls.title.invalid">
+            @if (formularioTarea.controls.title.touched && formularioTarea.controls.title.hasError('required')) {
+              <div class="invalid-feedback">El titulo de la tarea es obligatorio.</div>
+            }
+            @if (formularioTarea.controls.title.touched && formularioTarea.controls.title.hasError('maxlength')) {
+              <div class="invalid-feedback">El titulo no puede superar los 150 caracteres.</div>
+            }
           </div>
           <div class="col-md-3">
             <label class="form-label text-muted small">Columna</label>
-            <select class="form-select" [value]="columnaNuevaTarea()"
-              (change)="columnaNuevaTarea.set(+$any($event.target).value)">
+            <select class="form-select" formControlName="column_id"
+              [class.is-invalid]="formularioTarea.controls.column_id.touched && formularioTarea.controls.column_id.invalid">
               @for (c of columnasOrdenadas(); track c.id) {
-              <option [value]="c.id">{{ c.name }}</option>
+              <option [ngValue]="c.id">{{ c.name }}</option>
               }
             </select>
+            @if (formularioTarea.controls.column_id.touched && formularioTarea.controls.column_id.invalid) {
+              <div class="invalid-feedback">Selecciona una columna.</div>
+            }
           </div>
           <div class="col-md-3">
             <label class="form-label text-muted small">Asignar a</label>
-            <select class="form-select" [value]="asignadoNuevaTarea() ?? ''"
-              (change)="asignadoNuevaTarea.set($any($event.target).value ? +$any($event.target).value : null)">
-              <option value="">Sin asignar</option>
+            <select class="form-select" formControlName="assigned_to">
+              <option [ngValue]="null">Sin asignar</option>
               @for (m of miembrosGrupo(); track m.id) {
-              <option [value]="m.id">{{ m.nombre }}</option>
+              <option [ngValue]="m.id">{{ m.nombre }}</option>
               }
             </select>
           </div>
           <div class="col-12">
             <label class="form-label text-muted small">Descripcion (opcional)</label>
             <textarea class="form-control" rows="2" maxlength="1000" placeholder="Detalle de la tarea..."
-              [value]="descripcionNuevaTarea()" (input)="descripcionNuevaTarea.set($any($event.target).value)"></textarea>
+              formControlName="description"
+              [class.is-invalid]="formularioTarea.controls.description.touched && formularioTarea.controls.description.invalid"></textarea>
+            @if (formularioTarea.controls.description.touched && formularioTarea.controls.description.hasError('maxlength')) {
+              <div class="invalid-feedback">La descripcion no puede superar los 1000 caracteres.</div>
+            }
           </div>
           <div class="col-12 d-flex gap-2">
-            <button class="btn btn-success px-4" (click)="crearTarea()">Crear Tarea</button>
-            <button class="btn btn-outline-secondary" (click)="alternarFormTarea()">Cancelar</button>
+            <button type="submit" class="btn btn-success px-4">Crear Tarea</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="alternarFormTarea()">Cancelar</button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -83,26 +133,32 @@
     <div class="card shadow-sm border-0">
       <div class="card-body p-4">
         <h2 class="h5 fw-bold mb-3">Nueva Columna</h2>
-        <div class="row g-3 align-items-end">
+        <form class="row g-3 align-items-end" [formGroup]="formularioColumna" (ngSubmit)="crearColumna()">
           <div class="col-md-6">
             <label class="form-label text-muted small">Nombre de la Columna</label>
-            <input type="text" class="form-control" maxlength="50" placeholder="Ej: Testing" [value]="nombreNuevaColumna()"
-              (input)="nombreNuevaColumna.set(inputNombreColumna.value)" #inputNombreColumna>
+            <input type="text" class="form-control" maxlength="50" placeholder="Ej: Testing"
+              formControlName="name"
+              [class.is-invalid]="formularioColumna.controls.name.touched && formularioColumna.controls.name.invalid">
+            @if (formularioColumna.controls.name.touched && formularioColumna.controls.name.hasError('required')) {
+              <div class="invalid-feedback">El nombre de la columna es obligatorio.</div>
+            }
+            @if (formularioColumna.controls.name.touched && formularioColumna.controls.name.hasError('maxlength')) {
+              <div class="invalid-feedback">El nombre no puede superar los 50 caracteres.</div>
+            }
           </div>
           <div class="col-md-3">
             <label class="form-label text-muted small">Color</label>
-            <select class="form-select" [value]="colorNuevaColumna()"
-              (change)="colorNuevaColumna.set(selectColorColumna.value)" #selectColorColumna>
+            <select class="form-select" formControlName="color">
               @for (c of colores; track c.valor) {
               <option [value]="c.valor">{{ c.nombre }}</option>
               }
             </select>
           </div>
           <div class="col-md-3 d-flex gap-2">
-            <button class="btn btn-primary px-4" (click)="crearColumna()">Crear</button>
-            <button class="btn btn-outline-secondary" (click)="alternarFormColumna()">Cancelar</button>
+            <button type="submit" class="btn btn-primary px-4">Crear</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="alternarFormColumna()">Cancelar</button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -119,7 +175,7 @@
         (change)="filtroMiembro.set(selectFiltro.value)" #selectFiltro>
         <option value="todos">Todos los miembros</option>
         <option value="sin">Sin asignar</option>
-        @for (m of miembrosConTareas(); track m.id) {
+        @for (m of miembrosFiltro(); track m.id) {
         <option [value]="m.id">{{ m.nombre }}</option>
         }
       </select>
@@ -203,30 +259,34 @@
         }
 
         @if (editandoTarea()) {
-          <div class="mb-3">
-            <label class="form-label text-muted small">Titulo</label>
-            <input type="text" class="form-control" maxlength="150" [value]="tituloEdicionTarea()"
-              (input)="tituloEdicionTarea.set($any($event.target).value)">
-          </div>
-          <div class="mb-3">
-            <label class="form-label text-muted small">Descripcion</label>
-            <textarea class="form-control" rows="3" maxlength="1000" [value]="descripcionEdicionTarea()"
-              (input)="descripcionEdicionTarea.set($any($event.target).value)"></textarea>
-          </div>
-          <div class="mb-3">
-            <label class="form-label text-muted small">Asignado a</label>
-            <select class="form-select" [value]="asignadoEdicionTarea() ?? ''"
-              (change)="asignadoEdicionTarea.set($any($event.target).value ? +$any($event.target).value : null)">
-              <option value="">Sin asignar</option>
-              @for (m of miembrosGrupo(); track m.id) {
-              <option [value]="m.id">{{ m.nombre }}</option>
+          <form [formGroup]="formularioEdicionTarea" (ngSubmit)="guardarEdicionTarea(t)">
+            <div class="mb-3">
+              <label class="form-label text-muted small">Titulo</label>
+              <input type="text" class="form-control" maxlength="150" formControlName="title"
+                [class.is-invalid]="formularioEdicionTarea.controls.title.touched && formularioEdicionTarea.controls.title.invalid">
+              @if (formularioEdicionTarea.controls.title.touched && formularioEdicionTarea.controls.title.hasError('required')) {
+                <div class="invalid-feedback">El titulo de la tarea es obligatorio.</div>
               }
-            </select>
-          </div>
-          <div class="d-flex gap-2">
-            <button class="btn btn-primary btn-sm" (click)="guardarEdicionTarea(t)">Guardar</button>
-            <button class="btn btn-outline-secondary btn-sm" (click)="cancelarEdicionTarea()">Cancelar</button>
-          </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label text-muted small">Descripcion</label>
+              <textarea class="form-control" rows="3" maxlength="1000" formControlName="description"
+                [class.is-invalid]="formularioEdicionTarea.controls.description.touched && formularioEdicionTarea.controls.description.invalid"></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label text-muted small">Asignado a</label>
+              <select class="form-select" formControlName="assigned_to">
+                <option [ngValue]="null">Sin asignar</option>
+                @for (m of miembrosGrupo(); track m.id) {
+                <option [ngValue]="m.id">{{ m.nombre }}</option>
+                }
+              </select>
+            </div>
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="cancelarEdicionTarea()">Cancelar</button>
+            </div>
+          </form>
         } @else {
           <p class="text-secondary mb-3" style="white-space: pre-wrap;">{{ t.description || 'Sin descripcion' }}</p>
           <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">

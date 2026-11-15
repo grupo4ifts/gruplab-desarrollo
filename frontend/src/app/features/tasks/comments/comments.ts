@@ -1,5 +1,6 @@
 import { Component, OnInit, inject, input, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Comment } from '../models/comment';
 import { CommentService } from '../services/comment';
 import { ClassroomService } from '../../classrooms/services/classroom';
@@ -7,21 +8,28 @@ import { ClassroomService } from '../../classrooms/services/classroom';
 @Component({
   selector: 'app-comments',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe, ReactiveFormsModule],
   templateUrl: './comments.html'
 })
 export class Comments implements OnInit {
   private commentService = inject(CommentService);
   private classroomService = inject(ClassroomService);
+  private fb = inject(FormBuilder);
 
   tareaID = input.required<number>();
 
   comentarios = signal<Comment[]>([]);
-  contenido = signal('');
   comentarioEditando = signal<number | null>(null);
-  contenidoEdicion = signal('');
   comentarioAEliminar = signal<number | null>(null);
   errorMsg = signal('');
+
+  formularioComentario = this.fb.nonNullable.group({
+    contenido: ['', [Validators.required, Validators.maxLength(1000)]]
+  });
+
+  formularioEdicion = this.fb.nonNullable.group({
+    contenido: ['', [Validators.required, Validators.maxLength(1000)]]
+  });
 
   ngOnInit(): void {
     this.cargarComentarios();
@@ -39,22 +47,28 @@ export class Comments implements OnInit {
   }
 
   crearComentario(): void {
-    const sesion = this.classroomService.obtenerSesion();
-    const texto = this.contenido().trim();
+    if (this.formularioComentario.invalid) {
+      this.formularioComentario.markAllAsTouched();
+      return;
+    }
 
+    const sesion = this.classroomService.obtenerSesion();
     if (!sesion?.nombre) {
       this.errorMsg.set('Debes iniciar sesion para comentar.');
       return;
     }
+
+    const texto = this.formularioComentario.getRawValue().contenido.trim();
     if (!texto) {
-      this.errorMsg.set('El comentario no puede estar vacio.');
+      this.formularioComentario.controls.contenido.setErrors({ required: true });
+      this.formularioComentario.markAllAsTouched();
       return;
     }
 
     this.errorMsg.set('');
     this.commentService.crearComentario(this.tareaID(), sesion.nombre, texto).subscribe({
       next: () => {
-        this.contenido.set('');
+        this.formularioComentario.reset({ contenido: '' });
         this.cargarComentarios();
       },
       error: (err) => {
@@ -67,16 +81,22 @@ export class Comments implements OnInit {
     this.errorMsg.set('');
     this.comentarioAEliminar.set(null);
     this.comentarioEditando.set(comentario.id);
-    this.contenidoEdicion.set(comentario.content);
+    this.formularioEdicion.reset({ contenido: comentario.content });
   }
 
   guardarEdicion(comentario: Comment): void {
-    const sesion = this.classroomService.obtenerSesion();
-    const texto = this.contenidoEdicion().trim();
+    if (this.formularioEdicion.invalid) {
+      this.formularioEdicion.markAllAsTouched();
+      return;
+    }
 
+    const sesion = this.classroomService.obtenerSesion();
     if (!sesion?.nombre) return;
+
+    const texto = this.formularioEdicion.getRawValue().contenido.trim();
     if (!texto) {
-      this.errorMsg.set('El comentario no puede estar vacio.');
+      this.formularioEdicion.controls.contenido.setErrors({ required: true });
+      this.formularioEdicion.markAllAsTouched();
       return;
     }
 
@@ -84,7 +104,7 @@ export class Comments implements OnInit {
     this.commentService.editarComentario(comentario.id, sesion.nombre, texto).subscribe({
       next: () => {
         this.comentarioEditando.set(null);
-        this.contenidoEdicion.set('');
+        this.formularioEdicion.reset({ contenido: '' });
         this.cargarComentarios();
       },
       error: (err) => {
@@ -125,6 +145,6 @@ export class Comments implements OnInit {
 
   cancelarEdicion(): void {
     this.comentarioEditando.set(null);
-    this.contenidoEdicion.set('');
+    this.formularioEdicion.reset({ contenido: '' });
   }
 }

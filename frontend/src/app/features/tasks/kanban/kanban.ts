@@ -1,6 +1,7 @@
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BoardService } from '../services/board';
 import { TaskService } from '../services/task';
 import { MemberService } from '../../members/services/member';
@@ -18,7 +19,7 @@ interface MiembroFiltro {
 @Component({
   selector: 'app-kanban',
   standalone: true,
-  imports: [RouterLink, DatePipe, TaskCard, Comments],
+  imports: [RouterLink, DatePipe, ReactiveFormsModule, TaskCard, Comments],
   templateUrl: './kanban.html',
   styleUrl: './kanban.css'
 })
@@ -27,6 +28,7 @@ export class Kanban implements OnInit {
   private boardService = inject(BoardService);
   private taskService = inject(TaskService);
   private memberService = inject(MemberService);
+  private fb = inject(FormBuilder);
 
   readonly colores = [
     { valor: 'secondary', nombre: 'Gris' },
@@ -50,25 +52,34 @@ export class Kanban implements OnInit {
   tareaSeleccionada = signal<Task | null>(null);
 
   mostrarFormTarea = signal<boolean>(false);
-  tituloNuevaTarea = signal<string>('');
-  descripcionNuevaTarea = signal<string>('');
-  columnaNuevaTarea = signal<number>(0);
-  asignadoNuevaTarea = signal<number | null>(null);
-
   editandoTarea = signal<boolean>(false);
-  tituloEdicionTarea = signal<string>('');
-  descripcionEdicionTarea = signal<string>('');
-  asignadoEdicionTarea = signal<number | null>(null);
   confirmandoEliminarTarea = signal<boolean>(false);
   errorModalTarea = signal<string>('');
 
   mostrarFormColumna = signal<boolean>(false);
-  nombreNuevaColumna = signal<string>('');
-  colorNuevaColumna = signal<string>('secondary');
+  mostrarParticipacion = signal<boolean>(false);
 
   editandoColumnaId = signal<number | null>(null);
   nombreEdicion = signal<string>('');
   colorEdicion = signal<string>('secondary');
+
+  formularioTarea = this.fb.group({
+    title: ['', [Validators.required, Validators.maxLength(150)]],
+    description: ['', [Validators.maxLength(1000)]],
+    column_id: [0, [Validators.required, Validators.min(1)]],
+    assigned_to: [null as number | null]
+  });
+
+  formularioEdicionTarea = this.fb.group({
+    title: ['', [Validators.required, Validators.maxLength(150)]],
+    description: ['', [Validators.maxLength(1000)]],
+    assigned_to: [null as number | null]
+  });
+
+  formularioColumna = this.fb.nonNullable.group({
+    name: ['', [Validators.required, Validators.maxLength(50)]],
+    color: ['secondary', [Validators.required]]
+  });
 
   tareaArrastrada = signal<Task | null>(null);
   columnaSobreId = signal<number | null>(null);
@@ -77,10 +88,13 @@ export class Kanban implements OnInit {
     [...this.columnas()].sort((a, b) => a.position - b.position)
   );
 
-  miembrosConTareas = computed<MiembroFiltro[]>(() => {
+  miembrosFiltro = computed<MiembroFiltro[]>(() => {
     const mapa = new Map<number, string>();
+    for (const m of this.miembrosGrupo()) {
+      mapa.set(m.id, m.nombre);
+    }
     for (const t of this.tareas()) {
-      if (t.assigned_to !== null) {
+      if (t.assigned_to !== null && !mapa.has(t.assigned_to)) {
         mapa.set(t.assigned_to, t.assigned_name || `Miembro ${t.assigned_to}`);
       }
     }
@@ -88,6 +102,33 @@ export class Kanban implements OnInit {
       .map(([id, nombre]) => ({ id, nombre }))
       .sort((a, b) => a.nombre.localeCompare(b.nombre));
   });
+
+  participacionMiembros = computed(() => {
+    const listaTareas = this.tareas();
+    const totalTareas = listaTareas.length;
+    const ordenadas = this.columnasOrdenadas();
+    const ultimaColumnaId = ordenadas[ordenadas.length - 1]?.id;
+
+    return this.miembrosGrupo().map(m => {
+      const propias = listaTareas.filter(t => t.assigned_to === m.id);
+      const terminadas = ultimaColumnaId
+        ? propias.filter(t => t.column_id === ultimaColumnaId).length
+        : 0;
+      const porcentaje = totalTareas > 0 ? Math.round((propias.length / totalTareas) * 100) : 0;
+
+      return {
+        id: m.id,
+        nombre: m.nombre,
+        asignadas: propias.length,
+        terminadas,
+        porcentaje
+      };
+    });
+  });
+
+  tareasSinAsignar = computed(() =>
+    this.tareas().filter(t => t.assigned_to === null).length
+  );
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -144,30 +185,34 @@ export class Kanban implements OnInit {
 
   alternarFormTarea(): void {
     this.mostrarFormTarea.update(v => !v);
-    this.tituloNuevaTarea.set('');
-    this.descripcionNuevaTarea.set('');
-    this.asignadoNuevaTarea.set(null);
-    this.columnaNuevaTarea.set(this.columnasOrdenadas()[0]?.id || 0);
+    this.formularioTarea.reset({
+      title: '',
+      description: '',
+      column_id: this.columnasOrdenadas()[0]?.id || 0,
+      assigned_to: null
+    });
   }
 
   crearTarea(): void {
-    const title = this.tituloNuevaTarea().trim();
-    const column_id = this.columnaNuevaTarea();
-    if (!title) {
-      this.mensajeError.set('El titulo de la tarea es obligatorio');
+    if (this.formularioTarea.invalid) {
+      this.formularioTarea.markAllAsTouched();
       return;
     }
-    if (!column_id) {
-      this.mensajeError.set('Selecciona una columna para la tarea');
+
+    const { title, description, column_id, assigned_to } = this.formularioTarea.getRawValue();
+    const titulo = (title || '').trim();
+    if (!titulo) {
+      this.formularioTarea.controls.title.setErrors({ required: true });
+      this.formularioTarea.markAllAsTouched();
       return;
     }
 
     this.taskService.crearTarea({
       group_id: this.groupId(),
-      column_id,
-      assigned_to: this.asignadoNuevaTarea(),
-      title,
-      description: this.descripcionNuevaTarea().trim() || null
+      column_id: Number(column_id),
+      assigned_to: assigned_to ? Number(assigned_to) : null,
+      title: titulo,
+      description: (description || '').trim() || null
     }).subscribe({
       next: () => {
         this.mensajeError.set('');
@@ -196,9 +241,11 @@ export class Kanban implements OnInit {
     this.editandoTarea.set(true);
     this.confirmandoEliminarTarea.set(false);
     this.errorModalTarea.set('');
-    this.tituloEdicionTarea.set(tarea.title);
-    this.descripcionEdicionTarea.set(tarea.description || '');
-    this.asignadoEdicionTarea.set(tarea.assigned_to);
+    this.formularioEdicionTarea.reset({
+      title: tarea.title,
+      description: tarea.description || '',
+      assigned_to: tarea.assigned_to
+    });
   }
 
   cancelarEdicionTarea(): void {
@@ -207,16 +254,23 @@ export class Kanban implements OnInit {
   }
 
   guardarEdicionTarea(tarea: Task): void {
-    const title = this.tituloEdicionTarea().trim();
-    if (!title) {
-      this.errorModalTarea.set('El titulo de la tarea es obligatorio');
+    if (this.formularioEdicionTarea.invalid) {
+      this.formularioEdicionTarea.markAllAsTouched();
+      return;
+    }
+
+    const { title, description, assigned_to } = this.formularioEdicionTarea.getRawValue();
+    const titulo = (title || '').trim();
+    if (!titulo) {
+      this.formularioEdicionTarea.controls.title.setErrors({ required: true });
+      this.formularioEdicionTarea.markAllAsTouched();
       return;
     }
 
     this.taskService.actualizarTarea(tarea.id, {
-      title,
-      description: this.descripcionEdicionTarea().trim() || null,
-      assigned_to: this.asignadoEdicionTarea()
+      title: titulo,
+      description: (description || '').trim() || null,
+      assigned_to: assigned_to ? Number(assigned_to) : null
     }).subscribe({
       next: () => {
         this.editandoTarea.set(false);
@@ -243,22 +297,24 @@ export class Kanban implements OnInit {
 
   alternarFormColumna(): void {
     this.mostrarFormColumna.update(v => !v);
-    this.nombreNuevaColumna.set('');
-    this.colorNuevaColumna.set('secondary');
+    this.formularioColumna.reset({ name: '', color: 'secondary' });
   }
 
   crearColumna(): void {
-    const nombre = this.nombreNuevaColumna().trim();
-    if (!nombre) {
-      this.mensajeError.set('El nombre de la columna es obligatorio');
-      return;
-    }
-    if (nombre.length > 50) {
-      this.mensajeError.set('El nombre de la columna no puede superar los 50 caracteres');
+    if (this.formularioColumna.invalid) {
+      this.formularioColumna.markAllAsTouched();
       return;
     }
 
-    this.boardService.crearColumna(this.groupId(), nombre, this.colorNuevaColumna()).subscribe({
+    const { name, color } = this.formularioColumna.getRawValue();
+    const nombre = name.trim();
+    if (!nombre) {
+      this.formularioColumna.controls.name.setErrors({ required: true });
+      this.formularioColumna.markAllAsTouched();
+      return;
+    }
+
+    this.boardService.crearColumna(this.groupId(), nombre, color).subscribe({
       next: () => {
         this.mensajeError.set('');
         this.alternarFormColumna();

@@ -5,3 +5,4 @@ backend/.env
 docs
 .env
 *.env
+directivas_equipo.md

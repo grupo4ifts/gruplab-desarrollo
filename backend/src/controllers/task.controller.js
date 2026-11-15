@@ -1,53 +1,40 @@
-const taskService = require('../services/task.service')
+const taskService = require('../services/task.service');
 
+exports.obtenerTareaPorId = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const tarea = await taskService.obtenerTareaPorId(id);
+        res.status(200).json(tarea);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
 
-exports.obtenerTarea = async (req, res) => {
+exports.crearTarea = async (req, res) => {
     try {
-        const { groupId } = req.params;
-        const resultado = await boardService.obtenerTablero(groupId);
-        res.status(200).json(resultado);
+        const { group_id, column_id, assigned_to, title, description } = req.body || {};
+        const resultado = await taskService.crearTarea(group_id, column_id, assigned_to, title, description);
+        res.status(201).json(resultado);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
- 
-exports.crearColumna = async (req, res) => {
-    try {
-        const { groupId } = req.params;
-        const { name, color } = req.body || {};
-        const resultado = await boardService.crearColumna(groupId, name, color);
-        res.status(200).json(resultado);
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-};
- 
-exports.actualizarColumna = async (req, res) => {
+
+exports.actualizarTarea = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, color } = req.body || {};
-        const resultado = await boardService.actualizarColumna(id, name, color);
+        const { title, description, assigned_to } = req.body || {};
+        const resultado = await taskService.actualizarTarea(id, title, description, assigned_to);
         res.status(200).json(resultado);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
- 
-exports.eliminarColumna = async (req, res) => {
+
+exports.eliminarTarea = async (req, res) => {
     try {
         const { id } = req.params;
-        const resultado = await boardService.eliminarColumna(id);
-        res.status(200).json(resultado);
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-};
- 
-exports.moverTareaDeColumna = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { column_id } = req.body || {};
-        const resultado = await boardService.moverTareaDeColumna(id, column_id);
+        const resultado = await taskService.eliminarTarea(id);
         res.status(200).json(resultado);
     } catch (error) {
         res.status(400).json({ error: error.message });

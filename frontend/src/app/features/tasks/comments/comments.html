@@ -1,37 +1,55 @@
-<div class="lista-comentarios">
-  <h3>Comentarios</h3>
-  <div class="formulario-comentario">
-    <label>Escribí un comentario</label>
-    <textarea rows="3" maxlength="1000" placeholder="Escribí tu comentario..." [value]="contenido()"
-      (input)="contenido.set($any($event.target).value)">
-    </textarea>
-    <button (click)="crearComentario()">Publicar comentario</button>
+<div class="mt-4">
+  <h5 class="fw-bold mb-3">Comentarios</h5>
+
+  @if (errorMsg()) {
+    <div class="alert alert-danger py-2 mb-3">{{ errorMsg() }}</div>
+  }
+
+  <div class="mb-3">
+    <label class="form-label text-muted small">Escribi un comentario</label>
+    <textarea class="form-control mb-2" rows="3" maxlength="1000" placeholder="Escribi tu comentario..."
+      [value]="contenido()" (input)="contenido.set($any($event.target).value)"></textarea>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-primary btn-sm" (click)="crearComentario()">Publicar comentario</button>
+    </div>
   </div>
 
   <hr>
 
   @for (comentario of comentarios(); track comentario.id) {
-  <div class="comentario">
-    <strong>{{ comentario.author_name }}</strong>
-    <small>{{ comentario.created_at | date:'dd/MM/yyyy HH:mm' }}</small>
+    <div class="py-3 border-bottom">
+      <div class="d-flex justify-content-between align-items-center mb-1">
+        <strong>{{ comentario.author_name }}</strong>
+        <small class="text-muted">{{ comentario.created_at | date:'dd/MM/yyyy HH:mm' }}</small>
+      </div>
 
-    @if (comentarioEditando() === comentario.id) {
-      <textarea rows="3" [value]="contenidoEdicion()" (input)="contenidoEdicion.set($any($event.target).value)">
-          </textarea>
-      <button (click)="guardarEdicion(comentario)">Guardar</button>
-      <button (click)="cancelarEdicion()">Cancelar</button>
-    }
+      @if (comentarioEditando() === comentario.id) {
+        <textarea class="form-control mb-2" rows="3" maxlength="1000" [value]="contenidoEdicion()"
+          (input)="contenidoEdicion.set($any($event.target).value)"></textarea>
+        <div class="d-flex gap-2">
+          <button type="button" class="btn btn-primary btn-sm" (click)="guardarEdicion(comentario)">Guardar</button>
+          <button type="button" class="btn btn-outline-secondary btn-sm" (click)="cancelarEdicion()">Cancelar</button>
+        </div>
+      } @else {
+        <p class="mb-2" style="white-space: pre-wrap;">{{ comentario.content }}</p>
 
-    @if (comentarioEditando() !== comentario.id) {
-      <p>{{ comentario.content }}</p>
-
-      @if (esAutor(comentario)) {
-        <button (click)="iniciarEdicion(comentario)">Editar</button>
-        <button (click)="eliminarComentario(comentario)">Eliminar</button>
+        @if (esAutor(comentario)) {
+          @if (comentarioAEliminar() === comentario.id) {
+            <div class="d-flex align-items-center gap-2">
+              <span class="small text-danger">¿Eliminar este comentario?</span>
+              <button type="button" class="btn btn-danger btn-sm" (click)="eliminarComentario(comentario)">Confirmar</button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="cancelarEliminacion()">Cancelar</button>
+            </div>
+          } @else {
+            <div class="d-flex gap-2">
+              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="iniciarEdicion(comentario)">Editar</button>
+              <button type="button" class="btn btn-outline-danger btn-sm" (click)="confirmarEliminacion(comentario.id)">Eliminar</button>
+            </div>
+          }
+        }
       }
-    }
-  </div>
+    </div>
   } @empty {
-  <p>Todavía no hay comentarios.</p>
+    <p class="text-muted small mb-0">Todavia no hay comentarios.</p>
   }
 </div>

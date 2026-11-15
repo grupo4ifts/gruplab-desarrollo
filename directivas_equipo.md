@@ -83,10 +83,10 @@ gruplab-fe-be/
           classrooms/            (MODULO 1 COMPLETO - Luciano)
             models/classroom.ts  (Interfaces: Classroom, CrearAulaResponse, UsuarioSession, AuLab)
             services/classroom.ts(ClassroomService con Observable<T> y manejo de localStorage)
-            home/                (Home + listado multirrol "Mis AuLabs")
-            profesor/            (Formulario de creacion de aula)
-            alumno/              (Formulario de ingreso por codigo)
-            panel-aula/          (Panel del aula con permisos de profesor/alumno, GroupList y MemberList integrados)
+            home/                (Home + listado multirrol "Mis AuLabs" + boton "Ingresar como Profesor")
+            profesor/            (Formulario reactivo: Crear Aula o Ingresar a Aula Existente como Profesor)
+            alumno/              (Formulario reactivo de ingreso por codigo y registro en Members)
+            panel-aula/          (Panel del aula con permisos de profesor/alumno, GroupList y MemberList sincronizados)
           groups/                (LISTO - Leandro: models/group.ts, services/group.ts, group-list con permisos por rol)
           members/               (LISTO - Gonzalo: models/member.ts, services/member.ts, member-list)
           tasks/                 (Abel LISTO / Pendiente TaskService, TaskForm y TaskDetail de Leonardo)
@@ -94,7 +94,7 @@ gruplab-fe-be/
             models/task.ts       (LISTO - Task)
             services/board.ts    (LISTO - Abel: BoardService)
             services/task.ts     (Pendiente - Leonardo: TaskService)
-            kanban/              (LISTO - Abel: Tablero con 4 columnas base + agregar columna + filtros)
+            kanban/              (LISTO - Abel: Tablero con 4 columnas base + agregar columna + filtros + drag & drop)
             task-card/           (LISTO - Abel: Tarjeta de tarea y movimiento entre columnas)
             task-form/           (Pendiente - Leonardo: Crear tarea)
             task-detail/         (Pendiente - Leonardo: Ver/Editar/Borrar tarea)
@@ -405,9 +405,10 @@ Todo el modulo 1 ya se encuentra finalizado, documentado y compilando sin errore
   - Al eliminar un aula, elimina primero los miembros asociados (`eliminarMiembrosPorAula`) y luego el aula.
 - **Frontend (`features/classrooms/`)**:
   - Rutas con lazy loading: `/classrooms` (`Home`), `/classrooms/nuevo` (`Profesor`), `/classrooms/unirse` (`Alumno`), `/classrooms/:id` (`PanelAula`).
+  - `Profesor` y `Alumno`: implementados con `ReactiveFormsModule` (`FormBuilder`, validaciones por campo y envio con Enter). `Profesor` incluye ademas el modo **"Ingresar a Aula Existente"** (accesible desde `Home` con `?modo=ingresar`) validando codigo y miembro con `rol === 'profesor'`.
   - `Alumno`: al validar el codigo, registra/recupera al alumno en `Members` (`MemberService.agregarMiembro`) y guarda su `memberId` en la sesion.
   - Manejo de **"Mis AuLabs"** en `Home`: tarjetas que distinguen si sos Profesor o Alumno en cada aula.
-  - `PanelAula`: muestra cabecera, codigo del aula, usuario conectado, boton "Eliminar Aula" (exclusivo para rol profesor) e incrusta `<app-group-list [classroomId]="a.id" />` y `<app-member-list [classroomId]="a.id" />`.
+  - `PanelAula`: muestra cabecera, codigo del aula, usuario conectado, boton "Eliminar Aula" (exclusivo para rol profesor), incrusta `<app-group-list>` y `<app-member-list>`, y sincroniza `MemberList` cuando `GroupList` emite `gruposActualizados`.
 
 ---
 
@@ -573,7 +574,7 @@ Archivos que construye Abel:
    - **Renderizado dinamico de las columnas (`@for (col of columnas(); track col.id)`)**:
      - Muestra las **4 columnas iniciales** (y cualquier **columna nueva** que agregue el grupo).
      - En cada columna filtra las tareas con `obtenerTareasDeColumna(col.id)` (respetando tambien el filtro por miembro responsable).
-     - Incluye boton **"+ Nueva Columna"** en la cabecera del tablero para crear una columna adicional al instante, y boton para eliminar/renombrar columnas.
+     - Incluye boton **"+ Nueva Columna"** en la cabecera del tablero para crear una columna adicional al instante, boton para eliminar/renombrar columnas, y **Drag & Drop nativo HTML5** para arrastrar tarjetas entre columnas (`PATCH /tasks/:id/column`).
    - **Integracion con los componentes de Leonardo**:
      - Boton **"Nueva Tarea"**: abre `<app-task-form [groupId]="groupId()" [columnId]="columnas()[0].id" (creada)="cargarTablero()" />`.
      - Clic en una tarjeta: abre `<app-task-detail [tarea]="tareaSeleccionada()!" (cerrar)="tareaSeleccionada.set(null)" (actualizada)="cargarTablero()" />`.
@@ -742,7 +743,7 @@ INSERT INTO Comments (task_id, author_name, content) VALUES (1, 'Lautaro', 'Tabl
 - [x] Tabla `Classrooms` y Backend completo (`classroom.*`) con creacion de profesor en `Members` y borrado en cascada.
 - [x] Frontend con Lazy Loading, `RouterLink`, `inject()`, `Observable<T>` e interfaces.
 - [x] Manejo de sesion y **"Mis AuLabs"** multirrol en `ClassroomService`.
-- [x] `PanelAula` con permisos de profesor, `GroupList` y `MemberList` incrustados, y registro de alumnos en `Members` al ingresar.
+- [x] `PanelAula` con permisos de profesor, `GroupList` y `MemberList` incrustados y sincronizados, formularios reactivos en `Profesor`/`Alumno`, ingreso a aula existente como profesor y registro de alumnos en `Members`.
 
 ### Leandro (Modulo 2 - Grupos)
 - [x] Tabla `Groups` y Backend (`group.*`) integrado y probado en `peticionesTest.http`.
@@ -759,7 +760,7 @@ INSERT INTO Comments (task_id, author_name, content) VALUES (1, 'Lautaro', 'Tabl
 - [x] Tabla `BoardColumns` agregada a `schema.sql` y queries unificadas en `queries.js`.
 - [x] Backend en `board.repository.js`, `board.service.js`, `board.controller.js` y `board.routes.js`.
 - [x] `BoardService` en `features/tasks/services/board.ts` y ruta `/groups/:groupId/board` en `app.routes.ts`.
-- [x] Componentes `Kanban` (4 columnas base + nueva columna + filtros) y `TaskCard`.
+- [x] Componentes `Kanban` (4 columnas base + nueva columna + filtros + drag & drop) y `TaskCard`.
 - [ ] Conectar `<app-task-form>` y `<app-task-detail>` en `Kanban` cuando Leonardo termine su modulo.
 
 ### Leonardo (Modulo 5 - ABM de Tareas y Comentarios - Backend + Frontend)

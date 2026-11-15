@@ -17,6 +17,9 @@
           </div>
         </div>
         <div class="d-flex align-items-center gap-2 flex-wrap">
+          @if (!mostrarFormTarea() && columnasOrdenadas().length > 0) {
+          <button class="btn btn-success" (click)="alternarFormTarea()">+ Nueva Tarea</button>
+          }
           @if (!mostrarFormColumna()) {
           <button class="btn btn-primary" (click)="alternarFormColumna()">+ Nueva Columna</button>
           }
@@ -29,6 +32,51 @@
       </div>
     </div>
   </div>
+
+  @if (mostrarFormTarea()) {
+  <div class="col-12">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4">
+        <h2 class="h5 fw-bold mb-3">Nueva Tarea</h2>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label text-muted small">Titulo</label>
+            <input type="text" class="form-control" maxlength="150" placeholder="Ej: Implementar login"
+              [value]="tituloNuevaTarea()" (input)="tituloNuevaTarea.set($any($event.target).value)">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label text-muted small">Columna</label>
+            <select class="form-select" [value]="columnaNuevaTarea()"
+              (change)="columnaNuevaTarea.set(+$any($event.target).value)">
+              @for (c of columnasOrdenadas(); track c.id) {
+              <option [value]="c.id">{{ c.name }}</option>
+              }
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label text-muted small">Asignar a</label>
+            <select class="form-select" [value]="asignadoNuevaTarea() ?? ''"
+              (change)="asignadoNuevaTarea.set($any($event.target).value ? +$any($event.target).value : null)">
+              <option value="">Sin asignar</option>
+              @for (m of miembrosGrupo(); track m.id) {
+              <option [value]="m.id">{{ m.nombre }}</option>
+              }
+            </select>
+          </div>
+          <div class="col-12">
+            <label class="form-label text-muted small">Descripcion (opcional)</label>
+            <textarea class="form-control" rows="2" maxlength="1000" placeholder="Detalle de la tarea..."
+              [value]="descripcionNuevaTarea()" (input)="descripcionNuevaTarea.set($any($event.target).value)"></textarea>
+          </div>
+          <div class="col-12 d-flex gap-2">
+            <button class="btn btn-success px-4" (click)="crearTarea()">Crear Tarea</button>
+            <button class="btn btn-outline-secondary" (click)="alternarFormTarea()">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
 
   @if (mostrarFormColumna()) {
   <div class="col-12">
@@ -121,7 +169,7 @@
             (dragstart)="iniciarArrastre(t)"
             (dragend)="tareaArrastrada.set(null); columnaSobreId.set(null)"
             [tarea]="t" [puedeRetroceder]="puedeRetroceder(col.id)" [puedeAvanzar]="puedeAvanzar(col.id)"
-            (mover)="moverTarea(t, $event)" (seleccionar)="tareaSeleccionada.set($event)" />
+            (mover)="moverTarea(t, $event)" (seleccionar)="abrirDetalleTarea($event)" />
           } @empty {
           <p class="text-muted small text-center my-3">Sin tareas</p>
           }
@@ -142,26 +190,74 @@
 }
 
 @if (tareaSeleccionada(); as t) {
-<div class="modal d-block fondo-modal" tabindex="-1" (click)="tareaSeleccionada.set(null)">
-  <div class="modal-dialog modal-dialog-centered" (click)="$event.stopPropagation()">
+<div class="modal d-block fondo-modal" tabindex="-1" (click)="cerrarDetalleTarea()">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" (click)="$event.stopPropagation()">
     <div class="modal-content border-0 shadow-sm">
       <div class="modal-header bg-white py-3">
-        <h2 class="modal-title h5 fw-bold">{{ t.title }}</h2>
-        <button type="button" class="btn-close" (click)="tareaSeleccionada.set(null)"></button>
+        <h2 class="modal-title h5 fw-bold">{{ editandoTarea() ? 'Editar Tarea' : t.title }}</h2>
+        <button type="button" class="btn-close" (click)="cerrarDetalleTarea()"></button>
       </div>
       <div class="modal-body p-4">
-        <p class="text-secondary mb-3">{{ t.description || 'Sin descripcion' }}</p>
-        <div class="d-flex align-items-center gap-2 flex-wrap">
-          <span class="badge bg-light text-dark border">Columna: {{ nombreColumna(t.column_id) }}</span>
-          <span class="badge bg-light text-dark border">👤 {{ t.assigned_name || 'Sin asignar' }}</span>
-          <span class="badge bg-light text-dark border">{{ t.created_at | date:'dd/MM/yyyy HH:mm' }}</span>
-        </div>
+        @if (errorModalTarea()) {
+          <div class="alert alert-danger py-2 mb-3">{{ errorModalTarea() }}</div>
+        }
+
+        @if (editandoTarea()) {
+          <div class="mb-3">
+            <label class="form-label text-muted small">Titulo</label>
+            <input type="text" class="form-control" maxlength="150" [value]="tituloEdicionTarea()"
+              (input)="tituloEdicionTarea.set($any($event.target).value)">
+          </div>
+          <div class="mb-3">
+            <label class="form-label text-muted small">Descripcion</label>
+            <textarea class="form-control" rows="3" maxlength="1000" [value]="descripcionEdicionTarea()"
+              (input)="descripcionEdicionTarea.set($any($event.target).value)"></textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label text-muted small">Asignado a</label>
+            <select class="form-select" [value]="asignadoEdicionTarea() ?? ''"
+              (change)="asignadoEdicionTarea.set($any($event.target).value ? +$any($event.target).value : null)">
+              <option value="">Sin asignar</option>
+              @for (m of miembrosGrupo(); track m.id) {
+              <option [value]="m.id">{{ m.nombre }}</option>
+              }
+            </select>
+          </div>
+          <div class="d-flex gap-2">
+            <button class="btn btn-primary btn-sm" (click)="guardarEdicionTarea(t)">Guardar</button>
+            <button class="btn btn-outline-secondary btn-sm" (click)="cancelarEdicionTarea()">Cancelar</button>
+          </div>
+        } @else {
+          <p class="text-secondary mb-3" style="white-space: pre-wrap;">{{ t.description || 'Sin descripcion' }}</p>
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+              <span class="badge bg-light text-dark border">Columna: {{ nombreColumna(t.column_id) }}</span>
+              <span class="badge bg-light text-dark border">👤 {{ t.assigned_name || 'Sin asignar' }}</span>
+              <span class="badge bg-light text-dark border">{{ t.created_at | date:'dd/MM/yyyy HH:mm' }}</span>
+            </div>
+            @if (confirmandoEliminarTarea()) {
+              <div class="d-flex align-items-center gap-2">
+                <span class="small text-danger">¿Eliminar tarea?</span>
+                <button class="btn btn-danger btn-sm" (click)="eliminarTarea(t)">Confirmar</button>
+                <button class="btn btn-outline-secondary btn-sm" (click)="confirmandoEliminarTarea.set(false)">Cancelar</button>
+              </div>
+            } @else {
+              <div class="d-flex gap-2">
+                <button class="btn btn-outline-secondary btn-sm" (click)="iniciarEdicionTarea(t)">Editar</button>
+                <button class="btn btn-outline-danger btn-sm" (click)="confirmandoEliminarTarea.set(true)">Eliminar</button>
+              </div>
+            }
+          </div>
+
+          <hr>
+          <app-comments [tareaID]="t.id" />
+        }
       </div>
       <div class="modal-footer">
         <button class="btn btn-outline-secondary" [disabled]="!puedeRetroceder(t.column_id)"
-          (click)="moverTarea(t, 'anterior'); tareaSeleccionada.set(null)">← Anterior</button>
+          (click)="moverTarea(t, 'anterior'); cerrarDetalleTarea()">← Anterior</button>
         <button class="btn btn-outline-secondary" [disabled]="!puedeAvanzar(t.column_id)"
-          (click)="moverTarea(t, 'siguiente'); tareaSeleccionada.set(null)">Siguiente →</button>
+          (click)="moverTarea(t, 'siguiente'); cerrarDetalleTarea()">Siguiente →</button>
       </div>
     </div>
   </div>

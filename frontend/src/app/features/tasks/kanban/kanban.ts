@@ -2,9 +2,13 @@ import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { BoardService } from '../services/board';
+import { TaskService } from '../services/task';
+import { MemberService } from '../../members/services/member';
+import { Member } from '../../members/models/member';
 import { BoardColumn, GrupoTablero } from '../models/board-column';
 import { Task } from '../models/task';
 import { TaskCard } from '../task-card/task-card';
+import { Comments } from '../comments/comments';
 
 interface MiembroFiltro {
   id: number;
@@ -14,13 +18,15 @@ interface MiembroFiltro {
 @Component({
   selector: 'app-kanban',
   standalone: true,
-  imports: [RouterLink, DatePipe, TaskCard],
+  imports: [RouterLink, DatePipe, TaskCard, Comments],
   templateUrl: './kanban.html',
   styleUrl: './kanban.css'
 })
 export class Kanban implements OnInit {
   private route = inject(ActivatedRoute);
   private boardService = inject(BoardService);
+  private taskService = inject(TaskService);
+  private memberService = inject(MemberService);
 
   readonly colores = [
     { valor: 'secondary', nombre: 'Gris' },
@@ -36,11 +42,25 @@ export class Kanban implements OnInit {
   grupo = signal<GrupoTablero | null>(null);
   columnas = signal<BoardColumn[]>([]);
   tareas = signal<Task[]>([]);
+  miembrosGrupo = signal<Member[]>([]);
   cargando = signal<boolean>(true);
   mensajeError = signal<string>('');
 
   filtroMiembro = signal<string>('todos');
   tareaSeleccionada = signal<Task | null>(null);
+
+  mostrarFormTarea = signal<boolean>(false);
+  tituloNuevaTarea = signal<string>('');
+  descripcionNuevaTarea = signal<string>('');
+  columnaNuevaTarea = signal<number>(0);
+  asignadoNuevaTarea = signal<number | null>(null);
+
+  editandoTarea = signal<boolean>(false);
+  tituloEdicionTarea = signal<string>('');
+  descripcionEdicionTarea = signal<string>('');
+  asignadoEdicionTarea = signal<number | null>(null);
+  confirmandoEliminarTarea = signal<boolean>(false);
+  errorModalTarea = signal<string>('');
 
   mostrarFormColumna = signal<boolean>(false);
   nombreNuevaColumna = signal<string>('');
@@ -74,7 +94,15 @@ export class Kanban implements OnInit {
       const groupId = Number(params['groupId']);
       this.groupId.set(groupId);
       this.cargarGrupo(groupId);
+      this.cargarMiembros(groupId);
       this.cargarTablero();
+    });
+  }
+
+  cargarMiembros(groupId: number): void {
+    this.memberService.obtenerMiembrosPorGrupo(groupId).subscribe({
+      next: (miembros) => this.miembrosGrupo.set(miembros),
+      error: () => this.miembrosGrupo.set([])
     });
   }
 
@@ -111,6 +139,105 @@ export class Kanban implements OnInit {
       if (filtro === 'todos') return true;
       if (filtro === 'sin') return t.assigned_to === null;
       return t.assigned_to === Number(filtro);
+    });
+  }
+
+  alternarFormTarea(): void {
+    this.mostrarFormTarea.update(v => !v);
+    this.tituloNuevaTarea.set('');
+    this.descripcionNuevaTarea.set('');
+    this.asignadoNuevaTarea.set(null);
+    this.columnaNuevaTarea.set(this.columnasOrdenadas()[0]?.id || 0);
+  }
+
+  crearTarea(): void {
+    const title = this.tituloNuevaTarea().trim();
+    const column_id = this.columnaNuevaTarea();
+    if (!title) {
+      this.mensajeError.set('El titulo de la tarea es obligatorio');
+      return;
+    }
+    if (!column_id) {
+      this.mensajeError.set('Selecciona una columna para la tarea');
+      return;
+    }
+
+    this.taskService.crearTarea({
+      group_id: this.groupId(),
+      column_id,
+      assigned_to: this.asignadoNuevaTarea(),
+      title,
+      description: this.descripcionNuevaTarea().trim() || null
+    }).subscribe({
+      next: () => {
+        this.mensajeError.set('');
+        this.alternarFormTarea();
+        this.cargarTablero();
+      },
+      error: (error: any) => this.mostrarError(error, 'No se pudo crear la tarea')
+    });
+  }
+
+  abrirDetalleTarea(tarea: Task): void {
+    this.tareaSeleccionada.set(tarea);
+    this.editandoTarea.set(false);
+    this.confirmandoEliminarTarea.set(false);
+    this.errorModalTarea.set('');
+  }
+
+  cerrarDetalleTarea(): void {
+    this.tareaSeleccionada.set(null);
+    this.editandoTarea.set(false);
+    this.confirmandoEliminarTarea.set(false);
+    this.errorModalTarea.set('');
+  }
+
+  iniciarEdicionTarea(tarea: Task): void {
+    this.editandoTarea.set(true);
+    this.confirmandoEliminarTarea.set(false);
+    this.errorModalTarea.set('');
+    this.tituloEdicionTarea.set(tarea.title);
+    this.descripcionEdicionTarea.set(tarea.description || '');
+    this.asignadoEdicionTarea.set(tarea.assigned_to);
+  }
+
+  cancelarEdicionTarea(): void {
+    this.editandoTarea.set(false);
+    this.errorModalTarea.set('');
+  }
+
+  guardarEdicionTarea(tarea: Task): void {
+    const title = this.tituloEdicionTarea().trim();
+    if (!title) {
+      this.errorModalTarea.set('El titulo de la tarea es obligatorio');
+      return;
+    }
+
+    this.taskService.actualizarTarea(tarea.id, {
+      title,
+      description: this.descripcionEdicionTarea().trim() || null,
+      assigned_to: this.asignadoEdicionTarea()
+    }).subscribe({
+      next: () => {
+        this.editandoTarea.set(false);
+        this.errorModalTarea.set('');
+        this.cargarTablero();
+      },
+      error: (error: any) => {
+        this.errorModalTarea.set(error?.error?.error || 'No se pudo actualizar la tarea');
+      }
+    });
+  }
+
+  eliminarTarea(tarea: Task): void {
+    this.taskService.eliminarTarea(tarea.id).subscribe({
+      next: () => {
+        this.cerrarDetalleTarea();
+        this.cargarTablero();
+      },
+      error: (error: any) => {
+        this.errorModalTarea.set(error?.error?.error || 'No se pudo eliminar la tarea');
+      }
     });
   }
 

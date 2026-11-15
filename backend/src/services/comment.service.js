@@ -1,95 +1,72 @@
-const commentRepository = require('../repositories/comment.repository')
-
-//verifico que tengo la tarea
-exports.verificarTarea = async (idTarea) => {
-    const tareaID = await commentRepository.obtenertarea(idTarea)
-
-    if (tareaID.length === 0) {
-        throw new Error('Error: La tarea no existe.')
-    }
-    
-    return tareaID
-}
+const commentRepository = require('../repositories/comment.repository');
 
 exports.crearComentario = async (tareaID, autorName, contenido) => {
-
-    await exports.verificarTarea(tareaID) //accedo a la funcion exportada
-
-    if (!autorName || !autorName.trim()) {//verifico que no sean nula o indefinida y los campos no esten vacíos o no tengan espacios
-        throw new Error('Error: Falta el nombre del autor del comentario.')
-    }
-    if (!contenido || !contenido.trim()) {//verifico que no sean nula o indefinida y los campos no esten vacíos o no tengan espacios
-        throw new Error('Error: El comentario esta vacio. Verifique e intente nuevamente.')
-    }
-    if (contenido.length > 1000) {
-        throw new Error('Error: El comentario introducido esta fuera de rango establecido.')
+    if (!tareaID || !autorName || !autorName.trim() || !contenido || !contenido.trim()) {
+        throw new Error('Faltan datos para crear el comentario');
     }
 
-    const GuardarComment = await commentRepository.crearComentario(
-        tareaID,
-        autorName,
-        contenido
-    )
-
-    return {
-        mensaje: 'Comentario publicado con éxito',
-        comentarioID: GuardarComment.id
+    const texto = contenido.trim();
+    if (texto.length > 1000) {
+        throw new Error('El comentario no puede superar los 1000 caracteres');
     }
-}
 
-exports.obtenerComentario = async (tareaID) => { 
-    await exports.verificarTarea(tareaID)
+    const [tarea] = await commentRepository.obtenertarea(tareaID);
+    if (!tarea) {
+        throw new Error('Tarea no encontrada');
+    }
 
-    const comentarios = await commentRepository.obtenerComentario(tareaID)
+    const nuevo = await commentRepository.crearComentario(tareaID, autorName.trim(), texto);
+    return { message: 'Comentario publicado exitosamente', id: nuevo.id };
+};
 
-    return comentarios
-}
+exports.obtenerComentario = async (tareaID) => {
+    if (!tareaID) {
+        throw new Error('Falta el id de la tarea');
+    }
+
+    const [tarea] = await commentRepository.obtenertarea(tareaID);
+    if (!tarea) {
+        throw new Error('Tarea no encontrada');
+    }
+
+    return await commentRepository.obtenerComentario(tareaID);
+};
 
 exports.editarComentario = async (comentarioID, autorName, contenido) => {
-
-    if (!autorName || !autorName.trim()) {
-        throw new Error('Error: Falta el nombre del autor del comentario.')
+    if (!comentarioID || !autorName || !autorName.trim() || !contenido || !contenido.trim()) {
+        throw new Error('Faltan datos para editar el comentario');
     }
 
-    if (!contenido || !contenido.trim()) {
-        throw new Error('Error: El comentario esta vacio. Verifique e intente nuevamente.')
+    const texto = contenido.trim();
+    if (texto.length > 1000) {
+        throw new Error('El comentario no puede superar los 1000 caracteres');
     }
 
-    if (contenido.length > 1000) {
-        throw new Error('Error: El comentario introducido esta fuera de rango establecido.')
-    }
-
-    const comentario = await commentRepository.obtenerComentarioPorID(comentarioID)
-
+    const comentario = await commentRepository.obtenerComentarioPorID(comentarioID);
     if (!comentario) {
-        throw new Error('No hay comentarios Realizados.')
+        throw new Error('Comentario no encontrado');
+    }
+    if (comentario.author_name !== autorName.trim()) {
+        throw new Error('No tenes permiso para editar este comentario');
     }
 
-    if (comentario.author_name !== autorName) {
-        throw new Error('Acceso denegado: No tenes permiso para editar este comentario.')
-    }
-
-    return await commentRepository.editarComentario(
-        comentarioID,
-        contenido
-    )
-}
+    await commentRepository.editarComentario(comentarioID, texto);
+    return { message: 'Comentario actualizado correctamente' };
+};
 
 exports.eliminarComentario = async (comentarioID, autorName) => {
-
-    if (!autorName || !autorName.trim()) { //verifico que no sean nula o indefinida y los campos no esten vacíos o no tengan espacios
-        throw new Error('Error: Falta el nombre del autor del comentario.')
+    if (!comentarioID || !autorName || !autorName.trim()) {
+        throw new Error('Faltan datos para eliminar el comentario');
     }
 
-    const comentario = await commentRepository.obtenerComentarioPorID(comentarioID)
-
+    const comentario = await commentRepository.obtenerComentarioPorID(comentarioID);
     if (!comentario) {
-        throw new Error('No hay comentarios Realizados.')
+        throw new Error('Comentario no encontrado para eliminar');
+    }
+    if (comentario.author_name !== autorName.trim()) {
+        throw new Error('No tenes permiso para eliminar este comentario');
     }
 
-    if (comentario.author_name !== autorName) {
-        throw new Error('Acceso denegado: No tenes permiso para eliminar el comentario.')
-    }
-
-    return await commentRepository.eliminarComentario(comentarioID)
-}
+    await commentRepository.eliminarComentario(comentarioID);
+    return { message: 'Comentario eliminado correctamente' };
+};

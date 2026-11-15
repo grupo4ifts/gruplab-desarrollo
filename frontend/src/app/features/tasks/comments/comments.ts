@@ -1,19 +1,16 @@
 import { Component, OnInit, inject, input, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { Comment } from '../models/comment';
-import { CommentService } from '../services/comment.service';
+import { CommentService } from '../services/comment';
 import { ClassroomService } from '../../classrooms/services/classroom';
 
 @Component({
   selector: 'app-comments',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './comments.html',
-  styleUrl: './comments.css'
+  imports: [DatePipe],
+  templateUrl: './comments.html'
 })
-
 export class Comments implements OnInit {
-
   private commentService = inject(CommentService);
   private classroomService = inject(ClassroomService);
 
@@ -23,6 +20,8 @@ export class Comments implements OnInit {
   contenido = signal('');
   comentarioEditando = signal<number | null>(null);
   contenidoEdicion = signal('');
+  comentarioAEliminar = signal<number | null>(null);
+  errorMsg = signal('');
 
   ngOnInit(): void {
     this.cargarComentarios();
@@ -33,33 +32,40 @@ export class Comments implements OnInit {
       next: (respuesta) => {
         this.comentarios.set(respuesta);
       },
-        error: (error) => {
-    alert(error.error?.mensaje || 'Error: No se pudo cargar los comentarios');
-  }
+      error: (err) => {
+        this.errorMsg.set(err.error?.error || 'No se pudieron cargar los comentarios.');
+      }
     });
   }
 
   crearComentario(): void {
     const sesion = this.classroomService.obtenerSesion();
     const texto = this.contenido().trim();
-    
-    if (!texto || !sesion?.nombre) return;
-    this.commentService.crearComentario(
-      this.tareaID(),
-      sesion.nombre,
-      texto
-    ).subscribe({
+
+    if (!sesion?.nombre) {
+      this.errorMsg.set('Debes iniciar sesion para comentar.');
+      return;
+    }
+    if (!texto) {
+      this.errorMsg.set('El comentario no puede estar vacio.');
+      return;
+    }
+
+    this.errorMsg.set('');
+    this.commentService.crearComentario(this.tareaID(), sesion.nombre, texto).subscribe({
       next: () => {
         this.contenido.set('');
         this.cargarComentarios();
       },
-      error: (error) => {
-        alert(error.error?.mensaje || 'Error: No se pudo crear su comentario');
+      error: (err) => {
+        this.errorMsg.set(err.error?.error || 'No se pudo publicar el comentario.');
       }
     });
   }
 
   iniciarEdicion(comentario: Comment): void {
+    this.errorMsg.set('');
+    this.comentarioAEliminar.set(null);
     this.comentarioEditando.set(comentario.id);
     this.contenidoEdicion.set(comentario.content);
   }
@@ -68,44 +74,52 @@ export class Comments implements OnInit {
     const sesion = this.classroomService.obtenerSesion();
     const texto = this.contenidoEdicion().trim();
 
-    if (!texto || !sesion?.nombre) return;
+    if (!sesion?.nombre) return;
+    if (!texto) {
+      this.errorMsg.set('El comentario no puede estar vacio.');
+      return;
+    }
 
-    this.commentService.editarComentario(
-      comentario.id,
-      sesion.nombre,
-      texto
-    ).subscribe({
+    this.errorMsg.set('');
+    this.commentService.editarComentario(comentario.id, sesion.nombre, texto).subscribe({
       next: () => {
         this.comentarioEditando.set(null);
         this.contenidoEdicion.set('');
         this.cargarComentarios();
-       },
-      error: (error) => {
-        alert(error.error?.mensaje || 'Error: Su comentario no se pudo editar, Intente nuevamente.');
+      },
+      error: (err) => {
+        this.errorMsg.set(err.error?.error || 'No se pudo editar el comentario.');
       }
     });
+  }
+
+  confirmarEliminacion(comentarioId: number): void {
+    this.errorMsg.set('');
+    this.comentarioAEliminar.set(comentarioId);
+  }
+
+  cancelarEliminacion(): void {
+    this.comentarioAEliminar.set(null);
   }
 
   eliminarComentario(comentario: Comment): void {
     const sesion = this.classroomService.obtenerSesion();
     if (!sesion?.nombre) return;
-    if (!confirm('¿Querés eliminar este comentario?')) return;
 
-    this.commentService.eliminarComentario(
-      comentario.id,
-      sesion.nombre
-    ).subscribe({
+    this.errorMsg.set('');
+    this.commentService.eliminarComentario(comentario.id, sesion.nombre).subscribe({
       next: () => {
+        this.comentarioAEliminar.set(null);
         this.cargarComentarios();
-       },
-      error: (error) => {
-        alert(error.error?.mensaje || 'Error: Su comentario no se pudo eliminar, Intente nuevamente');
+      },
+      error: (err) => {
+        this.errorMsg.set(err.error?.error || 'No se pudo eliminar el comentario.');
       }
     });
   }
 
-  esAutor(comentario:Comment):boolean{
-    const sesion =this.classroomService.obtenerSesion();
+  esAutor(comentario: Comment): boolean {
+    const sesion = this.classroomService.obtenerSesion();
     return sesion?.nombre === comentario.author_name;
   }
 

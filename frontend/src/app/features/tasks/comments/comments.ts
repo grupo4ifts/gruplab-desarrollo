@@ -104,6 +104,11 @@ export class Comments implements OnInit {
     });
   }
 
+  esAutor(comentario:Comment):boolean{
+    const sesion =this.classroomService.obtenerSesion();
+    return sesion?.nombre === comentario.author_name;
+  }
+
   cancelarEdicion(): void {
     this.comentarioEditando.set(null);
     this.contenidoEdicion.set('');

@@ -2,33 +2,36 @@
   <h3>Comentarios</h3>
   <div class="formulario-comentario">
     <label>Escribí un comentario</label>
-
     <textarea rows="3" maxlength="1000" placeholder="Escribí tu comentario..." [value]="contenido()"
       (input)="contenido.set($any($event.target).value)">
     </textarea>
-
     <button (click)="crearComentario()">Publicar comentario</button>
   </div>
 
   <hr>
 
-  <div *ngFor="let comentario of comentarios()" class="comentario">
+  @for (comentario of comentarios(); track comentario.id) {
+  <div class="comentario">
     <strong>{{ comentario.author_name }}</strong>
     <small>{{ comentario.created_at | date:'dd/MM/yyyy HH:mm' }}</small>
-    <div *ngIf="comentarioEditando() === comentario.id">
-      <textarea rows="3" [value]="contenidoEdicion()" (input)="contenidoEdicion.set($any($event.target).value)">
-      </textarea>
 
+    @if (comentarioEditando() === comentario.id) {
+      <textarea rows="3" [value]="contenidoEdicion()" (input)="contenidoEdicion.set($any($event.target).value)">
+          </textarea>
       <button (click)="guardarEdicion(comentario)">Guardar</button>
       <button (click)="cancelarEdicion()">Cancelar</button>
-    </div>
+    }
 
-    <div *ngIf="comentarioEditando() !== comentario.id">
+    @if (comentarioEditando() !== comentario.id) {
       <p>{{ comentario.content }}</p>
-      <button (click)="iniciarEdicion(comentario)">Editar</button>
-      <button (click)="eliminarComentario(comentario)">Eliminar</button>
-    </div>
-  </div>
 
-  <p *ngIf="comentarios().length === 0">Todavía no hay comentarios.</p>
+      @if (esAutor(comentario)) {
+        <button (click)="iniciarEdicion(comentario)">Editar</button>
+        <button (click)="eliminarComentario(comentario)">Eliminar</button>
+      }
+    }
+  </div>
+  } @empty {
+  <p>Todavía no hay comentarios.</p>
+  }
 </div>

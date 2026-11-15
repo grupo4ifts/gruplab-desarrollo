@@ -2,12 +2,12 @@ const commentService = require('../services/comment.service')
 
 exports.crearComentario = async (req, res) => {
     try {
-        const { tareaID, autorName, contenido } = req.body // obtengo los datos del comentario desde el body que se envia desde el front
-        const respuesta = await commentService.crearComentario(tareaID, autorName, contenido) //importo el servicio. ejecuto crearComentario con los argumentos
-        res.status(200).json(respuesta.mensaje)
+        const { tareaID, autorName, contenido } = req.body || {} 
+        const respuesta = await commentService.crearComentario(tareaID, autorName, contenido) 
+        res.status(201).json(respuesta)
 
     } catch (error) {
-        res.status(400).json({ mensaje: error.message })
+        res.status(400).json({ error: error.message })
     }
 }
 
@@ -18,14 +18,14 @@ exports.obtenerComentario = async (req, res) => {
         res.status(200).json(respuesta)
 
     } catch (error) {
-        res.status(400).json({ mensaje: error.message })
+        res.status(400).json({ error: error.message })
     }
 }
 
 exports.editarComentario = async (req, res) => {
     try {
         const { comentarioID } = req.params
-        const { autorName, contenido } = req.body
+        const { autorName, contenido } = req.body || {}
 
         const respuesta = await commentService.editarComentario(
             comentarioID,
@@ -34,14 +34,14 @@ exports.editarComentario = async (req, res) => {
         )
         res.status(200).json(respuesta)
     } catch (error) {
-        res.status(400).json({ mensaje: error.message })
+        res.status(400).json({ error: error.message })
     }
 }
 
 exports.eliminarComentario = async (req, res) => {
     try {
         const { comentarioID } = req.params
-        const { autorName } = req.body
+        const { autorName } = req.body || {}
 
         const respuesta = await commentService.eliminarComentario(
             comentarioID,
@@ -51,6 +51,6 @@ exports.eliminarComentario = async (req, res) => {
         res.status(200).json(respuesta)
 
     } catch (error) {
-        res.status(400).json({ mensaje: error.message })
+        res.status(400).json({ error: error.message })
     }
 }
